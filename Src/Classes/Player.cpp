@@ -11,15 +11,13 @@ Player::Player(Rectangle object):
 
     image = LoadTexture("../Assets/Player/Player.png");
 
+    frame = {8, 3};
+
     srcRect.width = image.width / frame.x;
     srcRect.height = image.height / frame.y;
 }
 
 void Player::update() {
-    
-    velocity = {0, 0};
-    
-    srcRect.x = srcRect.width * currentFrame;
 
     move();
     animationLogic();
@@ -29,12 +27,14 @@ void Player::update() {
 
 void Player::move() {
 
-    float speed = 500;
+    const float speed = 500;
 
-    if(IsKeyDown(KEY_W)) velocity.y = -speed;
-    if(IsKeyDown(KEY_S)) velocity.y = speed;
-    if(IsKeyDown(KEY_A)) velocity.x = -speed; 
-    if(IsKeyDown(KEY_D)) velocity.x = speed;
+    velocity = {0, 0};
+
+    if(getInput().up) velocity.y = -speed;
+    if(getInput().down) velocity.y = speed;
+    if(getInput().right) velocity.x = speed;
+    if(getInput().left) velocity.x = -speed; 
     
     object.x += velocity.x * GetFrameTime();
     object.y += velocity.y * GetFrameTime();
@@ -42,29 +42,22 @@ void Player::move() {
 
 void Player::animationLogic() {
 
+    srcRect.x = srcRect.width * currentFrame;
 
-
-    if(IsKeyDown(KEY_A)) {
+    if(getInput().left) {
 
         direction = LEFT;
         switchAnimation("RunLeft");
-    }
-    else if(IsKeyDown(KEY_D)) {
+    } else if(getInput().right) {
 
         direction = RIGHT;
         switchAnimation("RunRight");
-    }
-    else {
+    } else {
 
-        if(velocity.y != 0) {
+        const std::string animation = (velocity.y != 0) ? "Run" : "Idle";
 
-            direction == LEFT ? switchAnimation("RunLeft") : 
-                switchAnimation("RunRight");
-        } else {
-
-            direction == LEFT ? switchAnimation("IdleLeft") : 
-                switchAnimation("IdleRight");
-        }
+        direction == LEFT ? switchAnimation(animation + "Left") : 
+            switchAnimation(animation + "Right");
     }     
 }
 
@@ -72,20 +65,11 @@ void Player::switchAnimation(std::string animation) {
 
     srcRect.y = srcRect.height * animationMap[animation][AnimationMapIndexY];
 
-    if(frameEnd != animationMap[animation][AnimationMapEndingIndex]) {
-        
-        if(animation.find("Idle") != std::string::npos) {
-            
-            frameStart = animationMap[animation][AnimationMapStartingIndex] + 1;
-            frameEnd = animationMap[animation][AnimationMapEndingIndex];
-        } else {
-            
-            frameStart = animationMap[animation][AnimationMapStartingIndex] + 1;
-            frameEnd = animationMap[animation][AnimationMapEndingIndex];
-        }
+    if(frameEnd == animationMap[animation][AnimationMapEndingIndex]) 
+        return;    
+    
+    frameStart = animationMap[animation][AnimationMapStartingIndex];
+    frameEnd = animationMap[animation][AnimationMapEndingIndex];
 
-        currentFrame = frameStart - 1;
-    }
-
-    print(currentFrame);
+    currentFrame = frameStart;
 }

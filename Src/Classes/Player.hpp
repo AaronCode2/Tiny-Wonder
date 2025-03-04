@@ -4,7 +4,7 @@
 #include <string>
 #include <array>
 #include "Sprite.hpp"
-#include "../utils.hpp"
+#include "../Utils.hpp"
 
 #define AnimationMapIndexY 0
 #define AnimationMapStartingIndex 1
@@ -30,13 +30,11 @@ class Player : public Sprite {
     private:
 
         int frameEnd = 2;
-        int frameStart = 1;
+        int frameStart = 0;
 
         Direction direction = LEFT;
 
         std::map<std::string, std::array<int, 3>> animationMap;
-
-        Vector2 frame = {8, 3};
         Vector2 velocity;
 
         void move();

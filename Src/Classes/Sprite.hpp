@@ -17,7 +17,6 @@ class Sprite {
         Rectangle srcRect;
         Vector2 frame;
 
-
         void draw(Texture2D image);
         void animate(int frameEnd, int frameStart = 0, float frameDuration = 0.1f);
 

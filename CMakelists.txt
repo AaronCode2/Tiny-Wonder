@@ -21,7 +21,7 @@ SOURCE_FILES
     Src/Main.cpp
     Src/Game.cpp
     Src/App.cpp
-    Src/utils.hpp
+    Src/Utils.cpp
     Src/Classes/Sprite.cpp
     Src/Classes/Player.cpp
 )
