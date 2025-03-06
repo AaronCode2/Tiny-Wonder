@@ -2,7 +2,7 @@
 
 Game::Game() {
     
-
+    world.init();
 }
 
 void Game::gameLoop() {

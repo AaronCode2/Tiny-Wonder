@@ -22,6 +22,8 @@ SOURCE_FILES
     Src/Game.cpp
     Src/App.cpp
     Src/Utils.cpp
+    Src/WorldManager/World.cpp
+    Src/WorldManager/Tile.cpp
     Src/Classes/Sprite.cpp
     Src/Classes/Player.cpp
 )

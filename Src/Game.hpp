@@ -2,6 +2,7 @@
 #include <raylib.h>
 #include "Classes/Sprite.hpp"
 #include "Classes/Player.hpp"
+#include "WorldManager/World.hpp"
 
 class Game {
 
@@ -15,6 +16,8 @@ class Game {
     private:
 
         Player player = Player({100, 100, 100, 100});
+
+        World world;
 
         void gameLoop();
         void updateGame();
