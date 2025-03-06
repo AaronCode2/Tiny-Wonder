@@ -6,15 +6,37 @@
 
 World::World() {
 
+    Tile::image = LoadTexture("../Assets/Tiles/Tile.png");
 }
 
 World::~World() {
 
+    UnloadTexture(Tile::image);
 }
 
 void World::init() {
 
     readData();
+
+    for(int i = 0; i < 10; i++) {
+
+        tiles.push_back(Tile(
+            {
+                (float) i * 100,
+                100,
+                100, 100
+            },
+            {3, 0}
+        ));
+    }
+}
+
+void World::update() {
+
+    for(auto tile : tiles) {
+
+        tile.update();
+    }
 }
 
 

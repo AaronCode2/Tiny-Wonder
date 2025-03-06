@@ -16,12 +16,12 @@ class World {
         ~World();
 
         void init();
+        void update();
 
     private:
 
         std::vector<Tile> tiles;
 
-        void update();
         void readData();
         void writeData();
 };

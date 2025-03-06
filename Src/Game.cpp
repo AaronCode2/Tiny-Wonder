@@ -20,5 +20,6 @@ void Game::gameLoop() {
 
 void Game::updateGame() {
 
+    world.update();
     player.update();
 }
