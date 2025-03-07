@@ -10,3 +10,13 @@ Input getInput() {
         IsKeyDown(KEY_D),
     };
 }
+
+bool Mouse::isHovering(Rectangle object) {
+
+    return CheckCollisionPointRec(GetMousePosition(), object);
+}
+
+bool Mouse::isClicked(Rectangle object) {
+
+    return (CheckCollisionPointRec(GetMousePosition(), object) && IsMouseButtonDown(MOUSE_BUTTON_LEFT));
+}

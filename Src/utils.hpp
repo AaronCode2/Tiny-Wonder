@@ -13,3 +13,9 @@ struct Input {
 };
 
 Input getInput();
+
+namespace Mouse {
+
+    bool isHovering(Rectangle object);
+    bool isClicked(Rectangle object);
+}
