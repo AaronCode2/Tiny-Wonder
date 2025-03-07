@@ -26,8 +26,7 @@ class World {
 
         World();
         ~World();
-
-        void init();
+        
         void update();
         void writeData();
 

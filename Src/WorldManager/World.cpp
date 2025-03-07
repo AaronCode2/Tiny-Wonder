@@ -7,16 +7,12 @@
 World::World() {
 
     Tile::image = LoadTexture("../Assets/Tiles/Tile.png");
+    readData();
 }
 
 World::~World() {
 
     UnloadTexture(Tile::image);
-}
-
-void World::init() {
-
-    readData();
 }
 
 void World::update() {
@@ -82,6 +78,8 @@ void World::readData() {
             {(float) numbers[FRAME_X], (float) numbers[FRAME_Y]}
         ));
     }
+
+    file.close();
 }
 
 void World::writeData() {
@@ -105,4 +103,6 @@ void World::writeData() {
 
             << "}\n";  
     }
+
+    file.close();
 }

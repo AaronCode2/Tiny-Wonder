@@ -2,7 +2,6 @@
 
 Game::Game() {
     
-    world.init();
 }
 
 Game::~Game() {
