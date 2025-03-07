@@ -14,6 +14,11 @@ struct Input {
 
 Input getInput();
 
+namespace Utils {
+
+    extern Color testColor;
+} 
+
 namespace Mouse {
 
     bool isHovering(Rectangle object);

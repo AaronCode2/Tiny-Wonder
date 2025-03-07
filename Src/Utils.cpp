@@ -11,6 +11,8 @@ Input getInput() {
     };
 }
 
+Color Utils::testColor = {255, 0, 0, 100};
+
 bool Mouse::isHovering(Rectangle object) {
 
     return CheckCollisionPointRec(GetMousePosition(), object);
@@ -18,5 +20,5 @@ bool Mouse::isHovering(Rectangle object) {
 
 bool Mouse::isClicked(Rectangle object) {
 
-    return (CheckCollisionPointRec(GetMousePosition(), object) && IsMouseButtonDown(MOUSE_BUTTON_LEFT));
+    return (CheckCollisionPointRec(GetMousePosition(), object) && IsMouseButtonPressed(MOUSE_BUTTON_LEFT));
 }

@@ -11,16 +11,50 @@ World::World() {
 }
 
 World::~World() {
-
+    
     UnloadTexture(Tile::image);
 }
 
 void World::update() {
-
-    for(auto tile : tiles) {
-
+    
+    for(auto &tile : tiles) {
+        
         tile.update();
+
+        for(float y = 0; y < GetScreenHeight(); y += 60) {
+            for(float x = 0; x < GetScreenWidth(); x += 60) {
+                
+                Rectangle object = {x, y, 60, 60};
+    
+                if(Mouse::isHovering(object)) {
+    
+                    DrawRectangleRec(object, Utils::testColor);
+                } 
+
+                if(Mouse::isClicked(object)) {
+                    
+                    bool skip = false;
+
+                    for(auto &tile : tiles) {
+
+                        if(tile.getObject().x == object.x && tile.getObject().y == object.y) {
+                            skip = true;
+                            break;
+                        }
+                    }
+
+                    if(skip) break;
+
+                    tiles.push_back(Tile(
+                        object,
+                        {2, 2}
+                    ));
+                }
+            }
+        }
+
     }
+
 }
 
 

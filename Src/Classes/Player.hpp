@@ -33,7 +33,7 @@ class Player : public Sprite {
         int frameStart = 0;
         float frameBuffer = 0.1f;
 
-        Direction direction = LEFT;
+        Direction direction = RIGHT;
 
         std::map<std::string, std::array<int, 3>> animationMap;
         Vector2 velocity;
