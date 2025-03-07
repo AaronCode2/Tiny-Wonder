@@ -6,9 +6,8 @@
 #include "../Utils.hpp"
 #include "Tile.hpp"
 
-// TODO: Make World
-
 #define NUM_SIZE 7
+#define FILE_NAME "../Data/TileMap.txt"
 
 enum fileReadStructure {
 
@@ -30,11 +29,11 @@ class World {
 
         void init();
         void update();
+        void writeData();
 
     private:
 
         std::vector<Tile> tiles;
 
         void readData();
-        void writeData();
 };

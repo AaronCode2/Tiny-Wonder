@@ -30,11 +30,11 @@ void World::update() {
 
 void World::readData() {
 
-    std::ifstream file("../Data/TileMap.txt");
+    std::ifstream file(FILE_NAME);
 
     if(!file.is_open()) {
 
-        std::cerr << "\033[31mError: Could not load Data TileMap.txt\n\033[0m";
+        std::cerr << "\033[31mError: Could not read Data TileMap.txt\n\033[0m";
         exit(EXIT_FAILURE);
     }
 
@@ -81,5 +81,28 @@ void World::readData() {
             },
             {(float) numbers[FRAME_X], (float) numbers[FRAME_Y]}
         ));
+    }
+}
+
+void World::writeData() {
+
+    std::ofstream file(FILE_NAME);
+
+    if(!file.is_open()) {
+
+        std::cerr << "\033[31mError: Could not read Data TileMap.txt\n\033[0m";
+        exit(EXIT_FAILURE);
+    }
+
+    for(auto tile : tiles) {  
+
+       file << "{"
+
+                << tile.getObject().x << ", " << tile.getObject().y << ", "
+                << tile.getObject().width << ", " << tile.getObject().height << ", "
+                << tile.getFrame().x << ", " << tile.getFrame().y << ", "
+                << tile.getType()   
+
+            << "}\n";  
     }
 }

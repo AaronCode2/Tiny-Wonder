@@ -19,6 +19,9 @@ class Tile : public Sprite {
         static Texture2D image;
 
         void update();
+
+        TileType getType() { return tileType; };
+
     private:
 
         TileType tileType;

@@ -9,6 +9,9 @@ class Sprite {
 
         void update();
 
+        Rectangle getObject() { return object; };
+        Vector2 getFrame() { return frame; }; 
+
         static Texture2D image;
 
     protected:

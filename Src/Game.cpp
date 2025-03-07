@@ -5,6 +5,11 @@ Game::Game() {
     world.init();
 }
 
+Game::~Game() {
+
+    world.writeData();
+}
+
 void Game::gameLoop() {
 
     while(!WindowShouldClose()) {
