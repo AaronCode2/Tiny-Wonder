@@ -34,7 +34,7 @@ void World::readData() {
 
     if(!file.is_open()) {
 
-        std::cerr << "\033[31mError: Could not read Data TileMap.txt\n\033[0m";
+        std::cerr << "\033[31mError: Could not read Data in TileMap.txt\n\033[0m";
         exit(EXIT_FAILURE);
     }
 
@@ -90,7 +90,7 @@ void World::writeData() {
 
     if(!file.is_open()) {
 
-        std::cerr << "\033[31mError: Could not read Data TileMap.txt\n\033[0m";
+        std::cerr << "\033[31mError: Could not write Data in TileMap.txt\n\033[0m";
         exit(EXIT_FAILURE);
     }
 
