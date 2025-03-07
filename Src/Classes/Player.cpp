@@ -21,7 +21,7 @@ void Player::update() {
 
     move();
     animationLogic();
-    animate(frameEnd, frameStart);
+    animate(frameEnd, frameStart, frameBuffer);
     draw(image);
 }
 
@@ -43,6 +43,9 @@ void Player::move() {
 void Player::animationLogic() {
 
     srcRect.x = srcRect.width * currentFrame;
+    
+    if(velocity.x != 0 || velocity.y != 0) frameBuffer = 0.1f;
+    else frameBuffer = 0.5f;
 
     if(getInput().left) {
 

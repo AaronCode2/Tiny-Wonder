@@ -31,6 +31,7 @@ class Player : public Sprite {
 
         int frameEnd = 2;
         int frameStart = 0;
+        float frameBuffer = 0.1f;
 
         Direction direction = LEFT;
 

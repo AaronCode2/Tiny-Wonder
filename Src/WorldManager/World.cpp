@@ -17,18 +17,6 @@ World::~World() {
 void World::init() {
 
     readData();
-
-    for(int i = 0; i < 10; i++) {
-
-        tiles.push_back(Tile(
-            {
-                (float) i * 100,
-                100,
-                100, 100
-            },
-            {3, 0}
-        ));
-    }
 }
 
 void World::update() {
@@ -39,8 +27,6 @@ void World::update() {
     }
 }
 
-
-#define numSize 7
 
 void World::readData() {
 
@@ -56,7 +42,7 @@ void World::readData() {
 
     while(std::getline(file, line)) {
 
-        int numbers[numSize]; 
+        int numbers[NUM_SIZE]; 
         int count = 0;        
         bool insideBraces = false;
         std::string temp;
@@ -76,7 +62,7 @@ void World::readData() {
         std::stringstream ss(temp);
         std::string token;
 
-        while (std::getline(ss, token, ',') && count < numSize) {
+        while (std::getline(ss, token, ',') && count < NUM_SIZE) {
 
             try{
 
@@ -86,9 +72,14 @@ void World::readData() {
             } catch (...) {}
         }
 
-        for(int i = 0; i < count; i++) {
-
-            std::cout << numbers[i] << " ";
-        }
+        tiles.push_back(Tile(
+            {
+                (float) numbers[X],
+                (float) numbers[Y],
+                (float) numbers[WIDTH],
+                (float) numbers[HEIGHT]
+            },
+            {(float) numbers[FRAME_X], (float) numbers[FRAME_Y]}
+        ));
     }
 }

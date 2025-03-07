@@ -8,6 +8,19 @@
 
 // TODO: Make World
 
+#define NUM_SIZE 7
+
+enum fileReadStructure {
+
+    X = 0,
+    Y,
+    WIDTH,
+    HEIGHT,
+    FRAME_X,
+    FRAME_Y,
+    ID
+};
+
 class World {
 
     public:
