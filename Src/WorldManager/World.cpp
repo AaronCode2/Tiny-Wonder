@@ -20,28 +20,30 @@ void World::update() {
     for(auto &tile : tiles) {
         
         tile.update();
+    }
 
-        for(float y = 0; y < GetScreenHeight(); y += 60) {
-            for(float x = 0; x < GetScreenWidth(); x += 60) {
+    for(float y = 0; y < GetScreenHeight(); y += 60) {
+        for(float x = 0; x < GetScreenWidth(); x += 60) {
                 
-                Rectangle object = {x, y, 60, 60};
+            Rectangle object = {x, y, 60, 60};
     
-                if(Mouse::isHovering(object)) {
+            if(Mouse::isHovering(object)) {
     
-                    DrawRectangleRec(object, Utils::testColor);
-                } 
+                DrawRectangleRec(object, Utils::testColor);
+            } 
 
-                if(Mouse::isClicked(object)) {
+            if(Mouse::isClickedL(object)) {
                     
-                    bool skip = false;
+                bool skip = false;
 
-                    for(auto &tile : tiles) {
+                for(auto &tile : tiles) {
 
-                        if(tile.getObject().x == object.x && tile.getObject().y == object.y) {
-                            skip = true;
-                            break;
-                        }
+                    if(tile.getObject().x == object.x && tile.getObject().y == object.y) {
+
+                        skip = true;
+                        break;
                     }
+                }
 
                     if(skip) break;
 
@@ -50,10 +52,22 @@ void World::update() {
                         {2, 2}
                     ));
                 }
+
+                if(Mouse::isClickedR(object)) {
+
+                    for(auto it = tiles.begin(); it < tiles.end();) {
+                        
+                        if(it->getObject().x == object.x && it->getObject().y == object.y) {
+
+                            it = tiles.erase(it);
+                            break;
+                        }
+
+                        it++;
+                    }
+                }
             }
         }
-
-    }
 
 }
 

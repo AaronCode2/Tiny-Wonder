@@ -22,5 +22,6 @@ namespace Utils {
 namespace Mouse {
 
     bool isHovering(Rectangle object);
-    bool isClicked(Rectangle object);
+    bool isClickedL(Rectangle object);
+    bool isClickedR(Rectangle object);
 }
