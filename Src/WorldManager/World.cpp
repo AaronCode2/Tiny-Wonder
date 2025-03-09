@@ -146,8 +146,6 @@ void World::frameLogicNeighbor(Tile &thisTile) {
 
         if(CheckCollisionRecs(tile.getObject(), neighborhoodRight) && tile.getFrame().x != 3)
             tile.setFrame({tile.getFrame().x + 1, tile.getFrame().y});
-        else if(tile.getFrame().x != 4)
-            thisTile.setFrame({tile.getFrame().x + 2, tile.getFrame().y});
 
 
         if(CheckCollisionRecs(tile.getObject(), neighborhoodUp) && tile.getFrame().y != 1)
