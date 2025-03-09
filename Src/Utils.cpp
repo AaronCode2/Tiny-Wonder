@@ -31,10 +31,10 @@ bool Mouse::isHovering(Rectangle object) {
 
 bool Mouse::isClickedL(Rectangle object) {
 
-    return (CheckCollisionPointRec(GetMousePosition(), object) && IsMouseButtonPressed(MOUSE_BUTTON_LEFT));
+    return (CheckCollisionPointRec(GetMousePosition(), object) && IsMouseButtonDown(MOUSE_BUTTON_LEFT));
 }
 
 bool Mouse::isClickedR(Rectangle object) {
 
-    return (CheckCollisionPointRec(GetMousePosition(), object) && IsMouseButtonPressed(MOUSE_BUTTON_RIGHT));
+    return (CheckCollisionPointRec(GetMousePosition(), object) && IsMouseButtonDown(MOUSE_BUTTON_RIGHT));
 }

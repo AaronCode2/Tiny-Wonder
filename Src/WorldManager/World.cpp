@@ -137,20 +137,96 @@ void World::frameLogicNeighbor(Tile &thisTile) {
     Rectangle neighborhoodRight = thisTile.getObject();
     neighborhoodRight.x += 30;
 
+    Rectangle neighborhoodLeft = thisTile.getObject();
+    neighborhoodLeft.x -= 30;
+
     Rectangle neighborhoodUp = thisTile.getObject();
     neighborhoodUp.y -= 30;
 
-    for(auto &tile : tiles) {
+    Rectangle neighborhoodDown = thisTile.getObject();
+    neighborhoodDown.y += 30;
 
-        if(Utils::isSameRect(thisTile.getObject(), tile.getObject())) continue;
+    bool cornerBottomLeftTiles = true;
+    bool cornerBottomRightTiles = true;
 
-        if(CheckCollisionRecs(tile.getObject(), neighborhoodRight) && tile.getFrame().x != 3)
-            tile.setFrame({tile.getFrame().x + 1, tile.getFrame().y});
+    bool cornerTopLeftTiles = true;
+    bool cornerTopRightTiles = true;
 
+    bool bottomRowTiles = true;
+    bool topRowTiles = true;
 
-        if(CheckCollisionRecs(tile.getObject(), neighborhoodUp) && tile.getFrame().y != 1)
-            tile.setFrame({tile.getFrame().x, tile.getFrame().y - 1});
+    bool sideLeftRowTiles = true;
+    bool sideRightRowTiles = true;
+
+    for(auto &otherTile : tiles) {
+
+        if(Utils::isSameRect(thisTile.getObject(), otherTile.getObject())) 
+            continue;
+
+        if(CheckCollisionRecs(otherTile.getObject(), neighborhoodRight)) {
+
+            cornerBottomRightTiles = false;
+            cornerTopRightTiles = false;
+            sideRightRowTiles = false;
+            break;
+        }
     }
+
+    for(auto &other0Tile : tiles) {
+
+        if(Utils::isSameRect(thisTile.getObject(), other0Tile.getObject())) 
+            continue;
+
+        if(CheckCollisionRecs(other0Tile.getObject(), neighborhoodLeft)) {
+
+            cornerBottomLeftTiles = false;
+            cornerTopLeftTiles = false;
+            sideLeftRowTiles = false;
+            break;
+        }
+    }
+
+    for(auto &other2Tile : tiles) {
+
+        if(Utils::isSameRect(thisTile.getObject(), other2Tile.getObject())) 
+            continue;
+
+        if(CheckCollisionRecs(other2Tile.getObject(), neighborhoodDown)) {
+
+            bottomRowTiles = false;
+            cornerBottomRightTiles = false;
+            cornerBottomLeftTiles = false;
+            break;
+        }
+    }
+
+    for(auto &other3Tile : tiles) {
+
+        if(Utils::isSameRect(thisTile.getObject(), other3Tile.getObject())) 
+            continue;
+
+        if(CheckCollisionRecs(other3Tile.getObject(), neighborhoodUp)) {
+
+            cornerTopLeftTiles = false;
+            cornerTopRightTiles = false;
+            topRowTiles = false;
+            break;
+        }
+    }
+            
+    if(cornerBottomLeftTiles) thisTile.setFrame({2, 2});
+    else if(cornerBottomRightTiles) thisTile.setFrame({4, 2});
+
+    else if(cornerTopLeftTiles) thisTile.setFrame({2, 0});
+    else if(cornerTopRightTiles) thisTile.setFrame({4, 0});
+
+    else if(topRowTiles) thisTile.setFrame({3, 0});
+    else if(bottomRowTiles) thisTile.setFrame({3, 2});
+
+    else if(sideLeftRowTiles) thisTile.setFrame({2, 1});
+    else if(sideRightRowTiles) thisTile.setFrame({4, 1});
+
+    else thisTile.setFrame({3, 1});
 }
 
 void World::writeData() {
