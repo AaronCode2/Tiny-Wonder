@@ -202,7 +202,14 @@ void World::frameLogicNeighbor(Tile &thisTile) {
             topRow = false;
         }
 
-        
+        neighborHoodRect = thisObject;
+        neighborHoodRect.x += 30;
+        neighborHoodRect.y -= 30;
+
+        if(CheckCollisionRecs(tile.getObject(), neighborHoodRect)) {
+
+            sideCornerTopRight = false;
+        }
     }
     
     const TileFrameOption options[] = {
