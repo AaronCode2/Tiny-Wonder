@@ -19,6 +19,7 @@ class Tile : public Sprite {
         static Texture2D image;
 
         void update();
+        void setFrame(Vector2 newFrame) { frame = newFrame; };
 
         TileType getType() { return tileType; };
 

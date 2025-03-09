@@ -35,4 +35,5 @@ class World {
         std::vector<Tile> tiles;
 
         void readData();
+        void frameLogicNeighbor(Tile &thisTile);
 };

@@ -19,6 +19,8 @@ void World::update() {
     
     for(auto &tile : tiles) {
         
+
+        frameLogicNeighbor(tile);
         tile.update();
     }
 
@@ -62,7 +64,7 @@ void World::update() {
                         it = tiles.erase(it);
                         break;
                     }
-                    
+
                     it++;
                 }
             }
@@ -106,7 +108,7 @@ void World::readData() {
         std::stringstream ss(temp);
         std::string token;
 
-        while (std::getline(ss, token, ',') && count < NUM_SIZE) {
+        while (std::getline(ss, token, ',') && count < NUM_SIZE - 1) {
 
             try{
 
@@ -128,6 +130,29 @@ void World::readData() {
     }
 
     file.close();
+}
+
+void World::frameLogicNeighbor(Tile &thisTile) {
+
+    Rectangle neighborhoodRight = thisTile.getObject();
+    neighborhoodRight.x += 30;
+
+    Rectangle neighborhoodUp = thisTile.getObject();
+    neighborhoodUp.y -= 30;
+
+    for(auto &tile : tiles) {
+
+        if(Utils::isSameRect(thisTile.getObject(), tile.getObject())) continue;
+
+        if(CheckCollisionRecs(tile.getObject(), neighborhoodRight) && tile.getFrame().x != 3)
+            tile.setFrame({tile.getFrame().x + 1, tile.getFrame().y});
+        else if(tile.getFrame().x != 4)
+            thisTile.setFrame({tile.getFrame().x + 2, tile.getFrame().y});
+
+
+        if(CheckCollisionRecs(tile.getObject(), neighborhoodUp) && tile.getFrame().y != 1)
+            tile.setFrame({tile.getFrame().x, tile.getFrame().y - 1});
+    }
 }
 
 void World::writeData() {
