@@ -31,7 +31,17 @@ enum TileFrameType {
     ROW_BOTTOM,
     ROW_LEFT,
     ROW_RIGHT,
+    SIDE_CORNER_TOP_LEFT,
+    SIDE_CORNER_TOP_RIGHT,
+    SIDE_CORNER_BOTTOM_LEFT,
+    SIDE_CORNER_BOTTOM_RIGHT,
     MIDDLE
+};
+
+struct TileFrameOption {
+
+    bool condition;
+    TileFrameType frameType;
 };
 
 class World {
@@ -50,5 +60,6 @@ class World {
         std::map<TileFrameType, Vector2> tileFrameMap;
 
         void readData();
+        void mapOutTileFrames();
         void frameLogicNeighbor(Tile &thisTile);
 };

@@ -145,99 +145,83 @@ void World::readData() {
 
 void World::frameLogicNeighbor(Tile &thisTile) {
 
-    Rectangle neighborhoodRight = thisTile.getObject();
-    neighborhoodRight.x += 30;
+    Rectangle thisObject = thisTile.getObject();
 
-    Rectangle neighborhoodLeft = thisTile.getObject();
-    neighborhoodLeft.x -= 30;
+    Rectangle neighborHoodRect = thisObject;
 
-    Rectangle neighborhoodUp = thisTile.getObject();
-    neighborhoodUp.y -= 30;
+    bool cornerBottomLeft = true, cornerBottomRight = true;
+    bool cornerTopLeft = true, cornerTopRight = true;
+    bool bottomRow = true, topRow = true;
+    bool sideLeftRow = true, sideRightRow = true;
+    
+    for(auto &tile : tiles) {
 
-    Rectangle neighborhoodDown = thisTile.getObject();
-    neighborhoodDown.y += 30;
-
-    bool cornerBottomLeftTiles = true;
-    bool cornerBottomRightTiles = true;
-
-    bool cornerTopLeftTiles = true;
-    bool cornerTopRightTiles = true;
-
-    bool bottomRowTiles = true;
-    bool topRowTiles = true;
-
-    bool sideLeftRowTiles = true;
-    bool sideRightRowTiles = true;
-
-    for(auto &otherTile : tiles) {
-
-        if(Utils::isSameRect(thisTile.getObject(), otherTile.getObject())) 
+        if(Utils::isSameRect(thisTile.getObject(), tile.getObject())) 
             continue;
 
-        if(CheckCollisionRecs(otherTile.getObject(), neighborhoodRight)) {
+        neighborHoodRect = thisObject;
+        neighborHoodRect.x += 30;
 
-            cornerBottomRightTiles = false;
-            cornerTopRightTiles = false;
-            sideRightRowTiles = false;
-            break;
+        if(CheckCollisionRecs(tile.getObject(), neighborHoodRect)) {
+
+            cornerBottomRight = false;
+            cornerTopRight = false;
+            sideRightRow = false;
+        }
+
+        neighborHoodRect = thisObject;
+        neighborHoodRect.x -= 30;
+
+        if(CheckCollisionRecs(tile.getObject(), neighborHoodRect)) {
+
+            cornerBottomLeft = false;
+            cornerTopLeft = false;
+            sideLeftRow = false;
+        }
+
+        neighborHoodRect = thisObject;
+        neighborHoodRect.y += 30;
+
+        if(CheckCollisionRecs(tile.getObject(), neighborHoodRect)) {
+
+            bottomRow = false;
+            cornerBottomRight = false;
+            cornerBottomLeft = false;
+        }
+        
+        neighborHoodRect = thisObject;
+        neighborHoodRect.y -= 30;
+
+        if(CheckCollisionRecs(tile.getObject(), neighborHoodRect)) {
+
+            cornerTopLeft = false;
+            cornerTopRight = false;
+            topRow = false;
+        }
+    }
+    
+    const TileFrameOption options[] = {
+
+        {cornerBottomLeft,  CORNER_BOTTOM_LEFT},
+        {cornerBottomRight, CORNER_BOTTOM_RIGHT},
+        {cornerTopLeft,     CORNER_TOP_LEFT},
+        {cornerTopRight,    CORNER_TOP_RIGHT},
+        {topRow,            ROW_TOP},
+        {bottomRow,         ROW_BOTTOM},
+        {sideLeftRow,       ROW_LEFT},
+        {sideRightRow,      ROW_RIGHT}
+    };
+
+    for(const auto option : options) {
+
+        if(option.condition) {
+
+            thisTile.setFrame(tileFrameMap[option.frameType]);
+            return;
         }
     }
 
-    for(auto &other0Tile : tiles) {
-
-        if(Utils::isSameRect(thisTile.getObject(), other0Tile.getObject())) 
-            continue;
-
-        if(CheckCollisionRecs(other0Tile.getObject(), neighborhoodLeft)) {
-
-            cornerBottomLeftTiles = false;
-            cornerTopLeftTiles = false;
-            sideLeftRowTiles = false;
-            break;
-        }
-    }
-
-    for(auto &other2Tile : tiles) {
-
-        if(Utils::isSameRect(thisTile.getObject(), other2Tile.getObject())) 
-            continue;
-
-        if(CheckCollisionRecs(other2Tile.getObject(), neighborhoodDown)) {
-
-            bottomRowTiles = false;
-            cornerBottomRightTiles = false;
-            cornerBottomLeftTiles = false;
-            break;
-        }
-    }
-
-    for(auto &other3Tile : tiles) {
-
-        if(Utils::isSameRect(thisTile.getObject(), other3Tile.getObject())) 
-            continue;
-
-        if(CheckCollisionRecs(other3Tile.getObject(), neighborhoodUp)) {
-
-            cornerTopLeftTiles = false;
-            cornerTopRightTiles = false;
-            topRowTiles = false;
-            break;
-        }
-    }
-            
-    if(cornerBottomLeftTiles) thisTile.setFrame(tileFrameMap[CORNER_BOTTOM_LEFT]);
-    else if(cornerBottomRightTiles) thisTile.setFrame(tileFrameMap[CORNER_BOTTOM_RIGHT]);  
-
-    else if(cornerTopLeftTiles) thisTile.setFrame(tileFrameMap[CORNER_TOP_LEFT]);
-    else if(cornerTopRightTiles) thisTile.setFrame(tileFrameMap[CORNER_TOP_RIGHT]);
-
-    else if(topRowTiles) thisTile.setFrame(tileFrameMap[ROW_TOP]);
-    else if(bottomRowTiles) thisTile.setFrame(tileFrameMap[ROW_BOTTOM]);
-
-    else if(sideLeftRowTiles) thisTile.setFrame(tileFrameMap[ROW_LEFT]);
-    else if(sideRightRowTiles) thisTile.setFrame(tileFrameMap[ROW_RIGHT]);
-
-    else thisTile.setFrame(tileFrameMap[MIDDLE]);
+    thisTile.setFrame(tileFrameMap[MIDDLE]);
 }
 
 void World::writeData() {
