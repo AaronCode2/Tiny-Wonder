@@ -157,6 +157,7 @@ void World::frameLogicNeighbor(Tile &thisTile) {
 
     bool cornerBottomLeft = true, cornerBottomRight = true;
     bool cornerTopLeft = true, cornerTopRight = true;
+    
     bool bottomRow = true, topRow = true;
     bool leftRow = true, rightRow = true;
     
