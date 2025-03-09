@@ -214,14 +214,15 @@ void World::frameLogicNeighbor(Tile &thisTile) {
     
     const TileFrameOption options[] = {
 
-        {cornerBottomLeft,  CORNER_BOTTOM_LEFT},
-        {cornerBottomRight, CORNER_BOTTOM_RIGHT},
-        {cornerTopLeft,     CORNER_TOP_LEFT},
-        {cornerTopRight,    CORNER_TOP_RIGHT},
-        {topRow,            ROW_TOP},
-        {bottomRow,         ROW_BOTTOM},
-        {leftRow,       ROW_LEFT},
-        {rightRow,      ROW_RIGHT}
+        {cornerBottomLeft,      CORNER_BOTTOM_LEFT},
+        {cornerBottomRight,     CORNER_BOTTOM_RIGHT},
+        {cornerTopLeft,         CORNER_TOP_LEFT},
+        {cornerTopRight,        CORNER_TOP_RIGHT},
+        {topRow,                ROW_TOP},
+        {bottomRow,             ROW_BOTTOM},
+        {leftRow,               ROW_LEFT},
+        {rightRow,              ROW_RIGHT},
+        {sideCornerTopRight,    SIDE_CORNER_TOP_RIGHT}
     };
 
     for(const auto option : options) {
