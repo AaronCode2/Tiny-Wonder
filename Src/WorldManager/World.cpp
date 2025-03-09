@@ -17,6 +17,9 @@ World::World() {
     tileFrameMap[ROW_RIGHT] = {4, 1};
     tileFrameMap[ROW_LEFT] = {2, 1};
     tileFrameMap[SIDE_CORNER_TOP_RIGHT] = {0, 4};
+    tileFrameMap[SIDE_CORNER_TOP_LEFT] = {1, 4};
+    tileFrameMap[SIDE_CORNER_BOTTOM_RIGHT] = {0, 3};
+    tileFrameMap[SIDE_CORNER_BOTTOM_LEFT] = {1, 3};
     tileFrameMap[MIDDLE] = {3, 1};
 
     readData();
@@ -155,7 +158,8 @@ void World::frameLogicNeighbor(Tile &thisTile) {
     bool bottomRow = true, topRow = true;
     bool leftRow = true, rightRow = true;
     
-    bool sideCornerTopRight = true;
+    bool sideCornerTopRight = true, sideCornerTopLeft = true;
+    bool sideCornerBottomRight = true, sideCornerBottomLeft = true;
 
     for(auto &tile : tiles) {
 
@@ -203,12 +207,47 @@ void World::frameLogicNeighbor(Tile &thisTile) {
         }
 
         neighborHoodRect = thisObject;
-        neighborHoodRect.x += 30;
+        neighborHoodRect.x += 60;
         neighborHoodRect.y -= 30;
+        neighborHoodRect.width = 10;
+        neighborHoodRect.height = 10;
 
         if(CheckCollisionRecs(tile.getObject(), neighborHoodRect)) {
 
             sideCornerTopRight = false;
+        }
+
+        neighborHoodRect = thisObject;
+        neighborHoodRect.x -= 60;
+        neighborHoodRect.y -= 30;
+        neighborHoodRect.width = 10;
+        neighborHoodRect.height = 10;
+
+        if(CheckCollisionRecs(tile.getObject(), neighborHoodRect)) {
+
+            sideCornerTopLeft = false;
+        }
+
+        neighborHoodRect = thisObject;
+        neighborHoodRect.x -= 60;
+        neighborHoodRect.y += 60;
+        neighborHoodRect.width = 10;
+        neighborHoodRect.height = 10;
+
+        if(CheckCollisionRecs(tile.getObject(), neighborHoodRect)) {
+
+            sideCornerBottomLeft = false;
+        }
+
+        neighborHoodRect = thisObject;
+        neighborHoodRect.x += 60;
+        neighborHoodRect.y += 60;
+        neighborHoodRect.width = 10;
+        neighborHoodRect.height = 10;
+
+        if(CheckCollisionRecs(tile.getObject(), neighborHoodRect)) {
+
+            sideCornerBottomRight = false;
         }
     }
     
@@ -218,11 +257,14 @@ void World::frameLogicNeighbor(Tile &thisTile) {
         {cornerBottomRight,     CORNER_BOTTOM_RIGHT},
         {cornerTopLeft,         CORNER_TOP_LEFT},
         {cornerTopRight,        CORNER_TOP_RIGHT},
-        {topRow,                ROW_TOP},
         {bottomRow,             ROW_BOTTOM},
+        {topRow,                ROW_TOP},
         {leftRow,               ROW_LEFT},
         {rightRow,              ROW_RIGHT},
-        {sideCornerTopRight,    SIDE_CORNER_TOP_RIGHT}
+        {sideCornerTopRight,    SIDE_CORNER_TOP_RIGHT},
+        {sideCornerTopLeft,     SIDE_CORNER_TOP_LEFT},
+        {sideCornerBottomRight, SIDE_CORNER_BOTTOM_RIGHT},
+        {sideCornerBottomLeft,  SIDE_CORNER_BOTTOM_LEFT}
     };
 
     for(const auto option : options) {
