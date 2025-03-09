@@ -16,7 +16,7 @@ World::World() {
     tileFrameMap[ROW_BOTTOM] = {3, 2};
     tileFrameMap[ROW_RIGHT] = {4, 1};
     tileFrameMap[ROW_LEFT] = {2, 1};
-    tileFrameMap[MIDDLE] = {2, 1};
+    tileFrameMap[MIDDLE] = {3, 1};
 
     readData();
 }
