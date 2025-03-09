@@ -158,6 +158,8 @@ void World::frameLogicNeighbor(Tile &thisTile) {
     bool sideLeftRowTiles = true;
     bool sideRightRowTiles = true;
 
+    bool sideCornerBottomLeft = true;
+
     for(auto &otherTile : tiles) {
 
         if(Utils::isSameRect(thisTile.getObject(), otherTile.getObject())) 
