@@ -7,6 +7,17 @@
 World::World() {
 
     Tile::image = LoadTexture("../Assets/Tiles/Tile.png");
+
+    tileFrameMap[CORNER_BOTTOM_RIGHT] = {4, 2};
+    tileFrameMap[CORNER_BOTTOM_LEFT] = {2, 2};
+    tileFrameMap[CORNER_TOP_RIGHT] = {4, 0};
+    tileFrameMap[CORNER_TOP_LEFT] = {2, 0};
+    tileFrameMap[ROW_TOP] = {3, 0};
+    tileFrameMap[ROW_BOTTOM] = {3, 2};
+    tileFrameMap[ROW_RIGHT] = {4, 1};
+    tileFrameMap[ROW_LEFT] = {2, 1};
+    tileFrameMap[MIDDLE] = {2, 1};
+
     readData();
 }
 
@@ -158,8 +169,6 @@ void World::frameLogicNeighbor(Tile &thisTile) {
     bool sideLeftRowTiles = true;
     bool sideRightRowTiles = true;
 
-    bool sideCornerBottomLeft = true;
-
     for(auto &otherTile : tiles) {
 
         if(Utils::isSameRect(thisTile.getObject(), otherTile.getObject())) 
@@ -216,19 +225,19 @@ void World::frameLogicNeighbor(Tile &thisTile) {
         }
     }
             
-    if(cornerBottomLeftTiles) thisTile.setFrame({2, 2});
-    else if(cornerBottomRightTiles) thisTile.setFrame({4, 2});
+    if(cornerBottomLeftTiles) thisTile.setFrame(tileFrameMap[CORNER_BOTTOM_LEFT]);
+    else if(cornerBottomRightTiles) thisTile.setFrame(tileFrameMap[CORNER_BOTTOM_RIGHT]);  
 
-    else if(cornerTopLeftTiles) thisTile.setFrame({2, 0});
-    else if(cornerTopRightTiles) thisTile.setFrame({4, 0});
+    else if(cornerTopLeftTiles) thisTile.setFrame(tileFrameMap[CORNER_TOP_LEFT]);
+    else if(cornerTopRightTiles) thisTile.setFrame(tileFrameMap[CORNER_TOP_RIGHT]);
 
-    else if(topRowTiles) thisTile.setFrame({3, 0});
-    else if(bottomRowTiles) thisTile.setFrame({3, 2});
+    else if(topRowTiles) thisTile.setFrame(tileFrameMap[ROW_TOP]);
+    else if(bottomRowTiles) thisTile.setFrame(tileFrameMap[ROW_BOTTOM]);
 
-    else if(sideLeftRowTiles) thisTile.setFrame({2, 1});
-    else if(sideRightRowTiles) thisTile.setFrame({4, 1});
+    else if(sideLeftRowTiles) thisTile.setFrame(tileFrameMap[ROW_LEFT]);
+    else if(sideRightRowTiles) thisTile.setFrame(tileFrameMap[ROW_RIGHT]);
 
-    else thisTile.setFrame({3, 1});
+    else thisTile.setFrame(tileFrameMap[MIDDLE]);
 }
 
 void World::writeData() {

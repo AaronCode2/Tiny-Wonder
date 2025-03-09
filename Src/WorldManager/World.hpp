@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <map>
 #include <raylib.h>
 #include "../Utils.hpp"
 #include "Tile.hpp"
@@ -20,6 +21,19 @@ enum fileReadStructure {
     ID
 };
 
+enum TileFrameType {
+
+    CORNER_BOTTOM_LEFT = 0,
+    CORNER_BOTTOM_RIGHT,
+    CORNER_TOP_LEFT,
+    CORNER_TOP_RIGHT,
+    ROW_TOP,
+    ROW_BOTTOM,
+    ROW_LEFT,
+    ROW_RIGHT,
+    MIDDLE
+};
+
 class World {
 
     public:
@@ -33,6 +47,7 @@ class World {
     private:
 
         std::vector<Tile> tiles;
+        std::map<TileFrameType, Vector2> tileFrameMap;
 
         void readData();
         void frameLogicNeighbor(Tile &thisTile);
