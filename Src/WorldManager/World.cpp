@@ -16,6 +16,7 @@ World::World() {
     tileFrameMap[ROW_BOTTOM] = {3, 2};
     tileFrameMap[ROW_RIGHT] = {4, 1};
     tileFrameMap[ROW_LEFT] = {2, 1};
+    tileFrameMap[SIDE_CORNER_TOP_RIGHT] = {0, 4};
     tileFrameMap[MIDDLE] = {3, 1};
 
     readData();
@@ -154,6 +155,8 @@ void World::frameLogicNeighbor(Tile &thisTile) {
     bool bottomRow = true, topRow = true;
     bool leftRow = true, rightRow = true;
     
+    bool sideCornerTopRight = true;
+
     for(auto &tile : tiles) {
 
         if(Utils::isSameRect(thisTile.getObject(), tile.getObject())) 
@@ -198,6 +201,8 @@ void World::frameLogicNeighbor(Tile &thisTile) {
             cornerTopRight = false;
             topRow = false;
         }
+
+        
     }
     
     const TileFrameOption options[] = {
