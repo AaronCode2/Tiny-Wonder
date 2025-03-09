@@ -149,6 +149,8 @@ void World::readData() {
 
 void World::frameLogicNeighbor(Tile &thisTile) {
 
+// TODO: Use #define for the repeated values ;)
+
     Rectangle thisObject = thisTile.getObject();
 
     Rectangle neighborHoodRect = thisObject;
