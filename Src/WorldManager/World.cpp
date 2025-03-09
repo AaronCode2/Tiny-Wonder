@@ -45,29 +45,29 @@ void World::update() {
                     }
                 }
 
-                    if(skip) break;
+                if(skip) break;
 
-                    tiles.push_back(Tile(
-                        object,
-                        {2, 2}
-                    ));
-                }
+                tiles.push_back(Tile(
+                    object,
+                    {2, 2}
+                ));
+            }
 
-                if(Mouse::isClickedR(object)) {
+            if(Mouse::isClickedR(object)) {
 
-                    for(auto it = tiles.begin(); it < tiles.end();) {
+                for(auto it = tiles.begin(); it < tiles.end();) {
                         
-                        if(it->getObject().x == object.x && it->getObject().y == object.y) {
+                    if(it->getObject().x == object.x && it->getObject().y == object.y) {
 
-                            it = tiles.erase(it);
-                            break;
-                        }
-
-                        it++;
+                        it = tiles.erase(it);
+                        break;
                     }
+                    
+                    it++;
                 }
             }
         }
+    }
 
 }
 
