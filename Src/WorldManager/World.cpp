@@ -152,7 +152,7 @@ void World::frameLogicNeighbor(Tile &thisTile) {
     bool cornerBottomLeft = true, cornerBottomRight = true;
     bool cornerTopLeft = true, cornerTopRight = true;
     bool bottomRow = true, topRow = true;
-    bool sideLeftRow = true, sideRightRow = true;
+    bool leftRow = true, rightRow = true;
     
     for(auto &tile : tiles) {
 
@@ -166,7 +166,7 @@ void World::frameLogicNeighbor(Tile &thisTile) {
 
             cornerBottomRight = false;
             cornerTopRight = false;
-            sideRightRow = false;
+            rightRow = false;
         }
 
         neighborHoodRect = thisObject;
@@ -176,7 +176,7 @@ void World::frameLogicNeighbor(Tile &thisTile) {
 
             cornerBottomLeft = false;
             cornerTopLeft = false;
-            sideLeftRow = false;
+            leftRow = false;
         }
 
         neighborHoodRect = thisObject;
@@ -208,8 +208,8 @@ void World::frameLogicNeighbor(Tile &thisTile) {
         {cornerTopRight,    CORNER_TOP_RIGHT},
         {topRow,            ROW_TOP},
         {bottomRow,         ROW_BOTTOM},
-        {sideLeftRow,       ROW_LEFT},
-        {sideRightRow,      ROW_RIGHT}
+        {leftRow,       ROW_LEFT},
+        {rightRow,      ROW_RIGHT}
     };
 
     for(const auto option : options) {
