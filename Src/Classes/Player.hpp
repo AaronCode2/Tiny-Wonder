@@ -2,8 +2,11 @@
 #include <raylib.h>
 #include <map>
 #include <string>
+#include <vector>
 #include <array>
 #include "Sprite.hpp"
+#include "../WorldManager/Tile.hpp"
+#include "../WorldManager/World.hpp"
 #include "../Utils.hpp"
 
 #define AnimationMapIndexY 0
@@ -21,9 +24,10 @@ class Player : public Sprite {
 
     public:
 
-        Player(Rectangle object);
+        Player(Rectangle object, World &world);
 
         void update();
+        Vector2 getVeclocity() { return velocity; };
 
         Texture2D image;
 
@@ -35,8 +39,9 @@ class Player : public Sprite {
 
         Direction direction = RIGHT;
 
+        World &world;
+
         std::map<std::string, std::array<int, 3>> animationMap;
-        Vector2 velocity;
 
         void move();
         void animationLogic();

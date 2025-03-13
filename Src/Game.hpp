@@ -15,10 +15,9 @@ class Game {
 
     private:
 
-        Player player = Player({100, 100, 100, 100});
-
         World world;
-
+        Player player = Player({100, 100, 100, 100}, world);
+    
         void gameLoop();
         void updateGame();
 };

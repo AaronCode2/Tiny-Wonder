@@ -24,7 +24,7 @@ void Game::gameLoop() {
 
 void Game::updateGame() {
 
-    world.update();
+    world.update(player.getVeclocity());
     player.update();
 
     std::string fps = std::to_string(GetFPS()) + "FPS";

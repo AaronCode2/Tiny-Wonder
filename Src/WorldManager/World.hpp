@@ -51,15 +51,15 @@ class World {
         World();
         ~World();
         
-        void update();
+        void update(Vector2 playerVelocity);
+        void frameLogicNeighbor(Tile &thisTile, Vector2 playerVelocity);
         void writeData();
 
+        std::vector<Tile> tiles;
     private:
 
-        std::vector<Tile> tiles;
         std::map<TileFrameType, Vector2> tileFrameMap;
 
         void readData();
         void mapOutTileFrames();
-        void frameLogicNeighbor(Tile &thisTile);
 };

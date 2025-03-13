@@ -23,7 +23,11 @@ class Tile : public Sprite {
 
         TileType getType() { return tileType; };
 
+        void setVelocity(Vector2 newVeclocity) { velocity = newVeclocity; };
+
     private:
 
         TileType tileType;
+
+        void move();
 };

@@ -1,7 +1,7 @@
 #include "Player.hpp"
 
-Player::Player(Rectangle object):
-    Sprite(object, frame)  
+Player::Player(Rectangle object, World &world):
+    Sprite(object, frame), world(world)  
 {   
 
     animationMap["IdleLeft"] = {0, 0, 2};
@@ -36,8 +36,13 @@ void Player::move() {
     if(getInput().right) velocity.x = speed;
     if(getInput().left) velocity.x = -speed; 
     
-    object.x += velocity.x * GetFrameTime();
-    object.y += velocity.y * GetFrameTime();
+    // object.x += velocity.x * GetFrameTime();
+    // object.y += velocity.y * GetFrameTime();
+
+    for(auto &tile : world.tiles) {
+
+        tile.setVelocity({-velocity.x, -velocity.y});        
+    }
 }
 
 void Player::animationLogic() {

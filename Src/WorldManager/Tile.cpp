@@ -18,5 +18,12 @@ void Tile::update() {
     srcRect.x = srcRect.width * frame.x;
     srcRect.y = srcRect.height * frame.y;
 
+    move();
     draw(image);
+}
+
+void Tile::move() {
+
+    object.x += velocity.x * GetFrameTime();
+    object.y += velocity.y * GetFrameTime();
 }

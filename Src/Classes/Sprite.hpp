@@ -17,6 +17,7 @@ class Sprite {
     protected:
 
         Rectangle object;
+        Vector2 velocity;
         Rectangle srcRect;
         Vector2 frame;
 

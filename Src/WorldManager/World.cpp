@@ -4,6 +4,7 @@
 #include <sstream>
 #include <string>
 
+
 World::World() {
 
     Tile::image = LoadTexture("../Assets/Tiles/Tile.png");
@@ -25,24 +26,25 @@ World::World() {
     readData();
 }
 
-World::~World() {
-    
+World::~World()
+{
+
     UnloadTexture(Tile::image);
 }
 
-void World::update() {
+void World::update(Vector2 playerVelocity) {
     
     for(auto &tile : tiles) {
         
-
-        frameLogicNeighbor(tile);
+        if(playerVelocity.x == 0 && playerVelocity.y == 0)
+        frameLogicNeighbor(tile, playerVelocity);
         tile.update();
     }
 
     for(float y = 0; y < GetScreenHeight(); y += 60) {
         for(float x = 0; x < GetScreenWidth(); x += 60) {
                 
-            Rectangle object = {x, y, 60, 60};
+            Rectangle object = {x + playerVelocity.x, y + playerVelocity.y, 60, 60};
     
             if(Mouse::isHovering(object)) {
     
@@ -74,7 +76,7 @@ void World::update() {
 
                 for(auto it = tiles.begin(); it < tiles.end();) {
                         
-                    if(it->getObject().x == object.x && it->getObject().y == object.y) {
+                    if(CheckCollisionRecs(it->getObject(), object)) {
 
                         it = tiles.erase(it);
                         break;
@@ -147,11 +149,14 @@ void World::readData() {
     file.close();
 }
 
-void World::frameLogicNeighbor(Tile &thisTile) {
-
-// TODO: Use #define for the repeated values ;)
+void World::frameLogicNeighbor(Tile &thisTile, Vector2 playerVelocity) {
 
     Rectangle thisObject = thisTile.getObject();
+
+    thisObject.x -= playerVelocity.x;
+    thisObject.y -= playerVelocity.y;
+    thisObject.width = 5;
+    thisObject.height = 5;
 
     Rectangle neighborHoodRect = thisObject;
 
@@ -170,7 +175,9 @@ void World::frameLogicNeighbor(Tile &thisTile) {
             continue;
 
         neighborHoodRect = thisObject;
-        neighborHoodRect.x += 30;
+        neighborHoodRect.x += 60;
+        
+        DrawRectangleRec(neighborHoodRect, Utils::testColor);
 
         if(CheckCollisionRecs(tile.getObject(), neighborHoodRect)) {
 
@@ -180,7 +187,9 @@ void World::frameLogicNeighbor(Tile &thisTile) {
         }
 
         neighborHoodRect = thisObject;
-        neighborHoodRect.x -= 30;
+        neighborHoodRect.x -= 60;
+
+        DrawRectangleRec(neighborHoodRect, Utils::testColor);
 
         if(CheckCollisionRecs(tile.getObject(), neighborHoodRect)) {
 
@@ -190,7 +199,9 @@ void World::frameLogicNeighbor(Tile &thisTile) {
         }
 
         neighborHoodRect = thisObject;
-        neighborHoodRect.y += 30;
+        neighborHoodRect.y += 60;
+
+        DrawRectangleRec(neighborHoodRect, Utils::testColor);
 
         if(CheckCollisionRecs(tile.getObject(), neighborHoodRect)) {
 
@@ -200,7 +211,9 @@ void World::frameLogicNeighbor(Tile &thisTile) {
         }
         
         neighborHoodRect = thisObject;
-        neighborHoodRect.y -= 30;
+        neighborHoodRect.y -= 60;
+
+        DrawRectangleRec(neighborHoodRect, Utils::testColor);
 
         if(CheckCollisionRecs(tile.getObject(), neighborHoodRect)) {
 
@@ -211,9 +224,9 @@ void World::frameLogicNeighbor(Tile &thisTile) {
 
         neighborHoodRect = thisObject;
         neighborHoodRect.x += 60;
-        neighborHoodRect.y -= 30;
-        neighborHoodRect.width = 10;
-        neighborHoodRect.height = 10;
+        neighborHoodRect.y -= 60;
+
+        DrawRectangleRec(neighborHoodRect, Utils::testColor);
 
         if(CheckCollisionRecs(tile.getObject(), neighborHoodRect)) {
 
@@ -222,9 +235,10 @@ void World::frameLogicNeighbor(Tile &thisTile) {
 
         neighborHoodRect = thisObject;
         neighborHoodRect.x -= 60;
-        neighborHoodRect.y -= 30;
-        neighborHoodRect.width = 10;
-        neighborHoodRect.height = 10;
+        neighborHoodRect.y -= 60;
+
+
+        DrawRectangleRec(neighborHoodRect, Utils::testColor);
 
         if(CheckCollisionRecs(tile.getObject(), neighborHoodRect)) {
 
@@ -234,8 +248,8 @@ void World::frameLogicNeighbor(Tile &thisTile) {
         neighborHoodRect = thisObject;
         neighborHoodRect.x -= 60;
         neighborHoodRect.y += 60;
-        neighborHoodRect.width = 10;
-        neighborHoodRect.height = 10;
+
+        DrawRectangleRec(neighborHoodRect, Utils::testColor);
 
         if(CheckCollisionRecs(tile.getObject(), neighborHoodRect)) {
 
@@ -245,8 +259,8 @@ void World::frameLogicNeighbor(Tile &thisTile) {
         neighborHoodRect = thisObject;
         neighborHoodRect.x += 60;
         neighborHoodRect.y += 60;
-        neighborHoodRect.width = 10;
-        neighborHoodRect.height = 10;
+
+        DrawRectangleRec(neighborHoodRect, Utils::testColor);
 
         if(CheckCollisionRecs(tile.getObject(), neighborHoodRect)) {
 
