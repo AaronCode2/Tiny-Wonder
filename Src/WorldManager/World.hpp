@@ -52,7 +52,7 @@ class World {
         ~World();
         
         void update(Vector2 playerVelocity);
-        void frameLogicNeighbor(Tile &thisTile, Vector2 playerVelocity);
+        void frameLogicNeighbor(Tile &thisTile);
         void writeData();
 
         std::vector<Tile> tiles;

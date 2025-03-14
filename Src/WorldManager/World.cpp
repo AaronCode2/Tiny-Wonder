@@ -24,11 +24,6 @@ World::World() {
     tileFrameMap[MIDDLE] = {3, 1};
 
     readData();
-
-    for(auto &tile : tiles) {
-
-        frameLogicNeighbor(tile, {0, 0});
-    }
 }
 
 World::~World() {
@@ -41,6 +36,14 @@ void World::update(Vector2 playerVelocity) {
     for(auto &tile : tiles) {
         
         tile.update();
+    }
+
+    if(playerVelocity.x == 0 && playerVelocity.y == 0) {
+
+        for(auto &tile : tiles) {
+
+            frameLogicNeighbor(tile);
+        }
     }
 
     for(float y = 0; y < GetScreenHeight(); y += 60) {
@@ -72,11 +75,6 @@ void World::update(Vector2 playerVelocity) {
                     object,
                     {2, 2}
                 ));
-
-                for(auto &tile : tiles) {
-
-                    frameLogicNeighbor(tile, {0, 0});
-                }
             }
 
             if(Mouse::isClickedR(object)) {
@@ -156,14 +154,14 @@ void World::readData() {
     file.close();
 }
 
-void World::frameLogicNeighbor(Tile &thisTile, Vector2 playerVelocity) {
-    Rectangle thisObject = thisTile.getObject();
-    thisObject.width = 5;
-    thisObject.height = 5;
+void World::frameLogicNeighbor(Tile &thisTile) {
 
-    // Offset the tile's position by the player's movement
-    thisObject.x += playerVelocity.x;
-    thisObject.y += playerVelocity.y;
+    Rectangle thisObject = thisTile.getObject();
+    // thisObject.width = 2;
+    // thisObject.height = 2;
+
+    // thisObject.x -= playerVelocity.x;
+    // thisObject.y -= playerVelocity.y;
 
     Rectangle neighborHoodRect = thisObject;
 
