@@ -72,6 +72,11 @@ void World::update(Vector2 playerVelocity) {
                     object,
                     {2, 2}
                 ));
+
+                for(auto &tile : tiles) {
+
+                    frameLogicNeighbor(tile, {0, 0});
+                }
             }
 
             if(Mouse::isClickedR(object)) {
