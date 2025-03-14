@@ -24,6 +24,11 @@ World::World() {
     tileFrameMap[MIDDLE] = {3, 1};
 
     readData();
+
+    for(auto &tile : tiles) {
+
+        frameLogicNeighbor(tile, playerVelocity);
+    }
 }
 
 World::~World() {
@@ -36,14 +41,6 @@ void World::update(Vector2 playerVelocity) {
     for(auto &tile : tiles) {
         
         tile.update();
-    }
-
-    if(playerVelocity.x != 0 || playerVelocity.y != 0) {
-
-        for(auto &tile : tiles) {
-
-            frameLogicNeighbor(tile, playerVelocity);
-        }
     }
 
     for(float y = 0; y < GetScreenHeight(); y += 60) {
