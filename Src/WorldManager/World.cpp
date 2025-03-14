@@ -27,7 +27,7 @@ World::World() {
 
     for(auto &tile : tiles) {
 
-        frameLogicNeighbor(tile, playerVelocity);
+        frameLogicNeighbor(tile, {0, 0});
     }
 }
 
