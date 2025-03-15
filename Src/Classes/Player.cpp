@@ -38,11 +38,6 @@ void Player::move() {
     
     // object.x += velocity.x * GetFrameTime();
     // object.y += velocity.y * GetFrameTime();
-
-    for(auto &tile : world.tiles) {
-        
-        tile.setVelocity({-velocity.x, -velocity.y});
-    }
 }
 
 void Player::animationLogic() {
