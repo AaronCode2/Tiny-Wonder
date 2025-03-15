@@ -18,10 +18,11 @@ void Tile::update() {
     srcRect.x = srcRect.width * frame.x;
     srcRect.y = srcRect.height * frame.y;
 
-    move();
-
+    
     if(CheckCollisionRecs(Utils::getScreenRect(), object))
         draw(image);
+
+    move();
 }
 
 void Tile::move() {

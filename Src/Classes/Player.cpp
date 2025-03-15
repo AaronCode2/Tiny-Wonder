@@ -41,7 +41,7 @@ void Player::move() {
         400,
         200,
         10,
-        10
+        GetScreenHeight() - 400.0f
     };
 
     velocity = {0, 0};
@@ -52,58 +52,72 @@ void Player::move() {
     if(getInput().left) velocity.x = -speed; 
     
     moveScreenX();
-    // moveScreenY();
+    moveScreenY();
 
+    updateHitBox();
     DrawRectangleRec(leftSide, Utils::testColor);
+}
+
+void Player::updateHitBox() {
+
+    hitBox = object;
+
+    DrawRectangleRec(hitBox, Utils::testColor);
 }
 
 void Player::moveScreenX() {
 
     object.x += velocity.x * GetFrameTime();
+    updateHitBox();
 
-    if(!CheckCollisionRecs(leftSide, object)) {
-            
+    if(CheckCollisionRecs(leftSide, object)) {
+        
+        for(auto &tile : tiles) 
+            tile.setVelocity({-velocity.x, 0.0f});
+
         if(velocity.x > 0) {
+            
+            const float offset = hitBox.x - object.x + hitBox.width;
 
-            velocity.x = 0;
-    
-            object.x = leftSide.x - object.x + object.width;
+            object.x = leftSide.x - offset;
         }
     
         if(velocity.x < 0) {
-    
-            velocity.x = 0;
-    
-            object.x = leftSide.x + leftSide.width - object.x;
+            
+            const float offset = hitBox.x - object.x;
+
+            object.x = leftSide.x + leftSide.width - offset;
         }
 
-        for(auto &tile : tiles) 
-            tile.setVelocity({-velocity.x, 0});
+        velocity.x = 0;
     }
 }
 
 void Player::moveScreenY() {
 
     object.y += velocity.y * GetFrameTime();
+    updateHitBox();
 
-    if(!CheckCollisionRecs(movementRangeBox, object)) {
+    if(CheckCollisionRecs(leftSide, object)) {
 
         for(auto &tile : tiles) 
-            tile.setVelocity({0, -velocity.y});
+            tile.setVelocity({0.0f, -velocity.y});
 
         if(velocity.y > 0) {
-
-            velocity.y = 0;
-
-            object.y = movementRangeBox.y - object.y + object.height;
+            
+            const float offset = hitBox.y - object.y + hitBox.height;
+    
+            object.y = leftSide.y - offset;
         }
-
+        
         if(velocity.y < 0) {
-
-            velocity.y = 0;
-
-            object.y = movementRangeBox.y + movementRangeBox.height - object.y;
+                
+            const float offset = hitBox.y - object.y;
+    
+            object.y = leftSide.y + leftSide.height - offset;
         }
+
+        velocity.y = 0;
     }
 }
 

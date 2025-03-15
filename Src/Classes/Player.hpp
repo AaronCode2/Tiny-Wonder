@@ -50,8 +50,10 @@ class Player : public Sprite {
         };
 
         Rectangle leftSide;
+        Rectangle hitBox;
 
         void move();
+        void updateHitBox();
         void moveScreenX();
         void moveScreenY();
         void animationLogic();

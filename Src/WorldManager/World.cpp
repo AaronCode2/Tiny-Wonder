@@ -41,6 +41,7 @@ void World::update(Vector2 playerVelocity) {
     for(auto &tile : tiles) {
 
         tile.update();
+        tile.setVelocity({0.0f, 0.0f});
     }
 
 
