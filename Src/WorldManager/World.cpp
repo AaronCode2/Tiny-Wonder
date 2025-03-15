@@ -33,11 +33,6 @@ World::~World() {
 
 void World::update(Vector2 playerVelocity) {
     
-    for(auto &tile : tiles) {
-        
-        tile.update();
-    }
-
     if(playerVelocity.x == 0 && playerVelocity.y == 0) {
 
         for(auto &tile : tiles) {
@@ -45,6 +40,12 @@ void World::update(Vector2 playerVelocity) {
             frameLogicNeighbor(tile);
         }
     }
+
+    for(auto &tile : tiles) {
+        
+        tile.update();
+    }
+
 
     for(float y = 0; y < GetScreenHeight(); y += 60) {
         for(float x = 0; x < GetScreenWidth(); x += 60) {
@@ -157,11 +158,9 @@ void World::readData() {
 void World::frameLogicNeighbor(Tile &thisTile) {
 
     Rectangle thisObject = thisTile.getObject();
-    // thisObject.width = 2;
-    // thisObject.height = 2;
 
-    // thisObject.x -= playerVelocity.x;
-    // thisObject.y -= playerVelocity.y;
+    thisObject.width = 5;
+    thisObject.height = 5;
 
     Rectangle neighborHoodRect = thisObject;
 
@@ -175,59 +174,94 @@ void World::frameLogicNeighbor(Tile &thisTile) {
     bool sideCornerBottomRight = true, sideCornerBottomLeft = true;
 
     for (auto &tile : tiles) {
+
         if (Utils::isSameRect(thisTile.getObject(), tile.getObject())) 
             continue;
 
         // Move the neighborhood rect relative to this tile's new position
         neighborHoodRect = thisObject;
-        neighborHoodRect.x += 60;
+        neighborHoodRect.x += 60.0f;
+
+        DrawRectangleRec(neighborHoodRect, Utils::testColor);
+
         if (CheckCollisionRecs(tile.getObject(), neighborHoodRect)) {
+
             cornerBottomRight = cornerTopRight = rightRow = false;
         }
 
+
+
         neighborHoodRect = thisObject;
-        neighborHoodRect.x -= 60;
+        neighborHoodRect.x -= 60.0f;
+
+        DrawRectangleRec(neighborHoodRect, Utils::testColor);
+
+
         if (CheckCollisionRecs(tile.getObject(), neighborHoodRect)) {
+
             cornerBottomLeft = cornerTopLeft = leftRow = false;
         }
 
         neighborHoodRect = thisObject;
-        neighborHoodRect.y += 60;
+        neighborHoodRect.y += 60.0f;
+
+        DrawRectangleRec(neighborHoodRect, Utils::testColor);
+
+
         if (CheckCollisionRecs(tile.getObject(), neighborHoodRect)) {
             bottomRow = cornerBottomRight = cornerBottomLeft = false;
         }
         
         neighborHoodRect = thisObject;
-        neighborHoodRect.y -= 60;
+        neighborHoodRect.y -= 60.0f;
+
+        DrawRectangleRec(neighborHoodRect, Utils::testColor);
+
+
         if (CheckCollisionRecs(tile.getObject(), neighborHoodRect)) {
             cornerTopLeft = cornerTopRight = topRow = false;
         }
 
         // Diagonal checks
         neighborHoodRect = thisObject;
-        neighborHoodRect.x += 60;
-        neighborHoodRect.y -= 60;
+        neighborHoodRect.x += 60.0f;
+        neighborHoodRect.y -= 60.0f;
+
+        DrawRectangleRec(neighborHoodRect, Utils::testColor);
+
+
         if (CheckCollisionRecs(tile.getObject(), neighborHoodRect)) {
             sideCornerTopRight = false;
         }
 
         neighborHoodRect = thisObject;
-        neighborHoodRect.x -= 60;
-        neighborHoodRect.y -= 60;
+        neighborHoodRect.x -= 60.0f;
+        neighborHoodRect.y -= 60.0f;
+
+        DrawRectangleRec(neighborHoodRect, Utils::testColor);
+
+
         if (CheckCollisionRecs(tile.getObject(), neighborHoodRect)) {
             sideCornerTopLeft = false;
         }
 
         neighborHoodRect = thisObject;
-        neighborHoodRect.x -= 60;
-        neighborHoodRect.y += 60;
+        neighborHoodRect.x -= 60.0f;
+        neighborHoodRect.y += 60.0f;
+
+        DrawRectangleRec(neighborHoodRect, Utils::testColor);
+
+
         if (CheckCollisionRecs(tile.getObject(), neighborHoodRect)) {
             sideCornerBottomLeft = false;
         }
 
         neighborHoodRect = thisObject;
-        neighborHoodRect.x += 60;
-        neighborHoodRect.y += 60;
+        neighborHoodRect.x += 60.0f;
+        neighborHoodRect.y += 60.0f;
+
+        DrawRectangleRec(neighborHoodRect, Utils::testColor);
+
         if (CheckCollisionRecs(tile.getObject(), neighborHoodRect)) {
             sideCornerBottomRight = false;
         }

@@ -18,9 +18,7 @@ bool Utils::isSameRect(Rectangle aObject, Rectangle bObject) {
     return (
 
         aObject.x == bObject.x &&
-        aObject.y == bObject.y &&
-        aObject.width == aObject.width &&
-        aObject.height == aObject.height
+        aObject.y == bObject.y
     );
 }
 
