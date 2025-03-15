@@ -76,9 +76,7 @@ void Player::move() {
 
 void Player::updateHitBox() {
 
-    hitBox = object;
-
-    DrawRectangleRec(hitBox, Utils::testColor);
+    hitBox = object; 
 }
 
 void Player::moveScreenX() {
