@@ -42,6 +42,15 @@ class Player : public Sprite {
         std::vector<Tile> &tiles;
         std::map<std::string, std::array<int, 3>> animationMap;
 
+        Rectangle movementRangeBox = {
+
+            400, 200, 
+            (float) GetScreenWidth() - 800, 
+            (float) GetScreenHeight() - 400
+        };
+
+        Rectangle leftSide;
+
         void move();
         void moveScreenX();
         void moveScreenY();

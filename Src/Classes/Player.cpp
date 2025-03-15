@@ -29,10 +29,19 @@ void Player::move() {
 
     const float speed = 600;
 
-    const Rectangle movementRangeBox = {
-        300, 300, 
-        GetScreenWidth(), 
-        GetScreenHeight()
+    Rectangle movementRangeBox = {
+
+        400, 200, 
+        (float) GetScreenWidth() - 800, 
+        (float) GetScreenHeight() - 400
+    };
+
+    leftSide = {
+
+        400,
+        200,
+        10,
+        10
     };
 
     velocity = {0, 0};
@@ -42,19 +51,60 @@ void Player::move() {
     if(getInput().right) velocity.x = speed;
     if(getInput().left) velocity.x = -speed; 
     
-    object.x += velocity.x * GetFrameTime();
-    object.y += velocity.y * GetFrameTime();
+    moveScreenX();
+    // moveScreenY();
 
-    DrawRectangleRec(movementRangeBox, Utils::testColor);
-
-    for(auto &tile : tiles) {
-
-        tile.setVelocity({-velocity.x, -velocity.y});
-    }
+    DrawRectangleRec(leftSide, Utils::testColor);
 }
 
 void Player::moveScreenX() {
 
+    object.x += velocity.x * GetFrameTime();
+
+    if(!CheckCollisionRecs(leftSide, object)) {
+            
+        if(velocity.x > 0) {
+
+            velocity.x = 0;
+    
+            object.x = leftSide.x - object.x + object.width;
+        }
+    
+        if(velocity.x < 0) {
+    
+            velocity.x = 0;
+    
+            object.x = leftSide.x + leftSide.width - object.x;
+        }
+
+        for(auto &tile : tiles) 
+            tile.setVelocity({-velocity.x, 0});
+    }
+}
+
+void Player::moveScreenY() {
+
+    object.y += velocity.y * GetFrameTime();
+
+    if(!CheckCollisionRecs(movementRangeBox, object)) {
+
+        for(auto &tile : tiles) 
+            tile.setVelocity({0, -velocity.y});
+
+        if(velocity.y > 0) {
+
+            velocity.y = 0;
+
+            object.y = movementRangeBox.y - object.y + object.height;
+        }
+
+        if(velocity.y < 0) {
+
+            velocity.y = 0;
+
+            object.y = movementRangeBox.y + movementRangeBox.height - object.y;
+        }
+    }
 }
 
 void Player::animationLogic() {

@@ -16,7 +16,14 @@ class Game {
     private:
 
         World world;
-        Player player = Player({100, 100, 100, 100}, world.tiles);
+        Player player = Player(
+            {
+                (float) (GetScreenWidth() / 2) - 100, 
+                (float) (GetScreenHeight() / 2) - 100, 
+                100, 100
+            }, 
+            world.tiles
+        );
     
         void gameLoop();
         void updateGame();
