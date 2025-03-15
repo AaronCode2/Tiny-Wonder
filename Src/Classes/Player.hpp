@@ -61,7 +61,6 @@ class Player : public Sprite {
 
         void move();
         void updateHitBox();
-        void updateRangeSides();
         void moveScreenX();
         void moveScreenY();
         void animationLogic();

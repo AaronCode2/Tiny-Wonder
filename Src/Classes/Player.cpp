@@ -61,15 +61,6 @@ void Player::move() {
 
     const float speed = 600;
 
-    Rectangle movementRangeBox = {
-
-        400, 200, 
-        (float) GetScreenWidth() - 800, 
-        (float) GetScreenHeight() - 400
-    };
-
-
-
     velocity = {0, 0};
 
     if(getInput().up) velocity.y = -speed;
@@ -84,6 +75,8 @@ void Player::move() {
 
     DrawRectangleRec(rangeBoxSides[0], Utils::testColor);
     DrawRectangleRec(rangeBoxSides[1], Utils::testColor);
+    DrawRectangleRec(rangeBoxSides[2], Utils::testColor);
+    DrawRectangleRec(rangeBoxSides[3], Utils::testColor);
 }
 
 void Player::updateHitBox() {
@@ -100,27 +93,27 @@ void Player::moveScreenX() {
     object.x += velocity.x * GetFrameTime();
     updateHitBox();
 
-    if(CheckCollisionRecs(leftSide, object)) {
+    // if(CheckCollisionRecs(leftSide, object)) {
         
-        for(auto &tile : tiles) 
-            tile.setVelocity({-velocity.x, 0.0f});
+    //     for(auto &tile : tiles) 
+    //         tile.setVelocity({-velocity.x, 0.0f});
 
-        if(velocity.x > 0) {
+    //     if(velocity.x > 0) {
             
-            const float offset = hitBox.x - object.x + hitBox.width;
+    //         const float offset = hitBox.x - object.x + hitBox.width;
 
-            object.x = leftSide.x - offset;
-        }
+    //         object.x = leftSide.x - offset;
+    //     }
     
-        if(velocity.x < 0) {
+    //     if(velocity.x < 0) {
             
-            const float offset = hitBox.x - object.x;
+    //         const float offset = hitBox.x - object.x;
 
-            object.x = leftSide.x + leftSide.width - offset;
-        }
+    //         object.x = leftSide.x + leftSide.width - offset;
+    //     }
 
-        velocity.x = 0;
-    }
+    //     velocity.x = 0;
+    // }
 }
 
 void Player::moveScreenY() {
@@ -128,27 +121,27 @@ void Player::moveScreenY() {
     object.y += velocity.y * GetFrameTime();
     updateHitBox();
 
-    if(CheckCollisionRecs(leftSide, object)) {
+    // if(CheckCollisionRecs(leftSide, object)) {
 
-        for(auto &tile : tiles) 
-            tile.setVelocity({0.0f, -velocity.y});
+    //     for(auto &tile : tiles) 
+    //         tile.setVelocity({0.0f, -velocity.y});
 
-        if(velocity.y > 0) {
+    //     if(velocity.y > 0) {
             
-            const float offset = hitBox.y - object.y + hitBox.height;
+    //         const float offset = hitBox.y - object.y + hitBox.height;
     
-            object.y = leftSide.y - offset;
-        }
+    //         object.y = leftSide.y - offset;
+    //     }
         
-        if(velocity.y < 0) {
+    //     if(velocity.y < 0) {
                 
-            const float offset = hitBox.y - object.y;
+    //         const float offset = hitBox.y - object.y;
     
-            object.y = leftSide.y + leftSide.height - offset;
-        }
+    //         object.y = leftSide.y + leftSide.height - offset;
+    //     }
 
-        velocity.y = 0;
-    }
+    //     velocity.y = 0;
+    // }
 }
 
 void Player::animationLogic() {
