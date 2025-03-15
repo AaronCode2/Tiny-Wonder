@@ -77,6 +77,9 @@ void World::update(Vector2 playerVelocity) {
       
                 for(auto &tile : tiles) {
 
+                    if(!CheckCollisionRecs(Utils::getScreenRect(), tile.getObject()))
+                        continue;
+
                     frameLogicNeighbor(tile);
                 }
             }
@@ -90,6 +93,9 @@ void World::update(Vector2 playerVelocity) {
                         it = tiles.erase(it);
 
                         for(auto &tile : tiles) {
+
+                            if(!CheckCollisionRecs(Utils::getScreenRect(), tile.getObject()))
+                                continue;
 
                             frameLogicNeighbor(tile);
                         }

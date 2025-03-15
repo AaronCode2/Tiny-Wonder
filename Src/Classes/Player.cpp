@@ -26,7 +26,7 @@ Player::Player(Rectangle object, std::vector<Tile> &tiles):
 
     rangeBoxSides[(int) RangeSiders::RIGHT] = {
 
-        GetScreenWidth() - 800.0F,
+        GetScreenWidth() - 400.0f,
         200,
         10,
         GetScreenHeight() - 400.0f
@@ -43,7 +43,7 @@ Player::Player(Rectangle object, std::vector<Tile> &tiles):
     rangeBoxSides[(int) RangeSiders::BOTTOM] = {
 
         400,
-        GetScreenHeight() - 400.0f,
+        GetScreenHeight() - 200.0f,
         GetScreenWidth() - 800.0f,
         10
     };
@@ -72,11 +72,6 @@ void Player::move() {
     moveScreenY();
 
     updateHitBox();
-
-    DrawRectangleRec(rangeBoxSides[0], Utils::testColor);
-    DrawRectangleRec(rangeBoxSides[1], Utils::testColor);
-    DrawRectangleRec(rangeBoxSides[2], Utils::testColor);
-    DrawRectangleRec(rangeBoxSides[3], Utils::testColor);
 }
 
 void Player::updateHitBox() {
@@ -93,27 +88,30 @@ void Player::moveScreenX() {
     object.x += velocity.x * GetFrameTime();
     updateHitBox();
 
-    // if(CheckCollisionRecs(leftSide, object)) {
+    for(auto rangeBoxSide : rangeBoxSides) {
+
+        if(CheckCollisionRecs(rangeBoxSide, object)) {
+            
+            for(auto &tile : tiles) 
+                tile.setVelocity({-velocity.x, 0.0f});
+
+            if(velocity.x > 0) {
+                
+                const float offset = hitBox.x - object.x + hitBox.width;
+
+                object.x = rangeBoxSide.x - offset;
+            }
         
-    //     for(auto &tile : tiles) 
-    //         tile.setVelocity({-velocity.x, 0.0f});
+            if(velocity.x < 0) {
+                
+                const float offset = hitBox.x - object.x;
 
-    //     if(velocity.x > 0) {
-            
-    //         const float offset = hitBox.x - object.x + hitBox.width;
+                object.x = rangeBoxSide.x + rangeBoxSide.width - offset;
+            }
 
-    //         object.x = leftSide.x - offset;
-    //     }
-    
-    //     if(velocity.x < 0) {
-            
-    //         const float offset = hitBox.x - object.x;
-
-    //         object.x = leftSide.x + leftSide.width - offset;
-    //     }
-
-    //     velocity.x = 0;
-    // }
+            velocity.x = 0;
+        }
+    }
 }
 
 void Player::moveScreenY() {
@@ -121,41 +119,47 @@ void Player::moveScreenY() {
     object.y += velocity.y * GetFrameTime();
     updateHitBox();
 
-    // if(CheckCollisionRecs(leftSide, object)) {
+    for(auto rangeBoxSide : rangeBoxSides) {
 
-    //     for(auto &tile : tiles) 
-    //         tile.setVelocity({0.0f, -velocity.y});
+        if(CheckCollisionRecs(rangeBoxSide, object)) {
 
-    //     if(velocity.y > 0) {
-            
-    //         const float offset = hitBox.y - object.y + hitBox.height;
-    
-    //         object.y = leftSide.y - offset;
-    //     }
-        
-    //     if(velocity.y < 0) {
+            for(auto &tile : tiles) 
+                tile.setVelocity({0.0f, -velocity.y});
+
+            if(velocity.y > 0) {
                 
-    //         const float offset = hitBox.y - object.y;
-    
-    //         object.y = leftSide.y + leftSide.height - offset;
-    //     }
+                const float offset = hitBox.y - object.y + hitBox.height;
+        
+                object.y = rangeBoxSide.y - offset;
+            }
+            
+            if(velocity.y < 0) {
+                    
+                const float offset = hitBox.y - object.y;
+        
+                object.y = rangeBoxSide.y + rangeBoxSide.height - offset;
+            }
 
-    //     velocity.y = 0;
-    // }
+            velocity.y = 0;
+        }
+    }
 }
 
 void Player::animationLogic() {
 
     srcRect.x = srcRect.width * currentFrame;
     
-    if(velocity.x != 0 || velocity.y != 0) frameBuffer = 0.1f;
+    if(
+        getInput().left || getInput().right 
+        || getInput().up || getInput().down
+    ) frameBuffer = 0.1f;
     else frameBuffer = 0.5f;
 
-    if(velocity.x < 0) {
+    if(getInput().left) {
 
         direction = LEFT;
         switchAnimation("RunLeft");
-    } else if(velocity.x > 0) {
+    } else if(getInput().right) {
 
         direction = RIGHT;
         switchAnimation("RunRight");
