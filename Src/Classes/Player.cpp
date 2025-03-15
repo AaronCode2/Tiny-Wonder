@@ -81,8 +81,6 @@ void Player::updateHitBox() {
     DrawRectangleRec(hitBox, Utils::testColor);
 }
 
-
-
 void Player::moveScreenX() {
 
     object.x += velocity.x * GetFrameTime();
