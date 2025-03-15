@@ -16,7 +16,7 @@ class Game {
     private:
 
         World world;
-        Player player = Player({100, 100, 100, 100}, world);
+        Player player = Player({100, 100, 100, 100}, world.tiles);
     
         void gameLoop();
         void updateGame();

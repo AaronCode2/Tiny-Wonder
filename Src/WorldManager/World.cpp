@@ -24,6 +24,11 @@ World::World() {
     tileFrameMap[MIDDLE] = {3, 1};
 
     readData();
+
+    for(auto &tile : tiles) {
+
+        frameLogicNeighbor(tile);
+    }
 }
 
 World::~World() {
@@ -35,13 +40,7 @@ void World::update(Vector2 playerVelocity) {
 
     for(auto &tile : tiles) {
 
-        tile.setVelocity({-playerVelocity.x, -playerVelocity.y});
         tile.update();
-    }
-
-    for(auto &tile : tiles) {
-
-        frameLogicNeighbor(tile);
     }
 
 
@@ -74,6 +73,11 @@ void World::update(Vector2 playerVelocity) {
                     object,
                     {2, 2}
                 ));
+      
+                for(auto &tile : tiles) {
+
+                    frameLogicNeighbor(tile);
+                }
             }
 
             if(Mouse::isClickedR(object)) {
@@ -83,6 +87,11 @@ void World::update(Vector2 playerVelocity) {
                     if(CheckCollisionRecs(it->getObject(), object)) {
 
                         it = tiles.erase(it);
+
+                        for(auto &tile : tiles) {
+
+                            frameLogicNeighbor(tile);
+                        }
                         break;
                     }
 
@@ -162,65 +171,62 @@ void World::frameLogicNeighbor(Tile &thisTile) {
 
     Rectangle neighborHoodRect = thisObject;
 
-    bool cornerBottomLeft = true, cornerBottomRight = true;
-    bool cornerTopLeft = true, cornerTopRight = true;
-    
-    bool bottomRow = true, topRow = true;
-    bool leftRow = true, rightRow = true;
-    
-    bool sideCornerTopRight = true, sideCornerTopLeft = true;
-    bool sideCornerBottomRight = true, sideCornerBottomLeft = true;
+    const int maxOptions = 14;
 
-    for (auto &tile : tiles) {
+    bool frameOptions[maxOptions];
+
+    for(auto &frameOption : frameOptions) 
+        frameOption = true;
+
+    for(auto &tile : tiles) {
 
         Rectangle otherTileObject = tile.getObject();
         otherTileObject.width = 30;
         otherTileObject.height = 30;
 
-        if (Utils::isSameRect(thisTile.getObject(), tile.getObject())) 
+        if(Utils::isSameRect(thisTile.getObject(), tile.getObject())) 
             continue;
 
-        // Move the neighborhood rect relative to this tile's new position
         neighborHoodRect = thisObject;
         neighborHoodRect.x += 60;
 
-        DrawRectangleRec(neighborHoodRect, Utils::testColor);
+        if(CheckCollisionRecs(otherTileObject, neighborHoodRect)) {
 
-        if (CheckCollisionRecs(otherTileObject, neighborHoodRect)) {
-
-            cornerBottomRight = cornerTopRight = rightRow = false;
+            frameOptions[CORNER_BOTTOM_RIGHT] = false;
+            frameOptions[CORNER_TOP_RIGHT] = false;
+            frameOptions[ROW_RIGHT] = false;
         }
-
-
 
         neighborHoodRect = thisObject;
         neighborHoodRect.x -= 60;
 
-        DrawRectangleRec(neighborHoodRect, Utils::testColor);
+        if(CheckCollisionRecs(otherTileObject, neighborHoodRect)) {
 
-        if (CheckCollisionRecs(otherTileObject, neighborHoodRect)) {
-
-            cornerBottomLeft = cornerTopLeft = leftRow = false;
+            frameOptions[CORNER_BOTTOM_LEFT] = false;
+            frameOptions[CORNER_TOP_LEFT] = false;
+            frameOptions[ROW_LEFT] = false;
         }
 
         neighborHoodRect = thisObject;
         neighborHoodRect.y += 60;
 
-        DrawRectangleRec(neighborHoodRect, Utils::testColor);
 
+        if(CheckCollisionRecs(otherTileObject, neighborHoodRect)) {
 
-        if (CheckCollisionRecs(otherTileObject, neighborHoodRect)) {
-            bottomRow = cornerBottomRight = cornerBottomLeft = false;
+            frameOptions[ROW_BOTTOM] = false;
+            frameOptions[CORNER_BOTTOM_RIGHT] = false;
+            frameOptions[CORNER_BOTTOM_LEFT] = false;
         }
         
         neighborHoodRect = thisObject;
         neighborHoodRect.y -= 60;
 
-        DrawRectangleRec(neighborHoodRect, Utils::testColor);
 
+        if(CheckCollisionRecs(otherTileObject, neighborHoodRect)) {
 
-        if (CheckCollisionRecs(otherTileObject, neighborHoodRect)) {
-            cornerTopLeft = cornerTopRight = topRow = false;
+            frameOptions[CORNER_TOP_LEFT] = false;
+            frameOptions[CORNER_TOP_RIGHT] = false;
+            frameOptions[ROW_TOP] = false;
         }
 
         // Diagonal checks
@@ -228,69 +234,52 @@ void World::frameLogicNeighbor(Tile &thisTile) {
         neighborHoodRect.x += 60;
         neighborHoodRect.y -= 60;
 
-        DrawRectangleRec(neighborHoodRect, Utils::testColor);
-
 
         if (CheckCollisionRecs(otherTileObject, neighborHoodRect)) {
-            sideCornerTopRight = false;
+
+            frameOptions[SIDE_CORNER_TOP_RIGHT] = false;
         }
 
         neighborHoodRect = thisObject;
         neighborHoodRect.x -= 60;
         neighborHoodRect.y -= 60;
 
-        DrawRectangleRec(neighborHoodRect, Utils::testColor);
-
 
         if (CheckCollisionRecs(otherTileObject, neighborHoodRect)) {
-            sideCornerTopLeft = false;
+
+            frameOptions[SIDE_CORNER_TOP_LEFT] = false;
         }
 
         neighborHoodRect = thisObject;
         neighborHoodRect.x -= 60;
         neighborHoodRect.y += 60;
 
-        DrawRectangleRec(neighborHoodRect, Utils::testColor);
-
 
         if (CheckCollisionRecs(otherTileObject, neighborHoodRect)) {
-            sideCornerBottomLeft = false;
+
+            frameOptions[SIDE_CORNER_BOTTOM_LEFT] = false;
         }
 
         neighborHoodRect = thisObject;
         neighborHoodRect.x += 60;
         neighborHoodRect.y += 60;
 
-        DrawRectangleRec(neighborHoodRect, Utils::testColor);
-
         if (CheckCollisionRecs(otherTileObject, neighborHoodRect)) {
-            sideCornerBottomRight = false;
+
+            frameOptions[SIDE_CORNER_BOTTOM_RIGHT] = false;
         }
     }
-    
-    const TileFrameOption options[] = {
-        {cornerBottomLeft,      CORNER_BOTTOM_LEFT},
-        {cornerBottomRight,     CORNER_BOTTOM_RIGHT},
-        {cornerTopLeft,         CORNER_TOP_LEFT},
-        {cornerTopRight,        CORNER_TOP_RIGHT},
-        {bottomRow,             ROW_BOTTOM},
-        {topRow,                ROW_TOP},
-        {leftRow,               ROW_LEFT},
-        {rightRow,              ROW_RIGHT},
-        {sideCornerTopRight,    SIDE_CORNER_TOP_RIGHT},
-        {sideCornerTopLeft,     SIDE_CORNER_TOP_LEFT},
-        {sideCornerBottomRight, SIDE_CORNER_BOTTOM_RIGHT},
-        {sideCornerBottomLeft,  SIDE_CORNER_BOTTOM_LEFT}
-    };
 
-    for (const auto option : options) {
-        if (option.condition) {
-            thisTile.setFrame(tileFrameMap[option.frameType]);
+    for(int i = 0; i < maxOptions; i++) {
+
+        if(frameOptions[i]) {
+
+            thisTile.setFrame(tileFrameMap[(TileFrameType) i]);
             return;
         }
     }
 
-    thisTile.setFrame(tileFrameMap[MIDDLE]);
+    // thisTile.setFrame(tileFrameMap[MIDDLE]);
 }
 
 void World::writeData() {

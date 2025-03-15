@@ -22,6 +22,11 @@ bool Utils::isSameRect(Rectangle aObject, Rectangle bObject) {
     );
 }
 
+Rectangle Utils::getScreenRect() {
+
+    return {0, 0, (float) GetScreenWidth(), (float) GetScreenHeight()};
+}
+
 bool Mouse::isHovering(Rectangle object) {
 
     return CheckCollisionPointRec(GetMousePosition(), object);

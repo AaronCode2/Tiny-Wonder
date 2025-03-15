@@ -17,8 +17,10 @@ Input getInput();
 namespace Utils {
 
     extern Color testColor;
+    Rectangle getScreenRect(); 
 
     bool isSameRect(Rectangle aObject, Rectangle bObject);
+
 } 
 
 namespace Mouse {

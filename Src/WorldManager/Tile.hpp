@@ -1,5 +1,6 @@
 #pragma once
 #include "../Classes/Sprite.hpp"
+#include "../Utils.hpp"
 
 // TODO: Make The Tile
 

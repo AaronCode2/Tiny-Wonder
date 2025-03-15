@@ -1,7 +1,7 @@
 #include "Player.hpp"
 
-Player::Player(Rectangle object, World &world):
-    Sprite(object, frame), world(world)  
+Player::Player(Rectangle object, std::vector<Tile> &tiles):
+    Sprite(object, frame), tiles(tiles)  
 {   
 
     animationMap["IdleLeft"] = {0, 0, 2};
@@ -29,6 +29,12 @@ void Player::move() {
 
     const float speed = 600;
 
+    const Rectangle movementRangeBox = {
+        300, 300, 
+        GetScreenWidth(), 
+        GetScreenHeight()
+    };
+
     velocity = {0, 0};
 
     if(getInput().up) velocity.y = -speed;
@@ -36,8 +42,19 @@ void Player::move() {
     if(getInput().right) velocity.x = speed;
     if(getInput().left) velocity.x = -speed; 
     
-    // object.x += velocity.x * GetFrameTime();
-    // object.y += velocity.y * GetFrameTime();
+    object.x += velocity.x * GetFrameTime();
+    object.y += velocity.y * GetFrameTime();
+
+    DrawRectangleRec(movementRangeBox, Utils::testColor);
+
+    for(auto &tile : tiles) {
+
+        tile.setVelocity({-velocity.x, -velocity.y});
+    }
+}
+
+void Player::moveScreenX() {
+
 }
 
 void Player::animationLogic() {

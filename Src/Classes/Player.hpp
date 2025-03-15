@@ -24,7 +24,7 @@ class Player : public Sprite {
 
     public:
 
-        Player(Rectangle object, World &world);
+        Player(Rectangle object, std::vector<Tile> &tiles);
 
         void update();
         Vector2 getVeclocity() { return velocity; };
@@ -39,11 +39,12 @@ class Player : public Sprite {
 
         Direction direction = RIGHT;
 
-        World &world;
-
+        std::vector<Tile> &tiles;
         std::map<std::string, std::array<int, 3>> animationMap;
 
         void move();
+        void moveScreenX();
+        void moveScreenY();
         void animationLogic();
         void switchAnimation(std::string animation);
 };
