@@ -15,6 +15,38 @@ Player::Player(Rectangle object, std::vector<Tile> &tiles):
 
     srcRect.width = image.width / frame.x;
     srcRect.height = image.height / frame.y;
+
+    rangeBoxSides[(int) RangeSiders::LEFT] = {
+
+        400,
+        200,
+        10,
+        GetScreenHeight() - 400.0f
+    };
+
+    rangeBoxSides[(int) RangeSiders::RIGHT] = {
+
+        GetScreenWidth() - 800.0F,
+        200,
+        10,
+        GetScreenHeight() - 400.0f
+    };
+
+    rangeBoxSides[(int) RangeSiders::TOP] = {
+
+        400,
+        200,
+        GetScreenWidth() - 800.0f,
+        10
+    };
+
+    rangeBoxSides[(int) RangeSiders::BOTTOM] = {
+
+        400,
+        GetScreenHeight() - 400.0f,
+        GetScreenWidth() - 800.0f,
+        10
+    };
 }
 
 void Player::update() {
@@ -36,13 +68,7 @@ void Player::move() {
         (float) GetScreenHeight() - 400
     };
 
-    leftSide = {
 
-        400,
-        200,
-        10,
-        GetScreenHeight() - 400.0f
-    };
 
     velocity = {0, 0};
 
@@ -55,7 +81,9 @@ void Player::move() {
     moveScreenY();
 
     updateHitBox();
-    DrawRectangleRec(leftSide, Utils::testColor);
+
+    DrawRectangleRec(rangeBoxSides[0], Utils::testColor);
+    DrawRectangleRec(rangeBoxSides[1], Utils::testColor);
 }
 
 void Player::updateHitBox() {
@@ -64,6 +92,8 @@ void Player::updateHitBox() {
 
     DrawRectangleRec(hitBox, Utils::testColor);
 }
+
+
 
 void Player::moveScreenX() {
 
@@ -128,11 +158,11 @@ void Player::animationLogic() {
     if(velocity.x != 0 || velocity.y != 0) frameBuffer = 0.1f;
     else frameBuffer = 0.5f;
 
-    if(getInput().left) {
+    if(velocity.x < 0) {
 
         direction = LEFT;
         switchAnimation("RunLeft");
-    } else if(getInput().right) {
+    } else if(velocity.x > 0) {
 
         direction = RIGHT;
         switchAnimation("RunRight");

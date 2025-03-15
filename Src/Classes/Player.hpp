@@ -19,6 +19,13 @@ enum Direction {
     RIGHT
 };
 
+enum class RangeSiders {
+
+    TOP = 0,
+    BOTTOM,
+    LEFT,
+    RIGHT
+};
 
 class Player : public Sprite {
 
@@ -49,11 +56,12 @@ class Player : public Sprite {
             (float) GetScreenHeight() - 400
         };
 
-        Rectangle leftSide;
+        Rectangle rangeBoxSides[4];
         Rectangle hitBox;
 
         void move();
         void updateHitBox();
+        void updateRangeSides();
         void moveScreenX();
         void moveScreenY();
         void animationLogic();
