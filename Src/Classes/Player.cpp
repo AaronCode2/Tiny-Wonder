@@ -27,7 +27,7 @@ void Player::update() {
 
 void Player::move() {
 
-    const float speed = 500;
+    const float speed = 600;
 
     velocity = {0, 0};
 

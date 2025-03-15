@@ -32,18 +32,11 @@ World::~World() {
 }
 
 void World::update(Vector2 playerVelocity) {
-    
-    if(playerVelocity.x == 0 && playerVelocity.y == 0) {
-
-        for(auto &tile : tiles) {
-
-            frameLogicNeighbor(tile);
-        }
-    }
 
     for(auto &tile : tiles) {
-        
+
         tile.update();
+        frameLogicNeighbor(tile);
     }
 
 
