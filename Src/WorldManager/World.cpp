@@ -45,10 +45,10 @@ void World::update(Vector2 playerVelocity) {
     }
 
 
-    for(float y = 0; y < GetScreenHeight(); y += 60) {
-        for(float x = 0; x < GetScreenWidth(); x += 60) {
+    for(float y = 0; y < GetScreenHeight(); y += 60 + playerVelocity.y) {
+        for(float x = 0; x < GetScreenWidth(); x += 60 + playerVelocity.x) {
                 
-            Rectangle object = {x + playerVelocity.x, y + playerVelocity.y, 60, 60};
+            Rectangle object = {x, y, 60, 60};
     
             if(Mouse::isHovering(object)) {
     
@@ -87,21 +87,14 @@ void World::update(Vector2 playerVelocity) {
             if(Mouse::isClickedR(object)) {
 
                 for(auto it = tiles.begin(); it < tiles.end();) {
-                        
-                    if(CheckCollisionRecs(it->getObject(), object)) {
+
+                    if(CheckCollisionRecs(Utils::getScreenRect(), it->getObject()) && CheckCollisionRecs(object, it->getObject())) {
 
                         it = tiles.erase(it);
-
-                        for(auto &tile : tiles) {
-
-                            if(!CheckCollisionRecs(Utils::getScreenRect(), tile.getObject()))
-                                continue;
-
-                            frameLogicNeighbor(tile);
-                        }
-                        break;
+                        continue;
                     }
-
+                    
+                    frameLogicNeighbor(*it);
                     it++;
                 }
             }
@@ -172,6 +165,7 @@ void World::readData() {
 void World::frameLogicNeighbor(Tile &thisTile) {
 
     Rectangle thisObject = thisTile.getObject();
+    Rectangle checkerArea = {thisObject.x - 300, thisObject.y - 300, 400, 400};
 
     thisObject.width = 5;
     thisObject.height = 5;
@@ -191,8 +185,10 @@ void World::frameLogicNeighbor(Tile &thisTile) {
         otherTileObject.width = 30;
         otherTileObject.height = 30;
 
-        if(Utils::isSameRect(thisTile.getObject(), tile.getObject())) 
-            continue;
+        if(
+            Utils::isSameRect(thisTile.getObject(), tile.getObject()) || 
+            !CheckCollisionRecs(checkerArea, otherTileObject)
+        ) continue;
 
         neighborHoodRect = thisObject;
         neighborHoodRect.x += 60;
@@ -306,7 +302,7 @@ void World::writeData() {
                 << tile.getObject().x << ", " << tile.getObject().y << ", "
                 << tile.getObject().width << ", " << tile.getObject().height << ", "
                 << tile.getFrame().x << ", " << tile.getFrame().y << ", "
-                << tile.getType()   
+                << (int) tile.getType()   
 
             << "}\n";  
     }
