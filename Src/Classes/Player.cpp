@@ -65,8 +65,6 @@ void Player::update() {
 }
 
 void Player::move() {
-
- 
     
     moveScreenX();
     moveScreenY();
@@ -144,10 +142,7 @@ void Player::animationLogic() {
 
     srcRect.x = srcRect.width * currentFrame;
     
-    if(
-        getInput().left || getInput().right 
-        || getInput().up || getInput().down
-    ) frameBuffer = 0.1f;
+    if(velocity.x != 0 || velocity.y != 0) frameBuffer = 0.1f;
     else frameBuffer = 0.5f;
 
     if(getInput().left) {
