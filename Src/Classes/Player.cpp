@@ -51,26 +51,25 @@ Player::Player(Rectangle object, std::vector<Tile> &tiles):
 
 void Player::update() {
 
-    move();
+    velocity = {0, 0};
+
+    if(getInput().up) velocity.y = -speed;
+    if(getInput().down) velocity.y = speed;
+    if(getInput().right) velocity.x = speed;
+    if(getInput().left) velocity.x = -speed;
+
     animationLogic();
+    move();
     animate(frameEnd, frameStart, frameBuffer);
     draw(image);
 }
 
 void Player::move() {
 
-    const float speed = 600;
-
-    velocity = {0, 0};
-
-    if(getInput().up) velocity.y = -speed;
-    if(getInput().down) velocity.y = speed;
-    if(getInput().right) velocity.x = speed;
-    if(getInput().left) velocity.x = -speed; 
+ 
     
     moveScreenX();
     moveScreenY();
-
     updateHitBox();
 }
 

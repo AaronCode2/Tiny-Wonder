@@ -45,8 +45,8 @@ void World::update(Vector2 playerVelocity) {
     }
 
 
-    for(float y = 0; y < GetScreenHeight(); y += 60 + playerVelocity.y) {
-        for(float x = 0; x < GetScreenWidth(); x += 60 + playerVelocity.x) {
+    for(float y = 0; y < GetScreenHeight(); y += 60) {
+        for(float x = 0; x < GetScreenWidth(); x += 60) {
                 
             Rectangle object = {x, y, 60, 60};
     
