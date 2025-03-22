@@ -1,6 +1,6 @@
 #include "DataIO.hpp"
 
-DataIO::DataIO(std::vector<Tile>& tiles, std::string path):
+DataIO::DataIO(std::vector<Tile> &tiles, std::string path):
     tiles(tiles) 
 {
     this->path = path;

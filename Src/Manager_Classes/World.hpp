@@ -8,41 +8,14 @@
 #include "../Entity_Classes/Tile.hpp"
 #include "TileManager.hpp"
 
-#define NUM_SIZE 7
-#define FILE_NAME "../Data/TileMap.txt"
-
-enum TileFrameType {
-
-    CORNER_BOTTOM_LEFT = 0,
-    CORNER_BOTTOM_RIGHT,
-    CORNER_TOP_LEFT,
-    CORNER_TOP_RIGHT,
-    ROW_TOP,
-    ROW_BOTTOM,
-    ROW_LEFT,
-    ROW_RIGHT,
-    SIDE_CORNER_TOP_LEFT,
-    SIDE_CORNER_TOP_RIGHT,
-    SIDE_CORNER_BOTTOM_LEFT,
-    SIDE_CORNER_BOTTOM_RIGHT,
-    MIDDLE
-};
-
 class World {
 
     public:
-
-        World();
-        ~World();
         
-        void update(Vector2 playerVelocity);
-        void frameLogicNeighbor(Tile &thisTile);
-        void writeData();
+        void update();
 
         TileManager tileManager;
     private:
 
-        std::map<TileFrameType, Vector2> tileFrameMap;
-
-        void readData();
+        void placeTiles();
 };
