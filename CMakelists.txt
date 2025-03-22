@@ -23,6 +23,7 @@ SOURCE_FILES
     Src/App.cpp
     Src/Utils.cpp
     Src/Manager_Classes/World.cpp
+    Src/Manager_Classes/DataIO.cpp
     Src/Entity_Classes/Tile.cpp
     Src/Entity_Classes/Sprite.cpp
     Src/Entity_Classes/Player.cpp

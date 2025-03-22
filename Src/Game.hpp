@@ -17,8 +17,8 @@ class Game {
     private:
 
         World world;
-        DataIO dataIO;
-
+        DataIO dataIO = DataIO(world.tileManager.tiles, "../Data/TileMap.txt");
+        
         Player player = Player(
             {
                 (float) (GetScreenWidth() / 2) - 100, 
