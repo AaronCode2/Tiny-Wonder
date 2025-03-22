@@ -9,7 +9,6 @@ class Game {
 
     public:
 
-        Game();
         ~Game();
 
         void run() { gameLoop(); };
@@ -18,7 +17,7 @@ class Game {
 
         World world;
         DataIO dataIO = DataIO(world.tileManager.tiles, "../Data/TileMap.txt");
-        
+
         Player player = Player(
             {
                 (float) (GetScreenWidth() / 2) - 100, 
