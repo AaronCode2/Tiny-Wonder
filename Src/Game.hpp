@@ -1,8 +1,7 @@
 #pragma once
 #include <raylib.h>
-#include "Classes/Sprite.hpp"
-#include "Classes/Player.hpp"
-#include "WorldManager/World.hpp"
+#include "Entity_Classes/Sprite.hpp"
+#include "Entity_Classes/Player.hpp"
 
 class Game {
 
