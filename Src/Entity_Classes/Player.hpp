@@ -5,8 +5,8 @@
 #include <vector>
 #include <array>
 #include "Sprite.hpp"
-#include "../WorldManager/Tile.hpp"
-#include "../WorldManager/World.hpp"
+#include "../Entity_Classes/Tile.hpp"
+#include "../Manager_Classes/World.hpp"
 #include "../Utils.hpp"
 
 #define AnimationMapIndexY 0

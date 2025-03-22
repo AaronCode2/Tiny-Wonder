@@ -1,5 +1,5 @@
 #pragma once
-#include "../Classes/Sprite.hpp"
+#include "../Entity_Classes/Sprite.hpp"
 #include "../Utils.hpp"
 
 enum TileType {
