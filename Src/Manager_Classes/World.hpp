@@ -6,20 +6,10 @@
 #include <raylib.h>
 #include "../Utils.hpp"
 #include "../Entity_Classes/Tile.hpp"
+#include "TileManager.hpp"
 
 #define NUM_SIZE 7
 #define FILE_NAME "../Data/TileMap.txt"
-
-enum fileReadStructure {
-
-    X = 0,
-    Y,
-    WIDTH,
-    HEIGHT,
-    FRAME_X,
-    FRAME_Y,
-    ID
-};
 
 enum TileFrameType {
 
@@ -38,12 +28,6 @@ enum TileFrameType {
     MIDDLE
 };
 
-struct TileFrameOption {
-
-    bool condition;
-    TileFrameType frameType;
-};
-
 class World {
 
     public:
@@ -55,11 +39,10 @@ class World {
         void frameLogicNeighbor(Tile &thisTile);
         void writeData();
 
-        std::vector<Tile> tiles;
+        TileManager tileManager;
     private:
 
         std::map<TileFrameType, Vector2> tileFrameMap;
 
         void readData();
-        void mapOutTileFrames();
 };

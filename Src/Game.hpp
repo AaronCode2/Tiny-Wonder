@@ -3,6 +3,7 @@
 #include "Entity_Classes/Sprite.hpp"
 #include "Entity_Classes/Player.hpp"
 #include "Manager_Classes/World.hpp"
+#include "Manager_Classes/DataIO.hpp"
 
 class Game {
 
@@ -16,13 +17,15 @@ class Game {
     private:
 
         World world;
+        DataIO dataIO;
+
         Player player = Player(
             {
                 (float) (GetScreenWidth() / 2) - 100, 
                 (float) (GetScreenHeight() / 2) - 100, 
                 100, 100
             }, 
-            world.tiles
+            world.tileManager.tiles
         );
     
         void gameLoop();

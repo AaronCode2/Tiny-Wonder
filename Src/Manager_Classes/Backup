@@ -25,7 +25,7 @@ World::World() {
 
     readData();
 
-    for(auto &tile : tileManager.tiles) {
+    for(auto &tile : tiles) {
 
         frameLogicNeighbor(tile);
     }
@@ -38,7 +38,7 @@ World::~World() {
 
 void World::update(Vector2 playerVelocity) {
 
-    for(auto &tile : tileManager.tiles) {
+    for(auto &tile : tiles) {
 
         tile.update();
         tile.setVelocity({0.0f, 0.0f});
@@ -59,7 +59,7 @@ void World::update(Vector2 playerVelocity) {
                     
                 bool skip = false;
 
-                for(auto &tile : tileManager.tiles) {
+                for(auto &tile : tiles) {
 
                     if(tile.getObject().x == object.x && tile.getObject().y == object.y) {
 
@@ -70,12 +70,12 @@ void World::update(Vector2 playerVelocity) {
 
                 if(skip) break;
 
-                tileManager.tiles.push_back(Tile(
+                tiles.push_back(Tile(
                     object,
                     {2, 2}
                 ));
       
-                for(auto &tile : tileManager.tiles) {
+                for(auto &tile : tiles) {
 
                     if(!CheckCollisionRecs(Utils::getScreenRect(), tile.getObject()))
                         continue;
@@ -86,11 +86,11 @@ void World::update(Vector2 playerVelocity) {
 
             if(Mouse::isClickedR(object)) {
 
-                for(auto it = tileManager.tiles.begin(); it < tileManager.tiles.end();) {
+                for(auto it = tiles.begin(); it < tiles.end();) {
 
                     if(CheckCollisionRecs(Utils::getScreenRect(), it->getObject()) && CheckCollisionRecs(object, it->getObject())) {
 
-                        it = tileManager.tiles.erase(it);
+                        it = tiles.erase(it);
                         continue;
                     }
                     
@@ -106,7 +106,60 @@ void World::update(Vector2 playerVelocity) {
 
 void World::readData() {
 
+    std::ifstream file(FILE_NAME);
 
+    if(!file.is_open()) {
+
+        std::cerr << "\033[31mError: Could not read Data in TileMap.txt\n\033[0m";
+        exit(EXIT_FAILURE);
+    }
+
+    std::string line;
+
+    while(std::getline(file, line)) {
+
+        int numbers[NUM_SIZE]; 
+        int count = 0;        
+        bool insideBraces = false;
+        std::string temp;
+
+        for(size_t i = 0; i < line.length(); i++) {
+
+            if(line[i] == '{')
+                continue;
+
+            if(line[i] == '}')
+                break;
+
+            temp += line[i];  
+        
+        }
+
+        std::stringstream ss(temp);
+        std::string token;
+
+        while (std::getline(ss, token, ',') && count < NUM_SIZE - 1) {
+
+            try{
+
+                int num = std::stoi(token);
+                numbers[count++] = num;
+
+            } catch (...) {}
+        }
+
+        tiles.push_back(Tile(
+            {
+                (float) numbers[X],
+                (float) numbers[Y],
+                (float) numbers[WIDTH],
+                (float) numbers[HEIGHT]
+            },
+            {(float) numbers[FRAME_X], (float) numbers[FRAME_Y]}
+        ));
+    }
+
+    file.close();
 }
 
 void World::frameLogicNeighbor(Tile &thisTile) {
@@ -126,7 +179,7 @@ void World::frameLogicNeighbor(Tile &thisTile) {
     for(auto &frameOption : frameOptions) 
         frameOption = true;
 
-    for(auto &tile : tileManager.tiles) {
+    for(auto &tile : tiles) {
 
         Rectangle otherTileObject = tile.getObject();
         otherTileObject.width = 30;
@@ -228,8 +281,31 @@ void World::frameLogicNeighbor(Tile &thisTile) {
             return;
         }
     }
+
+    // thisTile.setFrame(tileFrameMap[MIDDLE]);
 }
 
 void World::writeData() {
 
+    std::ofstream file(FILE_NAME);
+
+    if(!file.is_open()) {
+
+        std::cerr << "\033[31mError: Could not write Data in TileMap.txt\n\033[0m";
+        exit(EXIT_FAILURE);
+    }
+
+    for(auto tile : tiles) {  
+
+       file << "{"
+
+                << tile.getObject().x << ", " << tile.getObject().y << ", "
+                << tile.getObject().width << ", " << tile.getObject().height << ", "
+                << tile.getFrame().x << ", " << tile.getFrame().y << ", "
+                << (int) tile.getType()   
+
+            << "}\n";  
+    }
+
+    file.close();
 }

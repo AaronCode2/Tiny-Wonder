@@ -4,6 +4,7 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
+                "${workspaceFolder}/build/_deps/raylib-build/raylib/include",
                 "${workspaceFolder}/build/_deps/raylib-build/raylib/include"
             ],
             "defines": [

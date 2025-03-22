@@ -22,10 +22,10 @@ SOURCE_FILES
     Src/Game.cpp
     Src/App.cpp
     Src/Utils.cpp
-    Src/WorldManager/World.cpp
-    Src/WorldManager/Tile.cpp
-    Src/Classes/Sprite.cpp
-    Src/Classes/Player.cpp
+    Src/Manager_Classes/World.cpp
+    Src/Entity_Classes/Tile.cpp
+    Src/Entity_Classes/Sprite.cpp
+    Src/Entity_Classes/Player.cpp
 )
 
 add_executable(Aaron ${SOURCE_FILES})
