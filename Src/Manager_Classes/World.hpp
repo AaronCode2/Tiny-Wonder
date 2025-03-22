@@ -5,7 +5,7 @@
 #include <map>
 #include <raylib.h>
 #include "../Utils.hpp"
-#include "Tile.hpp"
+#include "../Entity_Classes/Tile.hpp"
 
 #define NUM_SIZE 7
 #define FILE_NAME "../Data/TileMap.txt"
