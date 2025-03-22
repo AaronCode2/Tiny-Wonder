@@ -4,10 +4,10 @@ Input getInput() {
 
     return {
 
-        IsKeyDown(KEY_W),
-        IsKeyDown(KEY_S),
-        IsKeyDown(KEY_A),
-        IsKeyDown(KEY_D),
+        (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP)),
+        (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT)),
+        (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN)),
+        (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)),
     };
 }
 
