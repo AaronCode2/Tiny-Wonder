@@ -2,6 +2,7 @@
 #include <raylib.h>
 #include "Entity_Classes/Sprite.hpp"
 #include "Entity_Classes/Player.hpp"
+#include "World_Manager/World.hpp"
 
 class Game {
 
