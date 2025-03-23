@@ -6,8 +6,6 @@
 
 void World::update() {
 
-    DrawRectangleRec({100, 100, 400, 400}, Utils::testColor);
-
     tileManager.update();
     placeTiles();
 }

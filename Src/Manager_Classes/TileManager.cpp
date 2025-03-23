@@ -17,6 +17,7 @@ void TileManager::update() {
     for(auto &tile : tiles) {
 
         tile.update();
+        // DrawRectangleRec({tile.getObject().x - 25, tile.getObject().y - 50, 125, 150}, Utils::testColor);
     }
 }
 
@@ -34,7 +35,7 @@ void TileManager::updateFrameType(Rectangle contactedArea) {
 void TileManager::checkNeighbors(Tile &thisTile) {
 
     Rectangle thisObject = thisTile.getObject();
-    Rectangle checkerArea = {thisObject.x - 300, thisObject.y - 300, 400, 400};
+    Rectangle checkerArea = {thisObject.x - 25, thisObject.y - 50, 150, 150};
     
     thisObject.width = 5;
     thisObject.height = 5;
