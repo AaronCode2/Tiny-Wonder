@@ -12,9 +12,11 @@ class World {
 
     public:
         
-        void update();
+        void update(Vector2 playerVeclocity);
 
         TileManager tileManager;
+
+        Vector2 offsetTiles = {0, 0};
     private:
 
         void placeTiles();
