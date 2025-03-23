@@ -16,7 +16,7 @@ void World::placeTiles() {
         for(float x = 0; x < GetScreenWidth(); x += 60) {
                 
             Rectangle object = {x, y, 60, 60};
-            Rectangle checkerArea = {object.x - 300, object.y - 300, 400, 400};
+            Rectangle checkerArea = {object.x - 50, object.y - 50, 150, 150};
 
             if(Mouse::isHovering(object)) 
                 DrawRectangleRec(object, Utils::testColor);
