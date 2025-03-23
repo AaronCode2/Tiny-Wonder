@@ -4,7 +4,7 @@ TileManager::TileManager() {
 
     Tile::image = LoadTexture("../Assets/Tiles/Tile.png");
     mapGrassFrames();
-    updateFrameType({});
+    updateFrameType(Utils::getScreenRect());
 }
 
 TileManager::~TileManager() {
@@ -23,6 +23,9 @@ void TileManager::update() {
 void TileManager::updateFrameType(Rectangle contactedArea) {
 
     for(auto &tile : tiles) {
+
+        if(!CheckCollisionRecs(contactedArea, tile.getObject())) 
+            continue;
 
         checkNeighbors(tile);
     }

@@ -6,6 +6,8 @@
 
 void World::update() {
 
+    DrawRectangleRec({100, 100, 400, 400}, Utils::testColor);
+
     tileManager.update();
     placeTiles();
 }
@@ -16,7 +18,8 @@ void World::placeTiles() {
         for(float x = 0; x < GetScreenWidth(); x += 60) {
                 
             Rectangle object = {x, y, 60, 60};
-    
+            Rectangle checkerArea = {object.x - 300, object.y - 300, 400, 400};
+
             if(Mouse::isHovering(object)) 
                 DrawRectangleRec(object, Utils::testColor);
             else continue;
@@ -28,7 +31,7 @@ void World::placeTiles() {
                     if(CheckCollisionRecs(it->getObject(), object)) {
 
                         tileManager.tiles.erase(it);
-                        tileManager.updateFrameType(object);
+                        tileManager.updateFrameType(checkerArea);
                         return;
                     } else it++;
                 }
@@ -47,7 +50,7 @@ void World::placeTiles() {
                 {2, 2}
             ));
 
-            tileManager.updateFrameType(object);
+            tileManager.updateFrameType(checkerArea);
         }       
     }
 }
