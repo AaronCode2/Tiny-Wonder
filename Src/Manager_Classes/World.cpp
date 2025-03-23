@@ -11,54 +11,44 @@ void World::update(Vector2 playerVeclocity) {
 }
 
 void World::placeTiles() {
-    Vector2 mousePos = GetMousePosition();
+    
+    for(float y = 0; y < GetScreenHeight(); y += 60) {
+        for(float x = 0; x < GetScreenWidth(); x += 60) {
+                
+            Rectangle object = {x, y, 60, 60};
+            Rectangle checkerArea = {object.x - 50, object.y - 50, 150, 150};
 
-    // Find the nearest tile to align with
-    float closestX = 0, closestY = 0;
-    float minDistance = 10000.0f; // Arbitrary large number
+            if(Mouse::isHovering(object)) 
+                DrawRectangleRec(object, Utils::testColor);
+            else continue;
 
-    for (auto &tile : tileManager.tiles) {
+            if(Mouse::isClickedR(object)) {
 
-        Vector2 tilePos = { tile.getObject().x, tile.getObject().y };
-        float dist = sqrtf((mousePos.x - tilePos.x) * (mousePos.x - tilePos.x) + (mousePos.y - tilePos.y) * (mousePos.y - tilePos.y));
+                for(auto it = tileManager.tiles.begin(); it < tileManager.tiles.end();) {
 
-        if (dist < minDistance) {
-            
-            minDistance = dist;
-            closestX = tile.getObject().x;
-            closestY = tile.getObject().y;
-        }
+                    if(CheckCollisionRecs(it->getObject(), object)) {
+
+                        tileManager.tiles.erase(it);
+                        tileManager.updateFrameType(checkerArea);
+                        return;
+                    } else it++;
+                }
+            }
+
+            if(!Mouse::isClickedL(object)) continue;
+
+            for(auto &tile : tileManager.tiles) {
+
+                if(Utils::isSameRect(tile.getObject(), object))
+                    return;
+            }
+
+            tileManager.tiles.push_back(Tile(
+                object,
+                {2, 2}
+            ));
+
+            tileManager.updateFrameType(checkerArea);
+        }       
     }
-
-    // Snap new tile relative to the closest tile
-    float snappedX = closestX + ((int)(mousePos.x - closestX) / 60) * 60;
-    float snappedY = closestY + ((int)(mousePos.y - closestY) / 60) * 60;
-
-    Rectangle object = {snappedX, snappedY, 60, 60};
-    Rectangle checkerArea = {object.x, object.y, 60, 60};
-
-    if (Mouse::isHovering(object))
-        DrawRectangleRec(object, Utils::testColor);
-    else return;
-
-    if (Mouse::isClickedR(object)) {
-        for (auto it = tileManager.tiles.begin(); it < tileManager.tiles.end();) {
-            if (CheckCollisionRecs(it->getObject(), object)) {
-                tileManager.tiles.erase(it);
-                tileManager.updateFrameType(checkerArea);
-                return;
-            } else it++;
-        }
-    }
-
-    if (!Mouse::isClickedL(object)) return;
-
-    // Prevent duplicate tiles
-    for (auto &tile : tileManager.tiles) {
-        if (Utils::isSameRect(tile.getObject(), object))
-            return;
-    }
-
-    tileManager.tiles.push_back(Tile(object, {2, 2}));
-    tileManager.updateFrameType(checkerArea);
 }
