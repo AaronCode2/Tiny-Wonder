@@ -49,7 +49,6 @@ class Player : public Sprite {
 
         std::vector<Tile> &tiles;
         std::map<std::string, std::array<int, 3>> animationMap;
-
         Rectangle movementRangeBox = {
 
             400, 200, 

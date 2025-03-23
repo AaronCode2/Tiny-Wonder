@@ -4,6 +4,7 @@
 #include <vector>
 #include <map>
 #include <raylib.h>
+#include <cmath>
 #include "../Utils.hpp"
 #include "../Entity_Classes/Tile.hpp"
 #include "TileManager.hpp"
