@@ -29,13 +29,14 @@ class TileManager {
         ~TileManager();
 
         void update();
-        void checkNeighbors(Tile &thisTile);
+        void updateFrameType(Rectangle contactedArea);
         std::vector<Tile> tiles;
-
-    private:
-
+        
+        private:
+        
         std::map<GrassType, Vector2> grassMap;
-
+        
         void mapGrassFrames();
+        void checkNeighbors(Tile &thisTile);
 
 };

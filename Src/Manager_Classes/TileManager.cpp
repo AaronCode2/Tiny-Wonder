@@ -4,6 +4,7 @@ TileManager::TileManager() {
 
     Tile::image = LoadTexture("../Assets/Tiles/Tile.png");
     mapGrassFrames();
+    updateFrameType({});
 }
 
 TileManager::~TileManager() {
@@ -16,6 +17,14 @@ void TileManager::update() {
     for(auto &tile : tiles) {
 
         tile.update();
+    }
+}
+
+void TileManager::updateFrameType(Rectangle contactedArea) {
+
+    for(auto &tile : tiles) {
+
+        checkNeighbors(tile);
     }
 }
 
@@ -101,7 +110,6 @@ void TileManager::checkNeighbors(Tile &thisTile) {
         neighborHoodRect.x -= 60;
         neighborHoodRect.y -= 60;
     
-    
         if(CheckCollisionRecs(otherTileObject, neighborHoodRect)) {
     
             frameOptions[SIDE_CORNER_TOP_LEFT] = false;
@@ -110,7 +118,6 @@ void TileManager::checkNeighbors(Tile &thisTile) {
         neighborHoodRect = thisObject;
         neighborHoodRect.x -= 60;
         neighborHoodRect.y += 60;
-    
     
         if(CheckCollisionRecs(otherTileObject, neighborHoodRect)) {
     

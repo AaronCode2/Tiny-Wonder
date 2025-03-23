@@ -28,6 +28,7 @@ void World::placeTiles() {
                     if(CheckCollisionRecs(it->getObject(), object)) {
 
                         tileManager.tiles.erase(it);
+                        tileManager.updateFrameType(object);
                         return;
                     } else it++;
                 }
@@ -45,6 +46,8 @@ void World::placeTiles() {
                 object,
                 {2, 2}
             ));
+
+            tileManager.updateFrameType(object);
         }       
     }
 }
