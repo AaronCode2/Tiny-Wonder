@@ -29,6 +29,7 @@ class TileManager {
         ~TileManager();
 
         void update();
+        void checkNeighbors(Tile &thisTile);
         std::vector<Tile> tiles;
 
     private:

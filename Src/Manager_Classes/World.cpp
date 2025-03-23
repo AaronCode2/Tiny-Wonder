@@ -17,25 +17,29 @@ void World::placeTiles() {
                 
             Rectangle object = {x, y, 60, 60};
     
-            if(Mouse::isHovering(object)) {
-    
+            if(Mouse::isHovering(object)) 
                 DrawRectangleRec(object, Utils::testColor);
-            } else continue;
+            else continue;
 
-            if(!Mouse::isClickedL(object)) continue;
-                    
-            bool skip = false;
+            if(Mouse::isClickedR(object)) {
 
-            for(auto &tile : tileManager.tiles) {
+                for(auto it = tileManager.tiles.begin(); it < tileManager.tiles.end();) {
 
-                if(tile.getObject().x == object.x && tile.getObject().y == object.y) {
+                    if(CheckCollisionRecs(it->getObject(), object)) {
 
-                    skip = true;
-                    break;
+                        tileManager.tiles.erase(it);
+                        return;
+                    } else it++;
                 }
             }
 
-            if(skip) break;
+            if(!Mouse::isClickedL(object)) continue;
+
+            for(auto &tile : tileManager.tiles) {
+
+                if(Utils::isSameRect(tile.getObject(), object))
+                    return;
+            }
 
             tileManager.tiles.push_back(Tile(
                 object,
