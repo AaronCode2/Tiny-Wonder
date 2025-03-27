@@ -17,7 +17,6 @@ void TileManager::update() {
     for(auto &tile : tiles) {
 
         tile.update();
-        // DrawRectangleRec({tile.getObject().x - 25, tile.getObject().y - 50, 125, 150}, Utils::testColor);
     }
 }
 
