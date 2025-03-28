@@ -6,24 +6,22 @@
 
 void World::update(Vector2 playerVeclocity) {
 
-    offsetCheckObject.x -= playerVeclocity.x;
-    offsetCheckObject.y -= playerVeclocity.y;
+    offsetCheckObject.x += tileManager.tiles[0].getVeclocity().x;
+    offsetCheckObject.y += tileManager.tiles[0].getVeclocity().y;
 
     tileManager.update();
     placeTiles();
 }
 
 void World::placeTiles() {
-    
-    const Rectangle recentOffsetCheck = offsetCheckObject;
-    offsetCheckObject.x -= 60;
-    offsetCheckObject.y -= 60;
+
+    DrawRectangleRec(offsetCheckObject, Utils::testColor); 
 
     for(float y = 0; y < GetScreenHeight(); y += 60) {
         for(float x = 0; x < GetScreenWidth(); x += 60) {
             
 
-            Rectangle object = {x - offsetCheckObject.x, y - offsetCheckObject.y, 60, 60};
+            Rectangle object = {x + offsetCheckObject.x, y + offsetCheckObject.y, 60, 60};
             Rectangle checkerArea = {object.x - 50, object.y - 50, 150, 150};
 
             if(Mouse::isHovering(object)) 
@@ -59,6 +57,4 @@ void World::placeTiles() {
             tileManager.updateFrameType(checkerArea);
         }       
     }
-
-    offsetCheckObject = recentOffsetCheck;
 }

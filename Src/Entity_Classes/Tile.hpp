@@ -23,6 +23,7 @@ class Tile : public Sprite {
         TileType getType() { return tileType; };
 
         void setVelocity(Vector2 newVeclocity) { velocity = newVeclocity; };
+        Vector2 getVeclocity() const {return velocity; };
 
     private:
 

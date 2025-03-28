@@ -18,7 +18,7 @@ class World {
         TileManager tileManager;
     private:
 
-        Rectangle offsetCheckObject = {60, 60, 60, 60};
+        Rectangle offsetCheckObject = {0, 0, 60, 60};
 
         void placeTiles();
 };
