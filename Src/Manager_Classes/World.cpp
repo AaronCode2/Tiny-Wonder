@@ -6,8 +6,11 @@
 
 void World::update(Vector2 playerVeclocity) {
 
-    offsetCheckObject.x += tileManager.tiles[0].getVeclocity().x;
-    offsetCheckObject.y += tileManager.tiles[0].getVeclocity().y;
+    if(!tileManager.tiles.empty()) {
+
+        offsetCheckObject.x += tileManager.tiles[0].getVeclocity().x * GetFrameTime();
+        offsetCheckObject.y += tileManager.tiles[0].getVeclocity().y * GetFrameTime();
+    }
 
     tileManager.update();
     placeTiles();
@@ -17,10 +20,10 @@ void World::placeTiles() {
 
     DrawRectangleRec(offsetCheckObject, Utils::testColor); 
 
-    for(float y = 0; y < GetScreenHeight(); y += 60) {
-        for(float x = 0; x < GetScreenWidth(); x += 60) {
+    for(float y = -2000; y < 20000; y += 60) {
+        for(float x = -2000; x < 20000; x += 60) {
 
-            Rectangle object = {x - offsetCheckObject.x, y - offsetCheckObject.y, 60, 60};
+            Rectangle object = {x + offsetCheckObject.x, y + offsetCheckObject.y, 60, 60};
             Rectangle checkerArea = {object.x - 50, object.y - 50, 150, 150};
 
             if(Mouse::isHovering(object)) 
