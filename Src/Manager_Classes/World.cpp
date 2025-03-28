@@ -19,9 +19,8 @@ void World::placeTiles() {
 
     for(float y = 0; y < GetScreenHeight(); y += 60) {
         for(float x = 0; x < GetScreenWidth(); x += 60) {
-            
 
-            Rectangle object = {x + offsetCheckObject.x, y + offsetCheckObject.y, 60, 60};
+            Rectangle object = {x - offsetCheckObject.x, y - offsetCheckObject.y, 60, 60};
             Rectangle checkerArea = {object.x - 50, object.y - 50, 150, 150};
 
             if(Mouse::isHovering(object)) 
