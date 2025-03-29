@@ -29,5 +29,5 @@ void Tile::move() {
     object.x += velocity.x * GetFrameTime();
     object.y += velocity.y * GetFrameTime();
 
-    velocity = {0, 0};
+    velocity = {0.0f, 0.0f};
 }
