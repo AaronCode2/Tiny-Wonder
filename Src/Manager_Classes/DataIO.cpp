@@ -1,8 +1,8 @@
 #include "DataIO.hpp"
 
-DataIO::DataIO(std::vector<Tile> &tiles):
-    tiles(tiles) 
-{
+DataIO::DataIO(std::vector<Tile> &tiles, Vector2 &worldPos):
+    tiles(tiles), worldPos(worldPos) 
+{   
     readTileData();
 }
 
@@ -89,7 +89,7 @@ void DataIO::readTileData() {
     file.close();
 }
 
-void DataIO::readWorldPosData(Vector2 &newWorldPos) {
+void DataIO::readWorldPosData() {
 
     std::ifstream file(WORLD_POS_PATH);
 
@@ -120,8 +120,8 @@ void DataIO::readWorldPosData(Vector2 &newWorldPos) {
 
                 int num = std::stoi(token);
                 if(count == 0)
-                    newWorldPos.x = num;
-                else newWorldPos.y = num;
+                    worldPos.x = num;
+                else worldPos.y = num;
 
             } catch (...) {}
         }
@@ -129,7 +129,7 @@ void DataIO::readWorldPosData(Vector2 &newWorldPos) {
 
 }
 
-void DataIO::writeWorldPosData(Vector2 worldPos) {
+void DataIO::writeWorldPosData() {
 
     std::ofstream file(WORLD_POS_PATH);
 

@@ -24,16 +24,17 @@ class DataIO {
     
     public:
 
-        DataIO(std::vector<Tile> &tiles);
+        DataIO(std::vector<Tile> &tiles, Vector2 &worldPos);
         ~DataIO() { writeTileData(); };
 
         void writeTileData();
         void readTileData();
 
-        void readWorldPosData(Vector2 &newWorldPos);
-        void writeWorldPosData(Vector2 worldPos);
+        void readWorldPosData();
+        void writeWorldPosData();
 
     private:
 
     std::vector<Tile> &tiles;
+    Vector2 &worldPos;
 };

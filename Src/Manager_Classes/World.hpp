@@ -16,9 +16,9 @@ class World {
         void update(Vector2 playerVeclocity);
 
         TileManager tileManager;
+        Rectangle offsetCheckObject = {0, 0, 60, 60};
     private:
 
-        Rectangle offsetCheckObject = {0, 0, 60, 60};
 
         void placeTiles();
 };
