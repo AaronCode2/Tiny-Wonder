@@ -86,7 +86,7 @@ void Player::moveScreenX() {
         if(CheckCollisionRecs(rangeBoxSide, object)) {
             
             for(auto &tile : tiles) 
-                tile.setVelocity({-velocity.x, 0.0f});
+                tile.setVelocity({(velocity.x * GetFrameTime()), 0.0f});
 
             if(velocity.x > 0) {
                 
@@ -117,7 +117,7 @@ void Player::moveScreenY() {
         if(CheckCollisionRecs(rangeBoxSide, object)) {
 
             for(auto &tile : tiles) 
-                tile.setVelocity({0.0f, -velocity.y});
+                tile.setVelocity({0.0f, -(velocity.y * GetFrameTime())});
 
             if(velocity.y > 0) {
                 
