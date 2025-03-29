@@ -18,7 +18,7 @@ void World::update(Vector2 playerVeclocity) {
 
 void World::placeTiles() {
 
-    DrawRectangleRec(offsetCheckObject, Utils::testColor); 
+    // DrawRectangleRec(offsetCheckObject, Utils::testColor); 
 
     for(float y = -2000; y < 20000; y += 60) {
         for(float x = -2000; x < 20000; x += 60) {

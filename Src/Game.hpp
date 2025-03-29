@@ -14,8 +14,7 @@ class Game {
     private:
 
         World world;
-        Vector2 worldPos = {world.offsetCheckObject.x, world.offsetCheckObject.y};
-        DataIO dataIO = DataIO(world.tileManager.tiles, worldPos);
+        DataIO dataIO = DataIO(world.tileManager.tiles, world.offsetCheckObject);
 
         Player player = Player(
             {
