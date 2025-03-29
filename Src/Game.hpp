@@ -14,7 +14,7 @@ class Game {
     private:
 
         World world;
-        DataIO dataIO = DataIO(world.tileManager.tiles, "../Data/TileMap.txt");
+        DataIO dataIO = DataIO(world.tileManager.tiles);
 
         Player player = Player(
             {

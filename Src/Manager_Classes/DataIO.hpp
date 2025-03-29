@@ -6,6 +6,8 @@
 #include "../Entity_Classes/Tile.hpp"
 
 #define NUM_SIZE 7
+#define WORLD_POS_PATH "../Data/WorldPos.txt"
+#define TILE_MAP_PATH "../Data/TileMap.txt"
 
 enum fileReadStructure {
 
@@ -22,14 +24,16 @@ class DataIO {
     
     public:
 
-        DataIO(std::vector<Tile> &tiles, std::string path);
+        DataIO(std::vector<Tile> &tiles);
         ~DataIO() { writeTileData(); };
 
         void writeTileData();
         void readTileData();
+
+        void readWorldPosData(Vector2 &newWorldPos);
+        void writeWorldPosData(Vector2 worldPos);
+
     private:
 
     std::vector<Tile> &tiles;
-    std::string path;
-
 };

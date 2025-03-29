@@ -8,8 +8,8 @@ void World::update(Vector2 playerVeclocity) {
 
     if(!tileManager.tiles.empty()) {
 
-        offsetCheckObject.x += tileManager.tiles[0].getVeclocity().x * GetFrameTime();
-        offsetCheckObject.y += tileManager.tiles[0].getVeclocity().y * GetFrameTime();
+        offsetCheckObject.x += tileManager.tiles[0].getVeclocity().x;
+        offsetCheckObject.y += tileManager.tiles[0].getVeclocity().y;
     }
 
     tileManager.update();

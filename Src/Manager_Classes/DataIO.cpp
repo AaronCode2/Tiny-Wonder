@@ -1,15 +1,14 @@
 #include "DataIO.hpp"
 
-DataIO::DataIO(std::vector<Tile> &tiles, std::string path):
+DataIO::DataIO(std::vector<Tile> &tiles):
     tiles(tiles) 
 {
-    this->path = path;
     readTileData();
 }
 
 void DataIO::writeTileData() {
 
-    std::ofstream file(path);
+    std::ofstream file(TILE_MAP_PATH);
 
     if(!file.is_open()) {
 
@@ -35,7 +34,7 @@ void DataIO::writeTileData() {
 
 void DataIO::readTileData() {
 
-    std::ifstream file(path);
+    std::ifstream file(TILE_MAP_PATH);
 
     if(!file.is_open()) {
 
@@ -49,7 +48,6 @@ void DataIO::readTileData() {
 
         int numbers[NUM_SIZE]; 
         int count = 0;        
-        bool insideBraces = false;
         std::string temp;
 
         for(size_t i = 0; i < line.length(); i++) {
@@ -89,4 +87,62 @@ void DataIO::readTileData() {
     }
 
     file.close();
+}
+
+void DataIO::readWorldPosData(Vector2 &newWorldPos) {
+
+    std::ifstream file(WORLD_POS_PATH);
+
+    std::string line;
+    int count = 0;
+
+    while(std::getline(file, line)) {
+
+        std::string temp;
+        for(size_t i = 0; i < line.length(); i++) {
+
+            if(line[i] == '{')
+                continue;
+
+            if(line[i] == '}')
+                break;
+
+            temp += line[i];  
+        
+        }
+
+        std::stringstream ss(temp);
+        std::string token;
+
+        while (std::getline(ss, token, ',') && count < 2) {
+
+            try{
+
+                int num = std::stoi(token);
+                if(count == 0)
+                    newWorldPos.x = num;
+                else newWorldPos.y = num;
+
+            } catch (...) {}
+        }
+    }
+
+}
+
+void DataIO::writeWorldPosData(Vector2 worldPos) {
+
+    std::ofstream file(WORLD_POS_PATH);
+
+    if(!file.is_open()) {
+
+        std::cerr << "/033[31mCould not write Data to WorldPosData\n\033[31m";
+        exit(EXIT_FAILURE);
+    }
+
+    file 
+    << "{"
+
+        << worldPos.x << ", "
+        << worldPos.y << ", "
+    << "}\n";
 }
