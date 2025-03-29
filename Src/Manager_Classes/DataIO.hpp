@@ -25,7 +25,7 @@ class DataIO {
     public:
 
         DataIO(std::vector<Tile> &tiles, Vector2 &worldPos);
-        ~DataIO() { writeTileData(); };
+        ~DataIO();
 
         void writeTileData();
         void readTileData();

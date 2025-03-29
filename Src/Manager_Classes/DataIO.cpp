@@ -6,6 +6,12 @@ DataIO::DataIO(std::vector<Tile> &tiles, Vector2 &worldPos):
     readTileData();
 }
 
+DataIO::~DataIO(){
+
+    writeTileData();
+    writeWorldPosData();
+}
+
 void DataIO::writeTileData() {
 
     std::ofstream file(TILE_MAP_PATH);
