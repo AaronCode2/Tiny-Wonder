@@ -148,8 +148,8 @@ void DataIO::writeWorldPosData() {
     file << std::fixed << std::setprecision(8)
     << "{"
 
-        << worldPos.x << ", "
-        << worldPos.y << ", "
+        << worldPos.x << ", " 
+        << worldPos.y << " "
 
     << "}\n";
 }
