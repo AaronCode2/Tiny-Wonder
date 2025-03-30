@@ -114,7 +114,6 @@ void DataIO::readWorldPosData() {
                 break;
 
             temp += line[i];  
-        
         }
 
         std::stringstream ss(temp);
