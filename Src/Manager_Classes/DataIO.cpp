@@ -71,9 +71,9 @@ void DataIO::readTileData() {
         std::stringstream ss(temp);
         std::string token;
 
-        while (std::getline(ss, token, ',') && count < NUM_SIZE - 1) {
+        while(std::getline(ss, token, ',') && count < NUM_SIZE - 1) {
 
-            try{
+            try {
 
                 int num = std::stoi(token);
                 numbers[count++] = num;
@@ -119,15 +119,16 @@ void DataIO::readWorldPosData() {
         std::stringstream ss(temp);
         std::string token;
 
-        while (std::getline(ss, token, ',') && count < 2) {
+        while(std::getline(ss, token, ',') && count < 2) {
 
-            try{
+            try {
 
-                int num = std::stoi(token);
+                float num = std::stof(token);
                 if(count == 0)
                     worldPos.x = num;
                 else worldPos.y = num;
 
+                count++;
             } catch (...) {}
         }
     }
@@ -140,14 +141,15 @@ void DataIO::writeWorldPosData() {
 
     if(!file.is_open()) {
 
-        std::cerr << "/033[31mCould not write Data to WorldPosData\n\033[31m";
+        std::cerr << "\033[31mCould not write Data to WorldPosData\n\033[31m";
         exit(EXIT_FAILURE);
     }
 
-    file 
+    file << std::fixed << std::setprecision(8)
     << "{"
 
         << worldPos.x << ", "
         << worldPos.y << ", "
+
     << "}\n";
 }
