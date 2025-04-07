@@ -2,6 +2,8 @@
 #include "../Entity_Classes/Sprite.hpp"
 #include "../Utils.hpp"
 
+#define TILE_SIZE 60.0f
+
 enum TileType {
 
     GRASS = 0,
