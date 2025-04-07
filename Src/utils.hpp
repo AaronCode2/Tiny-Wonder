@@ -21,6 +21,8 @@ namespace Utils {
 
     bool isSameRect(Rectangle aObject, Rectangle bObject);
 
+    int countDecimalPlaces(float num);
+
 } 
 
 namespace Mouse {

@@ -4,6 +4,7 @@ DataIO::DataIO(std::vector<Tile> &tiles, Vector2 &worldPos):
     tiles(tiles), worldPos(worldPos) 
 {   
     readTileData();
+    readWorldPosData();
 }
 
 DataIO::~DataIO(){
@@ -65,7 +66,6 @@ void DataIO::readTileData() {
                 break;
 
             temp += line[i];  
-        
         }
 
         std::stringstream ss(temp);
@@ -145,11 +145,14 @@ void DataIO::writeWorldPosData() {
         exit(EXIT_FAILURE);
     }
 
-    file << std::fixed << std::setprecision(8)
+    int worldXMaxDecimals = Utils::countDecimalPlaces(worldPos.x);
+    int worldYMaxDecimals = Utils::countDecimalPlaces(worldPos.y);
+
+    file
     << "{"
 
-        << worldPos.x << ", " 
-        << worldPos.y << " "
+        << std::fixed << std::setprecision(worldXMaxDecimals) << worldPos.x << ", " 
+        << std::fixed << std::setprecision(worldYMaxDecimals) << worldPos.y
 
     << "}\n";
 }
