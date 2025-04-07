@@ -16,7 +16,7 @@ class World {
         void update(Vector2 playerVeclocity);
 
         TileManager tileManager;
-        Vector2 offsetCheckObject = {0, 0};
+        Vector2 worldPos = {0, 0};
     private:
 
 
