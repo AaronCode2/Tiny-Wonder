@@ -21,16 +21,16 @@ void World::placeTiles() {
     float snappedX = ((int) GetMousePosition().x / 60) * 60;
     float snappedY = ((int) GetMousePosition().y / 60) * 60;
 
-    Rectangle selectionRect = {snappedX + worldPos.x, snappedY + worldPos.y, 60, 60};
-    Rectangle checkerArea = {selectionRect.x - 50, selectionRect.y - 50, 155, 155};
+    Rectangle selectionObject = {snappedX + worldPos.x, snappedY + worldPos.y, 60, 60};
+    Rectangle checkerArea = {selectionObject.x - 50, selectionObject.y - 50, 155, 155};
 
-    DrawRectangleRec(selectionRect, Utils::testColor);
+    DrawRectangleRec(selectionObject, Utils::testColor);
 
-    if(Mouse::isClickedR(selectionRect)) {
+    if(Mouse::isClickedR(selectionObject)) {
 
         for(auto it = tileManager.tiles.begin(); it < tileManager.tiles.end();) {
 
-            if(CheckCollisionRecs(it->getObject(), selectionRect)) {
+            if(CheckCollisionRecs(it->getObject(), selectionObject)) {
 
                 tileManager.tiles.erase(it);
                 tileManager.updateFrameType(checkerArea);
@@ -38,6 +38,22 @@ void World::placeTiles() {
             } else it++;
         }
     }
+
+    if(!Mouse::isClickedL(selectionObject)) return;
+
+    for(auto &tile : tileManager.tiles) {
+
+        if(Utils::isSameRect(tile.getObject(), selectionObject))
+            return;
+    }
+
+    tileManager.tiles.push_back(Tile(
+        selectionObject,
+        {2, 2}
+    ));
+
+    tileManager.updateFrameType(checkerArea);
+} 
 
     // for(float y = -2000; y < 20000; y += 60) {
     //     for(float x = -2000; x < 20000; x += 60) {
@@ -78,4 +94,3 @@ void World::placeTiles() {
     //         tileManager.updateFrameType(checkerArea);
     //     }       
     // }
-}
