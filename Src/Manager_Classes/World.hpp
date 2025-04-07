@@ -8,6 +8,7 @@
 #include "../Utils.hpp"
 #include "../Entity_Classes/Tile.hpp"
 #include "TileManager.hpp"
+#include <cmath>
 
 class World {
 

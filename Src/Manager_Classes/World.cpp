@@ -18,11 +18,21 @@ void World::update(Vector2 playerVeclocity) {
 
 void World::placeTiles() {
 
-    float snappedX = ((int) GetMousePosition().x / TILE_SIZE) * TILE_SIZE;
-    float snappedY = ((int) GetMousePosition().y / TILE_SIZE) * TILE_SIZE;
+    float mouseWorldX = GetMousePosition().x + worldPos.x;
+    float mouseWorldY = GetMousePosition().y + worldPos.y;
 
-    Rectangle selectionObject = {snappedX, snappedY, TILE_SIZE, TILE_SIZE};
+    float snappedWorldX = floorf(mouseWorldX / TILE_SIZE) * TILE_SIZE;
+    float snappedWorldY = floorf(mouseWorldY / TILE_SIZE) * TILE_SIZE;
+
+    Rectangle selectionObject = {snappedWorldX - worldPos.x, snappedWorldY - worldPos.y, TILE_SIZE, TILE_SIZE};
     Rectangle checkerArea = {selectionObject.x - 50, selectionObject.y - 50, 155, 155};
+
+    Rectangle worldTileRect = {
+        snappedWorldX,
+        snappedWorldY,
+        TILE_SIZE,
+        TILE_SIZE
+    };
 
     DrawRectangleRec(selectionObject, Utils::testColor);
 
@@ -30,7 +40,7 @@ void World::placeTiles() {
 
         for(auto it = tileManager.tiles.begin(); it < tileManager.tiles.end();) {
 
-            if(CheckCollisionRecs(it->getObject(), selectionObject)) {
+            if(CheckCollisionRecs(it->getObject(), worldTileRect)) {
 
                 tileManager.tiles.erase(it);
                 tileManager.updateFrameType(checkerArea);
@@ -43,12 +53,12 @@ void World::placeTiles() {
 
     for(auto &tile : tileManager.tiles) {
 
-        if(Utils::isSameRect(tile.getObject(), selectionObject))
+        if(Utils::isSameRect(tile.getObject(), worldTileRect))
             return;
     }
 
     tileManager.tiles.push_back(Tile(
-        selectionObject,
+        worldTileRect,
         {2, 2}
     ));
 
