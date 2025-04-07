@@ -18,43 +18,64 @@ void World::update(Vector2 playerVeclocity) {
 
 void World::placeTiles() {
 
-    for(float y = -2000; y < 20000; y += 60) {
-        for(float x = -2000; x < 20000; x += 60) {
+    float snappedX = ((int) GetMousePosition().x / 60) * 60;
+    float snappedY = ((int) GetMousePosition().y / 60) * 60;
 
-            Rectangle object = {x + worldPos.x, y + worldPos.y, 60, 60};
-            Rectangle checkerArea = {object.x - 50, object.y - 50, 155, 155};
+    Rectangle selectionRect = {snappedX + worldPos.x, snappedY + worldPos.y, 60, 60};
+    Rectangle checkerArea = {selectionRect.x - 50, selectionRect.y - 50, 155, 155};
 
-            if(Mouse::isHovering(object)) 
-                DrawRectangleRec(object, Utils::testColor);
-            else continue;
+    DrawRectangleRec(selectionRect, Utils::testColor);
 
-            if(Mouse::isClickedR(object)) {
+    if(Mouse::isClickedR(selectionRect)) {
 
-                for(auto it = tileManager.tiles.begin(); it < tileManager.tiles.end();) {
+        for(auto it = tileManager.tiles.begin(); it < tileManager.tiles.end();) {
 
-                    if(CheckCollisionRecs(it->getObject(), object)) {
+            if(CheckCollisionRecs(it->getObject(), selectionRect)) {
 
-                        tileManager.tiles.erase(it);
-                        tileManager.updateFrameType(checkerArea);
-                        return;
-                    } else it++;
-                }
-            }
-
-            if(!Mouse::isClickedL(object)) continue;
-
-            for(auto &tile : tileManager.tiles) {
-
-                if(Utils::isSameRect(tile.getObject(), object))
-                    return;
-            }
-
-            tileManager.tiles.push_back(Tile(
-                object,
-                {2, 2}
-            ));
-
-            tileManager.updateFrameType(checkerArea);
-        }       
+                tileManager.tiles.erase(it);
+                tileManager.updateFrameType(checkerArea);
+                return;
+            } else it++;
+        }
     }
+
+    // for(float y = -2000; y < 20000; y += 60) {
+    //     for(float x = -2000; x < 20000; x += 60) {
+
+    //         Rectangle object = {x + worldPos.x, y + worldPos.y, 60, 60};
+    //         Rectangle checkerArea = {object.x - 50, object.y - 50, 155, 155};
+
+    //         if(Mouse::isHovering(object)) 
+    //             DrawRectangleRec(object, Utils::testColor);
+    //         else continue;
+
+    //         if(Mouse::isClickedR(object)) {
+
+    //             for(auto it = tileManager.tiles.begin(); it < tileManager.tiles.end();) {
+
+    //                 if(CheckCollisionRecs(it->getObject(), object)) {
+
+    //                     tileManager.tiles.erase(it);
+    //                     tileManager.updateFrameType(checkerArea);
+    //                     return;
+    //                 } else it++;
+    //             }
+    //         }
+
+    //         if(!Mouse::isClickedL(object)) continue;
+
+    //         for(auto &tile : tileManager.tiles) {
+
+    //             if(Utils::isSameRect(tile.getObject(), object))
+    //                 return;
+    //         }
+
+    //         tileManager.tiles.push_back(Tile(
+    //             object,
+    //             {2, 2}
+    //         ));
+
+    //         tileManager.updateFrameType(checkerArea);
+    //     }       
+    // }
 }
