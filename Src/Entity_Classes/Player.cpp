@@ -53,12 +53,12 @@ void Player::update() {
 
     velocity = {0, 0};
 
-    const int speed = 500 * GetFrameTime();
+    const int speed = 500;
 
-    if(getInput().up) velocity.y = -speed;
-    if(getInput().down) velocity.y = speed;
-    if(getInput().right) velocity.x = speed;
-    if(getInput().left) velocity.x = -speed;
+    if(getInput().up) velocity.y = -speed * GetFrameTime();
+    if(getInput().down) velocity.y = speed * GetFrameTime();
+    if(getInput().right) velocity.x = speed * GetFrameTime();
+    if(getInput().left) velocity.x = -speed * GetFrameTime();
 
     animationLogic();
     move();
