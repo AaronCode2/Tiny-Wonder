@@ -4,7 +4,7 @@ project(Aaron)
 
 include(FetchContent)
 
-set(RAYLIB_VERSION 4.2.0)
+set(RAYLIB_VERSION 5.5)
 
 FetchContent_Declare(
     raylib
