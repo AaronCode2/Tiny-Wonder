@@ -2,7 +2,7 @@
 "configurations": [
     {
         "name": "Program",
-        "type": "cppdbg",
+        "type": "clr",
         "request": "launch",
         "program": "${workspaceFolder}/build/Aaron.exe",
         "args": [],
