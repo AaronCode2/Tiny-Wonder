@@ -7,6 +7,6 @@
 3. It should come with a option of what Compiler to use, use the compiler that fits you (a GCC is recommended)
 4. Once done, open the Terminal in the project directory or you could use the built-in one in Vscode.
 5. Check if Cmake has created the build file or you have done it wrong ❌
-6. Type this command
+6. Type this command ->
 
         cmake --build build
