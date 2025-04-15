@@ -17,43 +17,45 @@ void World::update(Vector2 playerVeclocity) {
 }
 
 void World::placeTiles() {
+    
+    for(float y = -20000; y < 20000; y += TILE_SIZE) {
+        for(float x = -20000; x < 20000; x += TILE_SIZE) {
+            
+            Rectangle selectionObject = {x, y, TILE_SIZE, TILE_SIZE};
+            
+            if(!CheckCollisionPointRec(GetMousePosition(), selectionObject))
+            continue;
+            
+            Rectangle checkerArea = {selectionObject.x - 50, selectionObject.y - 50, 155, 155};
+            DrawRectangleRec(selectionObject, Utils::testColor);
+            
+            if(Mouse::isClickedR(selectionObject)) {
 
-    float mouseWorldX = GetMousePosition().x + worldPos.x;
-    float mouseWorldY = GetMousePosition().y + worldPos.y;
+                for(auto it = tileManager.tiles.begin(); it < tileManager.tiles.end();) {
 
-    float snappedX = floorf(mouseWorldX / TILE_SIZE) * TILE_SIZE;
-    float snappedY = floorf(mouseWorldY / TILE_SIZE) * TILE_SIZE;
+                    if(CheckCollisionRecs(it->getObject(), selectionObject)) {
 
-    Rectangle selectionObject = {snappedX - worldPos.x, snappedY - worldPos.y, TILE_SIZE, TILE_SIZE};
-    Rectangle checkerArea = {selectionObject.x - 50, selectionObject.y - 50, 155, 155};
+                        tileManager.tiles.erase(it);
+                        tileManager.updateFrameType(checkerArea);
+                        return;
+                    } else it++;
+                }
+            }
 
-    DrawRectangleRec(selectionObject, Utils::testColor);
+            if(!Mouse::isClickedL(selectionObject)) return;
 
-    if(Mouse::isClickedR(selectionObject)) {
+            for(auto &tile : tileManager.tiles) {
 
-        for(auto it = tileManager.tiles.begin(); it < tileManager.tiles.end();) {
+                if(Utils::isSameRect(tile.getObject(), selectionObject))
+                    return;
+            }
 
-            if(CheckCollisionRecs(it->getObject(), selectionObject)) {
+            tileManager.tiles.push_back(Tile(
+                selectionObject,
+                {2, 2}
+            ));
 
-                tileManager.tiles.erase(it);
-                tileManager.updateFrameType(checkerArea);
-                return;
-            } else it++;
+            tileManager.updateFrameType(checkerArea);
         }
     }
-
-    if(!Mouse::isClickedL(selectionObject)) return;
-
-    for(auto &tile : tileManager.tiles) {
-
-        if(Utils::isSameRect(tile.getObject(), selectionObject))
-            return;
-    }
-
-    tileManager.tiles.push_back(Tile(
-        selectionObject,
-        {2, 2}
-    ));
-
-    tileManager.updateFrameType(checkerArea);
 } 
