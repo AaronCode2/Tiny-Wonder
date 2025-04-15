@@ -4,6 +4,7 @@
         "name": "(gdb) Launch",
         "type": "cppdbg",
         "request": "launch",
+        "preLaunchTask": "Cmake",
         "program": "${workspaceFolder}/build/Aaron.exe",
         "args": [],
         "stopAtEntry": false,
