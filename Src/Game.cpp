@@ -31,6 +31,6 @@ void Game::updateMode(){
     for(int key = 49; key <= 51; key++) {
 
         if(IsKeyDown(key))
-            gameMode = (GameMode) (49 - key);
+            gameMode = (GameMode) (key - 49);
     }
 }
