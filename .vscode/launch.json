@@ -1,14 +1,13 @@
 {
-"configurations": [
+    "configurations": [
     {
-        "name": "Program",
-        "type": "clr",
+        "name": "(gdb) Launch",
+        "type": "cppdbg",
         "request": "launch",
         "program": "${workspaceFolder}/build/Aaron.exe",
         "args": [],
         "stopAtEntry": false,
-        "preLaunchTask": "Cmake",
-        "cwd": "${workspaceFolder}/build",
+        "cwd": "${fileDirname}",
         "environment": [],
         "externalConsole": true,
         "MIMode": "gdb",
@@ -26,5 +25,5 @@
             }
         ]
     }
-]
+    ]
 }

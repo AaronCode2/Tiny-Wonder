@@ -1,10 +1,14 @@
 #include "World.hpp"
+#include "../Game.hpp"
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <string>
 
 void World::update(Vector2 playerVeclocity) {
+
+    if(gameMode != GameMode::BUILD) 
+        return;
 
     if(!tileManager.tiles.empty()) {
 

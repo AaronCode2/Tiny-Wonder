@@ -25,12 +25,11 @@ bool Utils::isSameRect(Rectangle aObject, Rectangle bObject) {
 int Utils::countDecimalPlaces(float num) {
 
     std::string str = std::to_string(num);
-    size_t dotPos = str.find('.');
     
     size_t lastNonZero = str.find_last_not_of('0');
     
-    if(lastNonZero != std::string::npos && lastNonZero > dotPos)
-        return (int) (lastNonZero - dotPos);
+    if(lastNonZero != std::string::npos && lastNonZero > str.find('.'))
+        return (int) (lastNonZero - str.find('.'));
     
     return -1;
 }

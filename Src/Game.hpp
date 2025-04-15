@@ -5,6 +5,15 @@
 #include "Manager_Classes/World.hpp"
 #include "Manager_Classes/DataIO.hpp"
 
+enum class GameMode {
+
+    EXPLORE = 0,
+    BUILD,
+    TRADE
+};
+
+extern GameMode gameMode;
+
 class Game {
 
     public:
@@ -27,4 +36,5 @@ class Game {
     
         void gameLoop();
         void updateGame();
+        void updateMode();
 };
