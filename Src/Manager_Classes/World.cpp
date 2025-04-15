@@ -21,10 +21,10 @@ void World::placeTiles() {
     for(float y = -20000; y < 20000; y += TILE_SIZE) {
         for(float x = -20000; x < 20000; x += TILE_SIZE) {
             
-            Rectangle selectionObject = {x, y, TILE_SIZE, TILE_SIZE};
+            Rectangle selectionObject = {x + worldPos.x, y + worldPos.y, TILE_SIZE, TILE_SIZE};
             
             if(!CheckCollisionPointRec(GetMousePosition(), selectionObject))
-            continue;
+                continue;
             
             Rectangle checkerArea = {selectionObject.x - 50, selectionObject.y - 50, 155, 155};
             DrawRectangleRec(selectionObject, Utils::testColor);
