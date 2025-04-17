@@ -20,7 +20,7 @@ void DataIO::writeTileData() {
     if(!file.is_open()) {
 
         std::cerr << "\033[31mError: Could not write Data in TileMap.txt\n\033[0m";
-        exit(EXIT_FAILURE);
+        // exit(EXIT_FAILURE);
     }
 
     for(auto tile : tiles) {  
@@ -35,8 +35,6 @@ void DataIO::writeTileData() {
 
         << "}\n";  
     }
-
-    file.close();
 }
 
 void DataIO::readTileData() {
@@ -91,8 +89,6 @@ void DataIO::readTileData() {
             {(float) numbers[FRAME_X], (float) numbers[FRAME_Y]}
         ));
     }
-
-    file.close();
 }
 
 void DataIO::readWorldPosData() {
