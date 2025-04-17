@@ -43,6 +43,7 @@ cmake --build build
 #### Now Worries!
 
 Well you will have to wait until I release the Game but once I do do the steps.  
+Game::Released = False  
 
 1. Go to the Releases and click on TinyWonder.zip.  
 2. Once downloaded, go to the directory you installed the game.
