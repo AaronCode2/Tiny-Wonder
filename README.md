@@ -39,6 +39,17 @@ git clone https://github.com/AaronCode2/Tiny-Wonder.git
 cmake --build build
 ```
 
+### Don't have a Compiler?
+#### Now Worries!
+
+Well you will have to wait until I release the Game but once I do do the steps.  
+
+1. Go to the Releases and click on TinyWonder.zip.  
+2. Once downloaded, go to the directory you installed the game.
+3. Then right click and Extract it.
+4. Place the extracted version of the game in the directory you want.  
+5. It is safe to delete the compressed Zip File / Folder
+
 
 ## Links and Credits
 
