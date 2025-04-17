@@ -42,7 +42,7 @@ cmake --build build
 ### Don't have a Compiler?
 #### No Worries!
 
-Well you will have to wait until I release the Game but once I do do the steps.  
+Well you will have to wait until I release the Game but once I do, do these steps.  
 Game::Released = False  
 
 1. Go to the Releases and click on TinyWonder.zip.  
