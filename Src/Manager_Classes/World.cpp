@@ -6,18 +6,17 @@
 #include <string>
 
 void World::update(Vector2 playerVeclocity) {
-
-    if(gameMode != GameMode::BUILD) 
-        return;
-
+    
     if(!tileManager.tiles.empty()) {
-
+        
         worldPos.x += tileManager.tiles[0].getVeclocity().x;
         worldPos.y += tileManager.tiles[0].getVeclocity().y;
     }
 
     tileManager.update();
-    placeTiles();
+
+    if(gameMode == GameMode::BUILD) 
+        placeTiles();
 }
 
 void World::placeTiles() {
