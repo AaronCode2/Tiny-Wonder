@@ -10,8 +10,11 @@ with the main theme being **Build**, **Explore**, **Farm**.
 ### The Git Way
 
 1. Install Git
-2. Type this command in your Terminal  
-                git clone https://github.com/AaronCode2/Tiny-Wonder.git
+2. Run the following command in your terminal:
+
+   ```bash
+   git clone https://github.com/AaronCode2/Tiny-Wonder.git
+   ```
 
 ### The Zipper Way
 
