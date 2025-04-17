@@ -5,6 +5,14 @@ This game is based around RPGs and gives the experience of a sandbox style
 with the main theme being **Build**, **Explore**, **Farm**.
 
 
+## How To clone Project
+
+### The Git Way
+
+1. Install Git
+2. Type this command in your Terminal
+        git clone https://github.com/AaronCode2/Tiny-Wonder.git
+
 ## How To Compile Project
 ### Hopefully you have a **C++ Compiler**, **Make**, **CMake** and **VSCode** installed to work
 
@@ -16,3 +24,10 @@ with the main theme being **Build**, **Explore**, **Farm**.
 6. Type this command
 
         cmake --build build
+
+
+## Links and Credits
+
+- Follow [me](https://messygear.itch.io/) on [itch.io](https://itch.io/)
+- Thank you for [Buttery Milk](https://butterymilk.itch.io/) for the [Asset Pack](https://butterymilk.itch.io/tiny-wonder-farm-asset-pack)  
+- Thanks especially for you as we couldn't have done this without you!
