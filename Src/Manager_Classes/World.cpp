@@ -43,7 +43,7 @@ void World::placeTiles() {
                         tileManager.tiles.erase(it);
                         tileManager.updateFrameType(checkerArea);
                         return;
-                    } else it++;
+                    } it++;
                 }
             }
 
