@@ -7,6 +7,7 @@
 #include "../Entity_Classes/Tile.hpp"
 
 #define NUM_SIZE 7
+#define FLOAT_PRECISION 2
 #define WORLD_POS_PATH "../Data/WorldPos.txt"
 #define TILE_MAP_PATH "../Data/TileMap.txt"
 

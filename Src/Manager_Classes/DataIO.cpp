@@ -27,8 +27,8 @@ void DataIO::writeTileData() {
 
        file 
        << "{"
-            << std::fixed << std::setprecision(5)
-            
+            << std::fixed << std::setprecision(FLOAT_PRECISION)
+
             << tile.getObject().x << ", " << tile.getObject().y << ", "
             << tile.getObject().width << ", " << tile.getObject().height << ", "
             << tile.getFrame().x << ", " << tile.getFrame().y << ", "
@@ -145,8 +145,8 @@ void DataIO::writeWorldPosData() {
     file
     << "{"
 
-        << std::fixed << std::setprecision(5) << worldPos.x << ", " 
-        << std::fixed << std::setprecision(5) << worldPos.y
+        << std::fixed << std::setprecision(FLOAT_PRECISION) << worldPos.x << ", " 
+        << std::fixed << std::setprecision(FLOAT_PRECISION) << worldPos.y
 
     << "}\n";
 }
