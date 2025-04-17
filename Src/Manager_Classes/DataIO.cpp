@@ -121,7 +121,7 @@ void DataIO::readWorldPosData() {
             try {
 
                 float num = std::stof(token);
-                if(count == 0)
+                if(count == X)
                     worldPos.x = num;
                 else worldPos.y = num;
 
