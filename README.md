@@ -12,9 +12,9 @@ with the main theme being **Build**, **Explore**, **Farm**.
 1. Install Git
 2. Run the following command in your terminal:
 
-   ```
-   git clone https://github.com/AaronCode2/Tiny-Wonder.git
-   ```
+```
+git clone https://github.com/AaronCode2/Tiny-Wonder.git
+```
 
 ### The Zipper Way
 
@@ -35,9 +35,9 @@ with the main theme being **Build**, **Explore**, **Farm**.
 5. Check if Cmake has created the build file or you have done it wrong ❌
 6. Type this command
 
-  ```
-  cmake --build build
-  ```
+```
+cmake --build build
+```
 
 
 ## Links and Credits
