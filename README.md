@@ -13,6 +13,15 @@ with the main theme being **Build**, **Explore**, **Farm**.
 2. Type this command in your Terminal
         git clone https://github.com/AaronCode2/Tiny-Wonder.git
 
+### The Zipper Way
+
+1. Hopefully you know how to install stuff from your browser  
+2. Click on this [link](https://github.com/AaronCode2/Tiny-Wonder/archive/refs/heads/main.zip) to download  
+3. Once downloaded, go to the directory you installed the project.
+4. Then right click and Extract it.
+5. Place the extracted version of the project in the directory you want.  
+6. It is safe to delete the compressed Zip File / Folder
+
 ## How To Compile Project
 ### Hopefully you have a **C++ Compiler**, **Make**, **CMake** and **VSCode** installed to work
 
