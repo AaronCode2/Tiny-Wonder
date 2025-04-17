@@ -40,7 +40,7 @@ cmake --build build
 ```
 
 ### Don't have a Compiler?
-#### Now Worries!
+#### No Worries!
 
 Well you will have to wait until I release the Game but once I do do the steps.  
 Game::Released = False  
