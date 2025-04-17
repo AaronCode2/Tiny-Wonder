@@ -1,6 +1,6 @@
 #include "Game.hpp"
 
-GameMode gameMode = GameMode::EXPLORE;
+GameMode gameMode = GameMode::BUILD;
 
 void Game::gameLoop() {
 

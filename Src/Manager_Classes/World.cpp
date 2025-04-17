@@ -30,13 +30,15 @@ void World::placeTiles() {
                 continue;
             
             Rectangle checkerArea = {selectionObject.x - 50, selectionObject.y - 50, 155, 155};
+            Rectangle deleteArea = {selectionObject.x - 10, selectionObject.y - 10, 50, 50};
+
             DrawRectangleRec(selectionObject, Utils::testColor);
             
             if(Mouse::isClickedR(selectionObject)) {
 
                 for(auto it = tileManager.tiles.begin(); it < tileManager.tiles.end();) {
 
-                    if(CheckCollisionRecs(it->getObject(), selectionObject)) {
+                    if(CheckCollisionRecs(it->getObject(), deleteArea)) {
 
                         tileManager.tiles.erase(it);
                         tileManager.updateFrameType(checkerArea);
