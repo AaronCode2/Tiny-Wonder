@@ -27,7 +27,8 @@ void DataIO::writeTileData() {
 
        file 
        << "{"
-
+            << std::fixed << std::setprecision(5)
+            
             << tile.getObject().x << ", " << tile.getObject().y << ", "
             << tile.getObject().width << ", " << tile.getObject().height << ", "
             << tile.getFrame().x << ", " << tile.getFrame().y << ", "
@@ -141,14 +142,11 @@ void DataIO::writeWorldPosData() {
         exit(EXIT_FAILURE);
     }
 
-    int worldXMaxDecimals = Utils::countDecimalPlaces(worldPos.x);
-    int worldYMaxDecimals = Utils::countDecimalPlaces(worldPos.y);
-
     file
     << "{"
 
-        << std::fixed << std::setprecision(worldXMaxDecimals) << worldPos.x << ", " 
-        << std::fixed << std::setprecision(worldYMaxDecimals) << worldPos.y
+        << std::fixed << std::setprecision(5) << worldPos.x << ", " 
+        << std::fixed << std::setprecision(5) << worldPos.y
 
     << "}\n";
 }
