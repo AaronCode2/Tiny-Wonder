@@ -12,7 +12,7 @@ with the main theme being **Build**, **Explore**, **Farm**.
 1. Install Git
 2. Run the following command in your terminal:
 
-   ```bash
+   ```
    git clone https://github.com/AaronCode2/Tiny-Wonder.git
    ```
 
