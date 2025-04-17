@@ -35,7 +35,9 @@ with the main theme being **Build**, **Explore**, **Farm**.
 5. Check if Cmake has created the build file or you have done it wrong ❌
 6. Type this command
 
-        cmake --build build
+  ```
+  cmake --build build
+  ```
 
 
 ## Links and Credits
