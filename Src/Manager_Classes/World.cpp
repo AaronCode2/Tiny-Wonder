@@ -30,7 +30,7 @@ void World::placeTiles() {
                 continue;
             
             Rectangle checkerArea = {selectionObject.x - 50, selectionObject.y - 50, 155, 155};
-            Rectangle deleteArea = {selectionObject.x - 10, selectionObject.y - 10, 50, 50};
+            Rectangle deleteArea = {selectionObject.x + 10, selectionObject.y + 10, 30, 30};
 
             DrawRectangleRec(selectionObject, Utils::testColor);
             
