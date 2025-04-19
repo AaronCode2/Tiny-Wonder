@@ -23,6 +23,7 @@ namespace Utils {
 
     int countDecimalPlaces(float num);
 
+    void exitApp();
 } 
 
 namespace Mouse {

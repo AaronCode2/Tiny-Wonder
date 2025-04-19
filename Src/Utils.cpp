@@ -13,6 +13,22 @@ Input getInput() {
 
 Color Utils::testColor = {255, 0, 0, 100};
 
+void Utils::exitApp() {
+
+    CloseWindow();
+
+#ifdef DEBUG
+
+    __debugbreak;
+#else
+
+    std::cout << "\033[31mPress ENTER to exit the Application as a Error has occured [USER]: ";
+    std::cin.get();
+
+    exit(EXIT_FAILURE);
+#endif
+} 
+
 bool Utils::isSameRect(Rectangle aObject, Rectangle bObject) {
 
     return (
