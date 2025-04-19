@@ -33,7 +33,7 @@ class TileManager {
         void updateFrameType(Rectangle contactedArea);
         std::vector<Tile> tiles;
         
-        TileType selectedType = GRASS;
+        TileType selectedType = LIGHT_GRASS;
 
         private:
         

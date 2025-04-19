@@ -146,7 +146,7 @@ void TileManager::checkNeighbors(Tile &thisTile) {
 
             switch(thisTile.getType()) {
 
-                case GRASS:
+                case LIGHT_GRASS:
 
                     thisTile.setFrame(grassMap[tileNeighborTile]);
                     return;
