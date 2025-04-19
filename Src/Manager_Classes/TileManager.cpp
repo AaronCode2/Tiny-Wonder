@@ -142,11 +142,26 @@ void TileManager::checkNeighbors(Tile &thisTile) {
     
         if(frameOptions[i]) {
             
-            if(thisTile.getType() == GRASS) 
-                thisTile.setFrame(grassMap[(TileNeighborType) i]);
-            else if(thisTile.getType() == GROUND)
-                thisTile.setFrame(groundMap[(TileNeighborType) i]);
-            return;
+            TileNeighborType tileNeighborTile = (TileNeighborType) i;
+
+            switch(thisTile.getType()) {
+
+                case GRASS:
+
+                    thisTile.setFrame(grassMap[tileNeighborTile]);
+                    return;
+
+                case GROUND:
+
+                    thisTile.setFrame(groundMap[tileNeighborTile]);
+                    return;
+
+                case DIRT:
+
+                    // TODO: Implement the Dirt code
+
+                    return;
+            }
         }
     }
 }
