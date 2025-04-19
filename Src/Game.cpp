@@ -7,7 +7,7 @@ void Game::gameLoop() {
     while(!WindowShouldClose()) {
 
         BeginDrawing();
-        ClearBackground(GRAY);
+        ClearBackground(backgroundColor);
         updateGame();
         updateMode();
         EndDrawing();

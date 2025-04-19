@@ -87,7 +87,8 @@ void DataIO::readTileData() {
                 (float) numbers[WIDTH],
                 (float) numbers[HEIGHT]
             },
-            {(float) numbers[FRAME_X], (float) numbers[FRAME_Y]}
+            {(float) numbers[FRAME_X], (float) numbers[FRAME_Y]},
+            (TileType) numbers[ID]
         ));
     }
 }

@@ -4,7 +4,7 @@
 #include <map>
 #include "../Entity_Classes/Tile.hpp"
 
-enum GrassType {
+enum TileNeighborType {
 
     CORNER_BOTTOM_LEFT = 0,
     CORNER_BOTTOM_RIGHT,
@@ -21,6 +21,7 @@ enum GrassType {
     MIDDLE
 };
 
+
 class TileManager {
 
     public:
@@ -32,11 +33,14 @@ class TileManager {
         void updateFrameType(Rectangle contactedArea);
         std::vector<Tile> tiles;
         
+        TileType selectedType = GRASS;
+
         private:
         
-        std::map<GrassType, Vector2> grassMap;
+        std::map<TileNeighborType, Vector2> groundMap;
+        std::map<TileNeighborType, Vector2> grassMap;
         
-        void mapGrassFrames();
+        void mapTileFrames();
         void checkNeighbors(Tile &thisTile);
 
 };

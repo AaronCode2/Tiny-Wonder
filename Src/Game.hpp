@@ -22,6 +22,8 @@ class Game {
 
     private:
 
+        Color backgroundColor = {130, 235, 207, 255};
+
         World world;
         DataIO dataIO = DataIO(world.tileManager.tiles, world.worldPos);
 

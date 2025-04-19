@@ -6,7 +6,8 @@
 
 enum TileType {
 
-    GRASS = 0,
+    GROUND = 0,
+    GRASS,
     DIRT
 };
 
@@ -14,7 +15,7 @@ class Tile : public Sprite {
 
     public:
 
-        Tile(Rectangle object, Vector2 frame);
+        Tile(Rectangle object, Vector2 frame, TileType tileType);
         ~Tile();
         
         static Texture2D image;
@@ -22,7 +23,7 @@ class Tile : public Sprite {
         void update();
         void setFrame(Vector2 newFrame) { frame = newFrame; };
 
-        TileType getType() { return tileType; };
+        TileType getType() const { return tileType; };
 
         void setVelocity(Vector2 newVeclocity) { velocity = newVeclocity; };
         Vector2 getVeclocity() const { return velocity; };

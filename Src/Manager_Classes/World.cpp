@@ -13,6 +13,9 @@ void World::update(Vector2 playerVeclocity) {
         worldPos.y += tileManager.tiles[0].getVeclocity().y;
     }
 
+    if(IsKeyPressed(KEY_E))
+        tileManager.selectedType = (tileManager.selectedType != GRASS) ? GROUND : GRASS;
+
     tileManager.update();
 
     if(gameMode == GameMode::BUILD) 
@@ -51,13 +54,14 @@ void World::placeTiles() {
 
             for(auto &tile : tileManager.tiles) {
 
-                if(Utils::isSameRect(tile.getObject(), selectionObject))
+                if(Utils::isSameRect(tile.getObject(), selectionObject) && tile.getType() == tileManager.selectedType)
                     return;
             }
 
             tileManager.tiles.push_back(Tile(
                 selectionObject,
-                {2, 2}
+                {2, 2},
+                tileManager.selectedType
             ));
 
             tileManager.updateFrameType(checkerArea);

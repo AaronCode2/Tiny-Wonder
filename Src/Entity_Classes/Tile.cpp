@@ -2,9 +2,12 @@
 
 Texture2D Tile::image;
 
-Tile::Tile(Rectangle object, Vector2 frame):
+Tile::Tile(Rectangle object, Vector2 frame, TileType tileType):
     Sprite(object, frame)
 {
+
+    this->tileType = tileType;
+
     srcRect.width = image.width / 9;
     srcRect.height = image.height / 20;
 }

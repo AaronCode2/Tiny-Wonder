@@ -3,7 +3,7 @@
 TileManager::TileManager() {
 
     Tile::image = LoadTexture("../Assets/Tiles/Tile.png");
-    mapGrassFrames();
+    mapTileFrames();
     updateFrameType(Utils::getScreenRect());
 }
 
@@ -56,7 +56,8 @@ void TileManager::checkNeighbors(Tile &thisTile) {
     
         if(
             Utils::isSameRect(thisTile.getObject(), tile.getObject()) || 
-            !CheckCollisionRecs(checkerArea, otherTileObject)
+            !CheckCollisionRecs(checkerArea, otherTileObject) || 
+            thisTile.getType() != tile.getType()
         ) continue;
     
         neighborHoodRect = thisObject;
@@ -141,25 +142,39 @@ void TileManager::checkNeighbors(Tile &thisTile) {
     
         if(frameOptions[i]) {
     
-            thisTile.setFrame(grassMap[(GrassType) i]);
+            thisTile.setFrame(grassMap[(TileNeighborType) i]);
             return;
         }
     }
 }
 
-void TileManager::mapGrassFrames() {
+void TileManager::mapTileFrames() {
     
-    grassMap[CORNER_BOTTOM_RIGHT] = {4, 2};
-    grassMap[CORNER_BOTTOM_LEFT] = {2, 2};
-    grassMap[CORNER_TOP_RIGHT] = {4, 0};
-    grassMap[CORNER_TOP_LEFT] = {2, 0};
-    grassMap[ROW_TOP] = {3, 0};
-    grassMap[ROW_BOTTOM] = {3, 2};
-    grassMap[ROW_RIGHT] = {4, 1};
-    grassMap[ROW_LEFT] = {2, 1};
-    grassMap[SIDE_CORNER_TOP_RIGHT] = {0, 4};
-    grassMap[SIDE_CORNER_TOP_LEFT] = {1, 4};
-    grassMap[SIDE_CORNER_BOTTOM_RIGHT] = {0, 3};
-    grassMap[SIDE_CORNER_BOTTOM_LEFT] = {1, 3};
-    grassMap[MIDDLE] = {3, 1};
+    groundMap[CORNER_BOTTOM_RIGHT] = {1, 8};
+    groundMap[CORNER_BOTTOM_LEFT] = {0, 8};
+    groundMap[CORNER_TOP_RIGHT] = {1, 7};
+    groundMap[CORNER_TOP_LEFT] = {0, 7};
+    groundMap[ROW_TOP] = {3, 9};
+    groundMap[ROW_BOTTOM] = {3, 7};
+    groundMap[ROW_RIGHT] = {2, 8};
+    groundMap[ROW_LEFT] = {4, 8};
+    groundMap[SIDE_CORNER_TOP_LEFT] = {4, 9};
+    groundMap[SIDE_CORNER_TOP_RIGHT] = {2, 9};
+    groundMap[SIDE_CORNER_BOTTOM_LEFT] = {4, 7};
+    groundMap[SIDE_CORNER_BOTTOM_RIGHT] = {2, 7};
+    groundMap[MIDDLE] = {3, 1};
+
+    grassMap[CORNER_BOTTOM_RIGHT] = {7, 6};
+    grassMap[CORNER_BOTTOM_LEFT] = {5, 6};
+    grassMap[CORNER_TOP_LEFT] = {5, 4};
+    grassMap[CORNER_TOP_RIGHT] = {7, 4};
+    grassMap[ROW_TOP] = {6, 4};
+    grassMap[ROW_BOTTOM] = {6, 6};
+    grassMap[ROW_RIGHT] = {7, 5};
+    grassMap[ROW_LEFT] = {5, 5};
+    grassMap[SIDE_CORNER_TOP_LEFT] = {2, 3};
+    grassMap[SIDE_CORNER_TOP_RIGHT] = {3, 3};
+    grassMap[SIDE_CORNER_BOTTOM_LEFT] = {2, 4};
+    grassMap[SIDE_CORNER_BOTTOM_RIGHT] = {3, 4};
+    grassMap[MIDDLE] = {6, 5}; 
 }
