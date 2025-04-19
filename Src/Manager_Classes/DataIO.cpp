@@ -17,10 +17,8 @@ void DataIO::writeTileData() {
 
     std::ofstream file(TILE_MAP_PATH);
 
-    if(!file.is_open()) {
-
-        std::cerr << "\033[31mError: Could not write Data in TileMap.txt\n\033[0m";
-    }
+    if(!file.is_open())
+        Utils::exitApp("Error: Could not write Data in TileMap.txt");
 
     for(auto tile : tiles) {  
 
@@ -43,7 +41,6 @@ void DataIO::readTileData() {
 
     if(!file.is_open()) 
         Utils::exitApp("Error: Could not read Data in TileMap.txt");
-    
 
     std::string line;
 
