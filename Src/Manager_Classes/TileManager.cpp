@@ -141,8 +141,11 @@ void TileManager::checkNeighbors(Tile &thisTile) {
     for(int i = 0; i < maxOptions; i++) {
     
         if(frameOptions[i]) {
-    
-            thisTile.setFrame(grassMap[(TileNeighborType) i]);
+            
+            if(thisTile.getType() == GRASS) 
+                thisTile.setFrame(grassMap[(TileNeighborType) i]);
+            else if(thisTile.getType() == GROUND)
+                thisTile.setFrame(groundMap[(TileNeighborType) i]);
             return;
         }
     }

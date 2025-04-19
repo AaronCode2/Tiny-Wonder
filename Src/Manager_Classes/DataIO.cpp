@@ -67,15 +67,8 @@ void DataIO::readTileData() {
         std::stringstream ss(temp);
         std::string token;
 
-        while(std::getline(ss, token, ',') && count < NUM_SIZE - 1) {
-
-            try {
-
-                int num = std::stoi(token);
-                numbers[count++] = num;
-
-            } catch (...) {}
-        }
+        while(std::getline(ss, token, ',') && count < NUM_SIZE) 
+            numbers[count++] = std::stoi(token);
 
         tiles.push_back(Tile(
             {
@@ -118,15 +111,11 @@ void DataIO::readWorldPosData() {
 
         while(std::getline(ss, token, ',') && count < 2) {
 
-            try {
+            int num = std::stof(token);
 
-                float num = std::stof(token);
-                if(count == X)
-                    worldPos.x = num;
-                else worldPos.y = num;
-
-                count++;
-            } catch (...) {}
+            if(count++ == X)
+                worldPos.x = num;
+            else worldPos.y = num;
         }
     }
 
@@ -141,10 +130,10 @@ void DataIO::writeWorldPosData() {
         Utils::exitApp("Could not write Data to WorldPosData");
 
     file
-    << "{"
-
-        << std::fixed << std::setprecision(FLOAT_PRECISION) << worldPos.x << ", " 
-        << std::fixed << std::setprecision(FLOAT_PRECISION) << worldPos.y
+    << "{" << std::fixed << std::setprecision(FLOAT_PRECISION)
+     
+        << worldPos.x << ", " 
+        << worldPos.y
 
     << "}\n";
 }

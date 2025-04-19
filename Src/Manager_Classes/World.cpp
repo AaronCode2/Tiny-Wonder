@@ -14,7 +14,7 @@ void World::update(Vector2 playerVeclocity) {
     }
 
     if(IsKeyPressed(KEY_E))
-        tileManager.selectedType = (tileManager.selectedType != GRASS) ? GROUND : GRASS;
+        tileManager.selectedType = (tileManager.selectedType == GRASS) ? GROUND : GRASS;
 
     tileManager.update();
 
