@@ -13,16 +13,17 @@ Input getInput() {
 
 Color Utils::testColor = {255, 0, 0, 100};
 
-void Utils::exitApp() {
+void Utils::exitApp(std::string errorInfo) {
 
     CloseWindow();
+    std::cerr << "\033[31m" << errorInfo << '\n';
 
 #ifdef DEBUG
 
     __debugbreak;
 #else
 
-    std::cout << "\033[31mPress ENTER to exit the Application as a Error has occured [USER]: ";
+    std::cout << "Press ENTER to exit the Application as a Error has occured [PLAYER]: ";
     std::cin.get();
 
     exit(EXIT_FAILURE);

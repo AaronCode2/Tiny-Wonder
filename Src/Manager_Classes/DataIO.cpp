@@ -41,11 +41,9 @@ void DataIO::readTileData() {
 
     std::ifstream file(TILE_MAP_PATH);
 
-    if(!file.is_open()) {
-
-        std::cerr << "\033[31mError: Could not read Data in TileMap.txt\n\033[0m";
-        exit(EXIT_FAILURE);
-    }
+    if(!file.is_open()) 
+        Utils::exitApp("Error: Could not read Data in TileMap.txt");
+    
 
     std::string line;
 
@@ -139,11 +137,8 @@ void DataIO::writeWorldPosData() {
 
     std::ofstream file(WORLD_POS_PATH);
 
-    if(!file.is_open()) {
-
-        std::cerr << "\033[31mCould not write Data to WorldPosData\n\033[31m";
-        exit(EXIT_FAILURE);
-    }
+    if(!file.is_open())
+        Utils::exitApp("Could not write Data to WorldPosData");
 
     file
     << "{"
