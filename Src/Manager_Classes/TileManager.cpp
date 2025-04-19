@@ -159,7 +159,6 @@ void TileManager::checkNeighbors(Tile &thisTile) {
                 case DIRT:
 
                     // TODO: Implement the Dirt code
-
                     return;
             }
         }

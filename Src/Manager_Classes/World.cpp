@@ -29,7 +29,7 @@ void World::placeTiles() {
             
             Rectangle selectionObject = {x + worldPos.x, y + worldPos.y, TILE_SIZE, TILE_SIZE};
             
-            if(!CheckCollisionPointRec(GetMousePosition(), selectionObject))
+            if(!Mouse::isHovering(selectionObject))
                 continue;
             
             Rectangle checkerArea = {selectionObject.x - 50, selectionObject.y - 50, 155, 155};
