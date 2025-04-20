@@ -33,6 +33,8 @@ void DataIO::writeTileData() {
 
         << "}\n";  
     }
+
+    file.close();
 }
 
 void DataIO::readTileData() {
@@ -133,4 +135,6 @@ void DataIO::writeWorldPosData() {
         << worldPos.y
 
     << "}\n";
+
+    file.close();
 }

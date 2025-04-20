@@ -16,7 +16,6 @@ class Tile : public Sprite {
     public:
 
         Tile(Rectangle object, Vector2 frame, TileType tileType);
-        ~Tile();
         
         static Texture2D image;
 

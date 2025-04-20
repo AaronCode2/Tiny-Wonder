@@ -12,10 +12,6 @@ Tile::Tile(Rectangle object, Vector2 frame, TileType tileType):
     srcRect.height = image.height / 20;
 }
 
-Tile::~Tile() {
-    
-}
-
 void Tile::update() {
 
     srcRect.x = srcRect.width * frame.x;
