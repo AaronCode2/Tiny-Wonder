@@ -8,6 +8,7 @@ enum TileType {
 
     GROUND = 0,
     LIGHT_GRASS,
+    DARK_GRASS,
     DIRT
 };
 
