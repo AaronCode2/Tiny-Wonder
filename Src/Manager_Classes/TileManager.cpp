@@ -148,7 +148,7 @@ void TileManager::checkNeighbors(Tile &thisTile) {
 
                 case LIGHT_GRASS:
 
-                    thisTile.setFrame(grassMap[tileNeighborTile]);
+                    thisTile.setFrame(lightGrassMap[tileNeighborTile]);
                     return;
 
                 case GROUND:
@@ -181,17 +181,17 @@ void TileManager::mapTileFrames() {
     groundMap[SIDE_CORNER_BOTTOM_RIGHT] = {2, 7};
     groundMap[MIDDLE] = {3, 1};
 
-    grassMap[CORNER_BOTTOM_RIGHT] = {7, 6};
-    grassMap[CORNER_BOTTOM_LEFT] = {5, 6};
-    grassMap[CORNER_TOP_LEFT] = {5, 4};
-    grassMap[CORNER_TOP_RIGHT] = {7, 4};
-    grassMap[ROW_TOP] = {6, 4};
-    grassMap[ROW_BOTTOM] = {6, 6};
-    grassMap[ROW_RIGHT] = {7, 5};
-    grassMap[ROW_LEFT] = {5, 5};
-    grassMap[SIDE_CORNER_TOP_LEFT] = {2, 3};
-    grassMap[SIDE_CORNER_TOP_RIGHT] = {3, 3};
-    grassMap[SIDE_CORNER_BOTTOM_LEFT] = {2, 4};
-    grassMap[SIDE_CORNER_BOTTOM_RIGHT] = {3, 4};
-    grassMap[MIDDLE] = {6, 5}; 
+    lightGrassMap[CORNER_BOTTOM_RIGHT] = {7, 6};
+    lightGrassMap[CORNER_BOTTOM_LEFT] = {5, 6};
+    lightGrassMap[CORNER_TOP_LEFT] = {5, 4};
+    lightGrassMap[CORNER_TOP_RIGHT] = {7, 4};
+    lightGrassMap[ROW_TOP] = {6, 4};
+    lightGrassMap[ROW_BOTTOM] = {6, 6};
+    lightGrassMap[ROW_RIGHT] = {7, 5};
+    lightGrassMap[ROW_LEFT] = {5, 5};
+    lightGrassMap[SIDE_CORNER_TOP_LEFT] = {2, 3};
+    lightGrassMap[SIDE_CORNER_TOP_RIGHT] = {3, 3};
+    lightGrassMap[SIDE_CORNER_BOTTOM_LEFT] = {2, 4};
+    lightGrassMap[SIDE_CORNER_BOTTOM_RIGHT] = {3, 4};
+    lightGrassMap[MIDDLE] = {6, 5}; 
 }
