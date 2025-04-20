@@ -8,7 +8,7 @@
         "program": "${workspaceFolder}/build/Aaron.exe",
         "args": [],
         "stopAtEntry": false,
-        "cwd": "${fileDirname}",
+        "cwd": "${workspaceFolder}/build",
         "environment": [],
         "externalConsole": true,
         "MIMode": "gdb",
