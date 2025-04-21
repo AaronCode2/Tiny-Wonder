@@ -2,6 +2,7 @@
 #include <raylib.h>
 #include "Entity_Classes/Sprite.hpp"
 #include "Entity_Classes/Player.hpp"
+#include "Manager_Classes/UI.hpp"
 #include "Manager_Classes/World.hpp"
 #include "Manager_Classes/DataIO.hpp"
 
@@ -24,6 +25,7 @@ class Game {
 
         Color backgroundColor = {130, 235, 207, 255};
 
+        UI ui;
         World world;
         DataIO dataIO = DataIO(world.tileManager.tiles, world.worldPos);
 

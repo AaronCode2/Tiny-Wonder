@@ -1,8 +1,7 @@
 
-Game::Status = 26%
+Game::Status = 26.25%
 
-Tomorrow
 
-1 -> Make lightGrass map and DarkGrass map. ❌
+1 -> Make lightGrass map and DarkGrass map. ✅
 2 -> Create a UI system for selecting which tiles to place. ❌
-3 -> Fix the Directory Error. ✅ 
+3 -> Fix the Directory Error. ✅
