@@ -2,6 +2,18 @@
 #include "../Utils.hpp"
 #include <iostream>
 
+struct Element {
+
+    Rectangle object;
+    Color color = Utils::testColor;
+};
+
+struct Inventory {
+
+    Element base;
+    Element inventorySlots[5];
+};
+
 class UI {
 
     public:
@@ -12,6 +24,5 @@ class UI {
 
         void draw();
 
-        Rectangle inventoryRec;
-        Rectangle inventoryBoxes[5];
+        Inventory inventory;
 };

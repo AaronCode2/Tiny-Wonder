@@ -2,9 +2,9 @@
 
 void UI::update() {
 
-    inventoryRec = {
+    inventory.base.object = {
 
-        GetScreenWidth() - 1200.0f,
+        (GetScreenWidth() / 2) - (700.0f / 2),
         GetScreenHeight() - 120.0f,
         700,
         70, 
@@ -15,5 +15,5 @@ void UI::update() {
 
 void UI::draw() {
 
-    DrawRectangleRounded(inventoryRec, 0.5f, 4, GRAY);
+    DrawRectangleRounded(inventory.base.object, 0.5f, 4, GRAY);
 }
