@@ -2,21 +2,25 @@
 #include "../Utils.hpp"
 #include <iostream>
 
+#define MAX_SLOTS 5
+
 struct Element {
 
-    Rectangle object;
+    Rectangle object = {};
     Color color = Utils::testColor;
 };
 
 struct Inventory {
 
     Element base;
-    Element inventorySlots[5];
+    Element slots[5];
 };
 
 class UI {
 
     public:
+
+        UI();
 
         void update();
 
