@@ -20,6 +20,7 @@ void Game::updateGame() {
 
     world.update(player.getVeclocity());
     player.update();
+    ui.update();
 
     std::string fps = std::to_string(GetFPS()) + "FPS";
 

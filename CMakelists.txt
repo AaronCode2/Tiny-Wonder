@@ -22,6 +22,7 @@ SOURCE_FILES
     Src/Game.cpp
     Src/App.cpp
     Src/Utils.cpp
+    Src/Manager_Classes/UI.cpp
     Src/Manager_Classes/World.cpp
     Src/Manager_Classes/TileManager.cpp
     Src/Manager_Classes/DataIO.cpp

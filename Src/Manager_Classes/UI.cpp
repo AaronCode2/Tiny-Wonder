@@ -7,8 +7,10 @@ void UI::update() {
 
 void UI::draw() {
 
-    if(GuiButton({100, 100, 200, 200}, "Click Me!")) {
+    DrawRectangleRec({100, 100, 100, 100}, RED);
+    DrawText("Click Me!", 150, 150, 10, WHITE);
 
-        std::cout << "Yeah, Thank YOU!!!!!!!";
-    }
+    if(Mouse::isClickedL({100, 100, 100, 100})) 
+        std::cout << "Yeah! Thank YOU!!!!!!!!!\n";
+    
 }
