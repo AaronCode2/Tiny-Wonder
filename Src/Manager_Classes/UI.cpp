@@ -2,15 +2,18 @@
 
 void UI::update() {
 
+    inventoryRec = {
+
+        GetScreenWidth() - 1200.0f,
+        GetScreenHeight() - 120.0f,
+        700,
+        70, 
+    };
+
     draw();
 }
 
 void UI::draw() {
 
-    DrawRectangleRec({100, 100, 100, 100}, RED);
-    DrawText("Click Me!", 150, 150, 10, WHITE);
-
-    if(Mouse::isClickedL({100, 100, 100, 100})) 
-        std::cout << "Yeah! Thank YOU!!!!!!!!!\n";
-    
+    DrawRectangleRounded(inventoryRec, 0.5f, 4, GRAY);
 }

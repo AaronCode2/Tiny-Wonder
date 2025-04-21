@@ -11,4 +11,7 @@ class UI {
     private:
 
         void draw();
+
+        Rectangle inventoryRec;
+        Rectangle inventoryBoxes[5];
 };
