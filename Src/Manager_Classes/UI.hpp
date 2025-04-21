@@ -1,6 +1,8 @@
 #include <raylib.h>
-#include "../Utils.hpp"
 #include <iostream>
+#include <map>
+#include "../Utils.hpp"
+#include "../Entity_Classes/Tile.hpp"
 
 #define MAX_SLOTS 5
 
@@ -10,10 +12,18 @@ struct Element {
     Color color = Utils::testColor;
 };
 
+
+struct Slot {
+
+    Rectangle object = {};
+    Color color = Utils::testColor;
+    Vector2 imageSrcPos;
+};
+
 struct Inventory {
 
     Element base;
-    Element slots[5];
+    Slot slots[5];
 };
 
 class UI {
@@ -27,6 +37,8 @@ class UI {
     private:
 
         void draw();
+
+        std::map<TileType, Vector2> imageSrcPos;
 
         Inventory inventory;
 };
