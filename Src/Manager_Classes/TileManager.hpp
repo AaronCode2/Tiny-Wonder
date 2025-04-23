@@ -21,9 +21,9 @@ enum TileNeighborType {
     MIDDLE
 };
 
-std::map<TileNeighborType, Vector2> groundMap;
-std::map<TileNeighborType, Vector2> lightGrassMap;
-std::map<TileNeighborType, Vector2> darkGrassMap;
+static std::map<TileNeighborType, Vector2> groundMap;
+static std::map<TileNeighborType, Vector2> lightGrassMap;
+static std::map<TileNeighborType, Vector2> darkGrassMap;
 
 class TileManager {
 
