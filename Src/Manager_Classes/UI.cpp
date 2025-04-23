@@ -2,7 +2,8 @@
 
 UI::UI() {
 
-    imageSrcPos[GROUND] = {1, 2};
+    imageSrcPos[GROUND] = {6, 7};
+    // imageSrcPos[LIGHT_GRASS] = {};
 
     inventory.base.color = {130, 130, 130, 230};
 
