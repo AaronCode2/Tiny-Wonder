@@ -2,12 +2,12 @@
 
 UI::UI() {
 
-    imageSrcPos[GROUND] = {6, 7};
-    imageSrcPos[LIGHT_GRASS] = {5, 1};
-    imageSrcPos[DARK_GRASS] = {5, 6};
-    imageSrcPos[SMALL_GRASS] = {0, 0};
-    imageSrcPos[SEA_DECORATIONS] = {8, 7};
-    imageSrcPos[DIRT] = {3, 11};
+    imageTilesSrcPos[GROUND] = {6, 7};
+    imageTilesSrcPos[LIGHT_GRASS] = {5, 1};
+    imageTilesSrcPos[DARK_GRASS] = {5, 6};
+    imageTilesSrcPos[SMALL_GRASS] = {0, 0};
+    imageTilesSrcPos[SEA_DECORATIONS] = {8, 7};
+    imageTilesSrcPos[DIRT] = {3, 11};
 
     inventory.base.color = {130, 130, 130, 230};
 
@@ -48,8 +48,8 @@ void UI::draw() {
         Slot slot = inventory.slots[i];
         Rectangle imageSrcRect = {
 
-            (Tile::image.width / 9) * imageSrcPos[(TileType) i].x,
-            (Tile::image.height / 19) * imageSrcPos[(TileType) i].y,
+            (Tile::image.width / 9) * imageTilesSrcPos[(TileType) i].x,
+            (Tile::image.height / 19) * imageTilesSrcPos[(TileType) i].y,
             (Tile::image.width / 9.0f), 
             (Tile::image.height / 19.0f)
         };

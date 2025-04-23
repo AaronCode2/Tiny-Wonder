@@ -7,6 +7,7 @@
 
 #define MAX_SLOTS 5
 
+
 struct Element {
 
     Rectangle object = {};
@@ -38,7 +39,8 @@ class UI {
 
         void draw();
 
-        std::map<TileType, Vector2> imageSrcPos;
+        std::map<TileType, Vector2> imageTilesSrcPos;
+        std::map<int, Vector2> imageBasesSrcPos;
 
         Inventory inventory;
 };
