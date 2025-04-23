@@ -18,7 +18,6 @@ struct Slot {
 
     Rectangle object = {};
     Color color = Utils::testColor;
-    Vector2 imageSrcPos;
 };
 
 struct Inventory {
