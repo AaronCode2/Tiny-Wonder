@@ -21,7 +21,7 @@ struct Slot {
     Color color = Utils::testColor;
 };
 
-struct Inventory {
+struct HotBar {
 
     Element base;
     Slot slots[5];
@@ -41,6 +41,10 @@ class UI {
 
         std::map<TileType, Vector2> imageTilesSrcPos;
         std::map<int, Vector2> imageBasesSrcPos;
+        Rectangle basesSrc;
 
-        Inventory inventory;
+        Texture2D basesImage = LoadTexture("../Assets/UI/BackBases.png");
+        Texture2D buttonImage = LoadTexture("../Assets/UI/Buttons.png");
+
+        HotBar hotBar;
 };

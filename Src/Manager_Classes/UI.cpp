@@ -9,13 +9,21 @@ UI::UI() {
     imageTilesSrcPos[SEA_DECORATIONS] = {8, 7};
     imageTilesSrcPos[DIRT] = {3, 11};
 
-    inventory.base.color = {130, 130, 130, 230};
+    hotBar.base.color = {130, 130, 130, 230};
+
+    Rectangle basesSrc = {
+
+        0,
+        0,
+        (basesImage.width / 2.0f),
+        (basesImage.height / 3.0f)
+    };
 
     for(int i = 0; i < MAX_SLOTS; i++) {
 
         unsigned char color = 200 - (i * 10);
 
-        inventory.slots[i] = {
+        hotBar.slots[i] = {
             {
                 ((GetScreenWidth() / 2) - (450.0f / 2) + 30) + (i * 80.0f), 
                 GetScreenHeight() - 110.0f, 
@@ -28,7 +36,7 @@ UI::UI() {
 
 void UI::update() {
 
-    inventory.base.object = {
+    hotBar.base.object = {
 
         (GetScreenWidth() / 2) - (450.0f / 2),
         GetScreenHeight() - 120.0f,
@@ -41,11 +49,16 @@ void UI::update() {
 
 void UI::draw() {
 
-    DrawRectangleRounded(inventory.base.object, 0.5f, 4, inventory.base.color);
+    DrawTexturePro(
+        basesImage, basesSrc,
+        hotBar.base.object,
+        {0, 0}, 0,
+        WHITE
+    );
 
     for(int i = 0 ; i < MAX_SLOTS; i++) {
 
-        Slot slot = inventory.slots[i];
+        Slot slot = hotBar.slots[i];
         Rectangle imageSrcRect = {
 
             (Tile::image.width / 9) * imageTilesSrcPos[(TileType) i].x,
@@ -53,6 +66,7 @@ void UI::draw() {
             (Tile::image.width / 9.0f), 
             (Tile::image.height / 19.0f)
         };
+
 
         DrawRectangleRounded(slot.object, 0.5f, 4, slot.color);
         DrawTexturePro(
