@@ -59,9 +59,15 @@ void UI::draw() {
             (Tile::image.height / 19.0f)
         };
 
+        Rectangle buttonObject = {
+            slot.object.x - 25,
+            slot.object.y - 30,
+            120, 120
+        };
+
         DrawTexturePro(
             buttonImage,
-            ButtonImage::getImageSrc({0, 0}), hotBar.slots[i].object,
+            ButtonImage::getImageSrc({0, 0}), buttonObject,
             {0, 0}, 0, WHITE
         );
 
