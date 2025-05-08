@@ -3,29 +3,8 @@
 #include <iostream>
 #include <map>
 #include "../Utils.hpp"
+#include "Elements.hpp"
 #include "../Entity_Classes/Tile.hpp"
-
-#define MAX_SLOTS 5
-
-
-struct Element {
-
-    Rectangle object = {};
-    Color color = Utils::testColor;
-};
-
-
-struct Slot {
-
-    Rectangle object = {};
-    Color color = Utils::testColor;
-};
-
-struct HotBar {
-
-    Element base;
-    Slot slots[5];
-};
 
 class UI {
 

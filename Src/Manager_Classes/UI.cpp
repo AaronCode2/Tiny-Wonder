@@ -11,13 +11,7 @@ UI::UI() {
 
     hotBar.base.color = {130, 130, 130, 230};
 
-    Rectangle basesSrc = {
-
-        0,
-        0,
-        (basesImage.width / 2.0f),
-        (basesImage.height / 3.0f)
-    };
+    Bases::setImage(basesImage);
 
     for(int i = 0; i < MAX_SLOTS; i++) {
 
@@ -38,10 +32,10 @@ void UI::update() {
 
     hotBar.base.object = {
 
-        (GetScreenWidth() / 2) - (450.0f / 2),
-        GetScreenHeight() - 120.0f,
-        450,
-        90, 
+        (GetScreenWidth() / 2) - (465.0f / 2),
+        GetScreenHeight() - 130.0f,
+        465,
+        110, 
     };
 
     draw();
@@ -50,7 +44,7 @@ void UI::update() {
 void UI::draw() {
 
     DrawTexturePro(
-        basesImage, basesSrc,
+        basesImage, Bases::getImageSrc({0, 0}),
         hotBar.base.object,
         {0, 0}, 0,
         WHITE
