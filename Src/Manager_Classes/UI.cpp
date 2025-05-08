@@ -11,11 +11,10 @@ UI::UI() {
 
     hotBar.base.color = {130, 130, 130, 230};
 
-    Bases::setImage(basesImage);
+    BasesImage::setImage(basesImage);
+    ButtonImage::setImage(buttonImage);
 
     for(int i = 0; i < MAX_SLOTS; i++) {
-
-        unsigned char color = 200 - (i * 10);
 
         hotBar.slots[i] = {
             {
@@ -23,7 +22,6 @@ UI::UI() {
                 GetScreenHeight() - 110.0f, 
                 70, 70
             },
-            {color, color, color, 255}
         };
     }
 }
@@ -44,7 +42,7 @@ void UI::update() {
 void UI::draw() {
 
     DrawTexturePro(
-        basesImage, Bases::getImageSrc({0, 0}),
+        basesImage, BasesImage::getImageSrc({0, 0}),
         hotBar.base.object,
         {0, 0}, 0,
         WHITE
@@ -61,8 +59,12 @@ void UI::draw() {
             (Tile::image.height / 19.0f)
         };
 
+        DrawTexturePro(
+            buttonImage,
+            ButtonImage::getImageSrc({0, 0}), hotBar.slots[i].object,
+            {0, 0}, 0, WHITE
+        );
 
-        DrawRectangleRounded(slot.object, 0.5f, 4, slot.color);
         DrawTexturePro(
             Tile::image, imageSrcRect, 
             slot.object, {0, 0},

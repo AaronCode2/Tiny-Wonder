@@ -4,7 +4,7 @@
 
 #define MAX_SLOTS 5
 
-namespace Bases {
+namespace BasesImage {
 
     Rectangle getImageSrc(Vector2 srcPos);
 
@@ -12,6 +12,16 @@ namespace Bases {
 
     extern Rectangle imageSrc;  
 };
+
+namespace ButtonImage {
+
+    Rectangle getImageSrc(Vector2 srcPos);
+
+    void setImage(const Texture2D &image);
+
+    extern Rectangle imageSrc;  
+};
+
 
 struct Element {
 
