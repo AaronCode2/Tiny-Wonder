@@ -32,9 +32,9 @@ void UI::update() {
 
     hotBar.base.object = {
 
-        (GetScreenWidth() / 2) - (465.0f / 2),
+        (GetScreenWidth() / 2) - (470.0f / 2),
         GetScreenHeight() - 130.0f,
-        465,
+        470,
         110, 
     };
 
