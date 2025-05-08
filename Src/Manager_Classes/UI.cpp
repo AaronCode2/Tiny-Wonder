@@ -3,8 +3,8 @@
 UI::UI() {
 
     imageTilesSrcPos[GROUND] = {6, 7};
-    imageTilesSrcPos[LIGHT_GRASS] = {5, 1};
-    imageTilesSrcPos[DARK_GRASS] = {5, 6};
+    imageTilesSrcPos[LIGHT_GRASS] = {5, 2};
+    imageTilesSrcPos[DARK_GRASS] = {5, 4};
     imageTilesSrcPos[SMALL_GRASS] = {0, 0};
     imageTilesSrcPos[SEA_DECORATIONS] = {8, 7};
     imageTilesSrcPos[DIRT] = {3, 11};
@@ -60,8 +60,8 @@ void UI::draw() {
         };
 
         Rectangle buttonObject = {
-            slot.object.x - 25,
-            slot.object.y - 30,
+            slot.object.x - 24,
+            slot.object.y - 25,
             120, 120
         };
 
