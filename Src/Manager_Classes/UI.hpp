@@ -6,7 +6,7 @@
 #include "Elements.hpp"
 #include "../Entity_Classes/Tile.hpp"
 #include "../Manager_Classes/TileManager.hpp"
-#include "../GameMode.hpp"
+#include "../Settings.hpp"
 
 class UI {
 

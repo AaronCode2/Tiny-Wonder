@@ -22,6 +22,7 @@ SOURCE_FILES
     Src/Game.cpp
     Src/App.cpp
     Src/Utils.cpp
+    Src/Settings.cpp
     Src/Manager_Classes/Elements.cpp 
     Src/Manager_Classes/UI.cpp
     Src/Manager_Classes/World.cpp
