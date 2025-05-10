@@ -5,7 +5,7 @@
 #include <sstream>
 #include <string>
 
-void World::update(Vector2 playerVeclocity) {
+void World::update() {
     
     if(!tileManager.tiles.empty()) {
         
@@ -22,7 +22,7 @@ void World::update(Vector2 playerVeclocity) {
 
     tileManager.update();
 
-    if(gameMode == GameMode::BUILD) 
+    if(Settings::gameMode == GameMode::BUILD) 
         placeTiles();
 }
 

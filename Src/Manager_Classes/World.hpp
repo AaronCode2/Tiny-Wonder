@@ -14,7 +14,7 @@ class World {
 
     public:
         
-        void update(Vector2 playerVeclocity);
+        void update();
 
         TileManager tileManager;
         Vector2 worldPos = {0, 0};

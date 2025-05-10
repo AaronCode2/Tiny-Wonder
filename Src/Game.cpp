@@ -1,7 +1,5 @@
 #include "Game.hpp"
 
-GameMode gameMode = GameMode::BUILD;
-
 void Game::gameLoop() {
 
     while(!WindowShouldClose()) {
@@ -18,7 +16,7 @@ void Game::gameLoop() {
 
 void Game::updateGame() {
 
-    world.update(player.getVeclocity());
+    world.update();
     player.update();
     ui.update();
 
@@ -32,6 +30,6 @@ void Game::updateMode(){
     for(int key = 49; key <= 51; key++) {
 
         if(IsKeyDown(key))
-            gameMode = (GameMode) (key - 49);
+            Settings::gameMode = (GameMode) (key - 49);
     }
 }

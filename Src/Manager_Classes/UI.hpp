@@ -5,12 +5,14 @@
 #include "../Utils.hpp"
 #include "Elements.hpp"
 #include "../Entity_Classes/Tile.hpp"
+#include "../Manager_Classes/TileManager.hpp"
+#include "../GameMode.hpp"
 
 class UI {
 
     public:
 
-        UI();
+        UI(TileType &selectedType);
 
         void update();
 
@@ -22,7 +24,8 @@ class UI {
         std::map<int, Vector2> imageBasesSrcPos;
         Rectangle basesSrc;
 
-        Texture2D basesImage = LoadTexture("../Assets/UI/BackBases.png");
+        TileType &selectedType;
+
         Texture2D buttonImage = LoadTexture("../Assets/UI/Buttons.png");
 
         HotBar hotBar;

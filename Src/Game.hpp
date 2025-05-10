@@ -5,15 +5,7 @@
 #include "Manager_Classes/UI.hpp"
 #include "Manager_Classes/World.hpp"
 #include "Manager_Classes/DataIO.hpp"
-
-enum class GameMode {
-
-    EXPLORE = 0,
-    BUILD,
-    TRADE
-};
-
-extern GameMode gameMode;
+#include "GameMode.hpp"
 
 class Game {
 
@@ -25,10 +17,10 @@ class Game {
 
         Color backgroundColor = {130, 235, 207, 255};
 
-        UI ui;
         World world;
         DataIO dataIO = DataIO(world.tileManager.tiles, world.worldPos);
-
+        UI ui = UI(world.tileManager.selectedType);
+        
         Player player = Player(
             {
                 (float) (GetScreenWidth() / 2) - 100, 
@@ -37,7 +29,8 @@ class Game {
             }, 
             world.tileManager.tiles
         );
-    
+
+        
         void gameLoop();
         void updateGame();
         void updateMode();

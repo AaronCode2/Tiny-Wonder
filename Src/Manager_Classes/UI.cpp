@@ -1,17 +1,18 @@
 #include "UI.hpp"
 
-UI::UI() {
+UI::UI(TileType &selectedType):
+    selectedType(selectedType)
+{
 
     imageTilesSrcPos[GROUND] = {6, 7};
-    imageTilesSrcPos[LIGHT_GRASS] = {5, 2};
-    imageTilesSrcPos[DARK_GRASS] = {5, 4};
+    imageTilesSrcPos[DARK_GRASS] = {5, 2};
+    imageTilesSrcPos[LIGHT_GRASS] = {5, 4};
     imageTilesSrcPos[SMALL_GRASS] = {0, 0};
     imageTilesSrcPos[SEA_DECORATIONS] = {8, 7};
     imageTilesSrcPos[DIRT] = {3, 11};
 
     hotBar.base.color = {130, 130, 130, 230};
 
-    BasesImage::setImage(basesImage);
     ButtonImage::setImage(buttonImage);
 
     for(int i = 0; i < MAX_SLOTS; i++) {
@@ -30,10 +31,10 @@ void UI::update() {
 
     hotBar.base.object = {
 
-        (GetScreenWidth() / 2) - (470.0f / 2),
-        GetScreenHeight() - 130.0f,
-        470,
-        110, 
+        (GetScreenWidth() / 2) - (410.0f / 2),
+        GetScreenHeight() - 120.0f,
+        410,
+        90, 
     };
 
     draw();
@@ -41,12 +42,9 @@ void UI::update() {
 
 void UI::draw() {
 
-    DrawTexturePro(
-        basesImage, BasesImage::getImageSrc({0, 0}),
-        hotBar.base.object,
-        {0, 0}, 0,
-        WHITE
-    );
+    DrawRectangleRounded(hotBar.base.object, 0.2, 4, {255, 209, 157, 255});
+
+    GameMode preSelectedMode = Settings::gameMode;
 
     for(int i = 0 ; i < MAX_SLOTS; i++) {
 
@@ -65,16 +63,32 @@ void UI::draw() {
             120, 120
         };
 
+        Vector2 buttonImageSrc = {0, 0};
+
+        if(Mouse::isHovering(buttonObject)) {
+
+            Settings::gameMode = GameMode::EXPLORE;
+            buttonImageSrc.x = 1;
+        }
+    
+
+        if(Mouse::isClickedL(buttonObject)) {
+
+            selectedType = (TileType) i;
+        }
+
         DrawTexturePro(
             buttonImage,
-            ButtonImage::getImageSrc({0, 0}), buttonObject,
+            ButtonImage::getImageSrc(buttonImageSrc), buttonObject,
             {0, 0}, 0, WHITE
         );
 
         DrawTexturePro(
             Tile::image, imageSrcRect, 
             slot.object, {0, 0},
-            0, WHITE
+            0, (buttonImageSrc.x == 0) ? WHITE : (Color) {255, 255, 255, 100}
         );
-    }   
+    }
+    
+    // gameMode = preSelectedMode;
 }
