@@ -7,9 +7,8 @@ UI::UI(TileType &selectedType):
     imageTilesSrcPos[GROUND] = {6, 7};
     imageTilesSrcPos[DARK_GRASS] = {5, 2};
     imageTilesSrcPos[LIGHT_GRASS] = {5, 4};
-    imageTilesSrcPos[SMALL_GRASS] = {0, 0};
-    imageTilesSrcPos[SEA_DECORATIONS] = {8, 7};
-    imageTilesSrcPos[DIRT] = {3, 11};
+    imageTilesSrcPos[DECORATIONS] = {0, 0};
+    imageTilesSrcPos[DIRT] = {3, 16};
 
     hotBar.base.color = {130, 130, 130, 230};
 
@@ -43,8 +42,8 @@ void UI::update() {
 void UI::draw() {
 
     DrawRectangleRounded(hotBar.base.object, 0.2, 4, {255, 209, 157, 255});
-
-    GameMode preSelectedMode = Settings::gameMode;
+    
+    Settings::HoveringOverMenu = false; 
 
     for(int i = 0 ; i < MAX_SLOTS; i++) {
 
@@ -65,17 +64,14 @@ void UI::draw() {
 
         Vector2 buttonImageSrc = {0, 0};
 
-        if(Mouse::isHovering(buttonObject)) {
+        if(Mouse::isHovering(slot.object)) {
 
-            Settings::gameMode = GameMode::EXPLORE;
+            Settings::HoveringOverMenu = true;
             buttonImageSrc.x = 1;
         }
-    
 
-        if(Mouse::isClickedL(buttonObject)) {
-
+        if(Mouse::isClickedL(buttonObject))
             selectedType = (TileType) i;
-        }
 
         DrawTexturePro(
             buttonImage,
@@ -89,6 +85,4 @@ void UI::draw() {
             0, (buttonImageSrc.x == 0) ? WHITE : (Color) {255, 255, 255, 100}
         );
     }
-    
-    // gameMode = preSelectedMode;
 }

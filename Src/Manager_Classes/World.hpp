@@ -3,23 +3,25 @@
 #include <sstream>
 #include <vector>
 #include <map>
+#include <thread>
 #include <raylib.h>
-#include <cmath>
+#include "NeighborTypes.hpp"
 #include "../Utils.hpp"
+#include "../Settings.hpp"
 #include "../Entity_Classes/Tile.hpp"
 #include "TileManager.hpp"
-#include <cmath>
+
+#define UNKNOWN_TILE (Vector2) {3, 11}
 
 class World {
 
     public:
         
-        void update();
-
         TileManager tileManager;
         Vector2 worldPos = {0, 0};
-    private:
 
+        void update();
+    private:
 
         void placeTiles();
 };

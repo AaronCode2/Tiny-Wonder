@@ -2,7 +2,7 @@
 #include <raylib.h>
 #include "../Utils.hpp"
 
-#define MAX_SLOTS 5
+
 
 namespace BasesImage {
 

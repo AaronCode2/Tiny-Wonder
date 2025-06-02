@@ -1,7 +1,8 @@
 
-Game::Status = 26.25%
+Game::Status = 30.01%
 
 
-1 -> Make lightGrass map and DarkGrass map. ✅
-2 -> Create a UI system for selecting which tiles to place. ❌
-3 -> Fix the Directory Error. ✅
+1 -> Make the save data for the player's position ❌
+2 -> More performance effiencet ❌
+3 -> Add the Player Icon UI ❌
+4 -> Add Collision ❌ ⁘⁙※◯

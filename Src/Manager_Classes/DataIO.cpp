@@ -29,7 +29,7 @@ void DataIO::writeTileData() {
             << tile.getObject().x << ", " << tile.getObject().y << ", "
             << tile.getObject().width << ", " << tile.getObject().height << ", "
             << tile.getFrame().x << ", " << tile.getFrame().y << ", "
-            << (int) tile.getType()   
+            << (int) tile.getType() << ", " << tile.decorationType   
 
         << "}\n";  
     }
@@ -77,7 +77,8 @@ void DataIO::readTileData() {
                 (float) numbers[HEIGHT]
             },
             {(float) numbers[FRAME_X], (float) numbers[FRAME_Y]},
-            (TileType) numbers[ID]
+            (TileType) numbers[ID],
+            (Decoration) numbers[DECORATION_ID]
         ));
     }
 

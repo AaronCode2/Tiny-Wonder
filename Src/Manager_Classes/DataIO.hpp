@@ -6,7 +6,7 @@
 #include <iomanip>
 #include "../Entity_Classes/Tile.hpp"
 
-#define NUM_SIZE 7
+#define NUM_SIZE 8
 #define FLOAT_PRECISION 0 // To avoid Tiles not aligning with each other
 #define WORLD_POS_PATH "../Data/WorldPos.txt"
 #define TILE_MAP_PATH "../Data/TileMap.txt"
@@ -19,7 +19,8 @@ enum fileReadStructure {
     HEIGHT,
     FRAME_X,
     FRAME_Y,
-    ID
+    ID,
+    DECORATION_ID
 };
 
 class DataIO {

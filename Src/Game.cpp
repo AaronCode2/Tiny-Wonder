@@ -6,8 +6,8 @@ void Game::gameLoop() {
 
         BeginDrawing();
         ClearBackground(backgroundColor);
-        updateGame();
         updateMode();
+        updateGame();
         EndDrawing();
     }
 

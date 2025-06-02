@@ -10,4 +10,5 @@ enum class GameMode {
 namespace Settings {
 
     extern GameMode gameMode;
+    extern bool HoveringOverMenu;
 }

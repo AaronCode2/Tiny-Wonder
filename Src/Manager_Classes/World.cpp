@@ -1,12 +1,7 @@
 #include "World.hpp"
-#include "../Game.hpp"
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <string>
 
 void World::update() {
-    
+
     if(!tileManager.tiles.empty()) {
         
         worldPos.x += tileManager.tiles[0].getVeclocity().x;
@@ -17,12 +12,12 @@ void World::update() {
 
         int newSelectType = tileManager.selectedType;
         tileManager.selectedType = (tileManager.selectedType != DIRT) ? (TileType) ++newSelectType : 
-          (TileType) 0;
+            (TileType) 0;
     }
 
     tileManager.update();
 
-    if(Settings::gameMode == GameMode::BUILD) 
+    if(Settings::gameMode == GameMode::BUILD && !Settings::HoveringOverMenu)
         placeTiles();
 }
 
@@ -58,13 +53,13 @@ void World::placeTiles() {
 
             for(auto &tile : tileManager.tiles) {
 
-                if(Utils::isSameRect(tile.getObject(), selectionObject) && tile.getType() == tileManager.selectedType)
+                if(Utils::isSameXY(tile.getObject(), selectionObject) && tile.getType() == tileManager.selectedType)
                     return;
             }
 
             tileManager.tiles.push_back(Tile(
                 selectionObject,
-                {2, 2},
+                UNKNOWN_TILE,
                 tileManager.selectedType
             ));
 

@@ -8,6 +8,8 @@
 #include "../Manager_Classes/TileManager.hpp"
 #include "../Settings.hpp"
 
+#define MAX_SLOTS 5
+
 class UI {
 
     public:

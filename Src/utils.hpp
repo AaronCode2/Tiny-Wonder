@@ -19,10 +19,10 @@ namespace Utils {
     extern Color testColor;
     Rectangle getScreenRect(); 
 
-    bool isSameRect(Rectangle aObject, Rectangle bObject);
-
-    int countDecimalPlaces(float num);
-
+    bool isSameXY(Rectangle aObject, Rectangle bObject);
+    bool isSameXY(Vector2 aObject, Vector2 bObject);
+    bool isSameXY(Vector2 aObject, Vector2 bObject, Vector2 bObject2);
+    
     void exitApp(std::string errorInfo);
 } 
 

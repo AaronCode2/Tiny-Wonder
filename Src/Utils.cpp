@@ -30,7 +30,7 @@ void Utils::exitApp(std::string errorInfo) {
 #endif
 } 
 
-bool Utils::isSameRect(Rectangle aObject, Rectangle bObject) {
+bool Utils::isSameXY(Rectangle aObject, Rectangle bObject) {
 
     return (
         aObject.x == bObject.x &&
@@ -38,16 +38,27 @@ bool Utils::isSameRect(Rectangle aObject, Rectangle bObject) {
     );
 }
 
-int Utils::countDecimalPlaces(float num) {
+bool Utils::isSameXY(Vector2 aObject, Vector2 bObject) {
 
-    std::string str = std::to_string(num);
-    
-    size_t lastNonZero = str.find_last_not_of('0');
-    
-    if(lastNonZero != std::string::npos && lastNonZero > str.find('.'))
-        return (int) (lastNonZero - str.find('.'));
-    
-    return -1;
+    return (
+        aObject.x == bObject.x &&
+        aObject.y == bObject.y
+    );
+}
+
+bool Utils::isSameXY(Vector2 aObject, Vector2 bObject, Vector2 bObject2) {
+
+    return (
+        (
+            aObject.x == bObject.x &&
+            aObject.y == bObject.y
+        ) 
+        ||
+        (
+            aObject.x == bObject2.x &&
+            aObject.y == bObject2.y
+        )
+    );
 }
 
 Rectangle Utils::getScreenRect() {

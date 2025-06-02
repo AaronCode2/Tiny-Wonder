@@ -3,27 +3,7 @@
 #include <vector>
 #include <map>
 #include "../Entity_Classes/Tile.hpp"
-
-enum TileNeighborType {
-
-    CORNER_BOTTOM_LEFT = 0,
-    CORNER_BOTTOM_RIGHT,
-    CORNER_TOP_LEFT,
-    CORNER_TOP_RIGHT,
-    ROW_TOP,
-    ROW_BOTTOM,
-    ROW_LEFT,
-    ROW_RIGHT,
-    SIDE_CORNER_TOP_LEFT,
-    SIDE_CORNER_TOP_RIGHT,
-    SIDE_CORNER_BOTTOM_LEFT,
-    SIDE_CORNER_BOTTOM_RIGHT,
-    MIDDLE
-};
-
-static std::map<TileNeighborType, Vector2> groundMap;
-static std::map<TileNeighborType, Vector2> lightGrassMap;
-static std::map<TileNeighborType, Vector2> darkGrassMap;
+#include "NeighborTypes.hpp"
 
 class TileManager {
 
@@ -36,11 +16,16 @@ class TileManager {
         void updateFrameType(Rectangle contactedArea);
         std::vector<Tile> tiles;
         
-        TileType selectedType = LIGHT_GRASS;
-
+        TileType selectedType = GROUND;
+        Decoration decoration;
+        
         private:
         
-        
+        float elapsedFrame = 0.0f;
+        int currentFrame = 0;
+
+        void animate();
+        void setFrameAnimationForSpecficTiles(Tile &tile);
         void mapTileFrames();
         void checkNeighbors(Tile &thisTile);
 

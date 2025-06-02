@@ -1,5 +1,6 @@
 #pragma once
-#include "../Entity_Classes/Sprite.hpp"
+#include "Sprite.hpp"
+#include "../Manager_Classes/NeighborTypes.hpp"
 #include "../Utils.hpp"
 
 #define TILE_SIZE 60
@@ -11,16 +12,15 @@ enum TileType {
     GROUND = 0,
     LIGHT_GRASS,
     DARK_GRASS,
-    SMALL_GRASS,
-    SEA_DECORATIONS, // THE ROCK =) 
-    DIRT
+    DECORATIONS, // THE ROCK =) 
+    DIRT,
 };
 
 class Tile : public Sprite {
 
     public:
 
-        Tile(Rectangle object, Vector2 frame, TileType tileType);
+        Tile(Rectangle object, Vector2 frame, TileType tileType, Decoration decorationType = NOT_SET);
         
         static Texture2D image;
 
@@ -31,6 +31,7 @@ class Tile : public Sprite {
 
         void setVelocity(Vector2 newVeclocity) { velocity = newVeclocity; };
         Vector2 getVeclocity() const { return velocity; };
+        Decoration decorationType = NOT_SET;
 
     private:
 
