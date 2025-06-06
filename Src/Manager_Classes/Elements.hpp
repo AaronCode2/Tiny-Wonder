@@ -2,8 +2,6 @@
 #include <raylib.h>
 #include "../Utils.hpp"
 
-
-
 namespace BasesImage {
 
     Rectangle getImageSrc(Vector2 srcPos);
@@ -25,13 +23,41 @@ namespace ButtonImage {
 
 struct Element {
 
-    Rectangle object = {};
+    Rectangle object = EMPTY_RECT;
     Color color = Utils::testColor;
+};
+
+struct Element2 {
+
+    Texture2D image = {};
+    Rectangle object = EMPTY_RECT;
+    Rectangle src = {0, 0, (float) image.width, (float) image.height};
+
+    void draw() {
+
+        DrawTexturePro(
+            image, 
+            src, object,
+            {0, 0}, 0, WHITE
+        );
+    }
+
+    void setFrame(Vector2 frame) {
+
+        src.width = image.width / frame.x;
+        src.height = image.height / frame.y;
+    }
+
+    void setSrcXY(Vector2 frame) {
+
+        src.x = src.width * frame.x;
+        src.y = src.width * frame.y;
+    }
 };
 
 struct Slot {
 
-    Rectangle object = {};
+    Rectangle object = EMPTY_RECT;
     Color color = Utils::testColor;
 };
 

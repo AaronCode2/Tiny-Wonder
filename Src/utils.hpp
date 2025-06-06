@@ -3,6 +3,7 @@
 #include <iostream>
 
 #define print(x) std::cout << x << '\n'
+#define EMPTY_RECT (Rectangle) {0, 0, 0, 0}
 
 struct Input {
 

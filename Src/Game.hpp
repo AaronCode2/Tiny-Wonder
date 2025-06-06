@@ -18,9 +18,7 @@ class Game {
         Color backgroundColor = {130, 235, 207, 255};
 
         World world;
-        DataIO dataIO = DataIO(world.tileManager.tiles, world.worldPos);
-        UI ui = UI(world.tileManager.selectedType);
-        
+
         Player player = Player(
             {
                 (float) (GetScreenWidth() / 2) - 100, 
@@ -29,6 +27,9 @@ class Game {
             }, 
             world.tileManager.tiles
         );
+
+        DataIO dataIO = DataIO(world.tileManager.tiles, world.worldPos, player.object);
+        UI ui = UI(world.tileManager.selectedType);
 
         
         void gameLoop();

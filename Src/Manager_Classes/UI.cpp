@@ -10,6 +10,16 @@ UI::UI(TileType &selectedType):
     imageTilesSrcPos[DECORATIONS] = {0, 0};
     imageTilesSrcPos[DIRT] = {3, 16};
 
+    gameModeSrc[GameMode::EXPLORE] = {0, 17};
+    gameModeSrc[GameMode::BUILD] = {0, 16};
+    gameModeSrc[GameMode::TRADE] = {2, 12};
+
+    gameModeStrings[GameMode::EXPLORE] = "EXPLORE";
+    gameModeStrings[GameMode::BUILD] = "BUILD";
+    gameModeStrings[GameMode::TRADE] = "TRADE";
+
+    gameModeLog.setFrame({5, 19});
+
     hotBar.base.color = {130, 130, 130, 230};
 
     ButtonImage::setImage(buttonImage);
@@ -26,6 +36,13 @@ UI::UI(TileType &selectedType):
     }
 }
 
+UI::~UI() {
+
+    UnloadTexture(buttonImage);
+    UnloadTexture(playerPhoto.image);
+    UnloadTexture(playerInfo.image);
+}
+
 void UI::update() {
 
     hotBar.base.object = {
@@ -36,12 +53,22 @@ void UI::update() {
         90, 
     };
 
+    gameModeLog.setSrcXY(gameModeSrc[Settings::gameMode]);
+
     draw();
 }
 
 void UI::draw() {
 
-    DrawRectangleRounded(hotBar.base.object, 0.2, 4, {255, 209, 157, 255});
+
+    DrawRectangleRec({20, 20, 100, 90}, SAVY_YELLOW);
+    playerPhoto.draw();
+    playerInfo.draw();
+
+    DrawText(gameModeStrings[Settings::gameMode].c_str(), 75, 157, 20, BLACK);
+    gameModeLog.draw();
+
+    DrawRectangleRounded(hotBar.base.object, 0.2, 4, SAVY_YELLOW);
     
     Settings::HoveringOverMenu = false; 
 

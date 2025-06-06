@@ -32,6 +32,7 @@ class Player : public Sprite {
     public:
 
         Player(Rectangle object, std::vector<Tile> &tiles);
+        ~Player();
 
         void update();
         Vector2 getVeclocity() const { return velocity; };

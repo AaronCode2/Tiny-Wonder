@@ -17,11 +17,20 @@ class World {
 
     public:
         
+        World();
+        ~World();
+
         TileManager tileManager;
         Vector2 worldPos = {0, 0};
 
         void update();
     private:
 
-        void placeTiles();
+        Rectangle selectionObject;
+        Rectangle checkerArea;
+        Rectangle deleteArea;
+
+        Texture2D selectorImage;
+
+        void checkMouseActions();
 };

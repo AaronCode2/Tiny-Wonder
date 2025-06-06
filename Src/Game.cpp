@@ -22,7 +22,7 @@ void Game::updateGame() {
 
     std::string fps = std::to_string(GetFPS()) + "FPS";
 
-    DrawText(fps.c_str(), 10, 10, 40, BLACK);
+    DrawText(fps.c_str(), 10, GetScreenHeight() - 40.0f, 40, BLACK);
 }
 
 void Game::updateMode(){

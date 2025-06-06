@@ -1,16 +1,16 @@
 #include "DataIO.hpp"
 
-DataIO::DataIO(std::vector<Tile> &tiles, Vector2 &worldPos):
-    tiles(tiles), worldPos(worldPos) 
+DataIO::DataIO(std::vector<Tile> &tiles, Vector2 &worldPos, Rectangle &playerObject):
+    tiles(tiles), worldPos(worldPos), playerObject(playerObject) 
 {   
     readTileData();
-    readWorldPosData();
+    readPosData();
 }
 
 DataIO::~DataIO(){
 
     writeTileData();
-    writeWorldPosData();
+    writePosData();
 }
 
 void DataIO::writeTileData() {
@@ -85,9 +85,9 @@ void DataIO::readTileData() {
     file.close();
 }
 
-void DataIO::readWorldPosData() {
+void DataIO::readPosData() {
 
-    std::ifstream file(WORLD_POS_PATH);
+    std::ifstream file(POS_PATH);
 
     std::string line;
     int count = 0;
@@ -109,33 +109,51 @@ void DataIO::readWorldPosData() {
         std::stringstream ss(temp);
         std::string token;
 
-        while(std::getline(ss, token, ',') && count < 2) {
+        while(std::getline(ss, token, ',') && count < POS_ELEMENTS) {
 
             int num = std::stof(token);
 
-            if(count++ == X)
-                worldPos.x = num;
-            else worldPos.y = num;
+            switch(count++) {
+
+                case WORLD_X:
+                    worldPos.x = num;
+                    break;
+                
+                case WORLD_Y:
+                    worldPos.y = num;
+                    break;
+
+                case PLAYER_X:
+                    playerObject.x = num;
+                    break;
+
+                case PLAYER_Y:
+                    playerObject.y = num;
+                    break;
+            }
         }
     }
 
     file.close();
 }
 
-void DataIO::writeWorldPosData() {
+void DataIO::writePosData() {
 
-    std::ofstream file(WORLD_POS_PATH);
+    std::ofstream file(POS_PATH);
 
     if(!file.is_open())
-        Utils::exitApp("Could not write Data to WorldPosData");
+        Utils::exitApp("Could not write Data to PosData");
 
     file
     << "{" << std::fixed << std::setprecision(FLOAT_PRECISION)
      
         << worldPos.x << ", " 
-        << worldPos.y
+        << worldPos.y << ", "
+        << playerObject.x << ", "
+        << playerObject.y
 
     << "}\n";
+
 
     file.close();
 }

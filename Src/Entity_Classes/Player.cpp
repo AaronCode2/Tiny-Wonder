@@ -49,6 +49,11 @@ Player::Player(Rectangle object, std::vector<Tile> &tiles):
     };
 }
 
+Player::~Player() {
+
+    UnloadTexture(image);
+}
+
 void Player::update() {
 
     velocity = {0, 0};

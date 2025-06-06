@@ -1,5 +1,15 @@
 #include "World.hpp"
 
+World::World() {
+
+    selectorImage = LoadTexture("../Assets/UI/Selector.png");
+}
+
+World::~World() {
+
+    UnloadTexture(selectorImage);
+}
+
 void World::update() {
 
     if(!tileManager.tiles.empty()) {
@@ -17,24 +27,30 @@ void World::update() {
 
     tileManager.update();
 
-    if(Settings::gameMode == GameMode::BUILD && !Settings::HoveringOverMenu)
-        placeTiles();
+    if(Settings::gameMode == GameMode::BUILD && !Settings::HoveringOverMenu) {
+
+        checkMouseActions();
+    }
 }
 
-void World::placeTiles() {
+void World::checkMouseActions() {
     
-    for(float y = -20000; y < 20000; y += TILE_SIZE) {
-        for(float x = -20000; x < 20000; x += TILE_SIZE) {
+    for(float y = -4000; y < 4000; y += TILE_SIZE) {
+        for(float x = -4000; x < 4000; x += TILE_SIZE) {
             
-            Rectangle selectionObject = {x + worldPos.x, y + worldPos.y, TILE_SIZE, TILE_SIZE};
+            selectionObject = {x + worldPos.x, y + worldPos.y, TILE_SIZE, TILE_SIZE};
             
             if(!Mouse::isHovering(selectionObject))
                 continue;
-            
-            Rectangle checkerArea = {selectionObject.x - 50, selectionObject.y - 50, 155, 155};
-            Rectangle deleteArea = {selectionObject.x + 10, selectionObject.y + 10, 30, 30};
 
-            DrawRectangleRec(selectionObject, Utils::testColor);
+            DrawTexturePro(
+                selectorImage,
+                {0, 0, (float) selectorImage.width, (float) selectorImage.height},
+                selectionObject, {0, 0}, 0, WHITE
+            );
+            
+            checkerArea = {selectionObject.x - 50, selectionObject.y - 50, 155, 155};
+            deleteArea = {selectionObject.x + 10, selectionObject.y + 10, 30, 30};
             
             if(Mouse::isClickedR(selectionObject)) {
 
@@ -66,4 +82,4 @@ void World::placeTiles() {
             tileManager.updateFrameType(checkerArea);
         }
     }
-} 
+}

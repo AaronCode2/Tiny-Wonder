@@ -13,10 +13,10 @@ class Sprite {
         Vector2 getFrame() { return frame; }; 
 
         static Texture2D image;
-
-    protected:
-
         Rectangle object;
+        
+    protected:
+        
         Vector2 velocity;
         Rectangle srcRect;
         Vector2 frame;
