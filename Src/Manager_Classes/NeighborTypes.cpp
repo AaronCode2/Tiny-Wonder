@@ -1,5 +1,12 @@
 #include "NeighborTypes.hpp"
 
+
+std::map<TileNeighborType, Vector2> NeighborTypes::groundMap;
+std::map<TileNeighborType, Vector2> NeighborTypes::lightGrassMap;
+std::map<TileNeighborType, Vector2> NeighborTypes::darkGrassMap;
+std::map<TileNeighborType, Vector2> NeighborTypes::dirtMap;
+std::map<Decoration, Vector2> NeighborTypes::decorationMap;
+
 void NeighborTypes::defineTypes(){
 
     NeighborTypes::groundMap[CORNER_BOTTOM_RIGHT] = {1, 9};

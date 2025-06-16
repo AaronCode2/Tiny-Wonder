@@ -3,7 +3,7 @@
 TileManager::TileManager() {
 
     Tile::image = LoadTexture("../Assets/Tiles/Tile.png");
-    mapTileFrames();
+    NeighborTypes::defineTypes();
 
     updateFrameType(Utils::getScreenRect());
 }
