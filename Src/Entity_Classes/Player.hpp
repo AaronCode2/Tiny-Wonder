@@ -37,6 +37,7 @@ class Player : public Sprite {
         void update();
         Vector2 getVeclocity() const { return velocity; };
         Vector2 getScreenVelocity() const { return screenVeclocity; };
+        Rectangle getHitBox() const {return hitBox; };
 
         Texture2D image;
 

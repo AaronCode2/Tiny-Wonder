@@ -42,13 +42,13 @@ struct Element2 {
         );
     }
 
-    void setFrame(Vector2 frame) {
+    void setFrame(const Vector2 frame) {
 
         src.width = image.width / frame.x;
         src.height = image.height / frame.y;
     }
 
-    void setSrcXY(Vector2 frame) {
+    void setSrcXY(const Vector2 frame) {
 
         src.x = src.width * frame.x;
         src.y = src.width * frame.y;

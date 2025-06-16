@@ -2,6 +2,7 @@
 #include "Sprite.hpp"
 #include "../Manager_Classes/NeighborTypes.hpp"
 #include "../Utils.hpp"
+#include <array>
 
 #define TILE_SIZE 60
 
@@ -31,11 +32,19 @@ class Tile : public Sprite {
 
         void setVelocity(Vector2 newVeclocity) { velocity = newVeclocity; };
         Vector2 getVeclocity() const { return velocity; };
+
+        std::array<Rectangle, 2> getHitBoxes() { return {hitBoxes[0], hitBoxes[1]}; };
+
         Decoration decorationType = NOT_SET;
 
     private:
 
         TileType tileType;
+
+        // Get HitBoxes working
+
+        Rectangle hitBoxes[2];
+        int count = 0;
 
         void move();
 };

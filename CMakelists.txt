@@ -27,6 +27,7 @@ SOURCE_FILES
     Src/Manager_Classes/UI.cpp
     Src/Manager_Classes/World.cpp
     Src/Manager_Classes/TileManager.cpp
+    Src/Manager_Classes/NeighborTypes.cpp
     Src/Manager_Classes/DataIO.cpp
     Src/Entity_Classes/Tile.cpp
     Src/Entity_Classes/Sprite.cpp

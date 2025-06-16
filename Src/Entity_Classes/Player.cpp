@@ -65,6 +65,12 @@ void Player::update() {
     if(getInput().right) velocity.x = speed * GetFrameTime();
     if(getInput().left) velocity.x = -speed * GetFrameTime();
 
+    if(IsKeyDown(KEY_E)) {
+
+        object.x = GetScreenWidth() / 2;
+        object.y = GetScreenHeight() / 2;
+    }
+
     animationLogic();
     move();
     animate(frameEnd, frameStart, frameBuffer);
@@ -76,11 +82,18 @@ void Player::move() {
     moveScreenX();
     moveScreenY();
     updateHitBox();
+    DrawRectangleRec(hitBox, Utils::testColor);
 }
 
 void Player::updateHitBox() {
 
-    hitBox = object; 
+    hitBox = {
+
+        object.x,
+        object.y + 65,
+        object.width,
+        object.height - 70
+    };
 }
 
 void Player::moveScreenX() {
@@ -88,9 +101,16 @@ void Player::moveScreenX() {
     object.x += velocity.x;
     updateHitBox();
 
-    for(auto rangeBoxSide : rangeBoxSides) {
+    // for(const auto &tile : tiles) {
 
-        if(CheckCollisionRecs(rangeBoxSide, object)) {
+
+    // }
+
+    for(const auto rangeBoxSide : rangeBoxSides) {
+
+        DrawRectangleRec(rangeBoxSide, Utils::testColor);
+
+        if(CheckCollisionRecs(rangeBoxSide, hitBox)) {
             
             for(auto &tile : tiles) 
                 tile.setVelocity({-velocity.x, 0.0f});
@@ -119,9 +139,9 @@ void Player::moveScreenY() {
     object.y += velocity.y;
     updateHitBox();
 
-    for(auto rangeBoxSide : rangeBoxSides) {
+    for(const auto rangeBoxSide : rangeBoxSides) {
 
-        if(CheckCollisionRecs(rangeBoxSide, object)) {
+        if(CheckCollisionRecs(rangeBoxSide, hitBox)) {
 
             for(auto &tile : tiles) 
                 tile.setVelocity({0.0f, -velocity.y});
@@ -135,9 +155,9 @@ void Player::moveScreenY() {
             
             if(velocity.y < 0) {
                     
-                const float offset = hitBox.y - object.y;
+                const float offset = object.y - hitBox.y;
         
-                object.y = rangeBoxSide.y + rangeBoxSide.height - offset;
+                object.y = rangeBoxSide.y + rangeBoxSide.height + offset;
             }
 
             velocity.y = 0;

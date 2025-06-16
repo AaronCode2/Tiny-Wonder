@@ -17,19 +17,19 @@ Input getInput();
 
 namespace Utils {
 
-    extern Color testColor;
+    extern Color const testColor;
     Rectangle getScreenRect(); 
 
-    bool isSameXY(Rectangle aObject, Rectangle bObject);
-    bool isSameXY(Vector2 aObject, Vector2 bObject);
-    bool isSameXY(Vector2 aObject, Vector2 bObject, Vector2 bObject2);
+    bool isSameXY(const Rectangle aObject, const Rectangle bObject);
+    bool isSameXY(const Vector2 aObject, const Vector2 bObject);
+    bool isSameXY(const Vector2 aObject, const Vector2 bObject, const Vector2 bObject2);
     
-    void exitApp(std::string errorInfo);
+    void exitApp(const std::string errorInfo);
 } 
 
 namespace Mouse {
 
-    bool isHovering(Rectangle object);
-    bool isClickedL(Rectangle object);
-    bool isClickedR(Rectangle object);
+    bool isHovering(const Rectangle object);
+    bool isClickedL(const Rectangle object);
+    bool isClickedR(const Rectangle object);
 }

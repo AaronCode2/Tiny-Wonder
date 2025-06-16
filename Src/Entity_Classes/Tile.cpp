@@ -4,7 +4,7 @@ Texture2D Tile::image;
 
 Tile::Tile(Rectangle object, Vector2 frame, TileType tileType, Decoration decorationType):
     Sprite(object, frame)
-{
+{   
 
     this->tileType = tileType;
     this->decorationType = decorationType;
@@ -22,6 +22,12 @@ void Tile::update() {
         draw(image);
 
     move();
+
+    if(tileType == GROUND) {
+
+        if(Utils::isSameXY(frame, NeighborTypes::groundMap[ROW_TOP]))
+            DrawRectangleRec(object, Utils::testColor);
+    }
 }
 
 void Tile::move() {

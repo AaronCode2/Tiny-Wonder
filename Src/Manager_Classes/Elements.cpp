@@ -1,6 +1,6 @@
 #include "Elements.hpp"
 
-Rectangle BasesImage::getImageSrc(Vector2 srcPos) {
+Rectangle BasesImage::getImageSrc(const Vector2 srcPos) {
 
     imageSrc.x = imageSrc.width * srcPos.x;
     imageSrc.y = imageSrc.height * srcPos.y;
@@ -16,7 +16,7 @@ void BasesImage::setImage(const Texture2D &image) {
 
 Rectangle BasesImage::imageSrc;
 
-Rectangle ButtonImage::getImageSrc(Vector2 srcPos) {
+Rectangle ButtonImage::getImageSrc(const Vector2 srcPos) {
 
     imageSrc.x = imageSrc.width * srcPos.x;
     imageSrc.y = imageSrc.height * srcPos.y;

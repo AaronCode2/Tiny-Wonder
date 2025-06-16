@@ -13,7 +13,7 @@ class TileManager {
         ~TileManager();
 
         void update();
-        void updateFrameType(Rectangle contactedArea);
+        void updateFrameType(const Rectangle contactedArea);
         std::vector<Tile> tiles;
         
         TileType selectedType = GROUND;

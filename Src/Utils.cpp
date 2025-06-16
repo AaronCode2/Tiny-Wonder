@@ -11,9 +11,9 @@ Input getInput() {
     };
 }
 
-Color Utils::testColor = {255, 0, 0, 100};
+Color const Utils::testColor = {255, 0, 0, 100};
 
-void Utils::exitApp(std::string errorInfo) {
+void Utils::exitApp(const std::string errorInfo) {
 
     CloseWindow();
     std::cerr << "\033[31m" << errorInfo << '\n';
@@ -30,7 +30,7 @@ void Utils::exitApp(std::string errorInfo) {
 #endif
 } 
 
-bool Utils::isSameXY(Rectangle aObject, Rectangle bObject) {
+bool Utils::isSameXY(const Rectangle aObject, const Rectangle bObject) {
 
     return (
         aObject.x == bObject.x &&
@@ -38,7 +38,7 @@ bool Utils::isSameXY(Rectangle aObject, Rectangle bObject) {
     );
 }
 
-bool Utils::isSameXY(Vector2 aObject, Vector2 bObject) {
+bool Utils::isSameXY(const Vector2 aObject, const Vector2 bObject) {
 
     return (
         aObject.x == bObject.x &&
@@ -46,7 +46,7 @@ bool Utils::isSameXY(Vector2 aObject, Vector2 bObject) {
     );
 }
 
-bool Utils::isSameXY(Vector2 aObject, Vector2 bObject, Vector2 bObject2) {
+bool Utils::isSameXY(const Vector2 aObject, const Vector2 bObject, const Vector2 bObject2) {
 
     return (
         (
@@ -66,17 +66,17 @@ Rectangle Utils::getScreenRect() {
     return {0, 0, (float) GetScreenWidth(), (float) GetScreenHeight()};
 }
 
-bool Mouse::isHovering(Rectangle object) {
+bool Mouse::isHovering(const Rectangle object) {
 
     return CheckCollisionPointRec(GetMousePosition(), object);
 }
 
-bool Mouse::isClickedL(Rectangle object) {
+bool Mouse::isClickedL(const Rectangle object) {
 
     return (CheckCollisionPointRec(GetMousePosition(), object) && IsMouseButtonDown(MOUSE_BUTTON_LEFT));
 }
 
-bool Mouse::isClickedR(Rectangle object) {
+bool Mouse::isClickedR(const Rectangle object) {
 
     return (CheckCollisionPointRec(GetMousePosition(), object) && IsMouseButtonDown(MOUSE_BUTTON_RIGHT));
 }

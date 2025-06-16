@@ -32,8 +32,13 @@ enum Decoration {
     SEAWEED
 };
 
-static std::map<TileNeighborType, Vector2> groundMap;
-static std::map<TileNeighborType, Vector2> lightGrassMap;
-static std::map<TileNeighborType, Vector2> darkGrassMap;
-static std::map<TileNeighborType, Vector2> dirtMap;
-static std::map<Decoration, Vector2> decorationMap;
+namespace NeighborTypes {
+
+    extern std::map<TileNeighborType, Vector2> groundMap;
+    extern std::map<TileNeighborType, Vector2> lightGrassMap;
+    extern std::map<TileNeighborType, Vector2> darkGrassMap;
+    extern std::map<TileNeighborType, Vector2> dirtMap;
+    extern std::map<Decoration, Vector2> decorationMap;
+    
+    void defineTypes();
+};

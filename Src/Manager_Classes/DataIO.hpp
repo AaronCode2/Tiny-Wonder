@@ -5,6 +5,7 @@
 #include <vector>
 #include <iomanip>
 #include "../Entity_Classes/Tile.hpp"
+#include "../Manager_Classes/NeighborTypes.hpp"
 
 #define NUM_SIZE 8
 #define POS_ELEMENTS 4

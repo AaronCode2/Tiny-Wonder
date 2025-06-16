@@ -1,6 +1,12 @@
 #include "Game.hpp"
 
-void Game::gameLoop() {
+Game::Game(){
+
+    
+}
+
+void Game::gameLoop()
+{
 
     while(!WindowShouldClose()) {
 

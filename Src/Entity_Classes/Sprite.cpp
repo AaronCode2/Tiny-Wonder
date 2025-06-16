@@ -29,7 +29,7 @@ void Sprite::draw(Texture2D image) {
     );
 }
 
-void Sprite::animate(int frameEnd, int frameStart, float frameDuration) {
+void Sprite::animate(const int frameEnd, const int frameStart, const float frameDuration) {
 
     elapsedFrame += GetFrameTime();
 

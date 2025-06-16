@@ -9,20 +9,20 @@ class Sprite {
 
         void update();
 
-        Rectangle getObject() { return object; };
-        Vector2 getFrame() { return frame; }; 
+        Rectangle getObject() const { return object; };
+        Vector2 getFrame() const { return frame; }; 
 
         static Texture2D image;
         Rectangle object;
         
     protected:
         
-        Vector2 velocity;
+        Vector2 velocity = {0, 0};
         Rectangle srcRect;
         Vector2 frame;
 
         void draw(Texture2D image);
-        void animate(int frameEnd, int frameStart = 0, float frameDuration = 0.1f);
+        void animate(const int frameEnd, const int frameStart = 0, const float frameDuration = 0.1f);
 
         int currentFrame = 0;
         float elapsedFrame = 0;
