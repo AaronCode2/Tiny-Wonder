@@ -33,7 +33,7 @@ void Tile::update() {
             hitBoxAjusters[0] = {
     
                 0,
-                -5,
+                -2,
                 60,
                 10
             };

@@ -75,6 +75,8 @@ void Player::update() {
     move();
     animate(frameEnd, frameStart, frameBuffer);
     draw(image);
+
+    DrawRectangleRec(hitBox, Utils::testColor);
 }
 
 void Player::move() {
@@ -82,7 +84,6 @@ void Player::move() {
     moveScreenX();
     moveScreenY();
     updateHitBox();
-    DrawRectangleRec(hitBox, Utils::testColor);
 }
 
 void Player::updateHitBox() {
@@ -101,36 +102,56 @@ void Player::moveScreenX() {
     object.x += velocity.x;
     updateHitBox();
 
-    // for(const auto &tile : tiles) {
+    for(auto &tile : tiles) {
 
+        for(const auto tileHitBox : tile.getHitBoxes()) {
 
-    // }
-
-    for(const auto rangeBoxSide : rangeBoxSides) {
-
-        DrawRectangleRec(rangeBoxSide, Utils::testColor);
-
-        if(CheckCollisionRecs(rangeBoxSide, hitBox)) {
+            if(!CheckCollisionRecs(hitBox, tileHitBox)) continue;
             
-            for(auto &tile : tiles)
-                tile.setVelocity({-velocity.x, 0.0f});
-
             if(velocity.x > 0) {
                 
                 const float offset = hitBox.x - object.x + hitBox.width;
 
-                object.x = rangeBoxSide.x - offset;
+                object.x = tileHitBox.x - offset;
             }
         
             if(velocity.x < 0) {
                 
                 const float offset = hitBox.x - object.x;
 
-                object.x = rangeBoxSide.x + rangeBoxSide.width - offset;
+                object.x = tileHitBox.x + tileHitBox.width - offset;
             }
 
             velocity.x = 0;
+            break;
         }
+    }
+
+    for(const auto rangeBoxSide : rangeBoxSides) {
+
+        DrawRectangleRec(rangeBoxSide, Utils::testColor);
+
+        if(!CheckCollisionRecs(rangeBoxSide, hitBox)) continue;
+            
+        for(auto &tile : tiles)
+            tile.setVelocity({-velocity.x, 0.0f});
+
+        if(velocity.x > 0) {
+                
+            const float offset = hitBox.x - object.x + hitBox.width;
+
+            object.x = rangeBoxSide.x - offset;
+        }
+        
+        if(velocity.x < 0) {
+                
+            const float offset = hitBox.x - object.x;
+
+            object.x = rangeBoxSide.x + rangeBoxSide.width - offset;
+        }
+
+        velocity.x = 0;
+        break;
     }
 }
 
