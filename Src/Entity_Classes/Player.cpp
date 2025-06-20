@@ -108,6 +108,8 @@ void Player::moveScreenX() {
 
             if(!CheckCollisionRecs(hitBox, tileHitBox)) continue;
             
+            DrawText("COLLISON!!!", 400, 400, 30, RED);
+
             if(velocity.x > 0) {
                 
                 const float offset = hitBox.x - object.x + hitBox.width;
@@ -123,7 +125,6 @@ void Player::moveScreenX() {
             }
 
             velocity.x = 0;
-            break;
         }
     }
 

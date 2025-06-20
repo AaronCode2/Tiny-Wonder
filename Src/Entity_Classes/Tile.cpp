@@ -11,6 +11,9 @@ Tile::Tile(Rectangle object, Vector2 frame, TileType tileType, Decoration decora
 
     srcRect.width = image.width / 9;
     srcRect.height = image.height / 20;
+
+    hitBoxAjusters[0] = EMPTY_RECT;
+    hitBoxAjusters[1] = EMPTY_RECT;
 }
 
 void Tile::update() {
@@ -20,8 +23,6 @@ void Tile::update() {
 
     if(CheckCollisionRecs(Utils::getScreenRect(), object))
         draw(image);
-
-
 
     move();
 
@@ -37,10 +38,11 @@ void Tile::update() {
                 60,
                 10
             };
-
-            DrawRectangleRec(hitBoxes[0], Utils::testColor);
         }
     }
+
+    DrawRectangleRec(hitBoxes[0], Utils::testColor);
+    DrawRectangleRec(hitBoxes[1], Utils::testColor);
 }
 
 void Tile::updateHitBox() {
