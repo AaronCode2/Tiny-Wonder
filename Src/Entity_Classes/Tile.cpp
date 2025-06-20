@@ -33,9 +33,9 @@ void Tile::update() {
             hitBoxAjusters[0] = {
     
                 0,
-                -30,
+                -5,
                 60,
-                60
+                10
             };
 
             DrawRectangleRec(hitBoxes[0], Utils::testColor);
