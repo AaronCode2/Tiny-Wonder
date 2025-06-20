@@ -41,7 +41,7 @@ class Tile : public Sprite {
 
         TileType tileType;
 
-        Rectangle hitBoxesAjusters[2];
+        Rectangle hitBoxAjusters[2];
         Rectangle hitBoxes[2] = {WH_EMPTY_RECT, WH_EMPTY_RECT};
         int count = 0;
 

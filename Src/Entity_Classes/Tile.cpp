@@ -21,15 +21,16 @@ void Tile::update() {
     if(CheckCollisionRecs(Utils::getScreenRect(), object))
         draw(image);
 
+    hitBoxAjusters[0] = {
+    
+            10,
+            10,
+            30,
+            30
+    };
+
     move();
 
-    hitBoxesAjusters[0] = {
-
-        10,
-        60,
-        40,
-        40
-    };
 
     if(tileType == GROUND) {
 
@@ -42,12 +43,15 @@ void Tile::update() {
 
 void Tile::updateHitBox() {
 
-    for(auto &hitBox : hitBoxes) {
-        for(const auto hitBoxAjust : hitBoxesAjusters) {
+    for(int i = 0; i < 1; i++) {
 
-            hitBox.x = object.x + hitBoxAjust.x;
-            hitBox.y = object.y + hitBoxAjust.y;
-        }
+        Rectangle &hitBox = hitBoxes[0];
+        Rectangle &hitBoxAjust = hitBoxAjusters[0];
+
+        hitBox.x = object.x + hitBoxAjust.x;
+        hitBox.y = object.y + hitBoxAjust.y;
+        hitBox.width = hitBoxAjust.width;
+        hitBox.height = hitBoxAjust.height;
     }
 }
 
