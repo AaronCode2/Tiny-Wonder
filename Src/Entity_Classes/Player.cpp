@@ -90,9 +90,9 @@ void Player::updateHitBox() {
     hitBox = {
 
         object.x,
-        object.y + 65,
+        object.y + 70,
         object.width,
-        object.height - 70
+        object.height - 30
     };
 }
 

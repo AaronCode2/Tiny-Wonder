@@ -21,13 +21,7 @@ void Tile::update() {
     if(CheckCollisionRecs(Utils::getScreenRect(), object))
         draw(image);
 
-    hitBoxAjusters[0] = {
-    
-            10,
-            10,
-            30,
-            30
-    };
+
 
     move();
 
@@ -35,6 +29,14 @@ void Tile::update() {
     if(tileType == GROUND) {
 
         if(Utils::isSameXY(frame, NeighborTypes::groundMap[ROW_TOP])) {
+
+            hitBoxAjusters[0] = {
+    
+                0,
+                -30,
+                60,
+                60
+            };
 
             DrawRectangleRec(hitBoxes[0], Utils::testColor);
         }
@@ -45,8 +47,8 @@ void Tile::updateHitBox() {
 
     for(int i = 0; i < 1; i++) {
 
-        Rectangle &hitBox = hitBoxes[0];
-        Rectangle &hitBoxAjust = hitBoxAjusters[0];
+        Rectangle &hitBox = hitBoxes[i];
+        Rectangle &hitBoxAjust = hitBoxAjusters[i];
 
         hitBox.x = object.x + hitBoxAjust.x;
         hitBox.y = object.y + hitBoxAjust.y;
