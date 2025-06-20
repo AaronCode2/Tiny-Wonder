@@ -23,10 +23,31 @@ void Tile::update() {
 
     move();
 
+    hitBoxesAjusters[0] = {
+
+        10,
+        60,
+        40,
+        40
+    };
+
     if(tileType == GROUND) {
 
-        if(Utils::isSameXY(frame, NeighborTypes::groundMap[ROW_TOP]))
-            DrawRectangleRec(object, Utils::testColor);
+        if(Utils::isSameXY(frame, NeighborTypes::groundMap[ROW_TOP])) {
+
+            DrawRectangleRec(hitBoxes[0], Utils::testColor);
+        }
+    }
+}
+
+void Tile::updateHitBox() {
+
+    for(auto &hitBox : hitBoxes) {
+        for(const auto hitBoxAjust : hitBoxesAjusters) {
+
+            hitBox.x = object.x + hitBoxAjust.x;
+            hitBox.y = object.y + hitBoxAjust.y;
+        }
     }
 }
 
@@ -34,6 +55,8 @@ void Tile::move() {
 
     object.x += velocity.x;
     object.y += velocity.y;
+
+    updateHitBox();
 
     velocity = {0.0f, 0.0f};
 }

@@ -41,10 +41,10 @@ class Tile : public Sprite {
 
         TileType tileType;
 
-        // Get HitBoxes working
-
-        Rectangle hitBoxes[2];
+        Rectangle hitBoxesAjusters[2];
+        Rectangle hitBoxes[2] = {WH_EMPTY_RECT, WH_EMPTY_RECT};
         int count = 0;
 
         void move();
+        void updateHitBox();
 };
