@@ -103,7 +103,6 @@ void Player::moveScreenX() {
     updateHitBox();
 
     for(auto &tile : tiles) {
-
         for(const auto tileHitBox : tile.getHitBoxes()) {
 
             if(!CheckCollisionRecs(hitBox, tileHitBox)) continue;
@@ -152,7 +151,6 @@ void Player::moveScreenX() {
         }
 
         velocity.x = 0;
-        break;
     }
 }
 
@@ -161,29 +159,53 @@ void Player::moveScreenY() {
     object.y += velocity.y;
     updateHitBox();
 
-    for(const auto rangeBoxSide : rangeBoxSides) {
+    for(auto &tile : tiles) {
+        for(const auto tileHitBox : tile.getHitBoxes()) {
 
-        if(CheckCollisionRecs(rangeBoxSide, hitBox)) {
-
-            for(auto &tile : tiles) 
-                tile.setVelocity({0.0f, -velocity.y});
+            if(!CheckCollisionRecs(hitBox, tileHitBox)) continue;
+            
+            DrawText("COLLISON!!!", 400, 400, 30, RED);
 
             if(velocity.y > 0) {
                 
                 const float offset = hitBox.y - object.y + hitBox.height;
-        
-                object.y = rangeBoxSide.y - offset;
+
+                object.y = tileHitBox.y - offset;
             }
-            
-            if(velocity.y < 0) {
-                    
-                const float offset = object.y - hitBox.y;
         
-                object.y = rangeBoxSide.y + rangeBoxSide.height + offset;
+            if(velocity.y < 0) {
+                
+                const float offset = hitBox.y - object.y;
+
+                object.y = tileHitBox.y + tileHitBox.height - offset;
             }
 
             velocity.y = 0;
         }
+    }
+
+    for(const auto rangeBoxSide : rangeBoxSides) {
+
+        if(!CheckCollisionRecs(rangeBoxSide, hitBox)) continue;
+
+        for(auto &tile : tiles) 
+            tile.setVelocity({0.0f, -velocity.y});
+
+        if(velocity.y > 0) {
+                
+            const float offset = hitBox.y - object.y + hitBox.height;
+        
+            object.y = rangeBoxSide.y - offset;
+        }
+            
+        if(velocity.y < 0) {
+                    
+            const float offset = object.y - hitBox.y;
+        
+            object.y = rangeBoxSide.y + rangeBoxSide.height + offset;
+        }
+
+        velocity.y = 0;
     }
 }
 
