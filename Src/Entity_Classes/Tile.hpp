@@ -50,4 +50,5 @@ class Tile : public Sprite {
 
         void move();
         void updateHitBox();
+        void getHitBoxData();
 };

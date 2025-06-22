@@ -23,30 +23,7 @@ void Tile::update() {
 
     move();
 
-    if(tileType == GROUND) {
-
-        isSolid = true;
-
-        if(Utils::isSameXY(frame, NeighborTypes::groundMap[ROW_TOP]))
-            hitBoxAjusters[0] = {0, -2, 60, 10};
-        else if(Utils::isSameXY(frame, NeighborTypes::groundMap[ROW_BOTTOM]))
-            hitBoxAjusters[0] = {0, 20, 60, 10};
-        else if(Utils::isSameXY(frame, NeighborTypes::groundMap[ROW_LEFT]))
-            hitBoxAjusters[0] = {-2, 0, 10, 60};
-        else {
-            isSolid = false;
-
-            hitBoxes[0] = EMPTY_RECT;
-            hitBoxes[1] = EMPTY_RECT;
-            hitBoxAjusters[0] = EMPTY_RECT; 
-            hitBoxAjusters[1] = EMPTY_RECT; 
-        }
-    }
-
-    updateHitBox();
-
-    DrawRectangleRec(hitBoxes[0], Utils::testColor);
-    DrawRectangleRec(hitBoxes[1], Utils::testColor);
+    getHitBoxData();
 }
 
 void Tile::updateHitBox() {
@@ -63,6 +40,35 @@ void Tile::updateHitBox() {
         hitBox.width = hitBoxAjust.width;
         hitBox.height = hitBoxAjust.height;
     }
+}
+
+void Tile::getHitBoxData(){
+
+    if(tileType != GROUND) return;
+
+    isSolid = true;
+
+    if(Utils::isSameXY(frame, NeighborTypes::groundMap[ROW_TOP]))
+        hitBoxAjusters[0] = {0, -2, 60, 10};
+    else if(Utils::isSameXY(frame, NeighborTypes::groundMap[ROW_BOTTOM]))
+        hitBoxAjusters[0] = {0, 20, 60, 10};
+    else if(Utils::isSameXY(frame, NeighborTypes::groundMap[ROW_LEFT]))
+        hitBoxAjusters[0] = {-2, 0, 10, 60};
+    else if(Utils::isSameXY(frame, NeighborTypes::groundMap[ROW_RIGHT]))
+        hitBoxAjusters[0] = {50, 0, 10, 60};
+    else {
+
+        isSolid = false;
+        hitBoxes[0] = EMPTY_RECT;
+        hitBoxes[1] = EMPTY_RECT;
+        hitBoxAjusters[0] = EMPTY_RECT; 
+        hitBoxAjusters[1] = EMPTY_RECT; 
+    }
+
+    updateHitBox();
+
+    DrawRectangleRec(hitBoxes[0], Utils::testColor);
+    DrawRectangleRec(hitBoxes[1], Utils::testColor);
 }
 
 void Tile::move() {
