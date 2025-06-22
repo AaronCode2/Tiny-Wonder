@@ -18,13 +18,6 @@ void World::update() {
         worldPos.y += tileManager.tiles[0].getVeclocity().y;
     }
 
-    if(IsKeyPressed(KEY_E)) {
-
-        int newSelectType = tileManager.selectedType;
-        tileManager.selectedType = (tileManager.selectedType != DIRT) ? (TileType) ++newSelectType : 
-            (TileType) 0;
-    }
-
     tileManager.update();
 
     if(Settings::gameMode == GameMode::BUILD && !Settings::HoveringOverMenu) {

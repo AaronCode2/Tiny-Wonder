@@ -92,6 +92,7 @@ void Tile::getHitBoxData(){
         hitBoxAjusters[0] = {-2, 30, 10, 60};
     else if(Utils::isSameXY(frame, NeighborTypes::groundMap[SIDE_CORNER_BOTTOM_RIGHT]))
         hitBoxAjusters[0] = {52, 30, 10, 60};
+    else isSolid = false;
 
     updateHitBox();
 

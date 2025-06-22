@@ -38,6 +38,7 @@ class Tile : public Sprite {
         Decoration decorationType = NOT_SET;
 
         bool getIsSolid() { return isSolid; };
+        void updateHitBox();
 
     private:
 
@@ -50,6 +51,5 @@ class Tile : public Sprite {
         bool __ta = false;
 
         void move();
-        void updateHitBox();
         void getHitBoxData();
 };

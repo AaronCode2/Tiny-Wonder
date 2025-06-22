@@ -65,7 +65,7 @@ void Player::update() {
     if(getInput().right) velocity.x = speed * GetFrameTime();
     if(getInput().left) velocity.x = -speed * GetFrameTime();
 
-    if(IsKeyDown(KEY_E)) {
+    if(IsKeyDown(KEY_R)) {
 
         object.x = GetScreenWidth() / 2;
         object.y = GetScreenHeight() / 2;
@@ -106,8 +106,11 @@ void Player::moveScreenX() {
 
         if(!tile.getIsSolid()) continue;
 
-        for(const auto tileHitBox : tile.getHitBoxes())
+        for(const auto tileHitBox : tile.getHitBoxes()) {
+
             Utils::collisionActionX(object, hitBox, tileHitBox, velocity);
+            tile.updateHitBox();
+        }
     }
 
     for(const auto rangeBoxSide : rangeBoxSides) {
@@ -142,8 +145,11 @@ void Player::moveScreenY() {
 
     for(auto &tile : tiles) {
     
-        for(const auto tileHitBox : tile.getHitBoxes())
+        for(const auto tileHitBox : tile.getHitBoxes()) {
+
             Utils::collisionActionY(object, hitBox, tileHitBox, velocity);
+            tile.updateHitBox();
+        }
     }
 }
 
