@@ -30,7 +30,7 @@ void Tile::updateHitBox() {
 
     if(!isSolid) return;
 
-    for(int i = 0; i < 1; i++) {
+    for(int i = 0; i < 2; i++) {
 
         Rectangle &hitBox = hitBoxes[i];
         Rectangle &hitBoxAjust = hitBoxAjusters[i];
@@ -44,6 +44,9 @@ void Tile::updateHitBox() {
 
 void Tile::getHitBoxData(){
 
+    if(IsKeyDown(KEY_T)) 
+        isSolid = !isSolid;
+
     if(tileType != GROUND) return;
 
     isSolid = true;
@@ -55,7 +58,25 @@ void Tile::getHitBoxData(){
     else if(Utils::isSameXY(frame, NeighborTypes::groundMap[ROW_LEFT]))
         hitBoxAjusters[0] = {-2, 0, 10, 60};
     else if(Utils::isSameXY(frame, NeighborTypes::groundMap[ROW_RIGHT]))
-        hitBoxAjusters[0] = {50, 0, 10, 60};
+        hitBoxAjusters[0] = {52, 0, 10, 60};
+
+    else if(Utils::isSameXY(frame, NeighborTypes::groundMap[CORNER_TOP_LEFT])) {
+
+        hitBoxAjusters[0] = {0, -2, 60, 10};
+        hitBoxAjusters[1] = {-2, 0, 10, 60};
+    } else if(Utils::isSameXY(frame, NeighborTypes::groundMap[CORNER_TOP_RIGHT])) {
+
+        hitBoxAjusters[0] = {0, -2, 60, 10};
+        hitBoxAjusters[1] = {52, 0, 10, 60};
+    } else if(Utils::isSameXY(frame, NeighborTypes::groundMap[CORNER_BOTTOM_LEFT])) {
+
+        hitBoxAjusters[0] = {0, 20, 60, 10};
+        hitBoxAjusters[1] = {-2, 0, 10, 60};
+    } else if(Utils::isSameXY(frame, NeighborTypes::groundMap[CORNER_BOTTOM_RIGHT])) {
+
+        hitBoxAjusters[0] = {0, 20, 60, 10};
+        hitBoxAjusters[1] = {52, 0, 10, 60};
+    }
     else {
 
         isSolid = false;
