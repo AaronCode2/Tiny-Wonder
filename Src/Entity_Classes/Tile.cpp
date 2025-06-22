@@ -22,23 +22,18 @@ void Tile::update() {
         draw(image);
 
     move();
-   
 
     if(tileType == GROUND) {
 
-        if(Utils::isSameXY(frame, NeighborTypes::groundMap[ROW_TOP])) {
+        isSolid = true;
 
-            isSolid = true; 
-
-            hitBoxAjusters[0] = {
-    
-                0,
-                -2,
-                60,
-                10
-            };
-        } else {
-
+        if(Utils::isSameXY(frame, NeighborTypes::groundMap[ROW_TOP]))
+            hitBoxAjusters[0] = {0, -2, 60, 10};
+        else if(Utils::isSameXY(frame, NeighborTypes::groundMap[ROW_BOTTOM]))
+            hitBoxAjusters[0] = {0, 20, 60, 10};
+        else if(Utils::isSameXY(frame, NeighborTypes::groundMap[ROW_LEFT]))
+            hitBoxAjusters[0] = {-2, 0, 10, 60};
+        else {
             isSolid = false;
 
             hitBoxes[0] = EMPTY_RECT;
@@ -52,7 +47,6 @@ void Tile::update() {
 
     DrawRectangleRec(hitBoxes[0], Utils::testColor);
     DrawRectangleRec(hitBoxes[1], Utils::testColor);
-
 }
 
 void Tile::updateHitBox() {
