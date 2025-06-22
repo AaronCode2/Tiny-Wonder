@@ -101,26 +101,26 @@ void Player::moveScreenX() {
 
     object.x += velocity.x;
     updateHitBox();
-    
+
+    for(auto &tile : tiles) {
+
+        if(!tile.getIsSolid()) continue;
+
+        for(const auto tileHitBox : tile.getHitBoxes())
+            Utils::collisionActionX(object, hitBox, tileHitBox, velocity);
+    }
+
     for(const auto rangeBoxSide : rangeBoxSides) {
-        
+
         DrawRectangleRec(rangeBoxSide, Utils::testColor);
-        
+
         if(CheckCollisionRecs(rangeBoxSide, hitBox)) {
             
             for(auto &tile : tiles)
-            tile.setVelocity({-velocity.x, 0.0f});
-            
+                tile.setVelocity({-velocity.x, 0.0f});
+
             Utils::collisionActionX(object, hitBox, rangeBoxSide, velocity);
         }
-    }
-
-    for(auto &tile : tiles) {
-    
-        if(!tile.getIsSolid()) continue;
-    
-        for(const auto tileHitBox : tile.getHitBoxes())
-            Utils::collisionActionX(object, hitBox, tileHitBox, velocity);
     }
 }
 
@@ -128,22 +128,22 @@ void Player::moveScreenY() {
 
     object.y += velocity.y;
     updateHitBox();
-
-    for(auto &tile : tiles) {
-
-        for(const auto tileHitBox : tile.getHitBoxes())
-            Utils::collisionActionY(object, hitBox, tileHitBox, velocity);
-    }
-
+    
     for(const auto rangeBoxSide : rangeBoxSides) {
-
+        
         if(CheckCollisionRecs(rangeBoxSide, hitBox)) {
             
             for(auto &tile : tiles)
-                tile.setVelocity({0.0f, -velocity.y});
-
+            tile.setVelocity({0.0f, -velocity.y});
+            
             Utils::collisionActionY(object, hitBox, rangeBoxSide, velocity);
         }
+    }
+
+    for(auto &tile : tiles) {
+    
+        for(const auto tileHitBox : tile.getHitBoxes())
+            Utils::collisionActionY(object, hitBox, tileHitBox, velocity);
     }
 }
 
