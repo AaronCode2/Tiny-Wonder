@@ -11,9 +11,6 @@ Tile::Tile(Rectangle object, Vector2 frame, TileType tileType, Decoration decora
 
     srcRect.width = image.width / 9;
     srcRect.height = image.height / 20;
-
-    hitBoxAjusters[0] = EMPTY_RECT;
-    hitBoxAjusters[1] = EMPTY_RECT;
 }
 
 void Tile::update() {
@@ -25,11 +22,13 @@ void Tile::update() {
         draw(image);
 
     move();
-
+   
 
     if(tileType == GROUND) {
 
         if(Utils::isSameXY(frame, NeighborTypes::groundMap[ROW_TOP])) {
+
+            isSolid = true; 
 
             hitBoxAjusters[0] = {
     
@@ -38,14 +37,27 @@ void Tile::update() {
                 60,
                 10
             };
+        } else {
+
+            isSolid = false;
+
+            hitBoxes[0] = EMPTY_RECT;
+            hitBoxes[1] = EMPTY_RECT;
+            hitBoxAjusters[0] = EMPTY_RECT; 
+            hitBoxAjusters[1] = EMPTY_RECT; 
         }
     }
 
+    updateHitBox();
+
     DrawRectangleRec(hitBoxes[0], Utils::testColor);
     DrawRectangleRec(hitBoxes[1], Utils::testColor);
+
 }
 
 void Tile::updateHitBox() {
+
+    if(!isSolid) return;
 
     for(int i = 0; i < 1; i++) {
 

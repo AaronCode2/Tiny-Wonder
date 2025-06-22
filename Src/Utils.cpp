@@ -61,6 +61,58 @@ bool Utils::isSameXY(const Vector2 aObject, const Vector2 bObject, const Vector2
     );
 }
 
+void Utils::collisionActionX(Rectangle &aObject, const Rectangle ahitBox, const Rectangle bHitBox, Vector2 &aVelocity) {
+
+    // Double-check Collision #BUG-FIX
+
+    if(!CheckCollisionRecs(ahitBox, bHitBox)) 
+        return;
+            
+    DrawText("COLLISON!!!", 400, 400, 30, RED);
+
+    if(aVelocity.x > 0) {
+                
+        const float offset = ahitBox.x - aObject.x + ahitBox.width;
+
+        aObject.x = bHitBox.x - offset;
+    }
+        
+    if(aVelocity.x < 0) {
+                
+        const float offset = ahitBox.x - aObject.x;
+
+        aObject.x = bHitBox.x + bHitBox.width - offset;
+    }
+
+    aVelocity.x = 0;
+}
+
+void Utils::collisionActionY(Rectangle &aObject, const Rectangle ahitBox, const Rectangle bHitBox, Vector2 &aVelocity) {
+
+    // Double-check Collision #BUG-FIX
+
+    if(!CheckCollisionRecs(ahitBox, bHitBox)) 
+        return;
+            
+    DrawText("COLLISON!!!", 400, 400, 30, RED);
+
+    if(aVelocity.y > 0) {
+                
+        const float offset = ahitBox.y - aObject.y + ahitBox.height;
+
+        aObject.y = bHitBox.y - offset;
+    }
+        
+    if(aVelocity.y < 0) {
+                
+        const float offset = ahitBox.y - aObject.y;
+
+        aObject.y = bHitBox.y + bHitBox.height - offset;
+    }
+
+    aVelocity.y = 0;
+}
+
 Rectangle Utils::getScreenRect() {
 
     return {0, 0, (float) GetScreenWidth(), (float) GetScreenHeight()};

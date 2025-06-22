@@ -101,56 +101,26 @@ void Player::moveScreenX() {
 
     object.x += velocity.x;
     updateHitBox();
-
-    for(auto &tile : tiles) {
-        for(const auto tileHitBox : tile.getHitBoxes()) {
-
-            if(!CheckCollisionRecs(hitBox, tileHitBox)) continue;
-            
-            DrawText("COLLISON!!!", 400, 400, 30, RED);
-
-            if(velocity.x > 0) {
-                
-                const float offset = hitBox.x - object.x + hitBox.width;
-
-                object.x = tileHitBox.x - offset;
-            }
+    
+    for(const auto rangeBoxSide : rangeBoxSides) {
         
-            if(velocity.x < 0) {
-                
-                const float offset = hitBox.x - object.x;
-
-                object.x = tileHitBox.x + tileHitBox.width - offset;
-            }
-
-            velocity.x = 0;
+        DrawRectangleRec(rangeBoxSide, Utils::testColor);
+        
+        if(CheckCollisionRecs(rangeBoxSide, hitBox)) {
+            
+            for(auto &tile : tiles)
+            tile.setVelocity({-velocity.x, 0.0f});
+            
+            Utils::collisionActionX(object, hitBox, rangeBoxSide, velocity);
         }
     }
 
-    for(const auto rangeBoxSide : rangeBoxSides) {
-
-        DrawRectangleRec(rangeBoxSide, Utils::testColor);
-
-        if(!CheckCollisionRecs(rangeBoxSide, hitBox)) continue;
-            
-        for(auto &tile : tiles)
-            tile.setVelocity({-velocity.x, 0.0f});
-
-        if(velocity.x > 0) {
-                
-            const float offset = hitBox.x - object.x + hitBox.width;
-
-            object.x = rangeBoxSide.x - offset;
-        }
-        
-        if(velocity.x < 0) {
-                
-            const float offset = hitBox.x - object.x;
-
-            object.x = rangeBoxSide.x + rangeBoxSide.width - offset;
-        }
-
-        velocity.x = 0;
+    for(auto &tile : tiles) {
+    
+        if(!tile.getIsSolid()) continue;
+    
+        for(const auto tileHitBox : tile.getHitBoxes())
+            Utils::collisionActionX(object, hitBox, tileHitBox, velocity);
     }
 }
 
@@ -160,52 +130,20 @@ void Player::moveScreenY() {
     updateHitBox();
 
     for(auto &tile : tiles) {
-        for(const auto tileHitBox : tile.getHitBoxes()) {
 
-            if(!CheckCollisionRecs(hitBox, tileHitBox)) continue;
-            
-            DrawText("COLLISON!!!", 400, 400, 30, RED);
-
-            if(velocity.y > 0) {
-                
-                const float offset = hitBox.y - object.y + hitBox.height;
-
-                object.y = tileHitBox.y - offset;
-            }
-        
-            if(velocity.y < 0) {
-                
-                const float offset = hitBox.y - object.y;
-
-                object.y = tileHitBox.y + tileHitBox.height - offset;
-            }
-
-            velocity.y = 0;
-        }
+        for(const auto tileHitBox : tile.getHitBoxes())
+            Utils::collisionActionY(object, hitBox, tileHitBox, velocity);
     }
 
     for(const auto rangeBoxSide : rangeBoxSides) {
 
-        if(!CheckCollisionRecs(rangeBoxSide, hitBox)) continue;
-
-        for(auto &tile : tiles) 
-            tile.setVelocity({0.0f, -velocity.y});
-
-        if(velocity.y > 0) {
-                
-            const float offset = hitBox.y - object.y + hitBox.height;
-        
-            object.y = rangeBoxSide.y - offset;
-        }
+        if(CheckCollisionRecs(rangeBoxSide, hitBox)) {
             
-        if(velocity.y < 0) {
-                    
-            const float offset = object.y - hitBox.y;
-        
-            object.y = rangeBoxSide.y + rangeBoxSide.height + offset;
-        }
+            for(auto &tile : tiles)
+                tile.setVelocity({0.0f, -velocity.y});
 
-        velocity.y = 0;
+            Utils::collisionActionY(object, hitBox, rangeBoxSide, velocity);
+        }
     }
 }
 

@@ -37,13 +37,16 @@ class Tile : public Sprite {
 
         Decoration decorationType = NOT_SET;
 
+        bool getIsSolid() { return isSolid; };
+
     private:
 
         TileType tileType;
 
         Rectangle hitBoxAjusters[2];
         Rectangle hitBoxes[2] = {WH_EMPTY_RECT, WH_EMPTY_RECT};
-        int count = 0;
+
+        bool isSolid = false;
 
         void move();
         void updateHitBox();
