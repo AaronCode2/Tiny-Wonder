@@ -47,6 +47,7 @@ class Tile : public Sprite {
         Rectangle hitBoxes[2] = {WH_EMPTY_RECT, WH_EMPTY_RECT};
 
         bool isSolid = false;
+        bool __ta = false;
 
         void move();
         void updateHitBox();

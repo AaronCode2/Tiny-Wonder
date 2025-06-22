@@ -45,11 +45,21 @@ void Tile::updateHitBox() {
 void Tile::getHitBoxData(){
 
     if(IsKeyDown(KEY_T)) 
-        isSolid = !isSolid;
+        __ta = !__ta;
+
+    if(__ta) {
+
+        isSolid = false;
+        return;
+    }
 
     if(tileType != GROUND) return;
 
     isSolid = true;
+    hitBoxes[0] = EMPTY_RECT;
+    hitBoxes[1] = EMPTY_RECT;
+    hitBoxAjusters[0] = EMPTY_RECT; 
+    hitBoxAjusters[1] = EMPTY_RECT;
 
     if(Utils::isSameXY(frame, NeighborTypes::groundMap[ROW_TOP]))
         hitBoxAjusters[0] = {0, -2, 60, 10};
@@ -77,14 +87,11 @@ void Tile::getHitBoxData(){
         hitBoxAjusters[0] = {0, 20, 60, 10};
         hitBoxAjusters[1] = {52, 0, 10, 60};
     }
-    else {
 
-        isSolid = false;
-        hitBoxes[0] = EMPTY_RECT;
-        hitBoxes[1] = EMPTY_RECT;
-        hitBoxAjusters[0] = EMPTY_RECT; 
-        hitBoxAjusters[1] = EMPTY_RECT; 
-    }
+    else if(Utils::isSameXY(frame, NeighborTypes::groundMap[SIDE_CORNER_BOTTOM_LEFT]))
+        hitBoxAjusters[0] = {-2, 30, 10, 60};
+    else if(Utils::isSameXY(frame, NeighborTypes::groundMap[SIDE_CORNER_BOTTOM_RIGHT]))
+        hitBoxAjusters[0] = {52, 30, 10, 60};
 
     updateHitBox();
 
