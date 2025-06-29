@@ -119,8 +119,16 @@ void Player::moveScreenX() {
 
         if(CheckCollisionRecs(rangeBoxSide, hitBox)) {
             
-            for(auto &tile : tiles)
-                tile.setVelocity({-velocity.x, 0.0f});
+            for(auto &tile : tiles) {
+
+                if(!tile.getIsSolid()) continue;
+
+                for(const auto tileHitBox : tile.getHitBoxes()) {
+
+                    Utils::collisionActionX(object, hitBox, tileHitBox, velocity);
+                    tile.updateHitBox();
+                }
+            }
 
             Utils::collisionActionX(object, hitBox, rangeBoxSide, velocity);
         }

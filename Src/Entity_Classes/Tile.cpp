@@ -22,7 +22,6 @@ void Tile::update() {
         draw(image);
 
     move();
-
     getHitBoxData();
 }
 
