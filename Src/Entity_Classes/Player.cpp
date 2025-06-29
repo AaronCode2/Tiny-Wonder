@@ -128,6 +128,8 @@ void Player::moveScreenX() {
                     Utils::collisionActionX(object, hitBox, tileHitBox, velocity);
                     tile.updateHitBox();
                 }
+
+                tile.setVelocity({-velocity.x, 0.0f});
             }
 
             Utils::collisionActionX(object, hitBox, rangeBoxSide, velocity);
