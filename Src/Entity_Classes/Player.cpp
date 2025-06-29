@@ -112,19 +112,29 @@ void Player::moveScreenX() {
             tile.updateHitBox();
         }
     }
-
+    
     for(const auto rangeBoxSide : rangeBoxSides) {
 
         DrawRectangleRec(rangeBoxSide, Utils::testColor);
 
         if(CheckCollisionRecs(rangeBoxSide, hitBox)) {
             
-            Utils::collisionActionX(object, hitBox, rangeBoxSide, velocity);
+            Utils::collisionActionX(object, hitBox, rangeBoxSide, velocity, false);
 
-            for(auto &tile : tiles) 
+            for(auto &tile : tiles) { 
+
                 tile.setVelocity({-velocity.x, 0.0f});
+
+                for(const auto tileHitBox : tile.getHitBoxes()) {
+
+                    if(CheckCollisionRecs(tileHitBox, hitBox)) 
+                        return; 
+                }
+            }
+
         }
     }
+
 }
 
 void Player::moveScreenY() {

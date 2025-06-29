@@ -49,8 +49,8 @@ namespace Utils {
     bool isSameXY(const Vector2 aObject, const Vector2 bObject);
     bool isSameXY(const Vector2 aObject, const Vector2 bObject, const Vector2 bObject2);
     
-    void collisionActionX(Rectangle &aObject, const Rectangle ahitBox, const Rectangle bHitBox, Vector2 &aVelocity);
-    void collisionActionY(Rectangle &aObject, const Rectangle ahitBox, const Rectangle bHitBox, Vector2 &aVelocity);
+    void collisionActionX(Rectangle &aObject, const Rectangle ahitBox, const Rectangle bHitBox, Vector2 &aVelocity, bool resetVelocity = true);
+    void collisionActionY(Rectangle &aObject, const Rectangle ahitBox, const Rectangle bHitBox, Vector2 &aVelocity, bool resetVelocity = true);
 
     void exitApp(const std::string errorInfo);
 } 

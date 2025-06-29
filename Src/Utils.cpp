@@ -61,7 +61,7 @@ bool Utils::isSameXY(const Vector2 aObject, const Vector2 bObject, const Vector2
     );
 }
 
-void Utils::collisionActionX(Rectangle &aObject, const Rectangle ahitBox, const Rectangle bHitBox, Vector2 &aVelocity) {
+void Utils::collisionActionX(Rectangle &aObject, const Rectangle ahitBox, const Rectangle bHitBox, Vector2 &aVelocity, bool resetVelocity) {
 
     // Double-check Collision #BUG-FIX
 
@@ -84,10 +84,10 @@ void Utils::collisionActionX(Rectangle &aObject, const Rectangle ahitBox, const 
         aObject.x = bHitBox.x + bHitBox.width - offset;
     }
 
-    aVelocity.x = 0;
+    if(resetVelocity) aVelocity.x = 0;
 }
 
-void Utils::collisionActionY(Rectangle &aObject, const Rectangle ahitBox, const Rectangle bHitBox, Vector2 &aVelocity) {
+void Utils::collisionActionY(Rectangle &aObject, const Rectangle ahitBox, const Rectangle bHitBox, Vector2 &aVelocity, bool resetVelocity) {
 
     // Double-check Collision #BUG-FIX
 
@@ -110,7 +110,7 @@ void Utils::collisionActionY(Rectangle &aObject, const Rectangle ahitBox, const 
         aObject.y = bHitBox.y + bHitBox.height - offset;
     }
 
-    aVelocity.y = 0;
+    if(resetVelocity) aVelocity.y = 0;
 }
 
 Rectangle Utils::getScreenRect() {
