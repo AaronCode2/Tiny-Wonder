@@ -59,10 +59,11 @@ class Player : public Sprite {
             (float) GetScreenHeight() - 400
         };
 
-        Rectangle rangeBoxSides[4];
+        Rectangle cameraBox;
         Rectangle hitBox;
 
         void move();
+        void updateCamera();
         void updateHitBox();
         void moveScreenX();
         void moveScreenY();

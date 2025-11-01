@@ -15,38 +15,6 @@ Player::Player(Rectangle object, std::vector<Tile> &tiles):
 
     srcRect.width = image.width / frame.x;
     srcRect.height = image.height / frame.y;
-
-    rangeBoxSides[(int) RangeSiders::LEFT] = {
-
-        400,
-        200,
-        10,
-        GetScreenHeight() - 400.0f
-    };
-
-    rangeBoxSides[(int) RangeSiders::RIGHT] = {
-
-        GetScreenWidth() - 400.0f,
-        200,
-        10,
-        GetScreenHeight() - 400.0f
-    };
-
-    rangeBoxSides[(int) RangeSiders::TOP] = {
-
-        400,
-        200,
-        GetScreenWidth() - 800.0f,
-        10
-    };
-
-    rangeBoxSides[(int) RangeSiders::BOTTOM] = {
-
-        400,
-        GetScreenHeight() - 200.0f,
-        GetScreenWidth() - 800.0f,
-        10
-    };
 }
 
 Player::~Player() {
@@ -77,6 +45,7 @@ void Player::update() {
     draw(image);
 
     DrawRectangleRec(hitBox, Utils::testColor);
+    DrawRectangleRec(cameraBox, Utils::testColor);
 }
 
 void Player::move() {
@@ -84,6 +53,18 @@ void Player::move() {
     moveScreenX();
     moveScreenY();
     updateHitBox();
+    updateCamera();
+}
+
+void Player::updateCamera() {
+
+    cameraBox = {
+
+        object.x - 350,
+        object.y - 350,
+        1500,
+        900
+    };
 }
 
 void Player::updateHitBox() {
@@ -112,49 +93,26 @@ void Player::moveScreenX() {
             tile.updateHitBox();
         }
     }
-    
-    for(const auto rangeBoxSide : rangeBoxSides) {
 
-        DrawRectangleRec(rangeBoxSide, Utils::testColor);
-
-        if(CheckCollisionRecs(rangeBoxSide, hitBox)) {
+    if(cameraBox.x + cameraBox.width >= GetScreenWidth()) {
+        for(auto &tile : tiles) {
             
-            Utils::collisionActionX(object, hitBox, rangeBoxSide, velocity, false);
-
-            for(auto &tile : tiles) { 
-
-                tile.setVelocity({-velocity.x, 0.0f});
-
-                for(const auto tileHitBox : tile.getHitBoxes()) {
-
-                    if(CheckCollisionRecs(tileHitBox, hitBox)) 
-                        return; 
-                }
-            }
-
+            tile.setVelocity({-velocity.x, 0});
         }
-    }
 
+        
+    }
 }
 
 void Player::moveScreenY() {
 
     object.y += velocity.y;
     updateHitBox();
-    
-    for(const auto rangeBoxSide : rangeBoxSides) {
-        
-        if(CheckCollisionRecs(rangeBoxSide, hitBox)) {
-            
-            for(auto &tile : tiles)
-            tile.setVelocity({0.0f, -velocity.y});
-            
-            Utils::collisionActionY(object, hitBox, rangeBoxSide, velocity);
-        }
-    }
 
     for(auto &tile : tiles) {
-    
+        
+        if(!tile.getIsSolid()) continue;
+
         for(const auto tileHitBox : tile.getHitBoxes()) {
 
             Utils::collisionActionY(object, hitBox, tileHitBox, velocity);
