@@ -5,8 +5,7 @@ Game::Game(){
     
 }
 
-void Game::gameLoop()
-{
+void Game::gameLoop() {
 
     while(!WindowShouldClose()) {
 
