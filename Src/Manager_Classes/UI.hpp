@@ -2,6 +2,7 @@
 #include <raylib.h>
 #include <iostream>
 #include <map>
+#include <math.h>
 #include "../Utils.hpp"
 #include "Elements.hpp"
 #include "../Entity_Classes/Tile.hpp"
@@ -31,6 +32,7 @@ class UI {
 
         Rectangle basesSrc;
         TileType &selectedType;
+        float delta;
 
         Texture2D buttonImage = LoadTexture("../Assets/UI/Buttons.png");
         Element2 gameModeLog = {LoadTexture("../Assets/UI/Emoji.png"), {20, 140, 50, 50}};
