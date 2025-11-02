@@ -72,14 +72,14 @@ void Utils::collisionActionX(Rectangle &aObject, const Rectangle ahitBox, const 
 
     if(aVelocity.x > 0) {
                 
-        const float offset = ahitBox.x - aObject.x + ahitBox.width;
+        const float offset = ahitBox.x - aObject.x + ahitBox.width + 0.01;
 
         aObject.x = bHitBox.x - offset;
     }
         
     if(aVelocity.x < 0) {
                 
-        const float offset = ahitBox.x - aObject.x;
+        const float offset = ahitBox.x - aObject.x - 0.01;
 
         aObject.x = bHitBox.x + bHitBox.width - offset;
     }

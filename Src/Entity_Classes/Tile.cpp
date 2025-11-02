@@ -95,8 +95,13 @@ void Tile::getHitBoxData(){
 
     updateHitBox();
 
+#if DEBUG_ACTIVE
+
     DrawRectangleRec(hitBoxes[0], Utils::testColor);
     DrawRectangleRec(hitBoxes[1], Utils::testColor);
+
+#endif
+
 }
 
 void Tile::move() {

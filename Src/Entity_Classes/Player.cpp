@@ -44,8 +44,13 @@ void Player::update() {
     animate(frameEnd, frameStart, frameBuffer);
     draw(image);
 
+#if DEBUG_ACTIVE
+
     DrawRectangleRec(hitBox, Utils::testColor);
     DrawRectangleRec(cameraBox, Utils::testColor);
+
+#endif
+
 }
 
 void Player::move() {
@@ -61,9 +66,9 @@ void Player::updateCamera() {
     cameraBox = {
 
         object.x - 350,
-        object.y - 350,
-        1500,
-        900
+        object.y - 300,
+        800,
+        700
     };
 }
 
@@ -83,31 +88,45 @@ void Player::moveScreenX() {
     object.x += velocity.x;
     updateHitBox();
 
+    if(cameraBox.x <= 0 && velocity.x < 0 || cameraBox.x + cameraBox.width >= GetScreenWidth() && velocity.x > 0) {
+        
+        for(auto &tile : tiles) {
+            
+            tile.setVelocity({-velocity.x, 0});
+            tile.updateHitBox();
+        }
+        
+        object.x -= velocity.x;
+    }
+
     for(auto &tile : tiles) {
-
+        
         if(!tile.getIsSolid()) continue;
-
+        
         for(const auto tileHitBox : tile.getHitBoxes()) {
-
+            
             Utils::collisionActionX(object, hitBox, tileHitBox, velocity);
             tile.updateHitBox();
         }
     }
 
-    if(cameraBox.x + cameraBox.width >= GetScreenWidth()) {
-        for(auto &tile : tiles) {
-            
-            tile.setVelocity({-velocity.x, 0});
-        }
-
-        
-    }
 }
 
 void Player::moveScreenY() {
 
     object.y += velocity.y;
     updateHitBox();
+
+    if(cameraBox.y <= 0 && velocity.y < 0 || cameraBox.y + cameraBox.height >= GetScreenHeight() && velocity.y > 0) {
+        
+        for(auto &tile : tiles) {
+            
+            tile.setVelocity({0, -velocity.y});
+            tile.updateHitBox();
+        }
+        
+        object.y -= velocity.y;
+    }
 
     for(auto &tile : tiles) {
         
