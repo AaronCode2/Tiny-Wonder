@@ -43,6 +43,7 @@ Input getInput();
 
 namespace Utils {
 
+    extern float deltaTimeIt;
     extern Color const testColor;
     Rectangle getScreenRect(); 
 

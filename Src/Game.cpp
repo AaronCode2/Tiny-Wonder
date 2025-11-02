@@ -21,6 +21,8 @@ void Game::gameLoop() {
 
 void Game::updateGame() {
 
+    Utils::deltaTimeIt += GetFrameTime();
+
     world.update();
     player.update();
     ui.update();

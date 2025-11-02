@@ -53,8 +53,7 @@ void UI::update() {
         90, 
     };
 
-    delta += GetFrameTime();
-    gameModeLog.object.y += std::sin(delta * 200) * 0.2f;
+    gameModeLog.object.y += std::sin(Utils::deltaTimeIt * 7.5) * 0.05;
 
     gameModeLog.setSrcXY(gameModeSrc[Settings::gameMode]);
 
