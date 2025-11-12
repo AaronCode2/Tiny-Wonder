@@ -29,6 +29,7 @@ class UI {
         std::map<GameMode, Vector2> gameModeSrc;
         std::map<GameMode, std::string> gameModeStrings;
         std::map<int, Vector2> imageBasesSrcPos;
+        std::map<Item, Vector2> itemSrcPos;
 
         Rectangle basesSrc;
         TileType &selectedType;
@@ -39,5 +40,6 @@ class UI {
         Element2 playerPhoto = {LoadTexture("../Assets/UI/PlayerPhoto.png"), {20, 20, 100, 100}};
         Element2 playerInfo = {LoadTexture("../Assets/UI/PlayerInfo.png"), {5, 5, 250, 200}};
 
+        Inventory inventory;
         HotBar hotBar;
 };

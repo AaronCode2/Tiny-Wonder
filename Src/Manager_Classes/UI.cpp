@@ -10,6 +10,20 @@ UI::UI(TileType &selectedType):
     imageTilesSrcPos[DECORATIONS] = {0, 0};
     imageTilesSrcPos[DIRT] = {3, 16};
 
+    itemSrcPos[Item::NOTHING] = {3, 2};
+    
+    itemSrcPos[Item::PUMPKIN_SEED] = {0, 1};
+    itemSrcPos[Item::CARROT_SEED] = {2, 1};
+    itemSrcPos[Item::COCA_SEED] = {1, 1};
+    itemSrcPos[Item::TOMATO_SEED] = {3, 1};
+    itemSrcPos[Item::CHILLEY_SEED] = {4, 1};
+    
+    itemSrcPos[Item::PUMPKIN] = {0, 0};
+    itemSrcPos[Item::CARROT] = {2, 0};
+    itemSrcPos[Item::COCA] = {1, 0};
+    itemSrcPos[Item::TOMATO] = {3, 0};
+    itemSrcPos[Item::CHILLEY] = {4, 0};
+
     gameModeSrc[GameMode::EXPLORE] = {0, 17};
     gameModeSrc[GameMode::BUILD] = {0, 16};
     gameModeSrc[GameMode::TRADE] = {2, 12};
@@ -76,7 +90,7 @@ void UI::draw() {
 
     for(int i = 0 ; i < MAX_SLOTS; i++) {
 
-        Slot slot = hotBar.slots[i];
+        Slotbar slot = hotBar.slots[i];
         Rectangle imageSrcRect = {
 
             (Tile::image.width / 9) * imageTilesSrcPos[(TileType) i].x,

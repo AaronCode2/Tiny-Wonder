@@ -2,6 +2,43 @@
 #include <raylib.h>
 #include "../Utils.hpp"
 
+enum class Item {
+
+    NOTHING = 0,
+    PUMPKIN_SEED,
+    CARROT_SEED,
+    COCA_SEED,
+    TOMATO_SEED,
+    CHILLEY_SEED,
+    PUMPKIN,
+    CARROT,
+    COCA,
+    TOMATO,
+    CHILLEY,
+}; 
+
+struct slot {
+
+    Item item = Item::NOTHING;
+    int amount = 0;
+};
+
+struct Inventory {
+
+    
+    slot slots[8];
+    bool openInventory = false;
+
+    Texture2D image;
+
+    void display() {
+
+        
+
+    }
+
+};
+
 namespace BasesImage {
 
     Rectangle getImageSrc(Vector2 srcPos);
@@ -55,7 +92,7 @@ struct Element2 {
     }
 };
 
-struct Slot {
+struct Slotbar {
 
     Rectangle object = EMPTY_RECT;
     Color color = Utils::testColor;
@@ -64,5 +101,5 @@ struct Slot {
 struct HotBar {
 
     Element base;
-    Slot slots[5];
+    Slotbar slots[5];
 };
