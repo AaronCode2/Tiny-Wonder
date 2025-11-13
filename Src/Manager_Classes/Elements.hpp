@@ -26,16 +26,20 @@ struct slot {
 struct Inventory {
 
     
-    slot slots[8];
-    bool openInventory = false;
+    public:
+    
+        void update();
 
-    Texture2D image;
+        Texture2D buttonImage;
+        Texture2D image;
+        bool openInventory = true;
+        Vector2 slotStartingPos;
+    
+    private:
 
-    void display() {
+        slot slots[8];
 
-        
-
-    }
+        void draw();
 
 };
 
@@ -56,7 +60,6 @@ namespace ButtonImage {
 
     extern Rectangle imageSrc;  
 };
-
 
 struct Element {
 

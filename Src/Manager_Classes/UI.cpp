@@ -1,7 +1,7 @@
 #include "UI.hpp"
 
 UI::UI(TileType &selectedType):
-    selectedType(selectedType)
+    selectedType(selectedType), inventory(inventory)
 {
 
     imageTilesSrcPos[GROUND] = {6, 7};
@@ -37,6 +37,9 @@ UI::UI(TileType &selectedType):
     hotBar.base.color = {130, 130, 130, 230};
 
     ButtonImage::setImage(buttonImage);
+
+    inventory.buttonImage = buttonImage;
+    inventory.slotStartingPos = {200, 200};
 
     for(int i = 0; i < MAX_SLOTS; i++) {
 
@@ -87,6 +90,8 @@ void UI::draw() {
     DrawRectangleRounded(hotBar.base.object, 0.2, 4, SAVY_YELLOW);
     
     Settings::HoveringOverMenu = false; 
+
+    inventory.update();
 
     for(int i = 0 ; i < MAX_SLOTS; i++) {
 
