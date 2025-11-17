@@ -6,6 +6,7 @@
 #define print(x) std::cout << x << '\n'
 #define EMPTY_RECT (Rectangle) {0, 0, 0, 0}
 #define WH_EMPTY_RECT (Rectangle) {0, 0, TILE_SIZE, TILE_SIZE}
+#define SAVY_YELLOW (Color) {255, 209, 157, 255}
 
         // for(const auto tileHitBox : tile.getHitBoxes()) {
 

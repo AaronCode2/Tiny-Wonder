@@ -10,7 +10,7 @@
 #include "../Settings.hpp"
 
 #define MAX_SLOTS 5
-#define SAVY_YELLOW (Color) {255, 209, 157, 255}
+
 
 class UI {
 

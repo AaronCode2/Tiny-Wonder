@@ -7,6 +7,8 @@ Game::Game(){
 
 void Game::gameLoop() {
 
+    SetTargetFPS(60);
+
     while(!WindowShouldClose()) {
 
         BeginDrawing();

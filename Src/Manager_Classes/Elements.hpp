@@ -1,6 +1,7 @@
 #pragma once
 #include <raylib.h>
 #include "../Utils.hpp"
+#include "../settings.hpp"
 
 enum class Item {
 
@@ -32,7 +33,7 @@ struct Inventory {
 
         Texture2D buttonImage;
         Texture2D image;
-        bool openInventory = true;
+        bool openInventory;
         Vector2 slotStartingPos;
     
     private:

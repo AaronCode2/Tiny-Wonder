@@ -39,7 +39,8 @@ UI::UI(TileType &selectedType):
     ButtonImage::setImage(buttonImage);
 
     inventory.buttonImage = buttonImage;
-    inventory.slotStartingPos = {200, 200};
+    inventory.slotStartingPos = {740, 300};
+    inventory.openInventory = true;
 
     for(int i = 0; i < MAX_SLOTS; i++) {
 
