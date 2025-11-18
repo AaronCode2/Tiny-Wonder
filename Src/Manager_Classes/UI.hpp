@@ -29,7 +29,6 @@ class UI {
         std::map<GameMode, Vector2> gameModeSrc;
         std::map<GameMode, std::string> gameModeStrings;
         std::map<int, Vector2> imageBasesSrcPos;
-        std::map<Item, Vector2> itemSrcPos;
 
         Rectangle basesSrc;
         TileType &selectedType;

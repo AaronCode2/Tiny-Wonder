@@ -2,6 +2,7 @@
 #include <raylib.h>
 #include "../Utils.hpp"
 #include "../settings.hpp"
+#include "map"
 
 enum class Item {
 
@@ -24,25 +25,7 @@ struct slot {
     int amount = 0;
 };
 
-struct Inventory {
 
-    
-    public:
-    
-        void update();
-
-        Texture2D buttonImage;
-        Texture2D image;
-        bool openInventory;
-        Vector2 slotStartingPos;
-    
-    private:
-
-        slot slots[8];
-
-        void draw();
-
-};
 
 namespace BasesImage {
 
@@ -67,6 +50,8 @@ struct Element {
     Rectangle object = EMPTY_RECT;
     Color color = Utils::testColor;
 };
+
+static std::map<Item, Vector2> itemSrcPos;
 
 struct Element2 {
 
@@ -94,6 +79,46 @@ struct Element2 {
         src.x = src.width * frame.x;
         src.y = src.width * frame.y;
     }
+};
+
+struct Element3 {
+
+    Texture2D image = {};
+    Rectangle src = {0, 0, (float) image.width, (float) image.height};
+
+    void setFrame(const Vector2 frame) {
+
+        src.width = image.width / frame.x;
+        src.height = image.height / frame.y;
+    }
+
+    Vector2 setSrcXY(const Vector2 frame) {
+
+        src.x = src.width * frame.x;
+        src.y = src.width * frame.y;
+
+        return {src.x, src.y};
+    }
+};
+
+struct Inventory {
+
+    public:
+    
+        void update();
+        void init();
+
+        Texture2D buttonImage;
+        Element3 itemSrcImage;
+        bool openInventory;
+        Vector2 slotStartingPos;
+    
+    private:
+
+        slot slots[10];
+
+        void draw();
+
 };
 
 struct Slotbar {

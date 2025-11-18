@@ -23,22 +23,61 @@ void Inventory::update() {
         draw();
 }
 
-void Inventory::draw() {
+void Inventory::init() {
 
+    itemSrcPos[Item::NOTHING] = {3, 2};
+    
+    itemSrcPos[Item::PUMPKIN_SEED] = {0, 1};
+    itemSrcPos[Item::CARROT_SEED] = {2, 1};
+    itemSrcPos[Item::COCA_SEED] = {1, 1};
+    itemSrcPos[Item::TOMATO_SEED] = {3, 1};
+    itemSrcPos[Item::CHILLEY_SEED] = {4, 1};
+    
+    itemSrcPos[Item::PUMPKIN] = {0, 0};
+    itemSrcPos[Item::CARROT] = {2, 0};
+    itemSrcPos[Item::COCA] = {1, 0};
+    itemSrcPos[Item::TOMATO] = {3, 0};
+    itemSrcPos[Item::CHILLEY] = {4, 0};
+
+    slotStartingPos = {740, 300};
+    openInventory = true;
+    itemSrcImage.image = LoadTexture("../Assets/Items/Items.png");
+    itemSrcImage.setFrame({5, 3});
+}
+
+void Inventory::draw() {
+    
     DrawRectangleRounded({750, 310, 430, 430}, 0.1f, 1, SAVY_YELLOW);
 
     for(float y = 0; y < 5; y++) {
         for(float x = 0; x < 5; x++) {
 
-            Rectangle buttonHitBoxRect =     
-            {
+            Rectangle buttonHitBoxRect = {
+
                 (x + 0.25f) * 80 + slotStartingPos.x,
                 (y + 0.25f) * 80 + slotStartingPos.y,
                 65,
                 65
             };
 
-            DrawTexturePro()
+            Rectangle buttonRect = {
+
+                x * 80 + slotStartingPos.x,
+                y * 80 + slotStartingPos.y,
+                120, 120,
+            };
+
+            Rectangle itemRect = {
+
+                x * 80 + slotStartingPos.x + 28,
+                y * 80 + slotStartingPos.y + 28,
+                60, 60,
+            };
+
+
+            // if(slots[(int) (x + y)].amount != 0)
+
+
 
             DrawTexturePro(
                 buttonImage,
@@ -48,6 +87,18 @@ void Inventory::draw() {
                     y * 80 + slotStartingPos.y,
                     120, 120,
                 },
+                {0, 0}, 0, WHITE
+            );
+
+            DrawTexturePro(
+                itemSrcImage.image,
+                {
+                    itemSrcImage.setSrcXY(itemSrcPos[Item::COCA]).x,
+                    itemSrcImage.setSrcXY(itemSrcPos[Item::COCA]).y,
+                    (float) itemSrcImage.image.width / 5,
+                    (float) itemSrcImage.image.height / 3,
+                },
+                itemRect,
                 {0, 0}, 0, WHITE
             );
         }
