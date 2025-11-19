@@ -82,6 +82,9 @@ void UI::draw() {
 
     inventory.update();
 
+    if(Settings::gameMode == GameMode::EXPLORE) 
+        return;
+
     for(int i = 0 ; i < MAX_SLOTS; i++) {
 
         Slotbar slot = hotBar.slots[i];
@@ -94,7 +97,7 @@ void UI::draw() {
         };
 
         Rectangle buttonObject = {
-            slot.object.x - 24,
+            slot.object.x - 25,
             slot.object.y - 25,
             120, 120
         };

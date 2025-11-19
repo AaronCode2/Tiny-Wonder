@@ -11,16 +11,19 @@ Rectangle BasesImage::getImageSrc(const Vector2 srcPos) {
 
 void Inventory::update() {
 
-    if(IsKeyPressed(KEY_E)) {
 
-        // ! Fix Hovering
 
-        Settings::HoveringOverMenu = true;
-        openInventory = !openInventory;
-    }
-
-    if(openInventory)
+    if(Settings::gameMode == GameMode::EXPLORE) {
         draw();
+
+        if(IsKeyPressed(KEY_E)) {
+            // ! Fix Hovering
+
+            Settings::HoveringOverMenu = true;
+            openInventory = !openInventory;
+        }
+
+    } else openInventory = false;
 }
 
 void Inventory::init() {
@@ -47,6 +50,75 @@ void Inventory::init() {
 
 void Inventory::draw() {
     
+
+    // Hotbar
+
+    for(float i = 0; i < 5; i++) {
+
+        Rectangle buttonHitBoxRect = {
+
+            (i + 0.35f) * 80 + slotStartingPos.x,
+            900,
+            65,
+            65
+        };
+
+        Rectangle buttonRect = {
+
+            i * 80 + slotStartingPos.x,
+            874,
+            120, 120,
+        };
+
+        const bool mouseHover = Mouse::isHovering(buttonHitBoxRect);
+
+        Rectangle itemRect;
+
+        if(!mouseHover) {
+
+            itemRect = {
+
+                i * 80 + slotStartingPos.x + 28,
+                902,
+                60, 60,
+            };
+        } else {
+
+            itemRect = {
+
+                i * 80 + slotStartingPos.x + 30,
+                904,
+                58, 58,
+            };
+        }
+
+
+        DrawTexturePro(
+            buttonImage,
+            ButtonImage::getImageSrc({(mouseHover ? 1.0f : 0.0f), 0}), 
+            buttonRect,
+            {0, 0}, 0, WHITE
+        );
+
+        DrawTexturePro(
+            itemSrcImage.image,
+            {
+                itemSrcImage.setSrcXY(itemSrcPos[Item::PUMPKIN]).x,
+                itemSrcImage.setSrcXY(itemSrcPos[Item::PUMPKIN]).y,
+                (float) itemSrcImage.image.width / 5,
+                (float) itemSrcImage.image.height / 3,
+            },
+            itemRect,
+            {0, 0}, 0, mouseHover ? (Color) {255, 255, 255, 200} : WHITE
+        );
+    }
+
+    // Inventory
+
+
+    if(!openInventory)
+        return;
+
     DrawRectangleRounded({750, 310, 430, 430}, 0.1f, 1, SAVY_YELLOW);
 
     for(float y = 0; y < 5; y++) {
@@ -67,12 +139,27 @@ void Inventory::draw() {
                 120, 120,
             };
 
-            Rectangle itemRect = {
+            const bool mouseHover = Mouse::isHovering(buttonHitBoxRect);
 
-                x * 80 + slotStartingPos.x + 28,
-                y * 80 + slotStartingPos.y + 28,
-                60, 60,
-            };
+            Rectangle itemRect;
+
+            if(!mouseHover) {
+
+                itemRect = {
+
+                    x * 80 + slotStartingPos.x + 28,
+                    y * 80 + slotStartingPos.y + 28,
+                    60, 60,
+                };
+            } else {
+
+                itemRect = {
+
+                    x * 80 + slotStartingPos.x + 30,
+                    y * 80 + slotStartingPos.y + 30,
+                    58, 58,
+                };
+            }
 
 
             // if(slots[(int) (x + y)].amount != 0)
@@ -81,25 +168,21 @@ void Inventory::draw() {
 
             DrawTexturePro(
                 buttonImage,
-                ButtonImage::getImageSrc({(Mouse::isHovering(buttonHitBoxRect) ? 1.0f : 0.0f), 0}), 
-                {
-                    x * 80 + slotStartingPos.x,
-                    y * 80 + slotStartingPos.y,
-                    120, 120,
-                },
+                ButtonImage::getImageSrc({(mouseHover ? 1.0f : 0.0f), 0}), 
+                buttonRect,
                 {0, 0}, 0, WHITE
             );
 
             DrawTexturePro(
                 itemSrcImage.image,
                 {
-                    itemSrcImage.setSrcXY(itemSrcPos[Item::COCA]).x,
-                    itemSrcImage.setSrcXY(itemSrcPos[Item::COCA]).y,
+                    itemSrcImage.setSrcXY(itemSrcPos[Item::PUMPKIN]).x,
+                    itemSrcImage.setSrcXY(itemSrcPos[Item::PUMPKIN]).y,
                     (float) itemSrcImage.image.width / 5,
                     (float) itemSrcImage.image.height / 3,
                 },
                 itemRect,
-                {0, 0}, 0, WHITE
+                {0, 0}, 0, mouseHover ? (Color) {255, 255, 255, 200} : WHITE
             );
         }
     }
