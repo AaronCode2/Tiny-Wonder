@@ -25,8 +25,6 @@ struct slot {
     int amount = 0;
 };
 
-
-
 namespace BasesImage {
 
     Rectangle getImageSrc(Vector2 srcPos);
@@ -115,7 +113,7 @@ struct Inventory {
     
     private:
 
-        slot slots[10];
+        slot slots[15];
 
         void draw();
 

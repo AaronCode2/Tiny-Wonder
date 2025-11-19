@@ -17,7 +17,6 @@ void Inventory::update() {
         draw();
 
         if(IsKeyPressed(KEY_E)) {
-            // ! Fix Hovering
 
             Settings::HoveringOverMenu = true;
             openInventory = !openInventory;
@@ -46,10 +45,15 @@ void Inventory::init() {
     openInventory = true;
     itemSrcImage.image = LoadTexture("../Assets/Items/Items.png");
     itemSrcImage.setFrame({5, 3});
+
+    for(auto &slot : slots) {
+
+        slot.amount = 1;
+        slot.item = Item::CHILLEY;
+    } 
 }
 
 void Inventory::draw() {
-    
 
     // Hotbar
 
@@ -100,11 +104,14 @@ void Inventory::draw() {
             {0, 0}, 0, WHITE
         );
 
+        if(slots[(int) (10 + i)].amount == 0)
+            continue;
+
         DrawTexturePro(
             itemSrcImage.image,
             {
-                itemSrcImage.setSrcXY(itemSrcPos[Item::PUMPKIN]).x,
-                itemSrcImage.setSrcXY(itemSrcPos[Item::PUMPKIN]).y,
+                itemSrcImage.setSrcXY(itemSrcPos[slots[(int) (i)].item]).x,
+                itemSrcImage.setSrcXY(itemSrcPos[slots[(int) (i)].item]).y,
                 (float) itemSrcImage.image.width / 5,
                 (float) itemSrcImage.image.height / 3,
             },
@@ -114,7 +121,6 @@ void Inventory::draw() {
     }
 
     // Inventory
-
 
     if(!openInventory)
         return;
@@ -160,24 +166,23 @@ void Inventory::draw() {
                     58, 58,
                 };
             }
-
-
-            // if(slots[(int) (x + y)].amount != 0)
-
-
-
+            
             DrawTexturePro(
+
                 buttonImage,
                 ButtonImage::getImageSrc({(mouseHover ? 1.0f : 0.0f), 0}), 
                 buttonRect,
                 {0, 0}, 0, WHITE
             );
 
+            if(slots[(int) (x + y)].amount == 0)
+                continue;
+
             DrawTexturePro(
                 itemSrcImage.image,
                 {
-                    itemSrcImage.setSrcXY(itemSrcPos[Item::PUMPKIN]).x,
-                    itemSrcImage.setSrcXY(itemSrcPos[Item::PUMPKIN]).y,
+                    itemSrcImage.setSrcXY(itemSrcPos[slots[(int) (x + y)].item]).x,
+                    itemSrcImage.setSrcXY(itemSrcPos[slots[(int) (x + y)].item]).y,
                     (float) itemSrcImage.image.width / 5,
                     (float) itemSrcImage.image.height / 3,
                 },
