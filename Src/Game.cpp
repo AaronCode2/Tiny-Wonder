@@ -3,6 +3,7 @@
 Game::Game(){
 
     
+    Utils::font = LoadFont("../Assets/fonts/Daydreamer.otf");
 }
 
 void Game::gameLoop() {

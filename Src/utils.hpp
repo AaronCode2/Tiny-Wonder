@@ -7,30 +7,9 @@
 #define EMPTY_RECT (Rectangle) {0, 0, 0, 0}
 #define WH_EMPTY_RECT (Rectangle) {0, 0, TILE_SIZE, TILE_SIZE}
 #define SAVY_YELLOW (Color) {255, 209, 157, 255}
+#define FONT_SIZE 30
+#define FONT_SPACING 1
 
-        // for(const auto tileHitBox : tile.getHitBoxes()) {
-
-        //     if(!CheckCollisionRecs(hitBox, tileHitBox)) continue;
-            
-        //     DrawText("COLLISON!!!", 400, 400, 30, RED);
-
-        //     if(velocity.y > 0) {
-                
-        //         const float offset = hitBox.y - object.y + hitBox.height;
-
-        //         object.y = tileHitBox.y - offset;
-        //     }
-        
-        //     if(velocity.y < 0) {
-                
-        //         const float offset = hitBox.y - object.y;
-
-        //         object.y = tileHitBox.y + tileHitBox.height - offset;
-        //     }
-
-        //     velocity.y = 0;
-        //     break;
-        // }
 
 struct Input {
 
@@ -56,6 +35,8 @@ namespace Utils {
     void collisionActionY(Rectangle &aObject, const Rectangle ahitBox, const Rectangle bHitBox, Vector2 &aVelocity, bool resetVelocity = true);
 
     void exitApp(const std::string errorInfo);
+
+    extern Font font;
 } 
 
 namespace Mouse {

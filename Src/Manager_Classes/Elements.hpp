@@ -110,6 +110,7 @@ struct Inventory {
         Element3 itemSrcImage;
         bool openInventory;
         Vector2 slotStartingPos;
+        bool dragged = false;
     
     private:
 

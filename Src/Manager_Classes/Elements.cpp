@@ -96,6 +96,11 @@ void Inventory::draw() {
             };
         }
 
+        Vector2 textPos = {
+
+            i * 80 + slotStartingPos.x + 60,
+            940
+        };
 
         DrawTexturePro(
             buttonImage,
@@ -117,6 +122,14 @@ void Inventory::draw() {
             },
             itemRect,
             {0, 0}, 0, mouseHover ? (Color) {255, 255, 255, 200} : WHITE
+        );
+
+        DrawTextEx(
+            Utils::font, 
+            ('x' + std::to_string(slots[(int) (10 + i)].amount)).c_str(), 
+            textPos, FONT_SIZE,
+            FONT_SPACING,
+            BLACK 
         );
     }
 
@@ -149,7 +162,7 @@ void Inventory::draw() {
 
             Rectangle itemRect;
 
-            if(!mouseHover) {
+            if(!mouseHover && dragged == false) {
 
                 itemRect = {
 
@@ -178,6 +191,26 @@ void Inventory::draw() {
             if(slots[(int) (x + y)].amount == 0)
                 continue;
 
+            
+            Vector2 textPos = {
+
+                x * 80 + slotStartingPos.x + 60,
+                y * 80 + slotStartingPos.y + 60
+            };
+            
+            dragged = false;
+
+            if(Mouse::isClickedL(itemRect)) {
+
+                    dragged = true;
+                
+                if(IsMouseButtonDown(MOUSE_BUTTON_LEFT) && dragged == true) {
+
+                    itemRect.x = (GetMouseX() - (itemRect.width / 2));
+                    itemRect.y = (GetMouseY() - (itemRect.height / 2));
+                }
+            }
+
             DrawTexturePro(
                 itemSrcImage.image,
                 {
@@ -189,6 +222,15 @@ void Inventory::draw() {
                 itemRect,
                 {0, 0}, 0, mouseHover ? (Color) {255, 255, 255, 200} : WHITE
             );
+
+            DrawTextEx(
+                Utils::font, 
+                ('x' + std::to_string(slots[(int) (x + y)].amount)).c_str(), 
+                textPos, FONT_SIZE,
+                FONT_SPACING,
+                BLACK 
+            );
+
         }
     }
 }

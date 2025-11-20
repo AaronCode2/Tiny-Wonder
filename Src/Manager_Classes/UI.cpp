@@ -14,7 +14,7 @@ UI::UI(TileType &selectedType):
     gameModeSrc[GameMode::BUILD] = {0, 16};
     gameModeSrc[GameMode::TRADE] = {2, 12};
 
-    gameModeStrings[GameMode::EXPLORE] = "EXPLORE";
+    gameModeStrings[GameMode::EXPLORE] = "GO";
     gameModeStrings[GameMode::BUILD] = "BUILD";
     gameModeStrings[GameMode::TRADE] = "TRADE";
 
@@ -68,12 +68,16 @@ void UI::update() {
 
 void UI::draw() {
 
-
     DrawRectangleRec({20, 20, 100, 90}, SAVY_YELLOW);
     playerPhoto.draw();
     playerInfo.draw();
 
-    DrawText(gameModeStrings[Settings::gameMode].c_str(), 75, 157, 20, BLACK);
+    DrawTextEx(
+        Utils::font, gameModeStrings[Settings::gameMode].c_str(), 
+        {75, 154}, FONT_SIZE, 
+        FONT_SPACING, BLACK
+    );
+
     gameModeLog.draw();
 
     DrawRectangleRounded(hotBar.base.object, 0.2, 4, SAVY_YELLOW);

@@ -14,6 +14,8 @@ Input getInput() {
 Color const Utils::testColor = {255, 0, 0, 100};
 float Utils::deltaTimeIt = 0.0f;
 
+Font Utils::font;
+
 void Utils::exitApp(const std::string errorInfo) {
 
     CloseWindow();
