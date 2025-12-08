@@ -108,6 +108,7 @@ struct Inventory {
 
         Texture2D buttonImage;
         Element3 itemSrcImage;
+
         bool openInventory;
         Vector2 slotStartingPos;
         bool dragged = false;
@@ -115,6 +116,9 @@ struct Inventory {
     private:
 
         slot slots[15];
+
+        static Rectangle draggedItem;
+        static int itemID;
 
         void draw();
 

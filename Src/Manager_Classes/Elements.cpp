@@ -53,6 +53,9 @@ void Inventory::init() {
     } 
 }
 
+Rectangle Inventory::draggedItem = EMPTY_RECT;
+int Inventory::itemID = -1;
+
 void Inventory::draw() {
 
     // Hotbar
@@ -162,7 +165,7 @@ void Inventory::draw() {
 
             Rectangle itemRect;
 
-            if(!mouseHover && dragged == false) {
+            if(!mouseHover) {
 
                 itemRect = {
 
@@ -180,6 +183,12 @@ void Inventory::draw() {
                 };
             }
             
+            if(Mouse::isClickedL(itemRect) && itemID == -1) {
+
+                itemID = x + (int) y;
+                draggedItem = itemRect;
+            }
+
             DrawTexturePro(
 
                 buttonImage,
@@ -188,28 +197,14 @@ void Inventory::draw() {
                 {0, 0}, 0, WHITE
             );
 
-            if(slots[(int) (x + y)].amount == 0)
+            if(slots[(int) (x + y)].amount == 0 || itemID == x + y)
                 continue;
-
             
             Vector2 textPos = {
 
                 x * 80 + slotStartingPos.x + 60,
                 y * 80 + slotStartingPos.y + 60
             };
-            
-            dragged = false;
-
-            if(Mouse::isClickedL(itemRect)) {
-
-                    dragged = true;
-                
-                if(IsMouseButtonDown(MOUSE_BUTTON_LEFT) && dragged == true) {
-
-                    itemRect.x = (GetMouseX() - (itemRect.width / 2));
-                    itemRect.y = (GetMouseY() - (itemRect.height / 2));
-                }
-            }
 
             DrawTexturePro(
                 itemSrcImage.image,
@@ -232,6 +227,35 @@ void Inventory::draw() {
             );
 
         }
+    }
+
+    if(itemID == -1) 
+        return;
+
+    if(IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
+
+        const int offset = 30;
+
+        draggedItem.x = GetMouseX() - offset;
+        draggedItem.y = GetMouseY() - offset;
+
+        DrawTexturePro(
+            itemSrcImage.image,
+            {
+                itemSrcImage.setSrcXY(itemSrcPos[slots[itemID].item]).x,
+                itemSrcImage.setSrcXY(itemSrcPos[slots[itemID].item]).y,
+                (float) itemSrcImage.image.width / 5,
+                (float) itemSrcImage.image.height / 3,
+            },
+            draggedItem,
+            {0, 0}, 0, (Color) {255, 255, 255, 200}
+        );
+    } else {
+
+        // ! FIX WIERD / / / / THINGY ?????? HOW is this happening??
+
+        draggedItem = EMPTY_RECT;
+        itemID = -1;
     }
 }
 
