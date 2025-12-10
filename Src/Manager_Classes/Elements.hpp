@@ -2,7 +2,8 @@
 #include <raylib.h>
 #include "../Utils.hpp"
 #include "../settings.hpp"
-#include "map"
+#include <map>
+#include <utils.h>
 
 enum class Item {
 
@@ -115,10 +116,10 @@ struct Inventory {
     
     private:
 
-        slot slots[15];
+        slot slots[6][5];
 
         static Rectangle draggedItem;
-        static int itemID;
+        static Vector2 itemID;
 
         void draw();
 

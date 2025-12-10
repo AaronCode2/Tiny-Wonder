@@ -46,15 +46,17 @@ void Inventory::init() {
     itemSrcImage.image = LoadTexture("../Assets/Items/Items.png");
     itemSrcImage.setFrame({5, 3});
 
-    for(auto &slot : slots) {
+    for(int y = 0; y < 6; y++) {
+        for(int x = 0; x < 5; x++) {
 
-        slot.amount = 1;
-        slot.item = Item::CHILLEY;
-    } 
+            slots[y][x].item = (Item) GetRandomValue(1, 10);
+            slots[y][x].amount = GetRandomValue(1, 10);
+        }
+    }
 }
 
 Rectangle Inventory::draggedItem = EMPTY_RECT;
-int Inventory::itemID = -1;
+Vector2 Inventory::itemID = {-1, -1};
 
 void Inventory::draw() {
 
@@ -101,9 +103,18 @@ void Inventory::draw() {
 
         Vector2 textPos = {
 
-            i * 80 + slotStartingPos.x + 60,
+            i * 80 + slotStartingPos.x + 30,
             940
         };
+
+        if(
+            Mouse::isClickedL(itemRect) && Utils::isSameXY(itemID, {-1, -1}) 
+            && slots[5][(int) i].item != Item::NOTHING
+        ) {
+
+            itemID = {i, 5};
+            draggedItem = itemRect;
+        }
 
         DrawTexturePro(
             buttonImage,
@@ -112,14 +123,14 @@ void Inventory::draw() {
             {0, 0}, 0, WHITE
         );
 
-        if(slots[(int) (10 + i)].amount == 0)
+        if(slots[5][(int) i].item == Item::NOTHING || Utils::isSameXY(itemID, {5, i}))
             continue;
 
         DrawTexturePro(
             itemSrcImage.image,
             {
-                itemSrcImage.setSrcXY(itemSrcPos[slots[(int) (i)].item]).x,
-                itemSrcImage.setSrcXY(itemSrcPos[slots[(int) (i)].item]).y,
+                itemSrcImage.setSrcXY(itemSrcPos[slots[5][(int) i].item]).x,
+                itemSrcImage.setSrcXY(itemSrcPos[slots[5][(int) i].item]).y,
                 (float) itemSrcImage.image.width / 5,
                 (float) itemSrcImage.image.height / 3,
             },
@@ -129,7 +140,7 @@ void Inventory::draw() {
 
         DrawTextEx(
             Utils::font, 
-            ('x' + std::to_string(slots[(int) (10 + i)].amount)).c_str(), 
+            ('x' + std::to_string(slots[5][(int) i].amount)).c_str(), 
             textPos, FONT_SIZE,
             FONT_SPACING,
             BLACK 
@@ -183,9 +194,12 @@ void Inventory::draw() {
                 };
             }
             
-            if(Mouse::isClickedL(itemRect) && itemID == -1) {
+            if(
+                Mouse::isClickedL(itemRect) && Utils::isSameXY(itemID, {-1, -1}) 
+                && slots[(int) y][(int) x].item != Item::NOTHING
+            ) {
 
-                itemID = x + (int) y;
+                itemID = {x, y};
                 draggedItem = itemRect;
             }
 
@@ -197,20 +211,20 @@ void Inventory::draw() {
                 {0, 0}, 0, WHITE
             );
 
-            if(slots[(int) (x + y)].amount == 0 || itemID == x + y)
+            if(slots[(int) y][(int) x].item == Item::NOTHING || Utils::isSameXY(itemID, {x, y}))
                 continue;
             
             Vector2 textPos = {
 
-                x * 80 + slotStartingPos.x + 60,
+                x * 80 + slotStartingPos.x + 30,
                 y * 80 + slotStartingPos.y + 60
             };
 
             DrawTexturePro(
                 itemSrcImage.image,
                 {
-                    itemSrcImage.setSrcXY(itemSrcPos[slots[(int) (x + y)].item]).x,
-                    itemSrcImage.setSrcXY(itemSrcPos[slots[(int) (x + y)].item]).y,
+                    itemSrcImage.setSrcXY(itemSrcPos[slots[(int) y][(int) x].item]).x,
+                    itemSrcImage.setSrcXY(itemSrcPos[slots[(int) y][(int) x].item]).y,
                     (float) itemSrcImage.image.width / 5,
                     (float) itemSrcImage.image.height / 3,
                 },
@@ -220,7 +234,7 @@ void Inventory::draw() {
 
             DrawTextEx(
                 Utils::font, 
-                ('x' + std::to_string(slots[(int) (x + y)].amount)).c_str(), 
+                ('x' + std::to_string(slots[(int) y][(int) x].amount)).c_str(), 
                 textPos, FONT_SIZE,
                 FONT_SPACING,
                 BLACK 
@@ -229,7 +243,7 @@ void Inventory::draw() {
         }
     }
 
-    if(itemID == -1) 
+    if(Utils::isSameXY(itemID, {-1, -1})) 
         return;
 
     if(IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
@@ -242,8 +256,8 @@ void Inventory::draw() {
         DrawTexturePro(
             itemSrcImage.image,
             {
-                itemSrcImage.setSrcXY(itemSrcPos[slots[itemID].item]).x,
-                itemSrcImage.setSrcXY(itemSrcPos[slots[itemID].item]).y,
+                itemSrcImage.setSrcXY(itemSrcPos[slots[(int) itemID.y][(int) itemID.x].item]).x,
+                itemSrcImage.setSrcXY(itemSrcPos[slots[(int) itemID.y][(int) itemID.x].item]).y,
                 (float) itemSrcImage.image.width / 5,
                 (float) itemSrcImage.image.height / 3,
             },
@@ -252,10 +266,49 @@ void Inventory::draw() {
         );
     } else {
 
-        // ! FIX WIERD / / / / THINGY ?????? HOW is this happening??
+        for(float y = 0; y < 6; y++) {
+            for(float x = 0; x < 5; x++) {
 
+                Rectangle buttonHitBoxRect;
+
+                if(y != 5) {
+
+                    buttonHitBoxRect = {
+
+                        (x + 0.25f) * 80 + slotStartingPos.x,
+                        (y + 0.25f) * 80 + slotStartingPos.y,
+                        65,
+                        65
+                    };
+                } else {
+
+                    buttonHitBoxRect = {
+
+                        (x + 0.35f) * 80 + slotStartingPos.x,
+                        900,
+                        65,
+                        65
+                    };
+                }
+
+                if(!CheckCollisionRecs(buttonHitBoxRect, draggedItem))
+                    continue;
+
+                if(slots[(int) y][(int) x].item == slots[(int) itemID.y][(int) itemID.x].item) {
+                    
+                    slots[(int) y][(int) x].amount += slots[(int) itemID.y][(int) itemID.x].amount;
+
+                    slots[(int) itemID.y][(int) itemID.x].item = Item::NOTHING;
+                    slots[(int) itemID.y][(int) itemID.x].amount = 0;
+
+                    break;
+                } else std::swap(slots[(int) y][(int) x], slots[(int) itemID.y][(int) itemID.x]);       
+
+            }
+        }
+        
         draggedItem = EMPTY_RECT;
-        itemID = -1;
+        itemID = {-1, -1};
     }
 }
 
