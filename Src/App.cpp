@@ -19,5 +19,5 @@ void App::logInfo() {
         << "If you find that this game has contains malware you can send a report on gitHub\n"
         << "As from the Developer of this game: The game uses no information needed for the user\n"
         << "It is safe to say that the autosaving system will not use any personal data and is needed to run the game\n"
-        << "Thank you for playing my game if you want to the 'how to play' go itch.io or gitHub \n\033[0m";
+        << "Thank you for playing my game if you want to the 'how to play' go itch.io or gitHub :) \n\033[0m";
 }
