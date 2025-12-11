@@ -30,8 +30,8 @@ class Game {
             world.tileManager.tiles
         );
 
-        DataIO dataIO = DataIO(world.tileManager.tiles, world.worldPos, player.object);
         UI ui = UI(world.tileManager.selectedType);
+        DataIO dataIO = DataIO(world.tileManager.tiles, world.worldPos, player.object, ui.getSlotData());
 
         
         void gameLoop();

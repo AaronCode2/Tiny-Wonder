@@ -1,16 +1,21 @@
 #include "DataIO.hpp"
 
-DataIO::DataIO(std::vector<Tile> &tiles, Vector2 &worldPos, Rectangle &playerObject):
-    tiles(tiles), worldPos(worldPos), playerObject(playerObject) 
+DataIO::DataIO(
+    std::vector<Tile> &tiles, Vector2 &worldPos, Rectangle &playerObject, 
+    std::array<std::array<Slot, 5>, 6> &slots
+):
+    tiles(tiles), worldPos(worldPos), playerObject(playerObject), slots(slots)
 {   
     readTileData();
     readPosData();
+    readInventoryData();
 }
 
 DataIO::~DataIO(){
 
     writeTileData();
     writePosData();
+    writeInventoryData();
 }
 
 void DataIO::writeTileData() {
@@ -154,6 +159,80 @@ void DataIO::writePosData() {
 
     << "}\n";
 
+
+    file.close();
+}
+
+void DataIO::readInventoryData() {
+
+    std::ifstream file(INVENTORY_PATH);
+
+    std::string line;
+    int count = 0;
+    int y = 0;
+    int x = 0;
+
+    while(std::getline(file, line)) {
+
+        std::string temp;
+        for(size_t i = 0; i < line.length(); i++) {
+
+            if(line[i] == '{')
+                continue;
+
+            if(line[i] == '}')
+                break;
+
+            temp += line[i];  
+        }
+
+        std::stringstream ss(temp);
+        std::string token;
+
+        count = 0;
+
+        while(std::getline(ss, token, ',') && count < INVENTORY_ELEMENTS) {
+
+            int num = std::stof(token);
+
+            if(count == 0)
+                slots[y][x].item = (Item) num;
+            else slots[y][x].amount = num;
+
+            count++;
+        }
+
+        x++;
+        if(x >= 5) {
+
+            y++;
+            x = 0;
+        }
+    }
+
+    file.close();
+}
+
+void DataIO::writeInventoryData()
+{
+
+    std::ofstream file(INVENTORY_PATH);
+
+    if(!file.is_open())
+        Utils::exitApp("Could not write Data to InventoryData");
+
+    for(int y = 0; y < 6; y++) {
+        for(int x = 0; x < 5; x++) {
+
+            file 
+            << "{"
+
+                << (int) slots[y][x].item << ", "
+                << slots[y][x].amount
+
+            << "}\n";
+        }
+    }
 
     file.close();
 }

@@ -2,6 +2,7 @@
 #include <raylib.h>
 #include "../Utils.hpp"
 #include "../settings.hpp"
+#include <array>
 #include <map>
 #include <utils.h>
 
@@ -20,7 +21,7 @@ enum class Item {
     CHILLEY,
 }; 
 
-struct slot {
+struct Slot {
 
     Item item = Item::NOTHING;
     int amount = 0;
@@ -113,10 +114,9 @@ struct Inventory {
         bool openInventory;
         Vector2 slotStartingPos;
         bool dragged = false;
+        std::array<std::array<Slot,5>, 6> slots;
     
     private:
-
-        slot slots[6][5];
 
         static Rectangle draggedItem;
         static Vector2 itemID;

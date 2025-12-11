@@ -46,11 +46,15 @@ void Inventory::init() {
     itemSrcImage.image = LoadTexture("../Assets/Items/Items.png");
     itemSrcImage.setFrame({5, 3});
 
-    for(int y = 0; y < 6; y++) {
-        for(int x = 0; x < 5; x++) {
+    bool __ast = false;
 
-            slots[y][x].item = (Item) GetRandomValue(1, 10);
-            slots[y][x].amount = GetRandomValue(1, 10);
+    if(__ast) {
+        for(int y = 0; y < 6; y++) {
+            for(int x = 0; x < 5; x++) {
+
+                slots[y][x].item = (Item) GetRandomValue(1, 10);
+                slots[y][x].amount = GetRandomValue(1, 10);
+            }
         }
     }
 }
@@ -123,7 +127,7 @@ void Inventory::draw() {
             {0, 0}, 0, WHITE
         );
 
-        if(slots[5][(int) i].item == Item::NOTHING || Utils::isSameXY(itemID, {5, i}))
+        if(slots[5][(int) i].item == Item::NOTHING || Utils::isSameXY(itemID, {i, 5}))
             continue;
 
         DrawTexturePro(
@@ -253,6 +257,11 @@ void Inventory::draw() {
         draggedItem.x = GetMouseX() - offset;
         draggedItem.y = GetMouseY() - offset;
 
+        Vector2 textPos = {
+            draggedItem.x,
+            draggedItem.y + 30
+        };
+
         DrawTexturePro(
             itemSrcImage.image,
             {
@@ -264,6 +273,15 @@ void Inventory::draw() {
             draggedItem,
             {0, 0}, 0, (Color) {255, 255, 255, 200}
         );
+
+        DrawTextEx(
+            Utils::font, 
+            ('x' + std::to_string(slots[(int) itemID.y][(int) itemID.x].amount)).c_str(), 
+            textPos, FONT_SIZE,
+            FONT_SPACING,
+            BLACK 
+        );
+
     } else {
 
         for(float y = 0; y < 6; y++) {
@@ -303,7 +321,6 @@ void Inventory::draw() {
 
                     break;
                 } else std::swap(slots[(int) y][(int) x], slots[(int) itemID.y][(int) itemID.x]);       
-
             }
         }
         

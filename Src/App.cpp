@@ -15,7 +15,7 @@ void App::logInfo() {
 
     std::cout 
         << "\033[31mDo not close this window instead please close the other window which has the Game Context\n"
-        << "If you find a bug or have a issue with the game please go to ******\n"
+        << "If you find a bug or have a issue with the game please go to https://github.com/AaronCode2/Tiny-Wonder and report an Issue\n"
         << "If you find that this game has contains malware you can send a report on gitHub\n"
         << "As from the Developer of this game: The game uses no information needed for the user\n"
         << "It is safe to say that the autosaving system will not use any personal data and is needed to run the game\n"
