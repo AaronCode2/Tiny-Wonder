@@ -6,4 +6,5 @@ Game::Status = 35.2%
 2 -> Make a money thingy
 3 -> Make plants plot
 4 -> IDK
-5 -> Inventory ✅ (Add split func!)
+5 -> Inventory ✅
+6 -> Add better UI (mouse and box expanding)

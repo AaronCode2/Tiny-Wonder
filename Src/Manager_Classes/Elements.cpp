@@ -49,7 +49,7 @@ void Inventory::init() {
     bool __ast = false;
 
     if(__ast) {
-        for(int y = 0; y < 6; y++) {
+        for(int y = 0; y < 5; y++) {
             for(int x = 0; x < 5; x++) {
 
                 slots[y][x].item = (Item) GetRandomValue(1, 10);
@@ -118,6 +118,25 @@ void Inventory::draw() {
 
             itemID = {i, 5};
             draggedItem = itemRect;
+        }  else if(
+                Mouse::isClickedOnceR(itemRect) && slots[5][(int) i].amount > 1
+        ) {
+
+            int half = slots[5][(int) i].amount / 2;
+            bool stop = false;
+            for(int y2 = 0; y2 < 6; y2++) {
+                for(int x2 = 0; x2 < 5; x2++) {
+
+                    if(slots[y2][x2].item == Item::NOTHING && stop == false) {
+
+                        slots[5][(int) i].amount -= half;
+                        slots[y2][x2].amount += half;
+                        slots[y2][x2].item = slots[5][(int) i].item;
+                        stop = true;
+                        break;
+                    }
+                }
+            }
         }
 
         DrawTexturePro(
@@ -205,7 +224,29 @@ void Inventory::draw() {
 
                 itemID = {x, y};
                 draggedItem = itemRect;
+            } else if(
+                Mouse::isClickedOnceR(itemRect) && slots[(int) y][(int) x].amount > 1
+            ) {
+
+                int half = slots[(int) y][(int) x].amount / 2;
+                bool stop = false;
+
+                for(int y2 = 0; y2 < 6; y2++) {
+                    for(int x2 = 0; x2 < 5; x2++) {
+
+                        if(slots[y2][x2].item == Item::NOTHING && stop == false) {
+
+                            slots[(int) y][(int) x].amount -= half; 
+                            slots[y2][x2].amount += half;
+                            slots[y2][x2].item = slots[(int) y][(int) x].item;
+                            stop = true;
+                            break;
+                        }
+                    }
+                }
             }
+
+            
 
             DrawTexturePro(
 
@@ -309,7 +350,7 @@ void Inventory::draw() {
                     };
                 }
 
-                if(!CheckCollisionRecs(buttonHitBoxRect, draggedItem))
+                if(!CheckCollisionPointRec(GetMousePosition(), buttonHitBoxRect))
                     continue;
 
                 if(slots[(int) y][(int) x].item == slots[(int) itemID.y][(int) itemID.x].item) {
