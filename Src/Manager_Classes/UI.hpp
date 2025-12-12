@@ -37,6 +37,8 @@ class UI {
         TileType &selectedType;
         
         Texture2D buttonImage = LoadTexture("../Assets/UI/Buttons.png");
+        Texture2D mouseImage = LoadTexture("../Assets/UI/Pointer.png");
+
         Element2 gameModeLog = {LoadTexture("../Assets/UI/Emoji.png"), {20, 140, 50, 50}};
     
         Element2 playerPhoto = {LoadTexture("../Assets/UI/PlayerPhoto.png"), {20, 20, 100, 100}};

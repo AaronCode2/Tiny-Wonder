@@ -7,6 +7,7 @@
 #define EMPTY_RECT (Rectangle) {0, 0, 0, 0}
 #define WH_EMPTY_RECT (Rectangle) {0, 0, TILE_SIZE, TILE_SIZE}
 #define SAVY_YELLOW (Color) {255, 209, 157, 255}
+#define MOUSE_YELLOW (Color) {163, 90, 66, 255}
 #define FONT_SIZE 30
 #define FONT_SPACING 1
 

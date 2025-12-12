@@ -64,6 +64,7 @@ void UI::update() {
     gameModeLog.setSrcXY(gameModeSrc[Settings::gameMode]);
 
     draw();
+    DrawTextureV(mouseImage, GetMousePosition(), MOUSE_YELLOW);
 }
 
 void UI::draw() {
