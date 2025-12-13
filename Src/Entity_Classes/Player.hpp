@@ -6,6 +6,7 @@
 #include <array>
 #include "Sprite.hpp"
 #include "../Entity_Classes/Tile.hpp"
+#include "../Entity_Classes/Plant.hpp"
 #include "../Manager_Classes/World.hpp"
 #include "../Utils.hpp"
 
@@ -31,7 +32,7 @@ class Player : public Sprite {
 
     public:
 
-        Player(Rectangle object, std::vector<Tile> &tiles);
+        Player(Rectangle object, std::vector<Tile> &tiles, std::vector<Plant> &plants);
         ~Player();
 
         void update();
@@ -51,6 +52,7 @@ class Player : public Sprite {
         Vector2 screenVeclocity = {0, 0};
 
         std::vector<Tile> &tiles;
+        std::vector<Plant> &plants;
         std::map<std::string, std::array<int, 3>> animationMap;
         Rectangle movementRangeBox = {
 

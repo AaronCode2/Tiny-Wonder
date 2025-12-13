@@ -48,10 +48,19 @@ class Plant : public Sprite {
         static std::map<PlantPosIt, Vector2> plantFrame;
 
         void update();
+        void setVelocity(Vector2 newVeclocity) { velocity = newVeclocity; };
+        Rectangle getHitbox() const {return hitBox; };
 
     private:
 
         void mapPlants();
+        void grow();
+        void updateHitBox();
+
+        int timeForNextState[4];
+        int time = GetTime();
+        int itTime = 0;
+        Rectangle hitBox;
 
         PLANTS plantType;
         PLANT_STAGE plantState = PLANT_STAGE::Seed;

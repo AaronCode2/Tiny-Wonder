@@ -4,21 +4,61 @@ Texture2D Plant::plantImage;
 std::map<PlantPosIt, Vector2> Plant::plantFrame;
 
 Plant::Plant(Rectangle object, PLANTS plantType): 
-    Sprite(object, {0, 0})
+    Sprite(object, {5, 6})
 {
 
     this->plantType = plantType;
     
     mapPlants();
+    srcRect.width = plantImage.width / frame.x;
+    srcRect.height = plantImage.height / frame.y;
+    
+    srcRect.x = plantFrame[{plantType, plantState}].x * srcRect.width;
+    srcRect.y = plantFrame[{plantType, plantState}].y * srcRect.height;
 
-    frame = plantFrame[{plantType, plantState}];
+    timeForNextState[0] = GetRandomValue(1, 4);
+    timeForNextState[1] = GetRandomValue(10, 15);
+    timeForNextState[2] = GetRandomValue(20, 30);
+    timeForNextState[3] = GetRandomValue(22, 35);
 }
 
 void Plant::update() {
 
     draw(plantImage);
 
-    DrawRectangleRec(object, Utils::testColor);
+    object.x += velocity.x;
+    object.y += velocity.y;
+
+    updateHitBox();
+
+    DrawRectangleRec(hitBox, Utils::testColor);
+
+    velocity = {0, 0};
+
+    grow();
+}
+
+
+void Plant::grow() {
+
+    if(GetTime() - time >= timeForNextState[itTime] && plantState != PLANT_STAGE::HARVESTABLE_ADULT) {
+
+        plantState = (PLANT_STAGE) ++itTime;
+        srcRect.x = plantFrame[{plantType, plantState}].x * srcRect.width;
+
+        time = GetTime();
+    }
+}
+
+void Plant::updateHitBox() {
+
+    hitBox = {
+
+        object.x + 20,
+        object.y + 20,
+        object.width - 40,
+        object.height - 40,
+    };
 }
 
 void Plant::mapPlants() {
@@ -53,3 +93,4 @@ void Plant::mapPlants() {
     plantFrame[{PLANTS::CHILY, PLANT_STAGE::GROWN_KID}] = {3, 4};
     plantFrame[{PLANTS::CHILY, PLANT_STAGE::HARVESTABLE_ADULT}] = {4, 4};
 }
+

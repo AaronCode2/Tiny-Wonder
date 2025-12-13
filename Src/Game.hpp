@@ -19,6 +19,7 @@ class Game {
 
         Color backgroundColor = {130, 235, 207, 255};
 
+        UI ui = UI(world.tileManager.selectedType);
         World world;
 
         Player player = Player(
@@ -27,10 +28,9 @@ class Game {
                 (float) (GetScreenHeight() / 2) - 100, 
                 100, 100
             }, 
-            world.tileManager.tiles
+            world.tileManager.tiles, world.tileManager.plants
         );
 
-        UI ui = UI(world.tileManager.selectedType);
         DataIO dataIO = DataIO(world.tileManager.tiles, world.worldPos, player.object, ui.getSlotData());
 
         

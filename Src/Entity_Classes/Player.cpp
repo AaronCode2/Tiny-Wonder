@@ -1,7 +1,7 @@
 #include "Player.hpp"
 
-Player::Player(Rectangle object, std::vector<Tile> &tiles):
-    Sprite(object, frame), tiles(tiles)  
+Player::Player(Rectangle object, std::vector<Tile> &tiles, std::vector<Plant> &plants):
+    Sprite(object, frame), tiles(tiles), plants(plants)  
 {   
 
     animationMap["IdleLeft"] = {0, 0, 2};
@@ -95,6 +95,11 @@ void Player::moveScreenX() {
             tile.setVelocity({-velocity.x, 0});
             tile.updateHitBox();
         }
+
+        for(auto &plant : plants) {
+
+            plant.setVelocity({-velocity.x, 0});
+        }
         
         object.x -= velocity.x;
     }
@@ -125,6 +130,12 @@ void Player::moveScreenY() {
             tile.updateHitBox();
         }
         
+        
+        for(auto &plant : plants) {
+
+            plant.setVelocity({0, -velocity.y});
+        }
+
         object.y -= velocity.y;
     }
 

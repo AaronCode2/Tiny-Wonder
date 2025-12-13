@@ -38,6 +38,16 @@ void World::checkMouseActions() {
             if(!Mouse::isHovering(selectionObject))
                 continue;
 
+            Rectangle selectionHitBox = {
+
+                selectionObject.x + 20,
+                selectionObject.y + 20,
+                selectionObject.width - 40,
+                selectionObject.height - 40,
+            };
+
+            DrawRectangleRec(selectionHitBox, Utils::testColor);
+
             Rectangle selectorObject = {
 
                 (selectionObject.x) + sin(Utils::deltaTimeIt * 7.5f) * 1.5f,
@@ -68,20 +78,41 @@ void World::checkMouseActions() {
                 }
             }
 
-            if(IsKeyPressed(KEY_Q)) {
+            if(IsKeyDown(KEY_Q)) {
+
+                bool foundTile = false;
 
                 for(auto &tile : tileManager.tiles) {
 
-                    if(Utils::isSameXY(tile.getObject(), selectionObject) && tile.getType() == DIRT) {
+                    Rectangle tileBoxDetector = tile.getObject();
+                    tileBoxDetector.x += 20;
+                    tileBoxDetector.y += 20;
+                    tileBoxDetector.width -= 40;
+                    tileBoxDetector.height -= 40;
 
-                        tileManager.plants.push_back(Plant(
+                    if(CheckCollisionRecs(tileBoxDetector, selectionObject) && tile.getType() == DIRT) {
 
-                            tile.getObject(),
-                            PLANTS::PUMPKIN
-                        ));
+                        foundTile = true;
+
+                        for(auto &plant : tileManager.plants) {
+
+                            if(CheckCollisionRecs(plant.getHitbox(), selectionObject)) {
+
+                                foundTile = false;
+                                break;
+                            }
+                        }
                         break;
                     }
                 }
+
+                if(!foundTile) return;
+
+                tileManager.plants.push_back(Plant(
+
+                    selectionObject,
+                    PLANTS::PUMPKIN
+                ));
             }
 
             if(!Mouse::isClickedL(selectionObject)) return;
