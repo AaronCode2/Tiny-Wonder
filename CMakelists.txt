@@ -32,6 +32,7 @@ SOURCE_FILES
     Src/Entity_Classes/Tile.cpp
     Src/Entity_Classes/Sprite.cpp
     Src/Entity_Classes/Player.cpp
+    Src/Entity_Classes/Plant.cpp
 )
 
 add_executable(Aaron ${SOURCE_FILES})

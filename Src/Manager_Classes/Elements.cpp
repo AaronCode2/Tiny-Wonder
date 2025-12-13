@@ -11,8 +11,6 @@ Rectangle BasesImage::getImageSrc(const Vector2 srcPos) {
 
 void Inventory::update() {
 
-
-
     if(Settings::gameMode == GameMode::EXPLORE) {
         draw();
 
@@ -42,21 +40,21 @@ void Inventory::init() {
     itemSrcPos[Item::CHILLEY] = {4, 0};
 
     slotStartingPos = {740, 300};
-    openInventory = true;
+    openInventory = false;
     itemSrcImage.image = LoadTexture("../Assets/Items/Items.png");
     itemSrcImage.setFrame({5, 3});
 
-    bool __ast = false;
+    // bool __ast = false;
 
-    if(__ast) {
-        for(int y = 0; y < 5; y++) {
-            for(int x = 0; x < 5; x++) {
+    // if(__ast) {
+    //     for(int y = 0; y < 5; y++) {
+    //         for(int x = 0; x < 5; x++) {
 
-                slots[y][x].item = (Item) GetRandomValue(1, 10);
-                slots[y][x].amount = GetRandomValue(1, 10);
-            }
-        }
-    }
+    //             slots[y][x].item = (Item) GetRandomValue(1, 10);
+    //             slots[y][x].amount = GetRandomValue(1, 10);
+    //         }
+    //     }
+    // }
 }
 
 Rectangle Inventory::draggedItem = EMPTY_RECT;

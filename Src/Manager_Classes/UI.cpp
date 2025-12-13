@@ -43,6 +43,7 @@ UI::UI(TileType &selectedType):
 UI::~UI() {
 
     UnloadTexture(buttonImage);
+    
     UnloadTexture(inventory.buttonImage);
     UnloadTexture(inventory.itemSrcImage.image);
     UnloadTexture(playerPhoto.image);
@@ -64,7 +65,7 @@ void UI::update() {
     gameModeLog.setSrcXY(gameModeSrc[Settings::gameMode]);
 
     draw();
-    DrawTextureV(mouseImage, GetMousePosition(), MOUSE_YELLOW);
+    DrawTextureV(mouseImage, GetMousePosition(), MOUSE_BROWN);
 }
 
 void UI::draw() {

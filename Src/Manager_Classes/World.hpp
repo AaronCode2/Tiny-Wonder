@@ -32,6 +32,5 @@ class World {
         Rectangle checkerArea;
         Rectangle deleteArea;
 
-
         void checkMouseActions();
 };

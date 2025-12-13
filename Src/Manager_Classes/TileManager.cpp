@@ -3,6 +3,8 @@
 TileManager::TileManager() {
 
     Tile::image = LoadTexture("../Assets/Tiles/Tile.png");
+    Plant::plantImage = LoadTexture("../Assets/Items/plants.png");
+    
     NeighborTypes::defineTypes();
 
     updateFrameType(Utils::getScreenRect());
@@ -11,6 +13,7 @@ TileManager::TileManager() {
 TileManager::~TileManager() {
 
     UnloadTexture(Tile::image);
+    UnloadTexture(Plant::plantImage);
 }
 
 void TileManager::update() {
@@ -21,6 +24,11 @@ void TileManager::update() {
 
         setFrameAnimationForSpecficTiles(tile);
         tile.update();
+    }
+
+    for(auto &plant : plants) {
+
+        plant.update();
     }
 }
 

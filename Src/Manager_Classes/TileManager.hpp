@@ -3,6 +3,7 @@
 #include <vector>
 #include <map>
 #include "../Entity_Classes/Tile.hpp"
+#include "../Entity_Classes/Plant.hpp"
 #include "NeighborTypes.hpp"
 
 class TileManager {
@@ -14,7 +15,9 @@ class TileManager {
 
         void update();
         void updateFrameType(const Rectangle contactedArea);
+
         std::vector<Tile> tiles;
+        std::vector<Plant> plants;
         
         TileType selectedType = GROUND;
         Decoration decoration;

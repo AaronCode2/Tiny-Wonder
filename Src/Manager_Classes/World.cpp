@@ -68,6 +68,22 @@ void World::checkMouseActions() {
                 }
             }
 
+            if(IsKeyPressed(KEY_Q)) {
+
+                for(auto &tile : tileManager.tiles) {
+
+                    if(Utils::isSameXY(tile.getObject(), selectionObject) && tile.getType() == DIRT) {
+
+                        tileManager.plants.push_back(Plant(
+
+                            tile.getObject(),
+                            PLANTS::PUMPKIN
+                        ));
+                        break;
+                    }
+                }
+            }
+
             if(!Mouse::isClickedL(selectionObject)) return;
 
             for(auto &tile : tileManager.tiles) {
