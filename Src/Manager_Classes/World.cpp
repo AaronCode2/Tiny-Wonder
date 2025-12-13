@@ -1,5 +1,7 @@
 #include "World.hpp"
 
+Texture2D World::selectorImage = {0};
+
 World::World() {
 
     selectorImage = LoadTexture("../Assets/UI/Selector.png");
@@ -36,10 +38,18 @@ void World::checkMouseActions() {
             if(!Mouse::isHovering(selectionObject))
                 continue;
 
+            Rectangle selectorObject = {
+
+                (selectionObject.x) + sin(Utils::deltaTimeIt * 7.5f) * 1.5f,
+                (selectionObject.y) + sin(Utils::deltaTimeIt * 7.5f) * 1.5f,
+                (selectionObject.width) - sin(Utils::deltaTimeIt * 7.6f) * 1.5f,
+                (selectionObject.height) - sin(Utils::deltaTimeIt * 7.6f) * 1.5f
+            };
+
             DrawTexturePro(
                 selectorImage,
                 {0, 0, (float) selectorImage.width, (float) selectorImage.height},
-                selectionObject, {0, 0}, 0, WHITE
+                selectorObject, {0, 0}, 0, WHITE
             );
             
             checkerArea = {selectionObject.x - 50, selectionObject.y - 50, 155, 155};

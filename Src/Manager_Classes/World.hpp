@@ -4,6 +4,7 @@
 #include <vector>
 #include <map>
 #include <thread>
+#include <math.h>
 #include <raylib.h>
 #include "NeighborTypes.hpp"
 #include "../Utils.hpp"
@@ -24,13 +25,13 @@ class World {
         Vector2 worldPos = {0, 0};
 
         void update();
+        static Texture2D selectorImage;
     private:
 
         Rectangle selectionObject;
         Rectangle checkerArea;
         Rectangle deleteArea;
 
-        Texture2D selectorImage;
 
         void checkMouseActions();
 };

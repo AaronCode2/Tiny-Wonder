@@ -2,11 +2,12 @@
 #include <raylib.h>
 #include <iostream>
 #include <map>
-#include <math.h>
+#include <cmath>
 #include "../Utils.hpp"
 #include "Elements.hpp"
 #include "../Entity_Classes/Tile.hpp"
 #include "../Manager_Classes/TileManager.hpp"
+#include "World.hpp"
 #include "../Settings.hpp"
 
 #define MAX_SLOTS 5
@@ -37,7 +38,7 @@ class UI {
         TileType &selectedType;
         
         Texture2D buttonImage = LoadTexture("../Assets/UI/Buttons.png");
-        Texture2D mouseImage = LoadTexture("../Assets/UI/Pointer.png");
+        Texture2D mouseImage = LoadTexture("../Assets/UI/Pointer Mouse.png");
 
         Element2 gameModeLog = {LoadTexture("../Assets/UI/Emoji.png"), {20, 140, 50, 50}};
     

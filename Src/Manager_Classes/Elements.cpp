@@ -113,7 +113,7 @@ void Inventory::draw() {
 
         if(
             Mouse::isClickedL(itemRect) && Utils::isSameXY(itemID, {-1, -1}) 
-            && slots[5][(int) i].item != Item::NOTHING
+            && slots[5][(int) i].item != Item::NOTHING && openInventory
         ) {
 
             itemID = {i, 5};
@@ -350,7 +350,7 @@ void Inventory::draw() {
                     };
                 }
 
-                if(!CheckCollisionPointRec(GetMousePosition(), buttonHitBoxRect))
+                if(!CheckCollisionPointRec(GetMousePosition(), buttonHitBoxRect) || Utils::isSameXY({x, y}, itemID))
                     continue;
 
                 if(slots[(int) y][(int) x].item == slots[(int) itemID.y][(int) itemID.x].item) {

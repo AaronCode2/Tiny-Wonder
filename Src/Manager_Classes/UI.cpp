@@ -118,6 +118,27 @@ void UI::draw() {
         if(Mouse::isClickedL(buttonObject))
             selectedType = (TileType) i;
 
+        if(i == (int) selectedType) {
+
+#define Adjust_selwh 28.0f
+#define Adjust_selxy 15.0F
+
+            Rectangle selectorObject = {
+
+                (buttonObject.x + Adjust_selxy) - sin(Utils::deltaTimeIt * 7.5f) * 1.5f,
+                (buttonObject.y + Adjust_selxy) - sin(Utils::deltaTimeIt * 7.5f) * 1.5f,
+                (buttonObject.width - Adjust_selwh) + sin(Utils::deltaTimeIt * 7.6f) * 1.5f,
+                (buttonObject.height - Adjust_selwh) + sin(Utils::deltaTimeIt * 7.6f) * 1.5f
+            };
+
+            DrawTexturePro(
+                World::selectorImage,
+                {0, 0, (float) World::selectorImage.width, (float) World::selectorImage.height},
+                selectorObject, {0, 0}, 0, WHITE
+            );
+        }
+
+
         DrawTexturePro(
             buttonImage,
             ButtonImage::getImageSrc(buttonImageSrc), buttonObject,
