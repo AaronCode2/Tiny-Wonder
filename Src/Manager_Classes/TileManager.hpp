@@ -20,7 +20,6 @@ class TileManager {
         std::vector<Tile> tiles;
         std::vector<Plant> plants;
         
-        Slot selectedSlot;
         TileType selectedType = GROUND;
         Decoration decoration;
         

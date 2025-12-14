@@ -28,8 +28,6 @@ UI::UI(TileType &selectedType):
     inventory.selectedHotBarItem = EMPTY_RECT;
     inventory.init();
 
-    inventory.selectedSlot = {Item::NOTHING, -1};
-
     for(int i = 0; i < MAX_SLOTS; i++) {
 
         hotBar.slots[i] = {

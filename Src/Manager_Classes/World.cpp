@@ -2,7 +2,7 @@
 
 Texture2D World::selectorImage = {0};
 
-World::World(Slot &selectedSlot): 
+World::World(Slot *selectedSlot): 
     selectedSlot(selectedSlot)
 {
     selectorImage = LoadTexture("../Assets/UI/Selector.png");
@@ -14,8 +14,6 @@ World::~World() {
 }
 
 void World::update() {
-
-    tileManager.selectedSlot = selectedSlot;
 
     if(!tileManager.tiles.empty()) {
         
@@ -59,7 +57,7 @@ void World::checkMouseActions() {
                 (selectionObject.height) - sin(Utils::deltaTimeIt * 7.6f) * 1.5f
             };
 
-            switch(selectedSlot.item) {
+            switch(selectedSlot->item) {
 
                 case Item::CARROT_SEED:
                 case Item::PUMPKIN_SEED:
@@ -110,10 +108,12 @@ void World::checkMouseActions() {
                         tileManager.plants.push_back(Plant(
                         
                             selectionObject,
-                            (PLANTS) (int) selectedSlot.item
+                            (PLANTS) (int) selectedSlot->item
                         ));
 
                         selectionObject.y += PLANT_ADJUST;
+
+                        selectedSlot->amount -= 1;
                     }
                     break;
             };

@@ -19,19 +19,6 @@ TileManager::~TileManager() {
 
 void TileManager::update() {
 
-    // switch(selectedSlot.item) {
-
-    //     case Item::CARROT_SEED:
-    //     case Item::PUMPKIN_SEED:
-    //     case Item::CHILLEY_SEED:
-    //     case Item::TOMATO_SEED:
-
-
-
-    //         break;
-
-    // };
-
     animate();
 
     for(auto &tile : tiles) {

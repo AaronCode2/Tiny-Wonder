@@ -140,7 +140,7 @@ void Inventory::draw() {
         if(slots[5][(int) i].item != Item::NOTHING && !openInventory && Mouse::isClickedL(buttonRect)) {
 
             selectedHotBarItem = buttonRect;
-            selectedSlot = slots[5][(int) i];
+            selectedSlot = &slots[5][(int) i];
         }
 
         DrawTexturePro(

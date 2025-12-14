@@ -112,7 +112,7 @@ struct Inventory {
         Element3 itemSrcImage;
 
         Rectangle selectedHotBarItem;
-        Slot selectedSlot;
+        Slot *selectedSlot = nullptr;
 
         bool openInventory;
         Vector2 slotStartingPos;
@@ -125,7 +125,6 @@ struct Inventory {
         static Vector2 itemID;
 
         void draw();
-
 };
 
 struct Slotbar {

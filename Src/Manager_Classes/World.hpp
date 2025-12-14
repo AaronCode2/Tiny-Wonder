@@ -19,7 +19,7 @@ class World {
 
     public:
         
-        World(Slot &selectedSlot);
+        World(Slot *selectedSlot);
         ~World();
 
         TileManager tileManager;
@@ -27,7 +27,7 @@ class World {
 
         void update();
         static Texture2D selectorImage;
-        Slot &selectedSlot;
+        Slot *selectedSlot;
     private:
 
         Rectangle selectionObject;
