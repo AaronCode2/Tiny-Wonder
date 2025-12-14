@@ -4,6 +4,7 @@ TileManager::TileManager() {
 
     Tile::image = LoadTexture("../Assets/Tiles/Tile.png");
     Plant::plantImage = LoadTexture("../Assets/Items/plants.png");
+    Plant::mapPlants();
     
     NeighborTypes::defineTypes();
 
@@ -17,6 +18,19 @@ TileManager::~TileManager() {
 }
 
 void TileManager::update() {
+
+    // switch(selectedSlot.item) {
+
+    //     case Item::CARROT_SEED:
+    //     case Item::PUMPKIN_SEED:
+    //     case Item::CHILLEY_SEED:
+    //     case Item::TOMATO_SEED:
+
+
+
+    //         break;
+
+    // };
 
     animate();
 

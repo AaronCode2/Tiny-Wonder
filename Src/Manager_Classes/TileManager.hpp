@@ -4,6 +4,7 @@
 #include <map>
 #include "../Entity_Classes/Tile.hpp"
 #include "../Entity_Classes/Plant.hpp"
+#include "Elements.hpp"
 #include "NeighborTypes.hpp"
 
 class TileManager {
@@ -19,6 +20,7 @@ class TileManager {
         std::vector<Tile> tiles;
         std::vector<Plant> plants;
         
+        Slot selectedSlot;
         TileType selectedType = GROUND;
         Decoration decoration;
         

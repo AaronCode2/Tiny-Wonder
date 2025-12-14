@@ -1,6 +1,6 @@
 #include "Game.hpp"
 
-Game::Game(){
+Game::Game() {
 
     
     Utils::font = LoadFont("../Assets/fonts/Daydreamer.otf");

@@ -137,6 +137,12 @@ void Inventory::draw() {
             }
         }
 
+        if(slots[5][(int) i].item != Item::NOTHING && !openInventory && Mouse::isClickedL(buttonRect)) {
+
+            selectedHotBarItem = buttonRect;
+            selectedSlot = slots[5][(int) i];
+        }
+
         DrawTexturePro(
             buttonImage,
             ButtonImage::getImageSrc({(mouseHover ? 1.0f : 0.0f), 0}), 
@@ -243,8 +249,6 @@ void Inventory::draw() {
                     }
                 }
             }
-
-            
 
             DrawTexturePro(
 

@@ -25,8 +25,10 @@ UI::UI(TileType &selectedType):
     ButtonImage::setImage(buttonImage);
 
     inventory.buttonImage = buttonImage;
+    inventory.selectedHotBarItem = EMPTY_RECT;
     inventory.init();
 
+    inventory.selectedSlot = {Item::NOTHING, -1};
 
     for(int i = 0; i < MAX_SLOTS; i++) {
 
@@ -88,8 +90,26 @@ void UI::draw() {
 
     inventory.update();
 
-    if(Settings::gameMode == GameMode::EXPLORE) 
+#define Adjust_selwh 28.0f
+#define Adjust_selxy 15.0F
+
+    if(Settings::gameMode == GameMode::EXPLORE) {
+        
+        Rectangle selectorObject = {
+
+            (inventory.selectedHotBarItem.x + Adjust_selxy) - sin(Utils::deltaTimeIt * 7.5f) * 1.5f,
+            (inventory.selectedHotBarItem.y + Adjust_selxy) - sin(Utils::deltaTimeIt * 7.5f) * 1.5f,
+            (inventory.selectedHotBarItem.width - Adjust_selwh) + sin(Utils::deltaTimeIt * 7.6f) * 1.5f,
+            (inventory.selectedHotBarItem.height - Adjust_selwh) + sin(Utils::deltaTimeIt * 7.6f) * 1.5f
+        };
+
+        DrawTexturePro(
+            World::selectorImage,
+            {0, 0, (float) World::selectorImage.width, (float) World::selectorImage.height},
+            selectorObject, {0, 0}, 0, WHITE
+        );
         return;
+    }
 
     for(int i = 0 ; i < MAX_SLOTS; i++) {
 
@@ -121,8 +141,7 @@ void UI::draw() {
 
         if(i == (int) selectedType) {
 
-#define Adjust_selwh 28.0f
-#define Adjust_selxy 15.0F
+
 
             Rectangle selectorObject = {
 

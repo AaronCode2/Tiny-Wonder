@@ -111,6 +111,9 @@ struct Inventory {
         Texture2D buttonImage;
         Element3 itemSrcImage;
 
+        Rectangle selectedHotBarItem;
+        Slot selectedSlot;
+
         bool openInventory;
         Vector2 slotStartingPos;
         bool dragged = false;

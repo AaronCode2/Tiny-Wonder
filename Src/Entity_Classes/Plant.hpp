@@ -5,7 +5,8 @@
 
 enum class PLANTS {
 
-    PUMPKIN = 0,
+    ERROR = 0,
+    PUMPKIN,
     CARROT,
     COCA,
     TOMATO,
@@ -48,12 +49,12 @@ class Plant : public Sprite {
         static std::map<PlantPosIt, Vector2> plantFrame;
 
         void update();
+        static void mapPlants();
         void setVelocity(Vector2 newVeclocity) { velocity = newVeclocity; };
         Rectangle getHitbox() const {return hitBox; };
 
     private:
 
-        void mapPlants();
         void grow();
         void updateHitBox();
 

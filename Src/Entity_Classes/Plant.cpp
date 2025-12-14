@@ -9,7 +9,6 @@ Plant::Plant(Rectangle object, PLANTS plantType):
 
     this->plantType = plantType;
     
-    mapPlants();
     srcRect.width = plantImage.width / frame.x;
     srcRect.height = plantImage.height / frame.y;
     
@@ -30,12 +29,15 @@ void Plant::update() {
     object.y += velocity.y;
 
     updateHitBox();
+    
+    velocity = {0, 0};
+    grow();
+
+#if DEBUG_ACTIVE
 
     DrawRectangleRec(hitBox, Utils::testColor);
+#endif
 
-    velocity = {0, 0};
-
-    grow();
 }
 
 
@@ -87,10 +89,10 @@ void Plant::mapPlants() {
     plantFrame[{PLANTS::TOMATO, PLANT_STAGE::GROWN_KID}] = {3, 3};
     plantFrame[{PLANTS::TOMATO, PLANT_STAGE::HARVESTABLE_ADULT}] = {4, 3};
 
-    plantFrame[{PLANTS::CHILY, PLANT_STAGE::Seed}] = {0, 4};
-    plantFrame[{PLANTS::CHILY, PLANT_STAGE::TINY_CUTE_BABY}] = {1, 4};
-    plantFrame[{PLANTS::CHILY, PLANT_STAGE::LITTLE_BABY}] = {2, 4};
-    plantFrame[{PLANTS::CHILY, PLANT_STAGE::GROWN_KID}] = {3, 4};
-    plantFrame[{PLANTS::CHILY, PLANT_STAGE::HARVESTABLE_ADULT}] = {4, 4};
+    plantFrame[{PLANTS::CHILY, PLANT_STAGE::Seed}] = {0, 5};
+    plantFrame[{PLANTS::CHILY, PLANT_STAGE::TINY_CUTE_BABY}] = {1, 5};
+    plantFrame[{PLANTS::CHILY, PLANT_STAGE::LITTLE_BABY}] = {2, 5};
+    plantFrame[{PLANTS::CHILY, PLANT_STAGE::GROWN_KID}] = {3, 5};
+    plantFrame[{PLANTS::CHILY, PLANT_STAGE::HARVESTABLE_ADULT}] = {4, 5};
 }
 

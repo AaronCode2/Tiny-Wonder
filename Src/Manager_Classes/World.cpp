@@ -2,8 +2,9 @@
 
 Texture2D World::selectorImage = {0};
 
-World::World() {
-
+World::World(Slot &selectedSlot): 
+    selectedSlot(selectedSlot)
+{
     selectorImage = LoadTexture("../Assets/UI/Selector.png");
 }
 
@@ -14,6 +15,8 @@ World::~World() {
 
 void World::update() {
 
+    tileManager.selectedSlot = selectedSlot;
+
     if(!tileManager.tiles.empty()) {
         
         worldPos.x += tileManager.tiles[0].getVeclocity().x;
@@ -21,11 +24,8 @@ void World::update() {
     }
 
     tileManager.update();
-
-    if(Settings::gameMode == GameMode::BUILD && !Settings::HoveringOverMenu) {
-
-        checkMouseActions();
-    }
+    checkMouseActions();
+    
 }
 
 void World::checkMouseActions() {
@@ -46,7 +46,10 @@ void World::checkMouseActions() {
                 selectionObject.height - 40,
             };
 
+#if DEBUG_ACTIVE
+
             DrawRectangleRec(selectionHitBox, Utils::testColor);
+#endif
 
             Rectangle selectorObject = {
 
@@ -55,6 +58,68 @@ void World::checkMouseActions() {
                 (selectionObject.width) - sin(Utils::deltaTimeIt * 7.6f) * 1.5f,
                 (selectionObject.height) - sin(Utils::deltaTimeIt * 7.6f) * 1.5f
             };
+
+            switch(selectedSlot.item) {
+
+                case Item::CARROT_SEED:
+                case Item::PUMPKIN_SEED:
+                case Item::CHILLEY_SEED:
+                case Item::TOMATO_SEED:
+                case Item::COCA_SEED:
+
+                    DrawTexturePro(
+                        selectorImage,
+                        {0, 0, (float) selectorImage.width, (float) selectorImage.height},
+                        selectorObject, {0, 0}, 0, WHITE
+                    );
+
+                    if(IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
+
+                        bool foundTile = false;
+
+                        for(auto &tile : tileManager.tiles) {
+                        
+                            Rectangle tileBoxDetector = tile.getObject();
+                            tileBoxDetector.x += 20;
+                            tileBoxDetector.y += 20;
+                            tileBoxDetector.width -= 40;
+                            tileBoxDetector.height -= 40;
+                        
+                            if(CheckCollisionRecs(tileBoxDetector, selectionObject) && tile.getType() == DIRT) {
+                            
+                                foundTile = true;
+                            
+                                for(auto &plant : tileManager.plants) {
+                                
+                                    if(CheckCollisionRecs(plant.getHitbox(), selectionObject)) {
+                                    
+                                        foundTile = false;
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                        }
+                        
+                        if(!foundTile) return;
+
+#define PLANT_ADJUST 10
+
+                        selectionObject.y -= PLANT_ADJUST;
+
+                        tileManager.plants.push_back(Plant(
+                        
+                            selectionObject,
+                            (PLANTS) (int) selectedSlot.item
+                        ));
+
+                        selectionObject.y += PLANT_ADJUST;
+                    }
+                    break;
+            };
+
+            if(Settings::gameMode == GameMode::EXPLORE || Settings::HoveringOverMenu)
+                return;
 
             DrawTexturePro(
                 selectorImage,

@@ -11,6 +11,7 @@
 #include "../Settings.hpp"
 #include "../Entity_Classes/Tile.hpp"
 #include "TileManager.hpp"
+#include "Elements.hpp"
 
 #define UNKNOWN_TILE (Vector2) {3, 11}
 
@@ -18,7 +19,7 @@ class World {
 
     public:
         
-        World();
+        World(Slot &selectedSlot);
         ~World();
 
         TileManager tileManager;
@@ -26,6 +27,7 @@ class World {
 
         void update();
         static Texture2D selectorImage;
+        Slot &selectedSlot;
     private:
 
         Rectangle selectionObject;
