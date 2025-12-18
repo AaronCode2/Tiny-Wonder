@@ -1,9 +1,10 @@
 #include "World.hpp"
+#include "Elements.hpp"
 
 Texture2D World::selectorImage = {0};
+Slot World::*selectedSlot;
 
-World::World(Slot *selectedSlot): 
-    selectedSlot(selectedSlot)
+World::World()
 {
     selectorImage = LoadTexture("../Assets/UI/Selector.png");
 }
@@ -23,8 +24,9 @@ void World::update() {
 
     tileManager.update();
     checkMouseActions();
-    
 }
+
+void World::getSelectedSlot(Slot *newSelectedSlot){ selectedSlot = newSelectedSlot; }
 
 void World::checkMouseActions() {
     

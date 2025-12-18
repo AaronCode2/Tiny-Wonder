@@ -20,7 +20,7 @@ class Game {
         Color backgroundColor = {130, 235, 207, 255};
 
         UI ui = UI(world.tileManager.selectedType);
-        World world = World(ui.inventory.selectedSlot);
+        World world;
 
         Player player = Player(
             {

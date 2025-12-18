@@ -4,7 +4,6 @@
 #include <map>
 #include "../Entity_Classes/Tile.hpp"
 #include "../Entity_Classes/Plant.hpp"
-#include "Elements.hpp"
 #include "NeighborTypes.hpp"
 
 class TileManager {

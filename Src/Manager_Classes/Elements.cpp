@@ -141,6 +141,7 @@ void Inventory::draw() {
 
             selectedHotBarItem = buttonRect;
             selectedSlot = &slots[5][(int) i];
+            World::getSelectedSlot(selectedSlot);
         }
 
         DrawTexturePro(

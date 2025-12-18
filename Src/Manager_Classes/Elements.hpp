@@ -2,6 +2,7 @@
 #include <raylib.h>
 #include "../Utils.hpp"
 #include "../settings.hpp"
+#include "World.hpp"
 #include <array>
 #include <map>
 #include <utils.h>
