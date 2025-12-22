@@ -57,11 +57,14 @@ class Plant : public Sprite {
 
         void grow();
         void updateHitBox();
+        void drawExternalPlantImage();
 
         int timeForNextState[4];
         int time = GetTime();
         int itTime = 0;
         Rectangle hitBox;
+        Rectangle srcRect2;
+        Rectangle object2;
 
         PLANTS plantType;
         PLANT_STAGE plantState = PLANT_STAGE::Seed;

@@ -19,11 +19,27 @@ Plant::Plant(Rectangle object, PLANTS plantType):
     timeForNextState[1] = GetRandomValue(10, 15);
     timeForNextState[2] = GetRandomValue(20, 30);
     timeForNextState[3] = GetRandomValue(22, 35);
+
+    if(plantType != PLANTS::CHILY)
+        return;
+    
+    srcRect2 = {
+
+        srcRect.x,
+        4 * srcRect.height,
+        srcRect.width,
+        srcRect.height
+    };
+
+    object2 = object;
 }
 
 void Plant::update() {
 
     draw(plantImage);
+
+    if(plantType == PLANTS::CHILY && plantState >= PLANT_STAGE::LITTLE_BABY)
+        drawExternalPlantImage();
 
     object.x += velocity.x;
     object.y += velocity.y;
@@ -40,13 +56,15 @@ void Plant::update() {
 
 }
 
-
 void Plant::grow() {
 
     if(GetTime() - time >= timeForNextState[itTime] && plantState != PLANT_STAGE::HARVESTABLE_ADULT) {
 
         plantState = (PLANT_STAGE) ++itTime;
         srcRect.x = plantFrame[{plantType, plantState}].x * srcRect.width;
+
+        if(plantType == PLANTS::CHILY && plantState >= PLANT_STAGE::LITTLE_BABY)
+            srcRect2.x = srcRect.x;
 
         time = GetTime();
     }
@@ -61,6 +79,18 @@ void Plant::updateHitBox() {
         object.width - 40,
         object.height - 40,
     };
+}
+
+void Plant::drawExternalPlantImage() {
+
+    object2 = object;
+    object2.y -= object2.height;
+
+    DrawTexturePro(
+        plantImage,
+        srcRect2, object2,
+        {0, 0}, 0, WHITE
+    );
 }
 
 void Plant::mapPlants() {

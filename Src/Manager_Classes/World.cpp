@@ -46,94 +46,89 @@ void World::checkMouseActions() {
                 selectionObject.height - 40,
             };
 
-#if DEBUG_ACTIVE
-
-            DrawRectangleRec(selectionHitBox, Utils::testColor);
-#endif
-
             Rectangle selectorObject = {
-
+            
                 (selectionObject.x) + sin(Utils::deltaTimeIt * 7.5f) * 1.5f,
                 (selectionObject.y) + sin(Utils::deltaTimeIt * 7.5f) * 1.5f,
                 (selectionObject.width) - sin(Utils::deltaTimeIt * 7.6f) * 1.5f,
                 (selectionObject.height) - sin(Utils::deltaTimeIt * 7.6f) * 1.5f
             };
 
-            if(!selectedSlot || GlobalVars::openInventory) 
-                break;
-
-            if(selectedSlot->amount <= 0) {
-
-                selectedSlot->item = Item::NOTHING;
-                break;
-            }
-
-            switch(selectedSlot->item) {
-
-                case Item::CARROT_SEED:
-                case Item::PUMPKIN_SEED:
-                case Item::CHILLEY_SEED:
-                case Item::TOMATO_SEED:
-                case Item::COCA_SEED:
-
-                    DrawTexturePro(
-                        selectorImage,
-                        {0, 0, (float) selectorImage.width, (float) selectorImage.height},
-                        selectorObject, {0, 0}, 0, WHITE
-                    );
-
-                    if(!IsMouseButtonDown(MOUSE_BUTTON_LEFT))
-                        break; 
-
-                    bool foundTile = false;
-                    for(auto &tile : tileManager.tiles) {
-                    
-                        Rectangle tileBoxDetector = tile.getObject();
-                        tileBoxDetector.x += 20;
-                        tileBoxDetector.y += 20;
-                        tileBoxDetector.width -= 40;
-                        tileBoxDetector.height -= 40;
-                    
-                        if(CheckCollisionRecs(tileBoxDetector, selectionObject) && tile.getType() == DIRT) {
-                        
-                            foundTile = true;
-                        
-                            for(auto &plant : tileManager.plants) {
-                            
-                                if(CheckCollisionRecs(plant.getHitbox(), selectionObject)) {
-                                
-                                    foundTile = false;
-                                    break;
-                                }
-                            }
-                            break;
-                        }
-                    }
-                    
-                    if(!foundTile) return;
-
-#define PLANT_ADJUST 10
-
-                    selectionObject.y -= PLANT_ADJUST;
-
-                    tileManager.plants.push_back(Plant(
-                    
-                        selectionObject,
-                        (PLANTS) (int) selectedSlot->item
-                    ));
-
-                    selectedSlot->amount += 1;
-                    break;
-            };
-
-            if(GlobalVars::gameMode == GameMode::EXPLORE || GlobalVars::HoveringOverMenu)
-                return;
-
             DrawTexturePro(
+
                 selectorImage,
                 {0, 0, (float) selectorImage.width, (float) selectorImage.height},
                 selectorObject, {0, 0}, 0, WHITE
             );
+
+#if DEBUG_ACTIVE
+
+            DrawRectangleRec(selectionHitBox, Utils::testColor);
+#endif
+
+            if(selectedSlot) {
+
+                if(selectedSlot->amount <= 0) {
+
+                    selectedSlot->item = Item::NOTHING;
+                    break;
+                }
+
+                switch(selectedSlot->item) {
+
+                    case Item::CARROT_SEED:
+                    case Item::PUMPKIN_SEED:
+                    case Item::CHILLEY_SEED:
+                    case Item::TOMATO_SEED:
+                    case Item::COCA_SEED:
+
+                        if(!IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+                            break; 
+
+                        bool foundTile = false;
+                        for(auto &tile : tileManager.tiles) {
+                        
+                            Rectangle tileBoxDetector = tile.getObject();
+                            tileBoxDetector.x += 20;
+                            tileBoxDetector.y += 20;
+                            tileBoxDetector.width -= 40;
+                            tileBoxDetector.height -= 40;
+                        
+                            if(CheckCollisionRecs(tileBoxDetector, selectionObject) && tile.getType() == DIRT) {
+                            
+                                foundTile = true;
+                            
+                                for(auto &plant : tileManager.plants) {
+                                
+                                    if(CheckCollisionRecs(plant.getHitbox(), selectionObject)) {
+                                    
+                                        foundTile = false;
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                        }
+                        
+                        if(!foundTile) break;
+
+#define PLANT_ADJUST 10
+
+                        selectionObject.y -= PLANT_ADJUST;
+
+                        tileManager.plants.push_back(Plant(
+                        
+                            selectionObject,
+                            (PLANTS) (int) selectedSlot->item
+                        ));
+
+                        selectedSlot->amount += 1;
+                        break;
+            };
+        }
+
+            if(GlobalVars::gameMode == GameMode::EXPLORE || GlobalVars::HoveringOverMenu)
+                return;
             
             checkerArea = {selectionObject.x - 50, selectionObject.y - 50, 155, 155};
             deleteArea = {selectionObject.x + 10, selectionObject.y + 10, 30, 30};
@@ -149,43 +144,6 @@ void World::checkMouseActions() {
                         return;
                     } it++;
                 }
-            }
-
-            if(IsKeyDown(KEY_Q)) {
-
-                bool foundTile = false;
-
-                for(auto &tile : tileManager.tiles) {
-
-                    Rectangle tileBoxDetector = tile.getObject();
-                    tileBoxDetector.x += 20;
-                    tileBoxDetector.y += 20;
-                    tileBoxDetector.width -= 40;
-                    tileBoxDetector.height -= 40;
-
-                    if(CheckCollisionRecs(tileBoxDetector, selectionObject) && tile.getType() == DIRT) {
-
-                        foundTile = true;
-
-                        for(auto &plant : tileManager.plants) {
-
-                            if(CheckCollisionRecs(plant.getHitbox(), selectionObject)) {
-
-                                foundTile = false;
-                                break;
-                            }
-                        }
-                        break;
-                    }
-                }
-
-                if(!foundTile) return;
-
-                tileManager.plants.push_back(Plant(
-
-                    selectionObject,
-                    PLANTS::PUMPKIN
-                ));
             }
 
             if(!Mouse::isClickedL(selectionObject)) return;
