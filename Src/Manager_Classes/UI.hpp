@@ -8,7 +8,7 @@
 #include "../Entity_Classes/Tile.hpp"
 #include "../Manager_Classes/TileManager.hpp"
 #include "World.hpp"
-#include "../Settings.hpp"
+#include "../GlobalVars.hpp"
 
 #define MAX_SLOTS 5
 

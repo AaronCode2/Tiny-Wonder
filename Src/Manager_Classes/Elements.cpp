@@ -11,16 +11,16 @@ Rectangle BasesImage::getImageSrc(const Vector2 srcPos) {
 
 void Inventory::update() {
 
-    if(Settings::gameMode == GameMode::EXPLORE) {
+    if(GlobalVars::gameMode == GameMode::EXPLORE) {
         draw();
 
         if(IsKeyPressed(KEY_E)) {
 
-            Settings::HoveringOverMenu = true;
-            openInventory = !openInventory;
+            GlobalVars::HoveringOverMenu = true;
+            GlobalVars::openInventory = !GlobalVars::openInventory;
         }
 
-    } else openInventory = false;
+    } else GlobalVars::openInventory = false;
 }
 
 void Inventory::init() {
@@ -40,7 +40,6 @@ void Inventory::init() {
     itemSrcPos[Item::CHILLEY] = {4, 0};
 
     slotStartingPos = {740, 300};
-    openInventory = false;
     itemSrcImage.image = LoadTexture("../Assets/Items/Items.png");
     itemSrcImage.setFrame({5, 3});
 
@@ -111,7 +110,7 @@ void Inventory::draw() {
 
         if(
             Mouse::isClickedL(itemRect) && Utils::isSameXY(itemID, {-1, -1}) 
-            && slots[5][(int) i].item != Item::NOTHING && openInventory
+            && slots[5][(int) i].item != Item::NOTHING && GlobalVars::openInventory
         ) {
 
             itemID = {i, 5};
@@ -137,7 +136,7 @@ void Inventory::draw() {
             }
         }
 
-        if(slots[5][(int) i].item != Item::NOTHING && !openInventory && Mouse::isClickedL(buttonRect)) {
+        if(slots[5][(int) i].item != Item::NOTHING && !GlobalVars::openInventory && Mouse::isClickedL(buttonRect)) {
 
             selectedHotBarItem = buttonRect;
             selectedSlot = &slots[5][(int) i];
@@ -177,7 +176,7 @@ void Inventory::draw() {
 
     // Inventory
 
-    if(!openInventory)
+    if(!GlobalVars::openInventory)
         return;
 
     DrawRectangleRounded({750, 310, 430, 430}, 0.1f, 1, SAVY_YELLOW);

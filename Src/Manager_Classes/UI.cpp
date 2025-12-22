@@ -62,7 +62,7 @@ void UI::update() {
 
     gameModeLog.object.y += std::sin(Utils::deltaTimeIt * 7.5) * 0.05;
 
-    gameModeLog.setSrcXY(gameModeSrc[Settings::gameMode]);
+    gameModeLog.setSrcXY(gameModeSrc[GlobalVars::gameMode]);
 
     draw();
     DrawTextureV(mouseImage, GetMousePosition(), MOUSE_BROWN);
@@ -75,7 +75,7 @@ void UI::draw() {
     playerInfo.draw();
 
     DrawTextEx(
-        Utils::font, gameModeStrings[Settings::gameMode].c_str(), 
+        Utils::font, gameModeStrings[GlobalVars::gameMode].c_str(), 
         {75, 154}, FONT_SIZE, 
         FONT_SPACING, BLACK
     );
@@ -84,14 +84,14 @@ void UI::draw() {
 
     DrawRectangleRounded(hotBar.base.object, 0.2, 4, SAVY_YELLOW);
     
-    Settings::HoveringOverMenu = false; 
+    GlobalVars::HoveringOverMenu = false; 
 
     inventory.update();
 
 #define Adjust_selwh 28.0f
 #define Adjust_selxy 15.0F
 
-    if(Settings::gameMode == GameMode::EXPLORE) {
+    if(GlobalVars::gameMode == GameMode::EXPLORE) {
         
         Rectangle selectorObject = {
 
@@ -130,7 +130,7 @@ void UI::draw() {
 
         if(Mouse::isHovering(slot.object)) {
 
-            Settings::HoveringOverMenu = true;
+            GlobalVars::HoveringOverMenu = true;
             buttonImageSrc.x = 1;
         }
 

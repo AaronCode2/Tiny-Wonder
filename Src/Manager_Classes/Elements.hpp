@@ -1,7 +1,7 @@
 #pragma once
 #include <raylib.h>
 #include "../Utils.hpp"
-#include "../settings.hpp"
+#include "../GlobalVars.hpp"
 #include "World.hpp"
 #include <array>
 #include <map>
@@ -115,7 +115,6 @@ struct Inventory {
         Rectangle selectedHotBarItem;
         Slot *selectedSlot = nullptr;
 
-        bool openInventory;
         Vector2 slotStartingPos;
         bool dragged = false;
         std::array<std::array<Slot,5>, 6> slots;

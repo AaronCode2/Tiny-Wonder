@@ -40,6 +40,6 @@ void Game::updateMode(){
     for(int key = 49; key <= 51; key++) {
 
         if(IsKeyDown(key))
-            Settings::gameMode = (GameMode) (key - 49);
+            GlobalVars::gameMode = (GameMode) (key - 49);
     }
 }

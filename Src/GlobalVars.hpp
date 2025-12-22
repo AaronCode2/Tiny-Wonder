@@ -7,8 +7,9 @@ enum class GameMode {
     TRADE
 };
 
-namespace Settings {
+namespace GlobalVars {
 
     extern GameMode gameMode;
     extern bool HoveringOverMenu;
+    extern bool openInventory;
 }

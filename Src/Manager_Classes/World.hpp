@@ -8,7 +8,7 @@
 #include <raylib.h>
 #include "NeighborTypes.hpp"
 #include "../Utils.hpp"
-#include "../Settings.hpp"
+#include "../GlobalVars.hpp"
 #include "../Entity_Classes/Tile.hpp"
 #include "TileManager.hpp"
 

@@ -2,7 +2,7 @@
 #include "Elements.hpp"
 
 Texture2D World::selectorImage = {0};
-Slot World::*selectedSlot;
+Slot* World::selectedSlot = nullptr;
 
 World::World()
 {
@@ -59,6 +59,15 @@ void World::checkMouseActions() {
                 (selectionObject.height) - sin(Utils::deltaTimeIt * 7.6f) * 1.5f
             };
 
+            if(!selectedSlot || GlobalVars::openInventory) 
+                break;
+
+            if(selectedSlot->amount <= 0) {
+
+                selectedSlot->item = Item::NOTHING;
+                break;
+            }
+
             switch(selectedSlot->item) {
 
                 case Item::CARROT_SEED:
@@ -73,54 +82,51 @@ void World::checkMouseActions() {
                         selectorObject, {0, 0}, 0, WHITE
                     );
 
-                    if(IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
+                    if(!IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+                        break; 
 
-                        bool foundTile = false;
-
-                        for(auto &tile : tileManager.tiles) {
+                    bool foundTile = false;
+                    for(auto &tile : tileManager.tiles) {
+                    
+                        Rectangle tileBoxDetector = tile.getObject();
+                        tileBoxDetector.x += 20;
+                        tileBoxDetector.y += 20;
+                        tileBoxDetector.width -= 40;
+                        tileBoxDetector.height -= 40;
+                    
+                        if(CheckCollisionRecs(tileBoxDetector, selectionObject) && tile.getType() == DIRT) {
                         
-                            Rectangle tileBoxDetector = tile.getObject();
-                            tileBoxDetector.x += 20;
-                            tileBoxDetector.y += 20;
-                            tileBoxDetector.width -= 40;
-                            tileBoxDetector.height -= 40;
+                            foundTile = true;
                         
-                            if(CheckCollisionRecs(tileBoxDetector, selectionObject) && tile.getType() == DIRT) {
+                            for(auto &plant : tileManager.plants) {
                             
-                                foundTile = true;
-                            
-                                for(auto &plant : tileManager.plants) {
+                                if(CheckCollisionRecs(plant.getHitbox(), selectionObject)) {
                                 
-                                    if(CheckCollisionRecs(plant.getHitbox(), selectionObject)) {
-                                    
-                                        foundTile = false;
-                                        break;
-                                    }
+                                    foundTile = false;
+                                    break;
                                 }
-                                break;
                             }
+                            break;
                         }
-                        
-                        if(!foundTile) return;
+                    }
+                    
+                    if(!foundTile) return;
 
 #define PLANT_ADJUST 10
 
-                        selectionObject.y -= PLANT_ADJUST;
+                    selectionObject.y -= PLANT_ADJUST;
 
-                        tileManager.plants.push_back(Plant(
-                        
-                            selectionObject,
-                            (PLANTS) (int) selectedSlot->item
-                        ));
+                    tileManager.plants.push_back(Plant(
+                    
+                        selectionObject,
+                        (PLANTS) (int) selectedSlot->item
+                    ));
 
-                        selectionObject.y += PLANT_ADJUST;
-
-                        selectedSlot->amount -= 1;
-                    }
+                    selectedSlot->amount += 1;
                     break;
             };
 
-            if(Settings::gameMode == GameMode::EXPLORE || Settings::HoveringOverMenu)
+            if(GlobalVars::gameMode == GameMode::EXPLORE || GlobalVars::HoveringOverMenu)
                 return;
 
             DrawTexturePro(

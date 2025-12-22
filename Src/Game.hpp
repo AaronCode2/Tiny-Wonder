@@ -5,7 +5,7 @@
 #include "Manager_Classes/UI.hpp"
 #include "Manager_Classes/World.hpp"
 #include "Manager_Classes/DataIO.hpp"
-#include "Settings.hpp"
+#include "GlobalVars.hpp"
 
 class Game {
 
