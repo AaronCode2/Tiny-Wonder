@@ -40,10 +40,9 @@ struct PlantPosIt {
 
 class Plant : public Sprite {
 
-
     public:
 
-        Plant(Rectangle object, PLANTS plantType);
+        Plant(Rectangle object, PLANTS plantType, PLANT_STAGE plantState);
 
         static Texture2D plantImage;
         static std::map<PlantPosIt, Vector2> plantFrame;
@@ -51,7 +50,10 @@ class Plant : public Sprite {
         void update();
         static void mapPlants();
         void setVelocity(Vector2 newVeclocity) { velocity = newVeclocity; };
-        Rectangle getHitbox() const {return hitBox; };
+        Rectangle getHitbox() const { return hitBox; };
+
+        PLANTS getPlantType() const { return plantType; };
+        PLANT_STAGE getPlantState() const { return plantState; };
 
     private:
 

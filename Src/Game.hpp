@@ -31,8 +31,10 @@ class Game {
             world.tileManager.tiles, world.tileManager.plants
         );
 
-        DataIO dataIO = DataIO(world.tileManager.tiles, world.worldPos, player.object, ui.getSlotData());
-
+        DataIO dataIO = DataIO(
+            world.tileManager.tiles, world.worldPos, 
+            player.object, ui.getSlotData(), world.tileManager.plants
+        );
         
         void gameLoop();
         void updateGame();

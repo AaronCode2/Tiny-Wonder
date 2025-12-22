@@ -7,14 +7,18 @@
 #include "../Entity_Classes/Tile.hpp"
 #include "../Manager_Classes/NeighborTypes.hpp"
 #include "Elements.hpp"
+#include "../Entity_Classes/Plant.hpp"
 
 #define NUM_SIZE 8
+#define PLANT_SIZE 4
 #define POS_ELEMENTS 4
+#define PLANT_ELEMENTS 4
 #define FLOAT_PRECISION 0 // To avoid Tiles not aligning with each other
 #define INVENTORY_ELEMENTS 2
 #define POS_PATH "../Data/Pos.txt"
 #define TILE_MAP_PATH "../Data/TileMap.txt"
 #define INVENTORY_PATH "../Data/Inventory.txt"
+#define PLANT_DATA_PATH "../Data/Plant.txt"
 
 enum fileReadStructure {
 
@@ -26,6 +30,14 @@ enum fileReadStructure {
     FRAME_Y,
     ID,
     DECORATION_ID
+};
+
+enum class PlantReadStructure {
+
+    X = 0,
+    Y,
+    PLANT_TYPE,
+    PLANT_STATE
 };
 
 enum PosStructure {
@@ -43,7 +55,8 @@ class DataIO {
 
         DataIO(
             std::vector<Tile> &tiles, Vector2 &worldPos, 
-            Rectangle &playerObject, std::array<std::array<Slot, 5>, 6> &slots
+            Rectangle &playerObject, std::array<std::array<Slot, 5>, 6> &slots,
+            std::vector<Plant> &plants
         );
 
         ~DataIO();
@@ -54,6 +67,8 @@ class DataIO {
         void readPosData();
         void writePosData();
 
+        void readPlantData();
+        void writePlantData();
         
         void readInventoryData();
         void writeInventoryData();
@@ -61,6 +76,7 @@ class DataIO {
     private:
 
     std::vector<Tile> &tiles;
+    std::vector<Plant> &plants;
     std::array<std::array<Slot, 5>, 6> &slots;
 
     Vector2 &worldPos;

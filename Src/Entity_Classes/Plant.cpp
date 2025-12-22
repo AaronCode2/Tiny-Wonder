@@ -3,17 +3,20 @@
 Texture2D Plant::plantImage;
 std::map<PlantPosIt, Vector2> Plant::plantFrame;
 
-Plant::Plant(Rectangle object, PLANTS plantType): 
+Plant::Plant(Rectangle object, PLANTS plantType, PLANT_STAGE plantState): 
     Sprite(object, {5, 6})
 {
 
     this->plantType = plantType;
+    this->plantState = plantState;
     
     srcRect.width = plantImage.width / frame.x;
     srcRect.height = plantImage.height / frame.y;
     
     srcRect.x = plantFrame[{plantType, plantState}].x * srcRect.width;
     srcRect.y = plantFrame[{plantType, plantState}].y * srcRect.height;
+
+    itTime = (int) plantState;
 
     timeForNextState[0] = GetRandomValue(1, 4);
     timeForNextState[1] = GetRandomValue(10, 15);

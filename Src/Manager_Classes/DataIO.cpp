@@ -2,13 +2,14 @@
 
 DataIO::DataIO(
     std::vector<Tile> &tiles, Vector2 &worldPos, Rectangle &playerObject, 
-    std::array<std::array<Slot, 5>, 6> &slots
+    std::array<std::array<Slot, 5>, 6> &slots, std::vector<Plant> &plants
 ):
-    tiles(tiles), worldPos(worldPos), playerObject(playerObject), slots(slots)
+    tiles(tiles), worldPos(worldPos), playerObject(playerObject), slots(slots), plants(plants)
 {   
     readTileData();
     readPosData();
     readInventoryData();
+    readPlantData();
 }
 
 DataIO::~DataIO(){
@@ -16,6 +17,7 @@ DataIO::~DataIO(){
     writeTileData();
     writePosData();
     writeInventoryData();
+    writePlantData();
 }
 
 void DataIO::writeTileData() {
@@ -163,7 +165,77 @@ void DataIO::writePosData() {
     file.close();
 }
 
-void DataIO::readInventoryData() {
+void DataIO::readPlantData() {
+
+    std::ifstream file(PLANT_DATA_PATH);
+
+    std::string line;
+    
+    while(std::getline(file, line)) {
+        
+        int elements[PLANT_SIZE]; 
+        int count = 0;
+        std::string temp;
+
+        for(size_t i = 0; i < line.length(); i++) {
+
+            if(line[i] == '{')
+                continue;
+
+            if(line[i] == '}')
+                break;
+
+            temp += line[i];  
+        }
+
+        std::stringstream ss(temp);
+        std::string token;
+
+        while(std::getline(ss, token, ',') && count < PLANT_ELEMENTS) {
+
+            elements[count++] = std::stof(token);
+        }
+
+        plants.push_back(Plant(
+                {
+                    (float) elements[0], 
+                    (float) elements[1],
+                    60, 60
+                },
+                (PLANTS) elements[2],
+                (PLANT_STAGE) elements[3]
+            )
+        );
+    }
+
+    file.close();
+}
+
+void DataIO::writePlantData() {
+
+    std::ofstream file(PLANT_DATA_PATH);
+
+    if(!file.is_open())
+        Utils::exitApp("Could not write Data to PlantData");
+
+    for(auto plant : plants) {
+
+        file 
+        << "{" << std::fixed << std::setprecision(FLOAT_PRECISION)
+
+            << plant.getObject().x << ", "
+            << plant.getObject().y << ", "
+            << (int) plant.getPlantType() << ", "
+            << (int) plant.getPlantState()
+        
+        << "}\n";
+    }
+
+    file.close();
+}
+
+void DataIO::readInventoryData()
+{
 
     std::ifstream file(INVENTORY_PATH);
 

@@ -119,7 +119,8 @@ void World::checkMouseActions() {
                         tileManager.plants.push_back(Plant(
                         
                             selectionObject,
-                            (PLANTS) (int) selectedSlot->item
+                            (PLANTS) (int) selectedSlot->item,
+                            PLANT_STAGE::Seed
                         ));
 
                         selectedSlot->amount += 1;
