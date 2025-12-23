@@ -13,8 +13,12 @@ TileManager::TileManager() {
 
 TileManager::~TileManager() {
 
+#if !__linux__
+
     UnloadTexture(Tile::image);
     UnloadTexture(Plant::plantImage);
+    
+#endif
 }
 
 void TileManager::update() {

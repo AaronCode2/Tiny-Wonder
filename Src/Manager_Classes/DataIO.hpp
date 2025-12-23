@@ -9,7 +9,7 @@
 #include "Elements.hpp"
 #include "../Entity_Classes/Plant.hpp"
 
-#define NUM_SIZE 8
+#define NUM_SIZE 6
 #define PLANT_SIZE 4
 #define POS_ELEMENTS 4
 #define PLANT_ELEMENTS 4
@@ -24,8 +24,6 @@ enum fileReadStructure {
 
     X = 0,
     Y,
-    WIDTH,
-    HEIGHT,
     FRAME_X,
     FRAME_Y,
     ID,

@@ -19,7 +19,11 @@ Player::Player(Rectangle object, std::vector<Tile> &tiles, std::vector<Plant> &p
 
 Player::~Player() {
 
+#if !__linux__
+
     UnloadTexture(image);
+
+#endif
 }
 
 void Player::update() {

@@ -34,7 +34,6 @@ void DataIO::writeTileData() {
             << std::fixed << std::setprecision(FLOAT_PRECISION)
 
             << tile.getObject().x << ", " << tile.getObject().y << ", "
-            << tile.getObject().width << ", " << tile.getObject().height << ", "
             << tile.getFrame().x << ", " << tile.getFrame().y << ", "
             << (int) tile.getType() << ", " << tile.decorationType   
 
@@ -80,8 +79,8 @@ void DataIO::readTileData() {
             {
                 (float) numbers[X],
                 (float) numbers[Y],
-                (float) numbers[WIDTH],
-                (float) numbers[HEIGHT]
+                (float) 60,
+                (float) 60
             },
             {(float) numbers[FRAME_X], (float) numbers[FRAME_Y]},
             (TileType) numbers[ID],

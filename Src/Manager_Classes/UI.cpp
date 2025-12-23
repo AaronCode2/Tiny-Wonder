@@ -42,12 +42,16 @@ UI::UI(TileType &selectedType):
 
 UI::~UI() {
 
+#if !__linux__
+
     UnloadTexture(buttonImage);
     
     UnloadTexture(inventory.buttonImage);
     UnloadTexture(inventory.itemSrcImage.image);
     UnloadTexture(playerPhoto.image);
     UnloadTexture(playerInfo.image);
+
+#endif
 }
 
 void UI::update() {

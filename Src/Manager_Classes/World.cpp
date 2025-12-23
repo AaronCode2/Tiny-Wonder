@@ -11,7 +11,11 @@ World::World()
 
 World::~World() {
 
+#if !__linux__
+
     UnloadTexture(selectorImage);
+    
+#endif
 }
 
 void World::update() {
