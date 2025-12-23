@@ -9,3 +9,4 @@ Game::Status = 35.2%
 5 -> Inventory ✅
 6 -> Add better UI (mouse and box expanding) ✅
 7 -> Fix dulipcate 60, 60 in tileMap.txt code
+8 -> Make #if LINUX
