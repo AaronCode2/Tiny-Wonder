@@ -132,6 +132,11 @@ void World::checkMouseActions() {
             };
         }
 
+        for(auto &plant : tileManager.plants) {
+
+            // if(plant.getPlantState() == PLANT_STAGE::HARVESTABLE_ADULT && plant.getObject() == )
+        }
+
             if(GlobalVars::gameMode == GameMode::EXPLORE || GlobalVars::HoveringOverMenu)
                 return;
             

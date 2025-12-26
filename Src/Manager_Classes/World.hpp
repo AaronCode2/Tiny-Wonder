@@ -29,7 +29,9 @@ class World {
         void update();
         static Texture2D selectorImage;
         static Slot *selectedSlot;
+        static Slot appendingSlot;
         static void getSelectedSlot(Slot *newSelectedSlot);
+        // static Slot getAppendingSlot() { return appendingSlot; };
 
     private:
 

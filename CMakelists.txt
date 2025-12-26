@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.10...3.50)
-
-project(Aaron)
+project(Tiny_Wonder)
 
 include(FetchContent)
 
@@ -13,6 +12,8 @@ FetchContent_Declare(
 )
 
 set(BUILD_EXAMPLES OFF CACHE INTERNAL "")
+set(BUILD_GAMES OFF CACHE BOOL "" FORCE)
+
 FetchContent_MakeAvailable(raylib)
 
 set(
@@ -35,15 +36,27 @@ SOURCE_FILES
     Src/Entity_Classes/Plant.cpp
 )
 
-add_executable(Aaron ${SOURCE_FILES})
-target_link_libraries(Aaron raylib)
+add_executable(Tiny_Wonder ${SOURCE_FILES})
+target_link_libraries(Tiny_Wonder raylib)
 
-if ("${PLATFORM}" STREQUAL "Web")
+if(WIN32)
+
+    target_sources(Tiny_Wonder PRIVATE Assets/Windows/app.rc)
+    target_link_options(Tiny_Wonder PRIVATE $<$<CONFIG:Release>:-mwindows>)
+elseif(APPLE)
+
+    target_link_options(Tiny_Wonder PRIVATE $<$<CONFIG:Release>:-MACOSX_BUNDLE>)
+endif()
+
+target_compile_definitions(Tiny_Wonder PUBLIC $<$<CONFIG:Debug>:DEBUG_ENABLED>)
+
+if("${PLATFORM}" STREQUAL "Web")
 
     message(FATAL_ERROR "Do not build in this project in the Web as it doesn't work!")
 endif()
 
-if (APPLE)
+if(APPLE)
+
     target_link_libraries(${PROJECT_NAME} "-framework IOKit")
     target_link_libraries(${PROJECT_NAME} "-framework Cocoa")
     target_link_libraries(${PROJECT_NAME} "-framework OpenGL")

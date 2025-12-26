@@ -4,7 +4,13 @@ void App::run() {
 
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     
+    
+    Image favicon = LoadImage("../Assets/UI/favicon.png");
     InitWindow(1000, 600, "Tiny Wonder");
+    
+    SetWindowIcon(favicon);
+    UnloadImage(favicon);
+    
     SetWindowState(FLAG_WINDOW_MAXIMIZED);
     HideCursor();
     logInfo();

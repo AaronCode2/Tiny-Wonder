@@ -5,7 +5,7 @@
         "type": "cppdbg",
         "request": "launch",
         "preLaunchTask": "Cmake",
-        "program": "${workspaceFolder}/build/Aaron.exe",
+        "program": "${workspaceFolder}/build/Tiny_Wonder.exe",
         "args": [],
         "stopAtEntry": false,
         "cwd": "${workspaceFolder}/build",
