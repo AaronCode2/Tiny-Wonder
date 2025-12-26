@@ -10,6 +10,7 @@
 #include "../Utils.hpp"
 #include "../GlobalVars.hpp"
 #include "../Entity_Classes/Tile.hpp"
+#include "Elements.hpp"
 #include "TileManager.hpp"
 
 struct Slot;
@@ -31,10 +32,11 @@ class World {
         static Slot *selectedSlot;
         static Slot appendingSlot;
         static void getSelectedSlot(Slot *newSelectedSlot);
-        // static Slot getAppendingSlot() { return appendingSlot; };
+        static Slot getAppendingSlot() { return appendingSlot; };
 
     private:
 
+        Element2 emoji = {LoadTexture("../Assets/UI/Emoji.png")};
         Rectangle selectionObject;
         Rectangle checkerArea;
         Rectangle deleteArea;

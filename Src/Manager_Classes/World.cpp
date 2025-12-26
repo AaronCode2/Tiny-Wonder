@@ -3,11 +3,16 @@
 
 Texture2D World::selectorImage = {0};
 Slot* World::selectedSlot = nullptr;
+Slot World::appendingSlot = {Item::NOTHING, -1};
 
 World::World()
 {
     selectorImage = LoadTexture("../Assets/UI/Selector.png");
+
+    emoji.setFrame({5, 19});
+    emoji.setSrcXY({1, 16});
 }
+
 
 World::~World() {
 
@@ -132,9 +137,25 @@ void World::checkMouseActions() {
             };
         }
 
-        for(auto &plant : tileManager.plants) {
+        if(GlobalVars::gameMode == GameMode::EXPLORE) {
+            for(auto it = tileManager.plants.begin(); it < tileManager.plants.end(); it++) {
 
-            // if(plant.getPlantState() == PLANT_STAGE::HARVESTABLE_ADULT && plant.getObject() == )
+                if(
+                    it->getPlantState() == PLANT_STAGE::HARVESTABLE_ADULT && 
+                    CheckCollisionRecs(it->getObject(), selectionHitBox)
+                ) {
+
+                    emoji.object = selectionObject;
+                    emoji.draw();
+                    
+                    if(IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
+
+                        appendingSlot = {(Item) (5 + (int) it->getPlantType()), 1};
+                        it = tileManager.plants.erase(it);
+                        break;
+                    }
+                }
+            }
         }
 
             if(GlobalVars::gameMode == GameMode::EXPLORE || GlobalVars::HoveringOverMenu)

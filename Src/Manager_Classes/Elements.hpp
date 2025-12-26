@@ -2,7 +2,6 @@
 #include <raylib.h>
 #include "../Utils.hpp"
 #include "../GlobalVars.hpp"
-#include "World.hpp"
 #include <array>
 #include <map>
 #include <utils.h>

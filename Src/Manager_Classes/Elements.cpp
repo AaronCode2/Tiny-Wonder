@@ -1,4 +1,5 @@
 #include "Elements.hpp"
+#include "World.hpp"
 
 
 Rectangle BasesImage::getImageSrc(const Vector2 srcPos) {
@@ -22,6 +23,8 @@ void Inventory::update() {
 
     } else GlobalVars::openInventory = false;
 }
+
+#define INVAILD_SLOT (Slot) {Item::NOTHING, -1}
 
 void Inventory::init() {
 
@@ -174,7 +177,25 @@ void Inventory::draw() {
         );
     }
 
-    // Inventory
+
+
+    if(World::appendingSlot.item != Item::NOTHING) {
+
+        for(int i = 0; i < 5; i++) {
+            for(int l = 0; l < 5; l++) {
+
+                if(slots[i][l].item == Item::NOTHING || slots[i][l].item == World::appendingSlot.item) {
+
+                    slots[i][l].amount += World::appendingSlot.amount;
+                    slots[i][l].item = World::appendingSlot.item;
+                    World::appendingSlot = {Item::NOTHING, -1};
+                    return;
+                }
+            }
+        }
+    }
+    
+// Inventory
 
     if(!GlobalVars::openInventory)
         return;
