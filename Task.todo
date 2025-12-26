@@ -1,12 +1,6 @@
 
 Game::Status = 56.2%
 
-
-1 -> Make a Farm system ✅
-2 -> Make a money thingy
-3 -> Make plants plot ✅
-4 -> Make the plants colllectable ✅
-5 -> Inventory ✅
-6 -> Add better UI (mouse and box expanding) ✅
-7 -> Fix dulipcate 60, 60 in tileMap.txt code ✅
-8 -> Make #if LINUX ✅
+1 -> Make a money thingy
+2 -> Make dealer system (with browser thingy and yeah)
+3 -> Freedom! Done!
