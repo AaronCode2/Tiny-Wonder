@@ -60,6 +60,7 @@ class Plant : public Sprite {
         void grow();
         void updateHitBox();
         void drawExternalPlantImage();
+        void mapPlantTimings();
 
         int timeForNextState[4];
         int time = GetTime();

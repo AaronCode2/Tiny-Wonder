@@ -62,6 +62,8 @@ void Inventory::init() {
 Rectangle Inventory::draggedItem = EMPTY_RECT;
 Vector2 Inventory::itemID = {-1, -1};
 
+#define STACK_SIZE 255
+
 void Inventory::draw() {
 
     // Hotbar
@@ -184,7 +186,10 @@ void Inventory::draw() {
         for(int i = 0; i < 5; i++) {
             for(int l = 0; l < 5; l++) {
 
-                if(slots[i][l].item == Item::NOTHING || slots[i][l].item == World::appendingSlot.item) {
+                if(
+                    (slots[i][l].item == Item::NOTHING || slots[i][l].item == World::appendingSlot.item)
+                    && slots[i][l].amount + World::appendingSlot.amount <= STACK_SIZE
+                ) {
 
                     slots[i][l].amount += World::appendingSlot.amount;
                     slots[i][l].item = World::appendingSlot.item;
@@ -194,7 +199,7 @@ void Inventory::draw() {
             }
         }
     }
-    
+
 // Inventory
 
     if(!GlobalVars::openInventory)
@@ -376,12 +381,27 @@ void Inventory::draw() {
                 if(!CheckCollisionPointRec(GetMousePosition(), buttonHitBoxRect) || Utils::isSameXY({x, y}, itemID))
                     continue;
 
-                if(slots[(int) y][(int) x].item == slots[(int) itemID.y][(int) itemID.x].item) {
+                if(
+                    slots[(int) y][(int) x].item == slots[(int) itemID.y][(int) itemID.x].item 
+                ) {
                     
-                    slots[(int) y][(int) x].amount += slots[(int) itemID.y][(int) itemID.x].amount;
 
-                    slots[(int) itemID.y][(int) itemID.x].item = Item::NOTHING;
-                    slots[(int) itemID.y][(int) itemID.x].amount = 0;
+                    if(slots[(int) y][(int) x].amount + slots[(int) itemID.y][(int) itemID.x].amount <= STACK_SIZE) {
+
+                        slots[(int) y][(int) x].amount += slots[(int) itemID.y][(int) itemID.x].amount;
+                        slots[(int) itemID.y][(int) itemID.x].item = Item::NOTHING;
+                        slots[(int) itemID.y][(int) itemID.x].amount = 0;
+
+                    } else {
+
+                        if(slots[(int) y][(int) x].amount != STACK_SIZE) {
+                            
+                            slots[(int) itemID.y][(int) itemID.x].amount = 
+                            STACK_SIZE - slots[(int) itemID.y][(int) itemID.x].amount;
+                        }
+
+                        slots[(int) y][(int) x].amount = STACK_SIZE;
+                    }
 
                     break;
                 } else std::swap(slots[(int) y][(int) x], slots[(int) itemID.y][(int) itemID.x]);       

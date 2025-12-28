@@ -44,7 +44,7 @@ void World::checkMouseActions() {
             
             selectionObject = {x + worldPos.x, y + worldPos.y, TILE_SIZE, TILE_SIZE};
             
-            if(!Mouse::isHovering(selectionObject))
+            if(!Mouse::isHovering(selectionObject) || GlobalVars::openInventory)
                 continue;
 
             Rectangle selectionHitBox = {
