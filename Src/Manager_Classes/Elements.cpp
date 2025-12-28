@@ -109,7 +109,7 @@ void Inventory::draw() {
 
         Vector2 textPos = {
 
-            i * 80 + slotStartingPos.x + 30,
+            i * 80 + slotStartingPos.x + 20,
             940
         };
 
@@ -289,7 +289,7 @@ void Inventory::draw() {
             
             Vector2 textPos = {
 
-                x * 80 + slotStartingPos.x + 30,
+                x * 80 + slotStartingPos.x + 20,
                 y * 80 + slotStartingPos.y + 60
             };
 
@@ -327,7 +327,7 @@ void Inventory::draw() {
         draggedItem.y = GetMouseY() - offset;
 
         Vector2 textPos = {
-            draggedItem.x,
+            draggedItem.x - 10,
             draggedItem.y + 30
         };
 

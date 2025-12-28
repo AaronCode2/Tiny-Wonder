@@ -2,7 +2,7 @@
 
 Hi I'm making a Game using Raylib library and C++ for the development.  
 This game is based around RPGs and gives the experience of a sandbox style  
-with the main theme being **Build**, **Explore**, **Farm**.
+with the main theme being **Build**, **Go**, **Farm**.
 
 
 ## How To clone Project

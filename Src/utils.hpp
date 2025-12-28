@@ -28,6 +28,8 @@ namespace Utils {
     extern Color const testColor;
     Rectangle getScreenRect(); 
 
+    std::string formatZeros(int num, int width);
+
     bool isSameXY(const Rectangle aObject, const Rectangle bObject);
     bool isSameXY(const Vector2 aObject, const Vector2 bObject);
     bool isSameXY(const Vector2 aObject, const Vector2 bObject, const Vector2 bObject2);

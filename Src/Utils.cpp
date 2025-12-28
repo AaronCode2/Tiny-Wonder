@@ -141,3 +141,14 @@ bool Mouse::isClickedOnceR(const Rectangle object) {
 
     return (CheckCollisionPointRec(GetMousePosition(), object) && IsMouseButtonPressed(MOUSE_BUTTON_RIGHT));
 }
+
+std::string Utils::formatZeros(int num, int width) {
+
+    std::string numText = std::to_string(num);
+
+    int leadingZero = width - numText.length();
+    
+    numText = 'x' + std::string(leadingZero, '0') + numText;
+
+    return numText;
+}

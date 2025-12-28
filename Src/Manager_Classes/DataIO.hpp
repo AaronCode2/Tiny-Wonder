@@ -19,6 +19,7 @@
 #define TILE_MAP_PATH "../Data/TileMap.txt"
 #define INVENTORY_PATH "../Data/Inventory.txt"
 #define PLANT_DATA_PATH "../Data/Plant.txt"
+#define MONEY_DATA_PATH "../Data/Money.txt"
 
 enum fileReadStructure {
 
@@ -70,6 +71,9 @@ class DataIO {
         
         void readInventoryData();
         void writeInventoryData();
+
+        void readMoneyData();
+        void writeMoneyData();
 
     private:
 

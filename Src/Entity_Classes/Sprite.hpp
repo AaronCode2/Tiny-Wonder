@@ -22,7 +22,7 @@ class Sprite {
         Rectangle srcRect;
         Vector2 frame;
 
-        void draw(Texture2D image);
+        void draw(Texture2D image = Sprite::image);
         void animate(const int frameEnd, const int frameStart = 0, const float frameDuration = 0.1f);
 
         int currentFrame = 0;

@@ -7,17 +7,23 @@ Sprite::Sprite(Rectangle object, Vector2 frame) {
     this->object = object;
     this->frame = frame;
     
+    if(image.id == 0) {
+
+        Sprite::image = LoadTexture("../Assets/Items/coin.png");
+        image = Sprite::image;
+    }
+
     srcRect.width = image.width / frame.x;
     srcRect.height = image.height / frame.y;
+    srcRect.y = 0;
 }
 
 void Sprite::update() {
     
     srcRect.x = srcRect.width * currentFrame;
-    srcRect.y = 0;
 
-    animate(2);
-    draw(image);
+    animate(frame.x);
+    draw();
 }
 
 void Sprite::draw(Texture2D image) {

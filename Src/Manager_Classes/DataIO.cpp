@@ -10,6 +10,7 @@ DataIO::DataIO(
     readPosData();
     readInventoryData();
     readPlantData();
+    readMoneyData();
 }
 
 DataIO::~DataIO(){
@@ -18,6 +19,7 @@ DataIO::~DataIO(){
     writePosData();
     writeInventoryData();
     writePlantData();
+    writeMoneyData();
 }
 
 void DataIO::writeTileData() {
@@ -304,6 +306,31 @@ void DataIO::writeInventoryData()
             << "}\n";
         }
     }
+
+    file.close();
+}
+
+void DataIO::readMoneyData() {
+
+    std::ifstream file(MONEY_DATA_PATH);
+
+    std::string data;
+    std::getline(file, data);
+
+    GlobalVars::money = std::stoi(data);
+
+    file.close();
+}
+
+void DataIO::writeMoneyData()
+{
+
+    std::ofstream file(MONEY_DATA_PATH);
+
+    if(!file.is_open())
+        Utils::exitApp("Could not write Data to MoneyData");
+
+    file << GlobalVars::money;
 
     file.close();
 }

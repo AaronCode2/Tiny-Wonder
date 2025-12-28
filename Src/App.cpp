@@ -21,6 +21,8 @@ void App::run() {
 
 void App::logInfo() {
 
+#if DEBUG_ENABLED
+
     std::cout 
         << "\033[31mDo not close this window instead please close the other window which has the Game Context\n"
         << "If you find a bug or have a issue with the game please go to https://github.com/AaronCode2/Tiny-Wonder and report an Issue\n"
@@ -28,4 +30,6 @@ void App::logInfo() {
         << "As from the Developer of this game: The game uses no information needed for the user\n"
         << "It is safe to say that the autosaving system will not use any personal data and is needed to run the game\n"
         << "Thank you for playing my game if you want to the 'how to play' go itch.io or gitHub :) \n\033[0m";
+#endif
+
 }

@@ -25,7 +25,12 @@ UI::UI(TileType &selectedType):
     ButtonImage::setImage(buttonImage);
 
     inventory.buttonImage = buttonImage;
-    inventory.selectedHotBarItem = EMPTY_RECT;
+    inventory.selectedHotBarItem = {
+        
+        (float) GetScreenWidth(),
+        (float) GetScreenHeight(),
+        10, 10
+    };
     inventory.init();
 
     for(int i = 0; i < MAX_SLOTS; i++) {
@@ -50,6 +55,7 @@ UI::~UI() {
     UnloadTexture(inventory.itemSrcImage.image);
     UnloadTexture(playerPhoto.image);
     UnloadTexture(playerInfo.image);
+    UnloadTexture(Sprite::image);
 
 #endif
 }
@@ -64,7 +70,7 @@ void UI::update() {
         90, 
     };
 
-    gameModeLog.object.y += std::sin(Utils::deltaTimeIt * 7.5) * 0.05;
+    gameModeLog.object.y += std::sin(Utils::deltaTimeIt * 7.5) * 25 * GetFrameTime();
 
     gameModeLog.setSrcXY(gameModeSrc[GlobalVars::gameMode]);
 
@@ -91,6 +97,30 @@ void UI::draw() {
     GlobalVars::HoveringOverMenu = false; 
 
     inventory.update();
+
+    coin.object = {
+        GetScreenWidth() - 190.0f,
+        20,
+        60,
+        60
+    };
+
+    DrawRectangleRounded(
+        {
+            GetScreenWidth() - 185.0f,
+            10,
+            165,
+            80
+        }, 
+        0.2, 4, SAVY_YELLOW
+    );
+
+    coin.update();
+
+    DrawTextEx(
+        Utils::font, Utils::formatZeros(GlobalVars::money, 5).c_str(),
+        {GetScreenWidth() - 140.0f, 40}, FONT_SIZE, FONT_SPACING, BLACK 
+    );
 
 #define Adjust_selwh 28.0f
 #define Adjust_selxy 15.0F
@@ -143,8 +173,6 @@ void UI::draw() {
 
         if(i == (int) selectedType) {
 
-
-
             Rectangle selectorObject = {
 
                 (buttonObject.x + Adjust_selxy) - sin(Utils::deltaTimeIt * 7.5f) * 1.5f,
@@ -159,7 +187,6 @@ void UI::draw() {
                 selectorObject, {0, 0}, 0, WHITE
             );
         }
-
 
         DrawTexturePro(
             buttonImage,

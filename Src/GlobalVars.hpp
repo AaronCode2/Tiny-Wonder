@@ -12,4 +12,5 @@ namespace GlobalVars {
     extern GameMode gameMode;
     extern bool HoveringOverMenu;
     extern bool openInventory;
+    extern int money;
 }
