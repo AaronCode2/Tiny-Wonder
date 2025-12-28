@@ -13,7 +13,6 @@
 
 #define MAX_SLOTS 5
 
-
 class UI {
 
     public:

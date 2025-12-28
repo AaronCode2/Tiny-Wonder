@@ -26,7 +26,7 @@ UI::UI(TileType &selectedType):
 
     inventory.buttonImage = buttonImage;
     inventory.selectedHotBarItem = {
-        
+
         (float) GetScreenWidth(),
         (float) GetScreenHeight(),
         10, 10
@@ -140,6 +140,29 @@ void UI::draw() {
             {0, 0, (float) World::selectorImage.width, (float) World::selectorImage.height},
             selectorObject, {0, 0}, 0, WHITE
         );
+        return;
+    } else if(GlobalVars::gameMode == GameMode::TRADE) {
+
+        DrawRectangleRounded(
+            {
+                (GetScreenWidth() / 8.0f),
+                (GetScreenHeight() / 5.1f),
+                (GetScreenWidth() / 1.35f),
+                (GetScreenHeight() / 1.45f),
+            }, 
+            0.09f, 6, SAVY_YELLOW
+        );
+
+        DrawRectangleRounded(
+            {
+                (GetScreenWidth() / 9.1f),
+                (GetScreenHeight() / 5.1f),
+                (GetScreenWidth() / 1.43f),
+                (GetScreenHeight() / 9.0f),
+            },
+            0.3, 4, SAVY_BROWN
+        );
+
         return;
     }
 
