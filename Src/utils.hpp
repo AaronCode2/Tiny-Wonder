@@ -10,6 +10,8 @@
 #define SAVY_YELLOW (Color) {255, 209, 157, 255}
 #define MOUSE_BROWN (Color) {163, 90, 66, 255}
 #define SAVY_BROWN (Color) {215, 147, 106, 255}
+#define DARK_BROWN (Color) {181, 108, 78, 255}
+
 #define FONT_SIZE 30
 #define FONT_SPACING 1
 

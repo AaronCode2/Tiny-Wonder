@@ -22,6 +22,8 @@ UI::UI(TileType &selectedType):
 
     hotBar.base.color = {130, 130, 130, 230};
 
+    iconMenu.setFrame({3, 3});
+
     ButtonImage::setImage(buttonImage);
 
     inventory.buttonImage = buttonImage;
@@ -125,8 +127,12 @@ void UI::draw() {
 #define Adjust_selwh 28.0f
 #define Adjust_selxy 15.0F
 
+
+
     if(GlobalVars::gameMode == GameMode::EXPLORE) {
         
+        rand = 0;
+
         Rectangle selectorObject = {
 
             (inventory.selectedHotBarItem.x + Adjust_selxy) - sin(Utils::deltaTimeIt * 7.5f) * 1.5f,
@@ -143,6 +149,8 @@ void UI::draw() {
         return;
     } else if(GlobalVars::gameMode == GameMode::TRADE) {
 
+        if(rand == 0) rand = GetRandomValue(100000000, 999999999);
+
         DrawRectangleRounded(
             {
                 (GetScreenWidth() / 8.0f),
@@ -155,13 +163,53 @@ void UI::draw() {
 
         DrawRectangleRounded(
             {
-                (GetScreenWidth() / 9.1f),
-                (GetScreenHeight() / 5.1f),
-                (GetScreenWidth() / 1.43f),
-                (GetScreenHeight() / 9.0f),
+                (GetScreenWidth() / 5.5f),
+                (GetScreenHeight() / 4.5f),
+                (GetScreenWidth() / 1.48f),
+                (GetScreenHeight() / 15.0f),
             },
             0.3, 4, SAVY_BROWN
         );
+
+        // Can't use ':' or '=' as the Font doesn't include them
+
+        std::string line = "https/dealership.com/LatestDeals/request?" + std::to_string(rand);
+
+        DrawTextEx(
+            Utils::font, line.c_str(),
+            {
+                (GetScreenWidth() / 5.4f),
+                (GetScreenHeight() / 4.1f)
+            },
+            FONT_SIZE, FONT_SPACING,
+            DARK_BROWN
+        );
+
+        iconMenu.object = {
+
+            (GetScreenWidth() / 7.3f),
+            (GetScreenHeight() / 4.5f),
+            (GetScreenWidth() / 25.0f),
+            (GetScreenHeight() / 15.0f)
+        };
+        
+        iconMenu.setSrcXY({2, 2});
+        iconMenu.draw();
+
+        for(int y = 1; y <= 3; y++) {
+            for(int x = 1; x <= 3; x++) {
+// Slove this Blah :(
+            DrawRectangleRounded(
+                {
+                    (GetScreenWidth() / 5.5f * x),
+                    (GetScreenHeight() / 3.2f * y),
+                    (GetScreenWidth() / 5.48f),
+                    (GetScreenHeight() / 9.0f),
+                },
+                0.3, 4, SAVY_BROWN
+            );
+         }   
+        }
 
         return;
     }
