@@ -94,7 +94,8 @@ void UI::draw() {
 
     gameModeLog.draw();
 
-    DrawRectangleRounded(hotBar.base.object, 0.2, 4, SAVY_YELLOW);
+    if(GlobalVars::gameMode != GameMode::TRADE)
+        DrawRectangleRounded(hotBar.base.object, 0.2, 4, SAVY_YELLOW);
     
     GlobalVars::HoveringOverMenu = false; 
 
@@ -198,13 +199,13 @@ void UI::draw() {
 
         for(int y = 1; y <= 3; y++) {
             for(int x = 1; x <= 3; x++) {
-// Slove this Blah :(
+
             DrawRectangleRounded(
                 {
-                    (GetScreenWidth() / 5.5f * x),
-                    (GetScreenHeight() / 3.2f * y),
+                    ((x * 30) + (GetScreenWidth() / 5.5f) * x),
+                    ((GetScreenHeight() / 4.2f) + y * ((GetScreenHeight() / 8.6f) + 30.0f)),   
                     (GetScreenWidth() / 5.48f),
-                    (GetScreenHeight() / 9.0f),
+                    (GetScreenHeight() / 8.6f),
                 },
                 0.3, 4, SAVY_BROWN
             );

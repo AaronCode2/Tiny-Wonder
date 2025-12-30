@@ -170,8 +170,12 @@ void World::checkMouseActions() {
 
                     if(CheckCollisionRecs(it->getObject(), deleteArea)) {
 
+                        if(it->getType() == GROUND || it->getType() == DIRT)
+                            GlobalVars::money++;
+
                         tileManager.tiles.erase(it);
                         tileManager.updateFrameType(checkerArea);
+
                         return;
                     } it++;
                 }
@@ -190,8 +194,10 @@ void World::checkMouseActions() {
                 UNKNOWN_TILE,
                 tileManager.selectedType
             ));
-
+            
             tileManager.updateFrameType(checkerArea);
+            if(tileManager.selectedType == GROUND || tileManager.selectedType == DIRT)
+                GlobalVars::money--;
         }
     }
 }
