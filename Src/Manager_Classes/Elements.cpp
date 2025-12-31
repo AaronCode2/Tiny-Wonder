@@ -173,7 +173,7 @@ void Inventory::draw() {
         DrawTextEx(
             Utils::font, 
             ('x' + std::to_string(slots[5][(int) i].amount)).c_str(), 
-            textPos, FONT_SIZE,
+            textPos, Utils::fontSize,
             FONT_SPACING,
             BLACK 
         );
@@ -308,7 +308,7 @@ void Inventory::draw() {
             DrawTextEx(
                 Utils::font, 
                 ('x' + std::to_string(slots[(int) y][(int) x].amount)).c_str(), 
-                textPos, FONT_SIZE,
+                textPos, Utils::fontSize,
                 FONT_SPACING,
                 BLACK 
             );
@@ -346,7 +346,7 @@ void Inventory::draw() {
         DrawTextEx(
             Utils::font, 
             ('x' + std::to_string(slots[(int) itemID.y][(int) itemID.x].amount)).c_str(), 
-            textPos, FONT_SIZE,
+            textPos, Utils::fontSize,
             FONT_SPACING,
             BLACK 
         );

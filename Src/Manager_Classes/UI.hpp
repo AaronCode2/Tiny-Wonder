@@ -10,6 +10,7 @@
 #include "../Entity_Classes/Sprite.hpp"
 #include "World.hpp"
 #include "../GlobalVars.hpp"
+#include "../Entity_Classes/Dealer.hpp"
 
 #define MAX_SLOTS 5
 
@@ -33,6 +34,7 @@ class UI {
         std::map<GameMode, Vector2> gameModeSrc;
         std::map<GameMode, std::string> gameModeStrings;
         std::map<int, Vector2> imageBasesSrcPos;
+        Dealer dealers[9];
         
         Rectangle basesSrc;
         Rectangle moneyBase;

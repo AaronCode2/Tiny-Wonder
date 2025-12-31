@@ -11,8 +11,9 @@ class Dealer {
         int cost;
         int itemsToGiveOrNeeded[5];
         bool gettingMoney;
+        int iName;
 
-        static std::string dealerNames;
+        static std::string dealerNames[30];
 
     private:
 

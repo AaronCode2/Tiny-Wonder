@@ -34,6 +34,7 @@ SOURCE_FILES
     Src/Entity_Classes/Sprite.cpp
     Src/Entity_Classes/Player.cpp
     Src/Entity_Classes/Plant.cpp
+    Src/Entity_Classes/Dealer.cpp
 )
 
 add_executable(Tiny_Wonder ${SOURCE_FILES})

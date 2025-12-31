@@ -88,7 +88,7 @@ void UI::draw() {
 
     DrawTextEx(
         Utils::font, gameModeStrings[GlobalVars::gameMode].c_str(), 
-        {75, 154}, FONT_SIZE, 
+        {75, 154}, Utils::fontSize, 
         FONT_SPACING, BLACK
     );
 
@@ -122,7 +122,7 @@ void UI::draw() {
 
     DrawTextEx(
         Utils::font, Utils::formatZeros(GlobalVars::money, 5).c_str(),
-        {GetScreenWidth() - 140.0f, 40}, FONT_SIZE, FONT_SPACING, BLACK 
+        {GetScreenWidth() - 140.0f, 40}, Utils::fontSize, FONT_SPACING, BLACK 
     );
 
 #define Adjust_selwh 28.0f
@@ -182,7 +182,7 @@ void UI::draw() {
                 (GetScreenWidth() / 5.4f),
                 (GetScreenHeight() / 4.1f)
             },
-            FONT_SIZE, FONT_SPACING,
+            Utils::fontSize, FONT_SPACING,
             DARK_BROWN
         );
 
@@ -200,16 +200,28 @@ void UI::draw() {
         for(int y = 1; y <= 3; y++) {
             for(int x = 1; x <= 3; x++) {
 
-            DrawRectangleRounded(
-                {
-                    ((x * 30) + (GetScreenWidth() / 5.5f) * x),
-                    ((GetScreenHeight() / 4.2f) + y * ((GetScreenHeight() / 8.6f) + 30.0f)),   
-                    (GetScreenWidth() / 5.48f),
-                    (GetScreenHeight() / 8.6f),
-                },
-                0.3, 4, SAVY_BROWN
-            );
-         }   
+                int i = y + x;
+
+                DrawRectangleRounded(
+                    {
+                        ((x * 30) + (GetScreenWidth() / 5.5f) * x),
+                        ((GetScreenHeight() / 4.2f) + y * ((GetScreenHeight() / 8.6f) + 30.0f)),   
+                        (GetScreenWidth() / 5.48f),
+                        (GetScreenHeight() / 8.6f),
+                    },
+                    0.3, 4, SAVY_BROWN
+                );
+
+                DrawTextEx(
+                    Utils::font, Dealer::dealerNames[dealers[i].iName].c_str(),
+                    {
+                        ((x * 30) + (GetScreenWidth() / 5.4f) * x),
+                        ((GetScreenHeight() / 4.2f) + y * ((GetScreenHeight() / 8.5f) + 30.0f)),   
+                    },
+                    Utils::fontSize, FONT_SPACING, BLACK
+                );
+
+            }   
         }
 
         return;

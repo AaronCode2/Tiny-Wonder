@@ -15,13 +15,14 @@ Color const Utils::testColor = {255, 0, 0, 100};
 float Utils::deltaTimeIt = 0.0f;
 
 Font Utils::font;
+int Utils::fontSize;
 
 void Utils::exitApp(const std::string errorInfo) {
 
     CloseWindow();
     std::cerr << "\033[31m" << errorInfo << '\n';
 
-#ifdef DEBUG
+#if DEBUG_ENABLED
 
     __debugbreak;
 #else

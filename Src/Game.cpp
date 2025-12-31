@@ -25,6 +25,7 @@ void Game::gameLoop() {
 void Game::updateGame() {
 
     Utils::deltaTimeIt += GetFrameTime();
+    Utils::fontSize = (GetScreenWidth() / 80) + (GetScreenHeight() / 155);
 
     world.update();
     player.update();

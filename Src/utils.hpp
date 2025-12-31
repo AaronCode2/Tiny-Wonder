@@ -33,6 +33,7 @@ namespace Utils {
     Rectangle getScreenRect(); 
 
     std::string formatZeros(int num, int width);
+    extern int fontSize;
 
     bool isSameXY(const Rectangle aObject, const Rectangle bObject);
     bool isSameXY(const Vector2 aObject, const Vector2 bObject);
