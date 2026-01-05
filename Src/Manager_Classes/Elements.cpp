@@ -1,6 +1,7 @@
 #include "Elements.hpp"
 #include "World.hpp"
 
+Element3 Inventory::itemSrcImage;
 
 Rectangle BasesImage::getImageSrc(const Vector2 srcPos) {
 

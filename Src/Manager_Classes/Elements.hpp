@@ -109,7 +109,7 @@ struct Inventory {
         void init();
 
         Texture2D buttonImage;
-        Element3 itemSrcImage;
+        static Element3 itemSrcImage;
 
         Rectangle selectedHotBarItem;
         Slot *selectedSlot = nullptr;

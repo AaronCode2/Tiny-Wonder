@@ -1,5 +1,6 @@
 #include <raylib.h>
 #include <string>
+#include "Plant.hpp"
 
 class Dealer {
 
@@ -9,7 +10,8 @@ class Dealer {
 
         void refresh();
         int cost;
-        int itemsToGiveOrNeeded[5];
+        int itemsToGiveOrNeeded;
+        PLANTS plantRequired;
         bool gettingMoney;
         int iName;
 

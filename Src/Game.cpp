@@ -22,10 +22,12 @@ void Game::gameLoop() {
     CloseWindow();
 }
 
+// Resloution: W:1920 H:1009
+
 void Game::updateGame() {
 
     Utils::deltaTimeIt += GetFrameTime();
-    Utils::fontSize = (GetScreenWidth() / 80) + (GetScreenHeight() / 155);
+    Utils::fontSize = (GetScreenHeight() / 97.63) + (GetScreenWidth() / 97.63);
 
     world.update();
     player.update();

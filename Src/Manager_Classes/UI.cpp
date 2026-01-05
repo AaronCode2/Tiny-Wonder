@@ -221,6 +221,23 @@ void UI::draw() {
                     Utils::fontSize, FONT_SPACING, BLACK
                 );
 
+                DrawTexturePro(
+                    Inventory::itemSrcImage.image,
+                    {
+                        Inventory::itemSrcImage.setSrcXY(itemSrcPos[(Item) (int) dealers[i].plantRequired]).x,
+                        Inventory::itemSrcImage.setSrcXY(itemSrcPos[(Item) (int) dealers[i].plantRequired]).y,
+                        (float) Inventory::itemSrcImage.image.width / 5,
+                        (float) Inventory::itemSrcImage.image.height / 3,
+                    }, 
+                    {
+                        ((GetScreenWidth() / 5.5f) + x * (GetScreenHeight() / 8.6f)),
+                        ((GetScreenHeight() / 4.2f) + y * ((GetScreenHeight() / 8.6f) + 30.0f)),   
+                        (GetScreenWidth() / 10.0f),
+                        (GetScreenHeight() / 5.0f)     
+                    }, 
+                    {0, 0}, 0, WHITE
+                );
+
             }   
         }
 
