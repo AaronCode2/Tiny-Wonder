@@ -197,15 +197,15 @@ void UI::draw() {
         iconMenu.setSrcXY({2, 2});
         iconMenu.draw();
 
-        for(int y = 1; y <= 3; y++) {
-            for(int x = 1; x <= 3; x++) {
+        for(int y = 0; y < 3; y++) {
+            for(int x = 0; x < 3; x++) {
 
                 int i = y + x;
 
                 DrawRectangleRounded(
                     {
-                        ((x * 30) + (GetScreenWidth() / 5.5f) * x),
-                        ((GetScreenHeight() / 4.2f) + y * ((GetScreenHeight() / 8.6f) + 30.0f)),   
+                        (((x + 1) * 30) + (GetScreenWidth() / 5.5f) * (x + 1)),
+                        ((GetScreenHeight() / 4.2f) + (y + 1) * ((GetScreenHeight() / 8.6f) + 30.0f)),   
                         (GetScreenWidth() / 5.48f),
                         (GetScreenHeight() / 8.6f),
                     },
@@ -215,8 +215,8 @@ void UI::draw() {
                 DrawTextEx(
                     Utils::font, Dealer::dealerNames[dealers[i].iName].c_str(),
                     {
-                        ((x * 30) + (GetScreenWidth() / 5.4f) * x),
-                        ((GetScreenHeight() / 4.2f) + y * ((GetScreenHeight() / 8.5f) + 30.0f)),   
+                        (((x + 1) * 30) + (GetScreenWidth() / 5.4f) * (x + 1)),
+                        ((GetScreenHeight() / 4.2f) + (y + 1) * ((GetScreenHeight() / 8.5f) + 30.0f)),   
                     },
                     Utils::fontSize, FONT_SPACING, BLACK
                 );
@@ -229,11 +229,11 @@ void UI::draw() {
                         (float) Inventory::itemSrcImage.image.width / 5,
                         (float) Inventory::itemSrcImage.image.height / 3,
                     }, 
-                    {
-                        ((GetScreenWidth() / 5.5f) + x * (GetScreenHeight() / 8.6f)),
-                        ((GetScreenHeight() / 4.2f) + y * ((GetScreenHeight() / 8.6f) + 30.0f)),   
-                        (GetScreenWidth() / 10.0f),
-                        (GetScreenHeight() / 5.0f)     
+                    { 
+                        ((GetScreenWidth() / 4.5f) + x * (GetScreenWidth() / 5.1f)), 
+                        ((GetScreenHeight() / 2.35f) + y * ((GetScreenHeight() / 6.6f))), 
+                        (GetScreenWidth() / 40.0f),  
+                        (GetScreenHeight() / 20.0f) 
                     }, 
                     {0, 0}, 0, WHITE
                 );
