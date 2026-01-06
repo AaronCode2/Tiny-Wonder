@@ -26,6 +26,10 @@ void Game::gameLoop() {
 
 void Game::updateGame() {
 
+    if(IsWindowHidden())
+        SetTargetFPS(5);
+    else SetTargetFPS(30);
+
     Utils::deltaTimeIt += GetFrameTime();
     Utils::fontSize = (GetScreenHeight() / 97.63) + (GetScreenWidth() / 97.63);
 

@@ -238,6 +238,16 @@ void UI::draw() {
                     {0, 0}, 0, WHITE
                 );
 
+                DrawTextEx(
+                    Utils::font,
+                    "x112",
+                    {
+                        ((GetScreenWidth() / 4.0f) + x * (GetScreenWidth() / 5.1f)), 
+                        ((GetScreenHeight() / 2.30f) + y * ((GetScreenHeight() / 6.6f)))
+                    },
+                    Utils::fontSize, FONT_SPACING, BLACK
+                );
+
             }   
         }
 
