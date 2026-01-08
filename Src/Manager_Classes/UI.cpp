@@ -37,6 +37,8 @@ UI::UI(TileType &selectedType):
     hotBar.base.color = {130, 130, 130, 230};
 
     iconMenu.setFrame({3, 3});
+    iconMenu.setSrcXY({2, 2});
+    iconMenu.clickAbleIndicator = true;
 
     ButtonImage::setImage(buttonImage);
 
@@ -208,8 +210,15 @@ void UI::draw() {
             (GetScreenWidth() / 25.0f),
             (GetScreenHeight() / 15.0f)
         };
-        
-        iconMenu.setSrcXY({2, 2});
+
+        if(Mouse::isClickedOnceL(iconMenu.object)) {
+
+            rand = 0;
+
+            for(auto &dealer : dealers)
+                dealer.refresh();
+        }
+
         iconMenu.draw();
 
         for(int y = 0; y < 3; y++) {
@@ -306,7 +315,7 @@ void UI::draw() {
 
                     DrawTextEx(
                         Utils::font,
-                        ("x" + std::to_string(dealers[i].itemsToGiveOrNeeded) + " for").c_str(),
+                        ("x" + std::to_string(dealers[i].cost) + " for").c_str(),
                         {
                             ((GetScreenWidth() / 4.3f) + x * (GetScreenWidth() / 5.1f)), 
                             ((GetScreenHeight() / 2.28f) + y * ((GetScreenHeight() / 6.6f)))
@@ -335,7 +344,7 @@ void UI::draw() {
                     
                     DrawTextEx(
                         Utils::font,
-                        ("x" + std::to_string(dealers[i].cost)).c_str(),
+                        ("x" + std::to_string(dealers[i].itemsToGiveOrNeeded)).c_str(),
                         {
                             ((GetScreenWidth() / 3.0f) + x * (GetScreenWidth() / 5.1f)), 
                             ((GetScreenHeight() / 2.28f) + y * ((GetScreenHeight() / 6.6f)))

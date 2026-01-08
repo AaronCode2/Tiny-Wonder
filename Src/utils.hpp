@@ -54,4 +54,5 @@ namespace Mouse {
     bool isClickedR(const Rectangle object);
 
     bool isClickedOnceR(const Rectangle object);
+    bool isClickedOnceL(const Rectangle object);
 }

@@ -58,13 +58,22 @@ struct Element2 {
     Texture2D image = {};
     Rectangle object = EMPTY_RECT;
     Rectangle src = {0, 0, (float) image.width, (float) image.height};
+    bool clickAbleIndicator = false;
+    Color colour = WHITE;
 
     void draw() {
+
+        if(clickAbleIndicator) {
+
+            if(Mouse::isHovering(object))
+                colour = {255, 255, 255, 200};
+            else colour = WHITE;
+        }
 
         DrawTexturePro(
             image, 
             src, object,
-            {0, 0}, 0, WHITE
+            {0, 0}, 0, colour
         );
     }
 

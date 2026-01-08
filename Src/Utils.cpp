@@ -137,6 +137,12 @@ bool Mouse::isClickedR(const Rectangle object) {
     return (CheckCollisionPointRec(GetMousePosition(), object) && IsMouseButtonDown(MOUSE_BUTTON_RIGHT));
 }
 
+bool Mouse::isClickedOnceL(const Rectangle object) {
+
+
+    return (CheckCollisionPointRec(GetMousePosition(), object) && IsMouseButtonPressed(MOUSE_BUTTON_LEFT));
+}
+
 bool Mouse::isClickedOnceR(const Rectangle object) {
 
 
