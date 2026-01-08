@@ -18,6 +18,20 @@ UI::UI(TileType &selectedType):
     gameModeStrings[GameMode::BUILD] = "BUILD";
     gameModeStrings[GameMode::TRADE] = "TRADE";
 
+    itemSrcPos[Item::NOTHING] = {3, 2};
+    
+    itemSrcPos[Item::PUMPKIN_SEED] = {0, 1};
+    itemSrcPos[Item::CARROT_SEED] = {2, 1};
+    itemSrcPos[Item::COCA_SEED] = {1, 1};
+    itemSrcPos[Item::TOMATO_SEED] = {3, 1};
+    itemSrcPos[Item::CHILLEY_SEED] = {4, 1};
+    
+    itemSrcPos[Item::PUMPKIN] = {0, 0};
+    itemSrcPos[Item::CARROT] = {2, 0};
+    itemSrcPos[Item::COCA] = {1, 0};
+    itemSrcPos[Item::TOMATO] = {3, 0};
+    itemSrcPos[Item::CHILLEY] = {4, 0};
+
     gameModeLog.setFrame({5, 19});
 
     hotBar.base.color = {130, 130, 130, 230};
@@ -34,6 +48,7 @@ UI::UI(TileType &selectedType):
         10, 10
     };
     inventory.init();
+    inventory.itemSrcImage.setFrame({5, 3});
 
     for(int i = 0; i < MAX_SLOTS; i++) {
 
@@ -221,33 +236,113 @@ void UI::draw() {
                     Utils::fontSize, FONT_SPACING, BLACK
                 );
 
-                DrawTexturePro(
-                    Inventory::itemSrcImage.image,
-                    {
-                        Inventory::itemSrcImage.setSrcXY(itemSrcPos[(Item) (int) dealers[i].plantRequired]).x,
-                        Inventory::itemSrcImage.setSrcXY(itemSrcPos[(Item) (int) dealers[i].plantRequired]).y,
-                        (float) Inventory::itemSrcImage.image.width / 5,
-                        (float) Inventory::itemSrcImage.image.height / 3,
-                    }, 
-                    { 
-                        ((GetScreenWidth() / 4.5f) + x * (GetScreenWidth() / 5.1f)), 
-                        ((GetScreenHeight() / 2.35f) + y * ((GetScreenHeight() / 6.6f))), 
-                        (GetScreenWidth() / 40.0f),  
-                        (GetScreenHeight() / 20.0f) 
-                    }, 
-                    {0, 0}, 0, WHITE
-                );
+// For the required Stuff
 
-                DrawTextEx(
-                    Utils::font,
-                    "x112",
-                    {
-                        ((GetScreenWidth() / 4.0f) + x * (GetScreenWidth() / 5.1f)), 
-                        ((GetScreenHeight() / 2.30f) + y * ((GetScreenHeight() / 6.6f)))
-                    },
-                    Utils::fontSize, FONT_SPACING, BLACK
-                );
+                if(dealers[i].gettingMoney) {
 
+                    DrawTexturePro(
+                        Inventory::itemSrcImage.image,
+                        {
+                            inventory.itemSrcImage.setSrcXY(itemSrcPos[(Item) (int) dealers[i].plantRequired]).x,
+                            inventory.itemSrcImage.setSrcXY(itemSrcPos[(Item) (int) dealers[i].plantRequired]).y,
+                            (float) Inventory::itemSrcImage.image.width / 5,
+                            (float) Inventory::itemSrcImage.image.height / 3,
+                        }, 
+                        { 
+                            ((GetScreenWidth() / 4.9f) + x * (GetScreenWidth() / 5.1f)), 
+                            ((GetScreenHeight() / 2.35f) + y * ((GetScreenHeight() / 6.6f))), 
+                            (GetScreenWidth() / 40.0f),  
+                            (GetScreenHeight() / 20.0f) 
+                        }, 
+                        {0, 0}, 0, WHITE
+                    );
+
+                    DrawTextEx(
+                        Utils::font,
+                        ("x" + std::to_string(dealers[i].itemsToGiveOrNeeded) + " for").c_str(),
+                        {
+                            ((GetScreenWidth() / 4.3f) + x * (GetScreenWidth() / 5.1f)), 
+                            ((GetScreenHeight() / 2.28f) + y * ((GetScreenHeight() / 6.6f)))
+                        },
+                        Utils::fontSize, FONT_SPACING, BLACK
+                    );
+
+    // The giveaway stuff
+        
+                    DrawTexturePro(
+                        Sprite::image,
+                        coin.getSrcRect(), 
+                        { 
+                            ((GetScreenWidth() / 3.28f) + x * (GetScreenWidth() / 5.1f)), 
+                            ((GetScreenHeight() / 2.35f) + y * ((GetScreenHeight() / 6.6f))), 
+                            (GetScreenWidth() / 40.0f),  
+                            (GetScreenHeight() / 20.0f) 
+                        }, 
+                        {0, 0}, 0, WHITE
+                    );
+                    
+                    DrawTextEx(
+                        Utils::font,
+                        ("x" + std::to_string(dealers[i].cost)).c_str(),
+                        {
+                            ((GetScreenWidth() / 3.0f) + x * (GetScreenWidth() / 5.1f)), 
+                            ((GetScreenHeight() / 2.28f) + y * ((GetScreenHeight() / 6.6f)))
+                        },
+                        Utils::fontSize, FONT_SPACING, BLACK
+                    );
+                } else {
+
+                    DrawTexturePro(
+                        coin.image,
+                        coin.getSrcRect(),
+                        { 
+                            ((GetScreenWidth() / 4.9f) + x * (GetScreenWidth() / 5.1f)), 
+                            ((GetScreenHeight() / 2.35f) + y * ((GetScreenHeight() / 6.6f))), 
+                            (GetScreenWidth() / 40.0f),  
+                            (GetScreenHeight() / 20.0f) 
+                        }, 
+                        {0, 0}, 0, WHITE
+                    );
+
+                    DrawTextEx(
+                        Utils::font,
+                        ("x" + std::to_string(dealers[i].itemsToGiveOrNeeded) + " for").c_str(),
+                        {
+                            ((GetScreenWidth() / 4.3f) + x * (GetScreenWidth() / 5.1f)), 
+                            ((GetScreenHeight() / 2.28f) + y * ((GetScreenHeight() / 6.6f)))
+                        },
+                        Utils::fontSize, FONT_SPACING, BLACK
+                    );
+
+    // The giveaway stuff
+        
+                    DrawTexturePro(
+                        Inventory::itemSrcImage.image,
+                        {
+                            inventory.itemSrcImage.setSrcXY(itemSrcPos[(Item) ((int) 5 + (int) dealers[i].plantRequired)]).x,
+                            inventory.itemSrcImage.setSrcXY(itemSrcPos[(Item) ((int) 5 + (int) dealers[i].plantRequired)]).y,
+                            (float) Inventory::itemSrcImage.image.width / 5,
+                            (float) Inventory::itemSrcImage.image.height / 3,
+                        },
+                        { 
+                            ((GetScreenWidth() / 3.28f) + x * (GetScreenWidth() / 5.1f)), 
+                            ((GetScreenHeight() / 2.35f) + y * ((GetScreenHeight() / 6.6f))), 
+                            (GetScreenWidth() / 40.0f),  
+                            (GetScreenHeight() / 20.0f) 
+                        }, 
+                        {0, 0}, 0, WHITE
+                    );
+                    
+                    DrawTextEx(
+                        Utils::font,
+                        ("x" + std::to_string(dealers[i].cost)).c_str(),
+                        {
+                            ((GetScreenWidth() / 3.0f) + x * (GetScreenWidth() / 5.1f)), 
+                            ((GetScreenHeight() / 2.28f) + y * ((GetScreenHeight() / 6.6f)))
+                        },
+                        Utils::fontSize, FONT_SPACING, BLACK
+                    );
+                }
             }   
         }
 

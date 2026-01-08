@@ -16,7 +16,7 @@ Dealer::Dealer() {
 
 void Dealer::refresh() {
 
-    gettingMoney = GetRandomValue(0, 1);
+    gettingMoney = (bool) GetRandomValue(0, 1);
     iName = GetRandomValue(0, 29);
 
     itemsToGiveOrNeeded = GetRandomValue(0, 40);

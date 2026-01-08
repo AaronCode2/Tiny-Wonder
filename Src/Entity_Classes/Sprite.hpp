@@ -15,6 +15,8 @@ class Sprite {
 
         static Texture2D image;
         Rectangle object;
+
+        Rectangle getSrcRect() const { return srcRect; };
         
     protected:
         

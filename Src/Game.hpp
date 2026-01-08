@@ -1,5 +1,4 @@
 #pragma once
-#include <raylib.h>
 #include "Entity_Classes/Sprite.hpp"
 #include "Entity_Classes/Player.hpp"
 #include "Manager_Classes/UI.hpp"
@@ -21,6 +20,7 @@ class Game {
 
         UI ui = UI(world.tileManager.selectedType);
         World world;
+        bool inactive = false;
 
         Player player = Player(
             {
