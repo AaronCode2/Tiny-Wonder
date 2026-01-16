@@ -18,15 +18,12 @@ Plant::Plant(Rectangle object, PLANTS plantType, PLANT_STAGE plantState):
 
     itTime = (int) plantState;
 
-    switch(plantType) {
 
-        
-    }
 
-    timeForNextState[0] = GetRandomValue(1, 4);
-    timeForNextState[1] = GetRandomValue(10, 15);
-    timeForNextState[2] = GetRandomValue(20, 30);
-    timeForNextState[3] = GetRandomValue(22, 35);
+    timeForNextState[0] = GetRandomValue(1, 4) * (int) plantType;
+    timeForNextState[1] = GetRandomValue(10, 15) * (int) plantType;
+    timeForNextState[2] = GetRandomValue(20, 30) * (int) plantType;
+    timeForNextState[3] = GetRandomValue(22, 35) * (int) plantType;
 
     if(plantType != PLANTS::CHILY)
         return;

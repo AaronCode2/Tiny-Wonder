@@ -5,6 +5,7 @@ Game::Game() {
     
     Utils::font = LoadFont("../Assets/fonts/Daydreamer.otf");
     PlayMusicStream(music);
+    SetExitKey(KEY_NULL);
 }
 
 void Game::gameLoop() {
@@ -44,6 +45,19 @@ void Game::updateGame() {
     world.update();
     player.update();
     ui.update();
+
+// Saves the game for 2 mins each time
+
+    if(GetTime() - dataSaverTimer >= 120) {
+
+        dataIO.saveData();
+        dataSaverTimer = GetTime();
+
+#if DEBUG_ENABLED    
+        print("Saving!!!");
+#endif
+
+    }
 
     std::string fps = std::to_string(GetFPS()) + "FPS";
 

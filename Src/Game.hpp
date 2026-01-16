@@ -38,6 +38,8 @@ class Game {
             player.object, ui.getSlotData(), world.tileManager.plants
         );
         
+        int dataSaverTimer = GetTime();
+
         void gameLoop();
         void updateGame();
         void updateMode();

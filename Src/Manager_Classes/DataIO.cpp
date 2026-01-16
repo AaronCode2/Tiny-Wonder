@@ -6,6 +6,10 @@ DataIO::DataIO(
 ):
     tiles(tiles), worldPos(worldPos), playerObject(playerObject), slots(slots), plants(plants)
 {   
+
+    if(!DirectoryExists("../Assets") || !DirectoryExists("../Data"))
+        Utils::exitApp("Error: Assets or Data directorys are missing, please redownload the game!");
+
     readTileData();
     readPosData();
     readInventoryData();
@@ -15,11 +19,7 @@ DataIO::DataIO(
 
 DataIO::~DataIO(){
 
-    writeTileData();
-    writePosData();
-    writeInventoryData();
-    writePlantData();
-    writeMoneyData();
+    saveData();
 }
 
 void DataIO::writeTileData() {
@@ -327,10 +327,22 @@ void DataIO::writeMoneyData()
 
     std::ofstream file(MONEY_DATA_PATH);
 
-    if(!file.is_open())
+    if(!file.is_open()) {
+
         Utils::exitApp("Could not write Data to MoneyData");
+    }
 
     file << GlobalVars::money;
 
     file.close();
 }
+
+void DataIO::saveData() {
+
+    writeTileData();
+    writePosData();
+    writeInventoryData();
+    writePlantData();
+    writeMoneyData();
+}
+

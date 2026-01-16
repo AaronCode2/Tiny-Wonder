@@ -75,6 +75,8 @@ class DataIO {
         void readMoneyData();
         void writeMoneyData();
 
+        void saveData();
+
     private:
 
     std::vector<Tile> &tiles;

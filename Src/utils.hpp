@@ -1,6 +1,7 @@
 #pragma once
 #include <raylib.h>
 #include <iostream>
+#include <fstream>
 
 #define DEBUG_ACTIVE false
 #define print(x) std::cout << x << '\n'

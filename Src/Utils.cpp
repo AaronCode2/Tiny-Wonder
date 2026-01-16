@@ -22,6 +22,12 @@ void Utils::exitApp(const std::string errorInfo) {
     CloseWindow();
     std::cerr << "\033[31m" << errorInfo << '\n';
 
+    std::ofstream file("Errors.log");
+
+    file << errorInfo;
+
+    file.close();
+
 #if DEBUG_ENABLED
 
     __debugbreak;

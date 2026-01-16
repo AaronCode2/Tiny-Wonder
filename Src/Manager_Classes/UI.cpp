@@ -101,6 +101,15 @@ void UI::update() {
     gameModeLog.setSrcXY(gameModeSrc[GlobalVars::gameMode]);
 
     draw();
+
+    if(IsKeyPressed(KEY_ESCAPE))
+        escapKeyPressed = !escapKeyPressed;
+    else if(!IsWindowFocused())
+        escapKeyPressed = false;
+
+    if(escapKeyPressed)
+        drawEscapeMenu();
+
     DrawTextureV(mouseImage, GetMousePosition(), MOUSE_BROWN);
 }
 
@@ -486,4 +495,16 @@ void UI::draw() {
             0, (buttonImageSrc.x == 0) ? WHITE : (Color) {255, 255, 255, 100}
         );
     }
+}
+
+void UI::drawEscapeMenu() {
+
+    DrawRectangleRounded(
+        {
+            ((GetScreenWidth() / 2) - (450.0f / 2) + 30) + (1 * 80.0f) - 98,
+            (GetScreenHeight() / 3.5f),
+            (GetScreenWidth() / 4.6f),
+            (GetScreenHeight() / 2.1f),
+        }, 0.1, 8, SAVY_BROWN);
+    
 }

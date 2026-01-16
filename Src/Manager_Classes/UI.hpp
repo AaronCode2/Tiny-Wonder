@@ -28,7 +28,8 @@ class UI {
 
     private:
     
-    void draw();
+        void draw();
+        void drawEscapeMenu();
     
         std::map<TileType, Vector2> imageTilesSrcPos;
         std::map<GameMode, Vector2> gameModeSrc;
@@ -50,6 +51,7 @@ class UI {
         Element2 playerPhoto = {LoadTexture("../Assets/UI/PlayerPhoto.png"), {20, 20, 100, 100}};
         Element2 playerInfo = {LoadTexture("../Assets/UI/PlayerInfo.png"), {5, 5, 250, 200}};
         int rand = 0;
+        bool escapKeyPressed = true;
 
         HotBar hotBar;
 };
