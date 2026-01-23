@@ -14,6 +14,7 @@
 
 #define FONT_SIZE 30
 #define FONT_SPACING 1
+#define SLOT_SIZE 120
 
 
 struct Input {

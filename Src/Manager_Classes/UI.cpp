@@ -258,7 +258,7 @@ void UI::draw() {
                             (float) Inventory::itemSrcImage.image.height / 3,
                         }, 
                         { 
-                            ((GetScreenWidth() / 4.9f) + x * (GetScreenWidth() / 5.1f)), 
+                            (x * 2 +(GetScreenWidth() / 4.9f) + x * (GetScreenWidth() / 5.1f)), 
                             ((GetScreenHeight() / 2.35f) + y * ((GetScreenHeight() / 6.6f))), 
                             (GetScreenWidth() / 40.0f),  
                             (GetScreenHeight() / 20.0f) 
@@ -305,7 +305,7 @@ void UI::draw() {
                         coin.image,
                         coin.getSrcRect(),
                         { 
-                            ((GetScreenWidth() / 4.9f) + x * (GetScreenWidth() / 5.1f)), 
+                            (x * 3.0f + (GetScreenWidth() / 4.9f) + x * (GetScreenWidth() / 5.1f)), 
                             ((GetScreenHeight() / 2.35f) + y * ((GetScreenHeight() / 6.6f))), 
                             (GetScreenWidth() / 40.0f),  
                             (GetScreenHeight() / 20.0f) 
@@ -317,7 +317,7 @@ void UI::draw() {
                         Utils::font,
                         ("x" + std::to_string(dealers[i].cost) + " for").c_str(),
                         {
-                            ((GetScreenWidth() / 4.3f) + x * (GetScreenWidth() / 5.1f)), 
+                            (x * 2 + (GetScreenWidth() / 4.3f) + x * (GetScreenWidth() / 5.1f)), 
                             ((GetScreenHeight() / 2.28f) + y * ((GetScreenHeight() / 6.6f)))
                         },
                         Utils::fontSize, FONT_SPACING, BLACK
@@ -334,7 +334,7 @@ void UI::draw() {
                             (float) Inventory::itemSrcImage.image.height / 3,
                         },
                         { 
-                            ((GetScreenWidth() / 3.28f) + x * (GetScreenWidth() / 5.1f)), 
+                            (x * 3.2f + (GetScreenWidth() / 3.28f) + x * (GetScreenWidth() / 5.1f)), 
                             ((GetScreenHeight() / 2.35f) + y * ((GetScreenHeight() / 6.6f))), 
                             (GetScreenWidth() / 40.0f),  
                             (GetScreenHeight() / 20.0f) 
@@ -369,10 +369,12 @@ void UI::draw() {
             (Tile::image.height / 19.0f)
         };
 
+// the - 25 is to prevent the texture from going offset
+
         Rectangle buttonObject = {
             slot.object.x - 25,
             slot.object.y - 25,
-            120, 120
+            SLOT_SIZE, SLOT_SIZE
         };
 
         Vector2 buttonImageSrc = {0, 0};

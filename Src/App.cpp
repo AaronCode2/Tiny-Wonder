@@ -10,6 +10,8 @@ void App::run() {
     
     SetWindowIcon(favicon);
     UnloadImage(favicon);
+
+    
     
     SetWindowState(FLAG_WINDOW_MAXIMIZED);
     HideCursor();

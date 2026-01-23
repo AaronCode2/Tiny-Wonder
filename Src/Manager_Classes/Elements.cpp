@@ -69,6 +69,9 @@ void Inventory::draw() {
 
     // Hotbar
 
+    slotStartingPos.x = ((GetScreenWidth() / 2) - (450.0f / 2) + 30) + (1 * 80.0f) - 25;
+    slotStartingPos.y = ((GetScreenHeight() / 2) - (550.0f / 2) + 30);
+
     for(float i = 0; i < 5; i++) {
 
         Rectangle buttonHitBoxRect = {
@@ -81,9 +84,9 @@ void Inventory::draw() {
 
         Rectangle buttonRect = {
 
-            i * 80 + slotStartingPos.x,
-            874,
-            120, 120,
+            ((GetScreenWidth() / 2) - (450.0f / 2) + 30) + (i * 80.0f) -25, 
+            GetScreenHeight() - 110.0f - 25, 
+            SLOT_SIZE, SLOT_SIZE
         };
 
         const bool mouseHover = Mouse::isHovering(buttonHitBoxRect);
@@ -206,14 +209,20 @@ void Inventory::draw() {
     if(!GlobalVars::openInventory)
         return;
 
-    DrawRectangleRounded({750, 310, 430, 430}, 0.1f, 1, SAVY_YELLOW);
+    DrawRectangleRounded(
+        {
+            ((GetScreenWidth() / 2) - (450.0f / 2) + 30) + (1 * 80.0f) - 98, 
+            ((GetScreenHeight() / 2) - (550.0f / 2) + 30), 
+            430, 430
+        }, 
+    0.1f, 1, SAVY_YELLOW);
 
     for(float y = 0; y < 5; y++) {
         for(float x = 0; x < 5; x++) {
 
             Rectangle buttonHitBoxRect = {
 
-                (x + 0.25f) * 80 + slotStartingPos.x,
+                (x + 0.25f) + (GetScreenWidth() / 2) + (x * 80.0f) - 200,
                 (y + 0.25f) * 80 + slotStartingPos.y,
                 65,
                 65
@@ -221,7 +230,7 @@ void Inventory::draw() {
 
             Rectangle buttonRect = {
 
-                x * 80 + slotStartingPos.x,
+                ((GetScreenWidth() / 2) - (450.0f / 2) + 30) + (x * 80.0f) - 25,
                 y * 80 + slotStartingPos.y,
                 120, 120,
             };
@@ -234,7 +243,7 @@ void Inventory::draw() {
 
                 itemRect = {
 
-                    x * 80 + slotStartingPos.x + 28,
+                    x * 80 + slotStartingPos.x - 50,
                     y * 80 + slotStartingPos.y + 28,
                     60, 60,
                 };
@@ -242,7 +251,7 @@ void Inventory::draw() {
 
                 itemRect = {
 
-                    x * 80 + slotStartingPos.x + 30,
+                    x * 80 + slotStartingPos.x - 52,
                     y * 80 + slotStartingPos.y + 30,
                     58, 58,
                 };
@@ -290,7 +299,7 @@ void Inventory::draw() {
             
             Vector2 textPos = {
 
-                x * 80 + slotStartingPos.x + 20,
+                x * ((GetScreenWidth() / 2) - (450.0f / 2) + 30) + (x * 80.0f) - 25,
                 y * 80 + slotStartingPos.y + 60
             };
 
@@ -313,7 +322,6 @@ void Inventory::draw() {
                 FONT_SPACING,
                 BLACK 
             );
-
         }
     }
 
