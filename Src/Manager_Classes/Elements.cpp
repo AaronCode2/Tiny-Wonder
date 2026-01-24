@@ -76,15 +76,15 @@ void Inventory::draw() {
 
         Rectangle buttonHitBoxRect = {
 
-            (i + 0.35f) * 80 + slotStartingPos.x,
-            900,
+            i + (GetScreenWidth() / 2) + (i * 82.0f) - 200,
+            GetScreenHeight() - 105.0f,
             65,
             65
         };
 
         Rectangle buttonRect = {
 
-            ((GetScreenWidth() / 2) - (450.0f / 2) + 30) + (i * 80.0f) -25, 
+            ((GetScreenWidth() / 2) - (450.0f / 2) + 30) + (i * 80.0f) - 25, 
             GetScreenHeight() - 110.0f - 25, 
             SLOT_SIZE, SLOT_SIZE
         };
@@ -97,24 +97,24 @@ void Inventory::draw() {
 
             itemRect = {
 
-                i * 80 + slotStartingPos.x + 28,
-                902,
+                i * 80 + slotStartingPos.x - 50,
+                GetScreenHeight() - 110.0f + 8,
                 60, 60,
             };
         } else {
 
             itemRect = {
 
-                i * 80 + slotStartingPos.x + 30,
-                904,
+                i * 80 + slotStartingPos.x - 52,
+                GetScreenHeight() - 110.0f + 6,
                 58, 58,
             };
         }
 
         Vector2 textPos = {
 
-            i * 80 + slotStartingPos.x + 20,
-            940
+            i * 80 + slotStartingPos.x - 52,
+            GetScreenHeight() - 110.0f + 40
         };
 
         if(
@@ -182,8 +182,6 @@ void Inventory::draw() {
             BLACK 
         );
     }
-
-
 
     if(World::appendingSlot.item != Item::NOTHING) {
 
@@ -299,7 +297,7 @@ void Inventory::draw() {
             
             Vector2 textPos = {
 
-                x * ((GetScreenWidth() / 2) - (450.0f / 2) + 30) + (x * 80.0f) - 25,
+                x * 80 + slotStartingPos.x - 52,
                 y * 80 + slotStartingPos.y + 60
             };
 
@@ -371,7 +369,7 @@ void Inventory::draw() {
 
                     buttonHitBoxRect = {
 
-                        (x + 0.25f) * 80 + slotStartingPos.x,
+                        (x + 0.25f) + (GetScreenWidth() / 2) + (x * 80.0f) - 200,
                         (y + 0.25f) * 80 + slotStartingPos.y,
                         65,
                         65
