@@ -378,8 +378,8 @@ void Inventory::draw() {
 
                     buttonHitBoxRect = {
 
-                        (x + 0.35f) * 80 + slotStartingPos.x,
-                        900,
+                        x + (GetScreenWidth() / 2) + (x * 82.0f) - 200,
+                        GetScreenHeight() - 105.0f,
                         65,
                         65
                     };

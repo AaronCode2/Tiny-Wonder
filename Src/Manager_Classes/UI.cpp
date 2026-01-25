@@ -145,8 +145,6 @@ void UI::draw() {
 #define Adjust_selwh 28.0f
 #define Adjust_selxy 15.0F
 
-
-
     if(GlobalVars::gameMode == GameMode::EXPLORE) {
         
         rand = 0;
@@ -226,6 +224,18 @@ void UI::draw() {
 
                 int i = y + x;
 
+                Color rectRoundedColor = SAVY_BROWN;
+
+                if(
+                    Mouse::isHovering(
+                    {
+                        (((x + 1) * 30) + (GetScreenWidth() / 5.5f) * (x + 1)),
+                        ((GetScreenHeight() / 4.2f) + (y + 1) * ((GetScreenHeight() / 8.6f) + 30.0f)),   
+                        (GetScreenWidth() / 5.48f),
+                        (GetScreenHeight() / 8.6f),
+                    })
+                ) rectRoundedColor.a = 100;
+
                 DrawRectangleRounded(
                     {
                         (((x + 1) * 30) + (GetScreenWidth() / 5.5f) * (x + 1)),
@@ -233,7 +243,7 @@ void UI::draw() {
                         (GetScreenWidth() / 5.48f),
                         (GetScreenHeight() / 8.6f),
                     },
-                    0.3, 4, SAVY_BROWN
+                    0.3, 4, rectRoundedColor
                 );
 
                 DrawTextEx(
@@ -360,6 +370,14 @@ void UI::draw() {
 
     for(int i = 0 ; i < MAX_SLOTS; i++) {
 
+        hotBar.slots[i] = {
+            {
+                ((GetScreenWidth() / 2) - (450.0f / 2) + 30) + (i * 80.0f), 
+                GetScreenHeight() - 110.0f, 
+                70, 70
+            },
+        };
+
         Slotbar slot = hotBar.slots[i];
         Rectangle imageSrcRect = {
 
@@ -372,8 +390,9 @@ void UI::draw() {
 // the - 25 is to prevent the texture from going offset
 
         Rectangle buttonObject = {
-            slot.object.x - 25,
-            slot.object.y - 25,
+
+            ((GetScreenWidth() / 2) - (450.0f / 2) + 30) + (i * 80.0f) - 25, 
+            GetScreenHeight() - 110.0f - 25, 
             SLOT_SIZE, SLOT_SIZE
         };
 
