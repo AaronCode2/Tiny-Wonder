@@ -226,25 +226,18 @@ void UI::draw() {
 
                 Color rectRoundedColor = SAVY_BROWN;
 
-                if(
-                    Mouse::isHovering(
-                    {
-                        (((x + 1) * 30) + (GetScreenWidth() / 5.5f) * (x + 1)),
-                        ((GetScreenHeight() / 4.2f) + (y + 1) * ((GetScreenHeight() / 8.6f) + 30.0f)),   
-                        (GetScreenWidth() / 5.48f),
-                        (GetScreenHeight() / 8.6f),
-                    })
-                ) rectRoundedColor.a = 100;
+                Rectangle BackBase = {
 
-                DrawRectangleRounded(
-                    {
-                        (((x + 1) * 30) + (GetScreenWidth() / 5.5f) * (x + 1)),
-                        ((GetScreenHeight() / 4.2f) + (y + 1) * ((GetScreenHeight() / 8.6f) + 30.0f)),   
-                        (GetScreenWidth() / 5.48f),
-                        (GetScreenHeight() / 8.6f),
-                    },
-                    0.3, 4, rectRoundedColor
-                );
+                    (((x + 1) * 30) + (GetScreenWidth() / 5.5f) * (x + 1)),
+                    ((GetScreenHeight() / 4.2f) + (y + 1) * ((GetScreenHeight() / 8.6f) + 30.0f)),   
+                    (GetScreenWidth() / 5.48f),
+                    (GetScreenHeight() / 8.6f),
+                };
+
+                if(Mouse::isHovering(BackBase)) 
+                    rectRoundedColor.a = 100;
+
+                DrawRectangleRounded(BackBase, 0.3, 4, rectRoundedColor);
 
                 DrawTextEx(
                     Utils::font, Dealer::dealerNames[dealers[i].iName].c_str(),
@@ -255,9 +248,38 @@ void UI::draw() {
                     Utils::fontSize, FONT_SPACING, BLACK
                 );
 
-// For the required Stuff
+// For the dealer giving Stuff (the Dealer gaining money, the player is losing money!)
 
                 if(dealers[i].gettingMoney) {
+
+                    if(Mouse::isClickedOnceL(BackBase)) {
+                        print("For required, losing money for the player");
+
+                        PLANTS dealerSelPlant = dealers[i].plantRequired;
+                        int dealerSelAmount = dealers[i].itemsToGiveOrNeeded;
+
+                        GlobalVars::money -= dealers[i].cost;
+                        for(int i2 = 0; i2 < 5; i2++) {
+                            for(int l = 0; l < 5; l++) {
+
+                                if(
+                                    (
+                                        inventory.slots[i2][l].item == Item::NOTHING || 
+                                        inventory.slots[i2][l].item == (Item) (int) dealerSelPlant
+                                    ) &&
+                                    inventory.slots[i2][l].amount + dealerSelAmount <= STACK_SIZE
+                                ) {
+                                
+                                    inventory.slots[i2][l].amount += dealerSelAmount;
+                                    inventory.slots[i2][l].item = (Item) (int) dealerSelPlant;
+
+                                    dealerSelPlant = PLANTS::ERROR;
+                                    dealerSelAmount = 0;
+                                    return;
+                            }
+                        }
+                    }           
+                }
 
                     DrawTexturePro(
                         Inventory::itemSrcImage.image,
@@ -285,8 +307,6 @@ void UI::draw() {
                         },
                         Utils::fontSize, FONT_SPACING, BLACK
                     );
-
-    // The giveaway stuff
         
                     DrawTexturePro(
                         Sprite::image,
@@ -309,7 +329,16 @@ void UI::draw() {
                         },
                         Utils::fontSize, FONT_SPACING, BLACK
                     );
+
+// For the Player giving Stuff (the player gaining money, the dealer is losing money!)
+
                 } else {
+
+                    if(Mouse::isClickedOnceL(BackBase)) {
+
+                        print("For required, gaining money");
+                        GlobalVars::money += dealers[i].itemsToGiveOrNeeded;
+                    }
 
                     DrawTexturePro(
                         coin.image,
@@ -333,8 +362,7 @@ void UI::draw() {
                         Utils::fontSize, FONT_SPACING, BLACK
                     );
 
-    // The giveaway stuff
-        
+
                     DrawTexturePro(
                         Inventory::itemSrcImage.image,
                         {

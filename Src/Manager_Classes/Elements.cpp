@@ -63,7 +63,7 @@ void Inventory::init() {
 Rectangle Inventory::draggedItem = EMPTY_RECT;
 Vector2 Inventory::itemID = {-1, -1};
 
-#define STACK_SIZE 255
+
 
 void Inventory::draw() {
 
