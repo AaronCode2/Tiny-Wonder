@@ -4,7 +4,11 @@
         {
             "label": "Cmake",
             "type": "shell",
-            "command": "clear; cmake --build build -- -j",
+            /* 
+                This works for ninja and make and uses all cores, you can remove --parallel to not use
+                the whole CPU. (if --parallel is enabled you will see the CPU using 100% or over)
+            */
+            "command": "clear; cmake --build build --parallel",
             "group": {
                 "kind": "build",
                 "isDefault": true
