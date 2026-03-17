@@ -20,15 +20,15 @@ void Dealer::refresh() {
     iName = GetRandomValue(0, 29);
 
     plantRequired = (PLANTS) GetRandomValue(1, 5);
-    cost = GetRandomValue(5, 50) * (int) plantRequired;
+    cost = GetRandomValue(1, 5) * (int) plantRequired;
 
     if(!gettingMoney) {
 
-        itemsToGiveOrNeeded = GetRandomValue(-30, 30) - GetRandomValue(1, 100) * (int) plantRequired;
-        cost += GetRandomValue(0, itemsToGiveOrNeeded) * (int) plantRequired;
+        itemsToGiveOrNeeded = GetRandomValue(0, 100) * (int) plantRequired;
+        cost += GetRandomValue(1, itemsToGiveOrNeeded) * (int) plantRequired;
     } else  {
 
         itemsToGiveOrNeeded =  GetRandomValue(1, 40);
-        cost += GetRandomValue(0, itemsToGiveOrNeeded) * GetRandomValue(1, 9);        
+        cost += GetRandomValue(1, itemsToGiveOrNeeded) * GetRandomValue(1, 9);        
     }
 }

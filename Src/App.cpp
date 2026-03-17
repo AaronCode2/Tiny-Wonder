@@ -6,11 +6,10 @@ void App::run() {
     
     
     Image favicon = LoadImage("../Assets/UI/favicon.png");
-    InitWindow(1000, 600, "Tiny Wonder");
+    InitWindow(1440, 730, "Tiny Wonder");
     
     SetWindowIcon(favicon);
     UnloadImage(favicon);
-
     
     
     SetWindowState(FLAG_WINDOW_MAXIMIZED);

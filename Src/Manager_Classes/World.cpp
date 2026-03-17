@@ -134,7 +134,7 @@ void World::checkMouseActions() {
                             PLANT_STAGE::Seed
                         ));
 
-                        selectedSlot->amount += 1;
+                        selectedSlot->amount -= 1;
                         break;
             };
         }

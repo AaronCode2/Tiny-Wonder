@@ -22,19 +22,19 @@ void Game::gameLoop() {
     CloseWindow();
 }
 
-// Resloution: W:1920 H:1009
+// Resloution: W:1920 H:1009, For my window, it could be different for anyone
 
 void Game::updateGame() {
 
-    if(!IsWindowFocused() && !inactive) {
+    // if(!IsWindowFocused() && !inactive) {
 
-        SetTargetFPS(10);
-        inactive = true;
-    } else if(IsWindowFocused() && inactive) {
+    //     SetTargetFPS(10);
+    //     inactive = true;
+    // } else if(IsWindowFocused() && inactive) {
 
-        SetTargetFPS(60);
-        inactive = false;
-    }
+    //     SetTargetFPS(60);
+    //     inactive = false;
+    // }
 
     Utils::deltaTimeIt += GetFrameTime();
     Utils::fontSize = (GetScreenHeight() / 97.63) + (GetScreenWidth() / 97.63);

@@ -89,6 +89,13 @@ void UI::update() {
         90, 
     };
 
+    gameModeLog.object = {
+
+        GetScreenWidth() / 78.0f,
+        GetScreenHeight() / 6.8f,
+        50, 50
+    };
+
     gameModeLog.object.y += std::sin(Utils::deltaTimeIt * 7.5) * 25 * GetFrameTime();
 
     gameModeLog.setSrcXY(gameModeSrc[GlobalVars::gameMode]);
@@ -253,12 +260,13 @@ void UI::draw() {
                 if(dealers[i].gettingMoney) {
 
                     if(Mouse::isClickedOnceL(BackBase)) {
-                        print("For required, losing money for the player");
 
                         PLANTS dealerSelPlant = dealers[i].plantRequired;
                         int dealerSelAmount = dealers[i].itemsToGiveOrNeeded;
 
-                        GlobalVars::money -= dealers[i].cost;
+                        if(GlobalVars::money < dealers[i].cost)
+                            return;
+
                         for(int i2 = 0; i2 < 5; i2++) {
                             for(int l = 0; l < 5; l++) {
 
@@ -272,9 +280,8 @@ void UI::draw() {
                                 
                                     inventory.slots[i2][l].amount += dealerSelAmount;
                                     inventory.slots[i2][l].item = (Item) (int) dealerSelPlant;
+                                    GlobalVars::money -= dealers[i].cost;
 
-                                    dealerSelPlant = PLANTS::ERROR;
-                                    dealerSelAmount = 0;
                                     return;
                             }
                         }
@@ -336,8 +343,23 @@ void UI::draw() {
 
                     if(Mouse::isClickedOnceL(BackBase)) {
 
-                        print("For required, gaining money");
-                        GlobalVars::money += dealers[i].itemsToGiveOrNeeded;
+                        PLANTS dealerSelPlant = dealers[i].plantRequired;
+                        int dealerSelAmount = dealers[i].itemsToGiveOrNeeded;
+
+                            for(int i2 = 0; i2 < 5; i2++) {
+                                for(int l = 0; l < 5; l++) {
+
+                                    if(
+                                        inventory.slots[i2][l].item == (Item) (5 + (int) dealerSelPlant) &&
+                                        inventory.slots[i2][l].amount >= dealerSelAmount
+                                    ) {
+
+                                        GlobalVars::money += dealers[i].cost;
+                                        inventory.slots[i2][l].amount -= dealerSelAmount;
+                                        return;
+                                    }
+                            }
+                        }           
                     }
 
                     DrawTexturePro(
