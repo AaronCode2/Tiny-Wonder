@@ -41,5 +41,7 @@ class World {
         Rectangle checkerArea;
         Rectangle deleteArea;
 
+        bool destroyingPlant = false;
+
         void checkMouseActions();
 };

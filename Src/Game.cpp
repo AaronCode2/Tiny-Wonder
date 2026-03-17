@@ -4,6 +4,7 @@ Game::Game() {
 
     
     Utils::font = LoadFont("../Assets/fonts/Daydreamer.otf");
+    PlayMusicStream(music);
 }
 
 void Game::gameLoop() {
@@ -36,6 +37,7 @@ void Game::updateGame() {
     //     inactive = false;
     // }
 
+    UpdateMusicStream(music);
     Utils::deltaTimeIt += GetFrameTime();
     Utils::fontSize = (GetScreenHeight() / 97.63) + (GetScreenWidth() / 97.63);
 

@@ -15,6 +15,7 @@ void App::run() {
     SetWindowState(FLAG_WINDOW_MAXIMIZED);
     HideCursor();
     logInfo();
+    InitAudioDevice();
 
     Game game;
     game.run();

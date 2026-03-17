@@ -77,7 +77,7 @@ void World::checkMouseActions() {
             DrawRectangleRec(selectionHitBox, Utils::testColor);
 #endif
 
-            if(selectedSlot) {
+            if(selectedSlot && GlobalVars::gameMode == GameMode::EXPLORE && !destroyingPlant) {
 
                 if(selectedSlot->amount <= 0) {
 
@@ -139,6 +139,8 @@ void World::checkMouseActions() {
             };
         }
 
+        destroyingPlant = false;
+
         if(GlobalVars::gameMode == GameMode::EXPLORE) {
             for(auto it = tileManager.plants.begin(); it < tileManager.plants.end(); it++) {
 
@@ -149,9 +151,11 @@ void World::checkMouseActions() {
 
                     emoji.object = selectionObject;
                     emoji.draw();
+                    destroyingPlant = true;
                     
                     if(IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
 
+                        destroyingPlant = true;
                         appendingSlot = {(Item) (5 + (int) it->getPlantType()), 1};
                         it = tileManager.plants.erase(it);
                         break;

@@ -22,6 +22,8 @@ class Game {
         World world;
         bool inactive = false;
 
+        Music music = LoadMusicStream("../Assets/Music/Manor_Query.ogg");
+
         Player player = Player(
             {
                 (float) (GetScreenWidth() / 2) - 100, 
