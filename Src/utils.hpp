@@ -13,6 +13,12 @@
 #define SAVY_BROWN (Color) {215, 147, 106, 255}
 #define DARK_BROWN (Color) {181, 108, 78, 255}
 
+#if DEBUG_ENABLED
+
+    #define DEBUG_ENABLED 455
+
+#endif
+
 #define FONT_SIZE 30
 #define FONT_SPACING 1
 #define SLOT_SIZE 120
@@ -48,7 +54,24 @@ namespace Utils {
     void exitApp(const std::string errorInfo);
 
     extern Font font;
+
+#if DEBUG_ENABLED
+
+
+    float f_testingVar = DEBUG_ENABLED;
+    int i_testingVar = DEBUG_ENABLED;
+
+    void TheDebugFunc() {
+
+        if(IsKeyDown(KEY_O)) {
+
+            f_testingVar++;
+            
+        }
+    }
+#endif
 } 
+
 
 namespace Mouse {
 

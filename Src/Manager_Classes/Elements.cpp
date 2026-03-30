@@ -63,8 +63,6 @@ void Inventory::init() {
 Rectangle Inventory::draggedItem = EMPTY_RECT;
 Vector2 Inventory::itemID = {-1, -1};
 
-
-
 void Inventory::draw() {
 
     // Hotbar

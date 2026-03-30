@@ -499,6 +499,7 @@ void UI::draw() {
 
 void UI::drawEscapeMenu() {
 
+
     DrawRectangleRounded(
         {
             ((GetScreenWidth() / 2) - (450.0f / 2) + 30) + (1 * 80.0f) - 98,
@@ -507,4 +508,18 @@ void UI::drawEscapeMenu() {
             (GetScreenHeight() / 2.1f),
         }, 0.1, 8, SAVY_BROWN);
     
+    Vector2 ExitbuttonSrc = {0, 1};
+
+    Rectangle ExitbuttonObject = {
+
+        ((GetScreenWidth() / 2) - (testingVar / 2) + 30) + (1 * 80.0f) - 98,
+        (GetScreenHeight() / 3.5f),
+        100,
+        100
+    };
+    
+    DrawRectangleRounded(
+        ExitbuttonObject,
+        0.1, 8, SAVY_YELLOW
+    );
 }
