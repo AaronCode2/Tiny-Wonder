@@ -14,8 +14,60 @@ Input getInput() {
 Color const Utils::testColor = {255, 0, 0, 100};
 float Utils::deltaTimeIt = 0.0f;
 
+#if DEBUG_ENABLED
+
+    float Utils::xdebugingvalue = 3.5f;
+    float Utils::ydebugingvalue = 3.5f;
+
+    void Utils::TheDebugFunc() {
+
+        if(!IsKeyDown(KEY_LEFT_SHIFT)) {
+
+            if(IsKeyPressed(KEY_O)) {
+
+                xdebugingvalue += 0.2;
+                print("X: " + std::to_string(xdebugingvalue));
+            } else if(IsKeyPressed(KEY_L)) {
+
+                xdebugingvalue -= 0.2;
+                print("X: " + std::to_string(xdebugingvalue));
+            } else if(IsKeyPressed(KEY_K)) {
+
+                ydebugingvalue += 0.2;
+                print("Y: " + std::to_string(ydebugingvalue));
+            } else if(IsKeyPressed(KEY_J)) {
+
+                ydebugingvalue -= 0.2;
+                print("Y: " + std::to_string(ydebugingvalue));
+            }
+        } else {
+
+            
+            if(IsKeyDown(KEY_O)) {
+
+                xdebugingvalue += 0.5;
+                print("X: " + std::to_string(xdebugingvalue));
+            } else if(IsKeyDown(KEY_L)) {
+
+                xdebugingvalue -= 0.5;
+                print("X: " + std::to_string(xdebugingvalue));
+            } else if(IsKeyDown(KEY_K)) {
+
+                ydebugingvalue += 0.5;
+                print("Y: " + std::to_string(ydebugingvalue));
+            } else if(IsKeyDown(KEY_J)) {
+
+                ydebugingvalue -= 0.5;
+                print("Y: " + std::to_string(ydebugingvalue));
+            }
+        }
+    }
+
+#endif
+
 Font Utils::font;
 int Utils::fontSize;
+
 
 void Utils::exitApp(const std::string errorInfo) {
 

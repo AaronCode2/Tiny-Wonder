@@ -14,6 +14,7 @@
 
 #define MAX_SLOTS 5
 
+
 class UI {
 
     public:
@@ -30,7 +31,10 @@ class UI {
     
         void draw();
         void drawEscapeMenu();
-    
+
+        std::string fps_explanation_type = "30";
+        FPS_TYPE fpsType = FPS_TYPE::THIRTY_FPS;
+
         std::map<TileType, Vector2> imageTilesSrcPos;
         std::map<GameMode, Vector2> gameModeSrc;
         std::map<GameMode, std::string> gameModeStrings;

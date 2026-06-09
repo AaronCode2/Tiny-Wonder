@@ -499,7 +499,6 @@ void UI::draw() {
 
 void UI::drawEscapeMenu() {
 
-
     DrawRectangleRounded(
         {
             ((GetScreenWidth() / 2) - (450.0f / 2) + 30) + (1 * 80.0f) - 98,
@@ -509,17 +508,62 @@ void UI::drawEscapeMenu() {
         }, 0.1, 8, SAVY_BROWN);
     
     Vector2 ExitbuttonSrc = {0, 1};
+    
+    Utils::TheDebugFunc();
 
-    Rectangle ExitbuttonObject = {
+    Rectangle fpsButtonObject = {
 
-        ((GetScreenWidth() / 2) - (testingVar / 2) + 30) + (1 * 80.0f) - 98,
-        (GetScreenHeight() / 3.5f),
-        100,
-        100
+        ((GetScreenWidth() / 2) - (403.0f / 2) + 30) + (1 * 80.0f) - 98,
+        (GetScreenHeight() / 2.5f),
+        (GetScreenWidth() / 5.2f),
+        (GetScreenHeight() / 11.0f),
     };
     
     DrawRectangleRounded(
-        ExitbuttonObject,
-        0.1, 8, SAVY_YELLOW
+        fpsButtonObject,
+        0.3, 4, SAVY_YELLOW
     );
+
+    if(Mouse::isClickedOnceL(fpsButtonObject)) {
+
+        if(fpsType != FPS_TYPE::MAXFPS)
+            fpsType = (FPS_TYPE) (1 + (int) fpsType);
+        else fpsType = FPS_TYPE::THIRTY_FPS;
+
+        switch(fpsType) {
+
+            case FPS_TYPE::THIRTY_FPS:
+
+                SetTargetFPS(30);
+                fps_explanation_type = "30";
+                break;
+                
+            case FPS_TYPE::SIXTY_FPS:
+
+                SetTargetFPS(60);
+                fps_explanation_type = "60";
+                break;
+
+
+            case FPS_TYPE::HUNDRED_AND_TWENTY_FPS:
+
+                SetTargetFPS(120);
+                fps_explanation_type = "120";
+                break;
+
+
+            case FPS_TYPE::MAXFPS:
+
+                SetTargetFPS(0xfffff); // hex for max
+                fps_explanation_type = "MAXIUM";
+                break;
+
+        }
+    }
+    
+    DrawTextEx(
+        Utils::font,  ("FPS:" + fps_explanation_type).c_str(), 
+        {(GetScreenWidth() / 2.39f), (GetScreenHeight() / 2.3f)}, Utils::fontSize + 10, FONT_SPACING, BLACK
+    );
+
 }
