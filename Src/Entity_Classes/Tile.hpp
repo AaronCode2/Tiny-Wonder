@@ -2,6 +2,7 @@
 #include "Sprite.hpp"
 #include "../Manager_Classes/NeighborTypes.hpp"
 #include "../Utils.hpp"
+#include <cmath>
 #include <array>
 
 #define TILE_SIZE 60

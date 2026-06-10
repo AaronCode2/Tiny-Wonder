@@ -18,8 +18,20 @@ void Tile::update() {
     srcRect.x = srcRect.width * frame.x;
     srcRect.y = srcRect.height * frame.y;
 
-    if(CheckCollisionRecs(Utils::getScreenRect(), object))
-        draw(image);
+    if(CheckCollisionRecs(Utils::getScreenRect(), object)) {
+
+        DrawTexturePro(
+            image,
+            srcRect, {
+
+                roundf(object.x),
+                roundf(object.y),
+                object.width,
+                object.height
+            },
+            {0, 0}, 0, WHITE
+        );
+    }
 
     move();
     getHitBoxData();
@@ -42,15 +54,6 @@ void Tile::updateHitBox() {
 }
 
 void Tile::getHitBoxData(){
-
-    if(IsKeyDown(KEY_T)) 
-        __ta = !__ta;
-
-    if(__ta) {
-
-        isSolid = false;
-        return;
-    }
 
     if(tileType != GROUND) return;
 
@@ -108,6 +111,9 @@ void Tile::move() {
 
     object.x += velocity.x;
     object.y += velocity.y;
+
+    // object.x = roundf(object.x);
+    // object.y = roundf(object.y);
 
     updateHitBox();
 

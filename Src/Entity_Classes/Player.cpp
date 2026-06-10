@@ -30,8 +30,6 @@ void Player::update() {
 
     velocity = {0, 0};
 
-    const int speed = 500;
-
     if(getInput().up) velocity.y = -speed * GetFrameTime();
     if(getInput().down) velocity.y = speed * GetFrameTime();
     if(getInput().right) velocity.x = speed * GetFrameTime();
@@ -93,7 +91,7 @@ void Player::moveScreenX() {
     updateHitBox();
 
     if(cameraBox.x <= 0 && velocity.x < 0 || cameraBox.x + cameraBox.width >= GetScreenWidth() && velocity.x > 0) {
-        
+
         for(auto &tile : tiles) {
             
             tile.setVelocity({-velocity.x, 0});
@@ -106,6 +104,7 @@ void Player::moveScreenX() {
         }
         
         object.x -= velocity.x;
+        updateHitBox();
     }
 
     for(auto &tile : tiles) {
@@ -114,8 +113,8 @@ void Player::moveScreenX() {
         
         for(const auto tileHitBox : tile.getHitBoxes()) {
             
-            Utils::collisionActionX(object, hitBox, tileHitBox, velocity);
             tile.updateHitBox();
+            Utils::collisionActionX(object, hitBox, tileHitBox, velocity);
         }
     }
 
@@ -149,8 +148,8 @@ void Player::moveScreenY() {
 
         for(const auto tileHitBox : tile.getHitBoxes()) {
 
-            Utils::collisionActionY(object, hitBox, tileHitBox, velocity);
             tile.updateHitBox();
+            Utils::collisionActionY(object, hitBox, tileHitBox, velocity);
         }
     }
 }

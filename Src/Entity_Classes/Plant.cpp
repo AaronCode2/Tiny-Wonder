@@ -41,7 +41,17 @@ Plant::Plant(Rectangle object, PLANTS plantType, PLANT_STAGE plantState):
 
 void Plant::update() {
 
-    draw(plantImage);
+    DrawTexturePro(
+        plantImage,
+        srcRect, {
+
+            roundf(object.x),
+            roundf(object.y),
+            object.width,
+            object.height,
+        },
+        {0, 0}, 0, WHITE
+    );
 
     if(plantType == PLANTS::CHILY && plantState >= PLANT_STAGE::LITTLE_BABY)
         drawExternalPlantImage();
@@ -93,7 +103,13 @@ void Plant::drawExternalPlantImage() {
 
     DrawTexturePro(
         plantImage,
-        srcRect2, object2,
+        srcRect2, {
+
+            roundf(object2.x),
+            roundf(object2.y),
+            object2.width,
+            object2.height
+        },
         {0, 0}, 0, WHITE
     );
 }

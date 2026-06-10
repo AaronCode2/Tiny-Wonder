@@ -44,6 +44,7 @@ class Player : public Sprite {
 
     private:
 
+        const int speed = 500;
         int frameEnd = 2;
         int frameStart = 0;
         float frameBuffer = 0.1f;
