@@ -1,6 +1,6 @@
 #include "GlobalVars.hpp"
 
-GameMode GlobalVars::gameMode = GameMode::EXPLORE;
+GameMode GlobalVars::gameMode = GameMode::BUILD;
 
 bool GlobalVars::HoveringOverMenu = false;
 bool GlobalVars::openInventory = false;

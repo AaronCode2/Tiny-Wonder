@@ -5,20 +5,23 @@ void App::run() {
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     
     
-    Image favicon = LoadImage("../Assets/UI/favicon.png");
     InitWindow(1440, 730, "Tiny Wonder");
     
-    SetWindowIcon(favicon);
-    UnloadImage(favicon);
+    Image favicon = LoadImage("../Assets/UI/favicon.png");
+    SetWindowIcon(favicon); // Sometimes it doesn't work don't know why?
     
     
     SetWindowState(FLAG_WINDOW_MAXIMIZED);
+    
+    SetTargetFPS(60);
     HideCursor();
     logInfo();
     InitAudioDevice();
 
     Game game;
     game.run();
+
+    UnloadImage(favicon);
 }
 
 void App::logInfo() {

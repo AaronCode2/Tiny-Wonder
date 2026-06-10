@@ -38,7 +38,6 @@ void Game::gameLoop() {
 
 void Game::startMenu() {
 
-    Utils::TheDebugFunc();
     UpdateMusicStream(music);
 
     DrawTexture(
