@@ -18,13 +18,69 @@ void Game::gameLoop() {
             break;
 
         BeginDrawing();
-        ClearBackground(backgroundColor);
-        updateMode();
-        updateGame();
+
+            ClearBackground(clearer);
+
+            if(!startGame)
+                startMenu();
+            else {    
+                updateMode();
+                updateGame();
+            }
+
+            DrawTextureV(mouseImage, GetMousePosition(), MOUSE_BROWN);
+
         EndDrawing();
     }
 
     CloseWindow();
+}
+
+void Game::startMenu() {
+
+    Utils::TheDebugFunc();
+    UpdateMusicStream(music);
+
+    DrawTexture(
+        startScreenImage, 
+        (GetScreenWidth() /  5.559998f), (GetScreenHeight() / 9.340026f), WHITE
+    );
+
+    Color playButtonColor = WHITE;
+
+    Vector2 playButtonObject = {
+
+        ((GetScreenWidth() / 2.080001f) - (403.0f / 2) + 30) + (1 * 80.0f) - 98,
+        (GetScreenHeight() / 1.440002f),
+    };
+
+    const Rectangle playButtonSrc = {
+
+        0, 0,
+        (float) playButtonImage.width,
+        (float) playButtonImage.height,
+    };
+
+    const Rectangle mouseCheckerRectButtonPlay = {
+
+        playButtonObject.x,
+        playButtonObject.y,
+        playButtonSrc.width,
+        playButtonSrc.height,
+    };
+
+    if(Mouse::isHovering(mouseCheckerRectButtonPlay))
+        playButtonColor.a = 200;
+    
+    if(Mouse::isClickedOnceL(mouseCheckerRectButtonPlay))
+        startGame = true;
+
+    DrawTextureRec(
+        playButtonImage, 
+        playButtonSrc,
+        playButtonObject, 
+        playButtonColor
+    );
 }
 
 // Resloution: W:1920 H:1009, For my window, it could be different for anyone, Resize is a bit choppy ¬_¬ 

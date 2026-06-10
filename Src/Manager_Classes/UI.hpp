@@ -48,7 +48,6 @@ class UI {
         TileType &selectedType;
         
         Texture2D buttonImage = LoadTexture("../Assets/UI/Buttons.png");
-        Texture2D mouseImage = LoadTexture("../Assets/UI/Pointer Mouse.png");
         Sprite coin = Sprite(EMPTY_RECT, {12, 1});
 
         Element2 gameModeLog = {LoadTexture("../Assets/UI/Emoji.png"), {20, 140, 50, 50}};

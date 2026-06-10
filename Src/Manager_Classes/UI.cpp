@@ -110,7 +110,7 @@ void UI::update() {
     if(escapKeyPressed)
         drawEscapeMenu();
 
-    DrawTextureV(mouseImage, GetMousePosition(), MOUSE_BROWN);
+    
 }
 
 int UI::getFpsSelected() {
@@ -513,8 +513,6 @@ void UI::drawEscapeMenu() {
         }, 0.1, 8, SAVY_BROWN);
     
     Vector2 ExitbuttonSrc = {0, 1};
-    
-    Utils::TheDebugFunc();
 
     Rectangle fpsButtonObject = {
 

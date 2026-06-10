@@ -21,6 +21,8 @@ class Game {
         UI ui = UI(world.tileManager.selectedType);
         World world;
         bool inactive = false;
+        bool startGame = false;
+        const Color clearer = {130, 235, 207}; 
 
         Music music = LoadMusicStream("../Assets/Music/Manor_Query.ogg");
 
@@ -39,6 +41,11 @@ class Game {
         );
         
         int dataSaverTimer = GetTime();
+
+        Texture2D startScreenImage = LoadTexture("../Assets/UI/Tiny Logo.png");
+        Texture2D playButtonImage = LoadTexture("../Assets/UI/PlayButton.png");
+        Texture2D mouseImage = LoadTexture("../Assets/UI/Pointer Mouse.png");
+
 
         void gameLoop();
         void startMenu();
