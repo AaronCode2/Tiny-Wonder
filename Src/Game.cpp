@@ -14,6 +14,9 @@ void Game::gameLoop() {
 
     while(!WindowShouldClose()) {
 
+        if(GlobalVars::saveAndExit)
+            break;
+
         BeginDrawing();
         ClearBackground(backgroundColor);
         updateMode();
@@ -24,19 +27,20 @@ void Game::gameLoop() {
     CloseWindow();
 }
 
-// Resloution: W:1920 H:1009, For my window, it could be different for anyone
+// Resloution: W:1920 H:1009, For my window, it could be different for anyone, Resize is a bit choppy ¬_¬ 
 
 void Game::updateGame() {
 
-    // if(!IsWindowFocused() && !inactive) {
+    if(!IsWindowFocused() && !inactive) {
 
-    //     SetTargetFPS(10);
-    //     inactive = true;
-    // } else if(IsWindowFocused() && inactive) {
+        SetTargetFPS(30);
+        inactive = true;
 
-    //     SetTargetFPS(60);
-    //     inactive = false;
-    // }
+    } else if(IsWindowFocused() && inactive) {
+
+        SetTargetFPS(ui.getFpsSelected());
+        inactive = false;
+    }
 
     UpdateMusicStream(music);
     Utils::deltaTimeIt += GetFrameTime();

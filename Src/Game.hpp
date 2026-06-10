@@ -41,6 +41,7 @@ class Game {
         int dataSaverTimer = GetTime();
 
         void gameLoop();
+        void startMenu();
         void updateGame();
         void updateMode();
 };

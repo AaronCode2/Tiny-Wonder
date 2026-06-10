@@ -14,6 +14,7 @@
 
 #define MAX_SLOTS 5
 
+// It's very messed up, it has other stuff than UI and alot of Draw Calls
 
 class UI {
 
@@ -26,14 +27,15 @@ class UI {
 
         Inventory inventory;
         std::array<std::array<Slot, 5>, 6>& getSlotData() { return inventory.slots; }
+        int getFpsSelected(); 
 
     private:
     
         void draw();
         void drawEscapeMenu();
 
-        std::string fps_explanation_type = "30";
-        FPS_TYPE fpsType = FPS_TYPE::THIRTY_FPS;
+        std::string fps_explanation_type = "60";
+        FPS_TYPE fpsType = FPS_TYPE::SIXTY_FPS;
 
         std::map<TileType, Vector2> imageTilesSrcPos;
         std::map<GameMode, Vector2> gameModeSrc;
@@ -55,7 +57,7 @@ class UI {
         Element2 playerPhoto = {LoadTexture("../Assets/UI/PlayerPhoto.png"), {20, 20, 100, 100}};
         Element2 playerInfo = {LoadTexture("../Assets/UI/PlayerInfo.png"), {5, 5, 250, 200}};
         int rand = 0;
-        bool escapKeyPressed = true;
+        bool escapKeyPressed = false;
 
         HotBar hotBar;
 };

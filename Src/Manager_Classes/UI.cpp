@@ -113,6 +113,11 @@ void UI::update() {
     DrawTextureV(mouseImage, GetMousePosition(), MOUSE_BROWN);
 }
 
+int UI::getFpsSelected() {
+
+    return std::stoi(fps_explanation_type);
+}
+
 void UI::draw() {
 
     DrawRectangleRec({20, 20, 100, 90}, SAVY_YELLOW);
@@ -181,7 +186,7 @@ void UI::draw() {
         return;
     } else if(GlobalVars::gameMode == GameMode::TRADE) {
 
-        if(rand == 0) rand = GetRandomValue(100000000, 999999999);
+        if(rand == 0) rand = GetRandomValue(10000000, 999999999);
 
         DrawRectangleRounded(
             {
@@ -205,7 +210,7 @@ void UI::draw() {
 
         // Can't use ':' or '=' as the Font doesn't include them
 
-        std::string line = "https/dealership.com/LatestDeals/request?" + std::to_string(rand);
+        std::string line = "https/dealership.com/LatestDeals!/request?" + std::to_string(rand);
 
         DrawTextEx(
             Utils::font, line.c_str(),
@@ -518,11 +523,58 @@ void UI::drawEscapeMenu() {
         (GetScreenWidth() / 5.2f),
         (GetScreenHeight() / 11.0f),
     };
+
+    Rectangle saveAndExitObject = {
+
+        ((GetScreenWidth() / 2) - (403.0f / 2) + 30) + (1 * 80.0f) - 98,
+        (GetScreenHeight() / 1.56f),
+        (GetScreenWidth() / 5.2f),
+        (GetScreenHeight() / 11.0f),
+    };
     
+
+    Rectangle tutorialObject = {
+
+        ((GetScreenWidth() / 2) - (403.0f / 2) + 30) + (1 * 80.0f) - 98,
+        (GetScreenHeight() / 1.92f),
+        (GetScreenWidth() / 5.2f),
+        (GetScreenHeight() / 11.0f),
+    };
+
+    Color fpsColor = SAVY_YELLOW;
+    Color saveAndExitColor = SAVY_YELLOW;
+    Color tutorialColor = SAVY_YELLOW;
+
+    if(Mouse::isHovering(fpsButtonObject))
+        fpsColor.a = 200;
+    
+    if(Mouse::isHovering(saveAndExitObject))
+        saveAndExitColor.a = 200;
+
+    
+    if(Mouse::isHovering(tutorialObject))
+        tutorialColor.a = 200;
+
+    if(Mouse::isClickedL(tutorialObject))
+        OpenURL("https://exmaple.com/");
+
+    if(Mouse::isClickedL(saveAndExitObject))
+        GlobalVars::saveAndExit = true;
+
     DrawRectangleRounded(
         fpsButtonObject,
-        0.3, 4, SAVY_YELLOW
+        0.3, 4, fpsColor
     );
+
+    DrawRectangleRounded(
+        saveAndExitObject,
+        0.3, 4, saveAndExitColor
+    );  
+
+    DrawRectangleRounded(
+        tutorialObject,
+        0.3, 4, tutorialColor
+    );  
 
     if(Mouse::isClickedOnceL(fpsButtonObject)) {
 
@@ -562,8 +614,23 @@ void UI::drawEscapeMenu() {
     }
     
     DrawTextEx(
-        Utils::font,  ("FPS:" + fps_explanation_type).c_str(), 
-        {(GetScreenWidth() / 2.39f), (GetScreenHeight() / 2.3f)}, Utils::fontSize + 10, FONT_SPACING, BLACK
+        Utils::font,  ("FPS: " + fps_explanation_type).c_str(), 
+        {(GetScreenWidth() / 2.18f), (GetScreenHeight() / 2.3f)}, Utils::fontSize + 10, FONT_SPACING, BLACK
+    );
+
+    DrawTextEx(
+        Utils::font,  "Menu", 
+        {(GetScreenWidth() / 2.16f), (GetScreenHeight() / 3.1f)}, Utils::fontSize + 15, FONT_SPACING, BLACK
+    );
+
+    DrawTextEx(
+        Utils::font,  "Tutorial", 
+        {(GetScreenWidth() / 2.26f), (GetScreenHeight() / 1.82f)}, Utils::fontSize + 10, FONT_SPACING, BLACK
+    );
+
+    DrawTextEx(
+        Utils::font,  "Save 'n' Exit", 
+        {(GetScreenWidth() / 2.34f), (GetScreenHeight() / 1.50f)}, Utils::fontSize + 10, FONT_SPACING, BLACK
     );
 
 }

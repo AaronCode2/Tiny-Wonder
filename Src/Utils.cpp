@@ -25,19 +25,19 @@ float Utils::deltaTimeIt = 0.0f;
 
             if(IsKeyPressed(KEY_O)) {
 
-                xdebugingvalue += 0.2;
+                xdebugingvalue += 0.02;
                 print("X: " + std::to_string(xdebugingvalue));
             } else if(IsKeyPressed(KEY_L)) {
 
-                xdebugingvalue -= 0.2;
+                xdebugingvalue -= 0.02;
                 print("X: " + std::to_string(xdebugingvalue));
             } else if(IsKeyPressed(KEY_K)) {
 
-                ydebugingvalue += 0.2;
+                ydebugingvalue += 0.02;
                 print("Y: " + std::to_string(ydebugingvalue));
             } else if(IsKeyPressed(KEY_J)) {
 
-                ydebugingvalue -= 0.2;
+                ydebugingvalue -= 0.02;
                 print("Y: " + std::to_string(ydebugingvalue));
             }
         } else {
@@ -130,8 +130,11 @@ void Utils::collisionActionX(Rectangle &aObject, const Rectangle ahitBox, const 
     if(!CheckCollisionRecs(ahitBox, bHitBox)) 
         return;
             
-    DrawText("COLLISON!!!", 400, 400, 30, RED);
+#if DEBUG_ENABLED
 
+    DrawText("COLLISON X!!!", 400, 400, 30, RED);
+
+#endif
     if(aVelocity.x > 0) {
                 
         const float offset = ahitBox.x - aObject.x + ahitBox.width + 0.01;
@@ -155,8 +158,12 @@ void Utils::collisionActionY(Rectangle &aObject, const Rectangle ahitBox, const 
 
     if(!CheckCollisionRecs(ahitBox, bHitBox)) 
         return;
-            
-    DrawText("COLLISON!!!", 400, 400, 30, RED);
+
+#if DEBUG_ENABLED
+
+    DrawText("COLLISON Y!!!", 400, 400, 30, RED);
+
+#endif
 
     if(aVelocity.y > 0) {
                 

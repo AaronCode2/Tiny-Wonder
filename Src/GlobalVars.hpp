@@ -13,4 +13,5 @@ namespace GlobalVars {
     extern bool HoveringOverMenu;
     extern bool openInventory;
     extern int money;
+    extern bool saveAndExit;
 }
