@@ -39,11 +39,11 @@ git clone https://github.com/AaronCode2/Tiny-Wonder.git
 cmake --build build
 ```
 
-### Don't have a Compiler?
+### Don't have a Compiler? - Just wanna play it
 #### No Worries!
 
 Well you will have to wait until I release the Game but once I do, do these steps.  
-Game::Released = False  
+Game::Released = True!  
 
 1. Go to the Releases and click on TinyWonder.zip.  
 2. Once downloaded, go to the directory you installed the game.
@@ -51,6 +51,12 @@ Game::Released = False
 4. Place the extracted version of the game in the directory you want.  
 5. It is safe to delete the compressed Zip File / Folder
 
+## How To Play
+
+1. Firstly Get out of that Island it Too Tiny to live, use that blocks of youre's to get out. Use your mouse left buttons to place down blocks and move with WASD!
+2. Make sure to find some place to live at and **be careful, each block you place is money -1**, So use it wisely
+3. Plot some land by clicking your dirt and place it around and bear in mind your losing money from this!
+4. Switch **Game modes by Pressing 1, 2, 3**, you wanna
 
 ## Links and Credits
 
