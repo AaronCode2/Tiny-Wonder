@@ -15,11 +15,11 @@ BEGIN
         BLOCK "040904E4"
         BEGIN
             VALUE "CompanyName",      "MessyGear Studios"
-            VALUE "FileDescription",  "Tiny Wonder"
+            VALUE "FileDescription",  "Tiny"
             VALUE "FileVersion",      "1.0.0"
-            VALUE "InternalName",     "Tiny_Wonder"
-            VALUE "OriginalFilename", "Tiny_Wonder.exe"
-            VALUE "ProductName",      "Tiny Wonder"
+            VALUE "InternalName",     "Tiny"
+            VALUE "OriginalFilename", "Tiny.exe"
+            VALUE "ProductName",      "Tiny"
             VALUE "ProductVersion",   "1.0.0"
             VALUE "LegalCopyright",   "N/A"
         END
