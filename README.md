@@ -1,9 +1,10 @@
-# Tiny Wonder
+# Tiny
 
 Hi I'm making a Game using Raylib library and C++ for the development.  
 This game is based around RPGs and gives the experience of a sandbox style  
-with the main theme being **Build**, **Go**, **Farm**.
+with the main theme being **Build**, **Go**, **Farm**. Here are some images:
 
+![Girl looking at river](Assets/Photos/thumbnail%201.png)
 
 ## How To clone Project
 
@@ -53,13 +54,24 @@ Game::Released = True!
 
 ## How To Play
 
-1. Firstly Get out of that Island it Too Tiny to live, use that blocks of youre's to get out. Use your mouse left buttons to place down blocks and move with WASD!
+1. Firstly Get out of that Island it Too Tiny to live, use that blocks of youre's to get out. Use your mouse left buttons to place down blocks and move with ```W A S D```!
 2. Make sure to find some place to live at and **be careful, each block you place is money -1**, So use it wisely
 3. Plot some land by clicking your dirt and place it around and bear in mind your losing money from this!
-4. Switch **Game modes by Pressing 1, 2, 3**, you wanna
+4. Switch **Game modes by Pressing ```1```, ```2```, ```3```**, **you wanna press ```1``` to go to Explore mode**
+5. Then press ```E``` to acess inventory and drop that seeds into your hotbar using your mouse!
+6. Plant them and sing a song to make them grow faster.
+7. Once grown, you should see a harvest symbol, right click and you will have some plants in your inventory
+8. Go switch game modes to Trade mode by tapping ```3``` and select your disered trade and enjoy!
+9. Eat, Sleep, Repeat.
+10. And wait
 
 ## Links and Credits
 
 - Follow [me](https://messygear.itch.io/) on [itch.io](https://itch.io/)
 - Thank you for [Buttery Milk](https://butterymilk.itch.io/) for the [Asset Pack](https://butterymilk.itch.io/tiny-wonder-farm-asset-pack)  
 - Thanks especially for you as we couldn't have done this without you!
+
+## Some Images
+
+![Bigger picture staring at daisy View](Assets/Photos/thumbnail%203.png)
+![Charcter farming some veggies](Assets/Photos/thumbnail%202.png)

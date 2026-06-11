@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10...3.50)
-project(Tiny_Wonder)
+project(Tiny)
 
 include(FetchContent)
 
@@ -37,19 +37,19 @@ SOURCE_FILES
     Src/Entity_Classes/Dealer.cpp
 )
 
-add_executable(Tiny_Wonder ${SOURCE_FILES})
-target_link_libraries(Tiny_Wonder raylib)
+add_executable(Tiny ${SOURCE_FILES})
+target_link_libraries(Tiny raylib)
 
 if(WIN32)
 
-    target_sources(Tiny_Wonder PRIVATE Assets/Windows/app.rc)
-    target_link_options(Tiny_Wonder PRIVATE $<$<CONFIG:Release>:-mwindows>)
+    target_sources(Tiny PRIVATE Assets/Windows/app.rc)
+    target_link_options(Tiny PRIVATE $<$<CONFIG:Release>:-mwindows>)
 elseif(APPLE)
 
-    target_link_options(Tiny_Wonder PRIVATE $<$<CONFIG:Release>:-MACOSX_BUNDLE>)
+    target_link_options(Tiny PRIVATE $<$<CONFIG:Release>:-MACOSX_BUNDLE>)
 endif()
 
-target_compile_definitions(Tiny_Wonder PUBLIC $<$<CONFIG:Debug>:DEBUG_ENABLED>)
+target_compile_definitions(Tiny PUBLIC $<$<CONFIG:Debug>:DEBUG_ENABLED>)
 
 if("${PLATFORM}" STREQUAL "Web")
 

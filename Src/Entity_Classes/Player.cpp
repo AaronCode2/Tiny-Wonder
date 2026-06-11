@@ -107,16 +107,16 @@ void Player::moveScreenX() {
         updateHitBox();
     }
 
-    // for(auto &tile : tiles) {
+    for(auto &tile : tiles) {
         
-    //     if(!tile.getIsSolid()) continue;
+        if(!tile.getIsSolid()) continue;
         
-    //     for(const auto tileHitBox : tile.getHitBoxes()) {
+        for(const auto tileHitBox : tile.getHitBoxes()) {
             
-    //         tile.updateHitBox();
-    //         Utils::collisionActionX(object, hitBox, tileHitBox, velocity);
-    //     }
-    // }
+            tile.updateHitBox();
+            Utils::collisionActionX(object, hitBox, tileHitBox, velocity);
+        }
+    }
 
 }
 
@@ -142,16 +142,16 @@ void Player::moveScreenY() {
         object.y -= velocity.y;
     }
 
-    // for(auto &tile : tiles) {
+    for(auto &tile : tiles) {
         
-    //     if(!tile.getIsSolid()) continue;
+        if(!tile.getIsSolid()) continue;
 
-    //     for(const auto tileHitBox : tile.getHitBoxes()) {
+        for(const auto tileHitBox : tile.getHitBoxes()) {
 
-    //         tile.updateHitBox();
-    //         Utils::collisionActionY(object, hitBox, tileHitBox, velocity);
-    //     }
-    // }
+            tile.updateHitBox();
+            Utils::collisionActionY(object, hitBox, tileHitBox, velocity);
+        }
+    }
 }
 
 void Player::animationLogic() {
