@@ -36,7 +36,7 @@ git clone https://github.com/AaronCode2/Tiny-Wonder.git
 5. Check if Cmake has created the build file or you have done it wrong ❌
 6. Type this command
 
-```
+```python
 cmake --build build
 ```
 
