@@ -42,7 +42,7 @@ Doen't work in VS cl complier use GCC instead. Support will come soon.
 cmake --build build
 ```
 
-### Don't have a Compiler? - Just wanna play it
+## Don't have a Compiler? - Just wanna play it
 #### No Worries!
 
 Well you will have to wait until I release the Game but once I do, do these steps.  
