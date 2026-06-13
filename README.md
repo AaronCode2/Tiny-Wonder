@@ -4,7 +4,7 @@ Hi I'm making a Game using Raylib library and C++ for the development.
 This game is based around RPGs and gives the experience of a sandbox style  
 with the main theme being **Build**, **Go**, **Farm**. Here are some images:
 
-![Girl looking at river](Assets/Photos/thumbnail%201.png)
+![Player looking at river](Assets/Photos/thumbnail%201.png)
 
 ## How To clone Project
 
@@ -27,7 +27,9 @@ git clone https://github.com/AaronCode2/Tiny-Wonder.git
 6. It is safe to delete the compressed Zip File / Folder
 
 ## How To Compile Project
-### Hopefully you have a **C++ Compiler**, **Make**, **CMake** and **VSCode** installed to work
+### Hopefully you have a **GCC C++ Compiler**, **Make**, **CMake** and **VSCode** installed to work
+
+Doen't work in VS cl complier use GCC instead. Support will come soon.
 
 1. Download as a Zip or use Git
 2. Open the Project with Vscode and install the C/C++ Extension Pack
