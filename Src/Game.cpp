@@ -2,7 +2,6 @@
 
 Game::Game() {
 
-    
     Utils::font = LoadFont("../Assets/fonts/Daydreamer.otf");
     PlayMusicStream(music);
     SetExitKey(KEY_NULL);

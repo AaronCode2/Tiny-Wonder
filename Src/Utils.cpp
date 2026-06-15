@@ -216,11 +216,26 @@ bool Mouse::isClickedOnceR(const Rectangle object) {
 
 std::string Utils::formatZeros(int num, int width) {
 
-    std::string numText = std::to_string(num);
+    // This func can fail when overflow happens, don't know if it works in release?
+
+    std::string numText;
+
+    try {
+
+        numText = std::to_string(num);
+    } catch(const std::exception& e) {
+
+#if DEBUG_ENABLED
+
+        std::cerr << e.what() << '\n';
+#endif
+    }
 
     int leadingZero = width - numText.length();
     
-    numText = 'x' + std::string(leadingZero, '0') + numText;
+    if(num >= 0)
+        numText = 'x' + std::string(leadingZero, '0') + numText;
+    else numText = "x" + numText;
 
     return numText;
 }

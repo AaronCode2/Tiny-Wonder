@@ -158,9 +158,15 @@ void UI::draw() {
 
     coin.update();
 
+    Color moneyColor = BLACK;
+
+    if(GlobalVars::money <= 0) {
+        moneyColor = RED;
+    }
+
     DrawTextEx(
-        Utils::font, Utils::formatZeros(GlobalVars::money, 5).c_str(),
-        {GetScreenWidth() - 140.0f, 40}, Utils::fontSize, FONT_SPACING, BLACK 
+        GetFontDefault(), Utils::formatZeros(GlobalVars::money, 5).c_str(),
+        {GetScreenWidth() - 140.0f, 40}, Utils::fontSize, FONT_SPACING, moneyColor 
     );
 
 #define Adjust_selwh 28.0f

@@ -80,11 +80,8 @@ void World::checkMouseActions() {
 
             if(selectedSlot && GlobalVars::gameMode == GameMode::EXPLORE) {
 
-                if(selectedSlot->amount <= 0) {
-
+                if(selectedSlot->amount <= 0)
                     selectedSlot->item = Item::NOTHING;
-                    break;
-                }
 
                 switch(selectedSlot->item) {
 
@@ -185,12 +182,25 @@ void World::checkMouseActions() {
             }
 
             if(!Mouse::isClickedL(selectionObject)) return;
+            if(GlobalVars::money <= 0) return;
+
+            bool isTileVaild = false;
 
             for(auto &tile : tileManager.tiles) {
 
                 if(Utils::isSameXY(tile.getObject(), selectionObject) && tile.getType() == tileManager.selectedType)
                     return;
+
+                if(tileManager.selectedType == TileType::DIRT || tileManager.selectedType == TileType::DARK_GRASS || tileManager.selectedType == TileType::LIGHT_GRASS) {
+                    
+                    if(!(CheckCollisionRecs(tile.getObject(), selectionObject) && tile.getType() == TileType::GROUND))
+                        continue;
+                    else isTileVaild = true;
+                }
             }
+
+            if((!isTileVaild && (tileManager.selectedType == TileType::DIRT || tileManager.selectedType == TileType::DARK_GRASS || tileManager.selectedType == TileType::LIGHT_GRASS)))
+                return;
 
             tileManager.tiles.push_back(Tile(
                 selectionObject,
