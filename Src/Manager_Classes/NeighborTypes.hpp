@@ -28,7 +28,7 @@ enum Decoration {
     YELLOW_FLOWER,
     TWO_WHITE_FLOWER,
     THREE_WHITE_FLOWER,
-    THE_ROCK, // :/ ???
+    THE_ROCK,
     SEAWEED
 };
 

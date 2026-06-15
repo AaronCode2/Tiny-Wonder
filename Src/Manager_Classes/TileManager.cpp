@@ -11,6 +11,8 @@ TileManager::TileManager() {
     updateFrameType(Utils::getScreenRect());
 }
 
+// Lunix automaticly clears out GPU memory unlike Windows
+
 TileManager::~TileManager() {
 
 #if !__linux__

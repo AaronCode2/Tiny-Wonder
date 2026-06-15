@@ -6,6 +6,23 @@ Game::Game() {
     PlayMusicStream(music);
     SetExitKey(KEY_NULL);
 }
+ 
+/*! 
+    There maybe be texture that aren't unloaded, if so, report an issue immediately
+    on github, as this is a memory leak and only way to fix is to off the computer
+    or simply unload it. Don't worry about the __linux__ flag.
+!*/
+
+Game::~Game() {
+
+#if !__linux__
+
+    UnloadTexture(startScreenImage);
+    UnloadTexture(playButtonImage);
+    UnloadTexture(mouseImage);
+
+#endif
+}
 
 void Game::gameLoop() {
 

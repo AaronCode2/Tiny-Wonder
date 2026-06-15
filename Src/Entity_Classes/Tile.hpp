@@ -7,14 +7,12 @@
 
 #define TILE_SIZE 60
 
-// Imagine not having a low taper fade 👀
-
 enum TileType {
 
     GROUND = 0,
     LIGHT_GRASS,
     DARK_GRASS,
-    DECORATIONS, // THE ROCK =) 
+    DECORATIONS,
     DIRT,
 };
 

@@ -17,6 +17,8 @@ DataIO::DataIO(
     readMoneyData();
 }
 
+// If it crashed unexpectly, it won't save!
+
 DataIO::~DataIO(){
 
     saveData();

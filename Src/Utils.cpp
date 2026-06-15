@@ -83,7 +83,6 @@ void Utils::exitApp(const std::string errorInfo) {
 #if DEBUG_ENABLED
 
     __debugbreak;
-#else
 
     std::cout << "Press ENTER to exit the Application as a Error has occured [PLAYER]: ";
     std::cin.get();
@@ -219,19 +218,24 @@ std::string Utils::formatZeros(int num, int width) {
     // This func can fail when overflow happens, don't know if it works in release?
 
     std::string numText;
+    int leadingZero;
 
     try {
 
         numText = std::to_string(num);
+        leadingZero = width - numText.length();
     } catch(const std::exception& e) {
 
 #if DEBUG_ENABLED
 
         std::cerr << e.what() << '\n';
 #endif
-    }
 
-    int leadingZero = width - numText.length();
+        Utils::exitApp(
+            "Overflow Money, The variable `NumText` value (Integar): " + numText + " To fix simply go to"
+            " the Data/Money.txt and edit this to become a number below 4 digits"
+        );
+    }
     
     if(num >= 0)
         numText = 'x' + std::string(leadingZero, '0') + numText;
